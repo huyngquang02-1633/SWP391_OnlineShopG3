@@ -34,62 +34,7 @@ public class Dashboard_admin extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LocalDate today = LocalDate.now();
-        int month = today.getMonthValue();
-       
-        if(req.getSession().getAttribute("AccAdminSession")!=null){
-            
-            
-            ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
-            ArrayList<Customer> newCusList = new CustomerDAO().getNewCustomer(month);
-            
-            ArrayList<Customer> totalOfGuest = new CustomerDAO().getTotalNumberOfGuest();
-            
-            
-
-            ArrayList<OrderDetail> odDetail = new OrderDAO().getOrderDetailByMonth(month);
-            double totalOrderAmount = 0;
-            for (OrderDetail orderDetail : odDetail) {
-                totalOrderAmount+=orderDetail.getQuantity() * orderDetail.getUnitPrice();
-            }
-             ArrayList<Double> statistic = new ArrayList<>();
-             
-            if(req.getParameter("year")!=null){
-                int year = Integer.parseInt(req.getParameter("year"));
-                for (int i = 1; i <= month; i++) {
-                    double revenueInMonth = 0;
-                    ArrayList<OrderDetail> odDetailList= new OrderDAO().getOrderDetailByMonth(i,year);
-                    for (OrderDetail orderDetailEle : odDetailList) {
-                        revenueInMonth+=orderDetailEle.getQuantity() * orderDetailEle.getUnitPrice();
-                    }
-                    statistic.add(revenueInMonth);
-                }
-            }else{
-                 for (int i = 1; i <= month; i++) {
-                    double revenueInMonth = 0;
-                    ArrayList<OrderDetail> odDetailList= new OrderDAO().getOrderDetailByMonth(i);
-                    for (OrderDetail orderDetailEle : odDetailList) {
-                        revenueInMonth+=orderDetailEle.getQuantity() * orderDetailEle.getUnitPrice();
-                    }
-                    statistic.add(revenueInMonth);
-                }
-            }
-            
-            
-            
-            req.setAttribute("totalOrderAmount", totalOrderAmount);
-
-            req.setAttribute("totalOfGuest", totalOfGuest.size());
-            req.setAttribute("statistic", statistic);
-            req.setAttribute("newCusList", newCusList.size());
-            req.setAttribute("cusList", cusList.size());
-            
-            
-            req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
-        }else{
-            resp.getWriter().print("Access Denied!");
-            //return;
-        }
+        
     }
     
 }

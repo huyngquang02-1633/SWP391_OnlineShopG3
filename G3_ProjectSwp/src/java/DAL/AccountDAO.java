@@ -51,91 +51,65 @@ public class AccountDAO extends DBContext{
         }
         return acc;
     }
+
     
-    public Account checkAccountExist(String email){
-        Account acc = null;
-        try {
-            String sql = "select * from Accounts where Email=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                int AccountID = rs.getInt("AccountID");
-                String Email = rs.getString("Email");
-                String Password = rs.getString("Password");
-                String CustomerID = rs.getString("CustomerID");
-                int EmployeeID = rs.getInt("EmployeeID");
-                int Role = rs.getInt("Role");
-                acc = new Account(AccountID, Email, Password, CustomerID, EmployeeID, Role);
-            }
-        } catch (Exception e) {
-        }
-        return acc;
-    }
-    
-    public int editProfile(Customer cus, Account acc){
-        int result1=0, result2=0;
+    public boolean editProfile(Customer cus, Account acc){
+        int result=0;
             try {
-                String sql1="UPDATE Customers SET CompanyName = ?,ContactName = ?,ContactTitle=?, [Address]=? WHERE CustomerID=?";
-                String sql2="UPDATE Accounts SET [Password] = ? WHERE Email=?";
-                PreparedStatement ps1 = connection.prepareStatement(sql1);
-                PreparedStatement ps2 = connection.prepareStatement(sql2);
-                ps1.setString(1, cus.getCompanyName());
-                ps1.setString(2,cus.getContactName() );
-                ps1.setString(3, cus.getContactTitle() ); 
-                ps1.setString(4,cus.getAddress() );
-                ps1.setString(5,cus.getCustomerID());
-                
-                if(acc!=null){
-                    ps2.setString(1, acc.getPassword());
-                    ps2.setString(2, acc.getEmail() );
-                    result2 = ps2.executeUpdate();
-                    
-                }else{result2=1;}
-                
-                result1 = ps1.executeUpdate();
-                
+//                String sql1="UPDATE Customers SET CompanyName = ?,ContactName = ?,ContactTitle=?, [Address]=? WHERE CustomerID=?";
+//                String sql2="UPDATE Accounts SET [Password] = ? WHERE Email=?";
+                String sql = "exec updateAccount ?, ?, ?, ?, ?, ?, ?,?,?;";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1,createNewCusID() );
+                ps.setString(2, cus.getFirstName());
+                ps.setString(3, cus.getLastName());
+                ps.setString(4, cus.getContactTitle());
+                ps.setDate(5, cus.getDateOfBirth());
+                ps.setString(6, cus.getAddress());
+                ps.setString(7, cus.getPhoneNumber());
+                ps.setString(8, acc.getEmail());
+                ps.setString(9, acc.getPassword());
+                result = ps.executeUpdate();
             } catch (Exception e) {
             }
-            
-            if (result1>0 && result2>0) {
-                return 1;
-            } else {
-                return 0; 
-            }
-        
+            return result>0;
     }
   
     
-    public int createAccount(Customer cus, Account acc){
-        int result1=0, result2=0;
+    public boolean createAccount(Customer cus, Account acc){
+        int result=0;
             try {
-                String sql1="insert into Customers(CustomerID, CompanyName , ContactName,ContactTitle,Address,CreateDate) values(?,?,?,?,?,GETDATE())";
-                String sql2="insert into Accounts(Email, Password,CustomerID,Role) values(?,?,?,?)";
-                PreparedStatement ps1 = connection.prepareStatement(sql1);
-                PreparedStatement ps2 = connection.prepareStatement(sql2);
-                String CustomerID=randomString(5);
-                ps1.setString(1,CustomerID );
-                ps1.setString(2, cus.getCompanyName());
-                ps1.setString(3,cus.getContactName() );
-                ps1.setString(4, cus.getContactTitle());
-                ps1.setString(5,cus.getAddress());
-                
-                ps2.setString(1, acc.getEmail());
-                ps2.setString(2, acc.getPassword());
-                ps2.setString(3, CustomerID);
-                ps2.setInt(4, 2);
-                result1 = ps1.executeUpdate();
-                result2 = ps2.executeUpdate();
+//                String sql1="insert into Customers(CustomerID, CompanyName , ContactName,ContactTitle,Address,CreateDate) values(?,?,?,?,?,GETDATE())";
+//                String sql2="insert into Accounts(Email, Password,CustomerID,Role) values(?,?,?,?)";
+                String sql = "exec createAccount ?, ?, ?, ?, ?, ?, ?,?,?;";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1,createNewCusID() );
+                ps.setString(2, cus.getFirstName());
+                ps.setString(3, cus.getLastName());
+                ps.setString(4, cus.getContactTitle());
+                ps.setDate(5, cus.getDateOfBirth());
+                ps.setString(6, cus.getAddress());
+                ps.setString(7, cus.getPhoneNumber());
+                ps.setString(8, acc.getEmail());
+                ps.setString(9, acc.getPassword());
+                result = ps.executeUpdate();
             } catch (Exception e) {
             }
-            
-            if (result1>0 && result2>0) {
-            return 1;
-        } else {
-            return 0; 
+            return result>0;
+    }
+    
+    public int createNewCusID(){
+        int maxCusID=0;
+        try {
+            String sql = "select Max(Customers.CustomerID) as 'MaxCusID' from Customers";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                maxCusID = rs.getInt("MaxCusID");
+            }
+        } catch (Exception e) {
         }
-        
+        return maxCusID+1;
     }
     
     
@@ -169,7 +143,7 @@ public class AccountDAO extends DBContext{
         return sb.toString();
     }
     
-    public int changePassword(Account account) {
+    public boolean changePassword(Account account) {
         int rs = 0;
         try {
             String sql = "update Accounts set Password =? where Email=?";
@@ -179,11 +153,7 @@ public class AccountDAO extends DBContext{
             rs = ps.executeUpdate();
         } catch (SQLException e) {
         }
-        if (rs > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return rs > 0;
     }
     
     

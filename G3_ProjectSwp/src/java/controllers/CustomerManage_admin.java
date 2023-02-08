@@ -31,20 +31,7 @@ public class CustomerManage_admin extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PaginationObject paging = new PaginationObject();
-
-        int currentPage = 1;
-        if ( req.getParameter("currentPage")!=null) {
-            currentPage = Integer.parseInt(req.getParameter("currentPage"));
-        }
-        ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
-        List<Customer> listInCurrentPage = new ArrayList<>();
-        listInCurrentPage = paging.getListInCurrentPage(cusList, currentPage);
-        req.setAttribute("numberOfPage", paging.getNumberOfPage(cusList));
-        req.getSession().setAttribute("currentPage", currentPage);
-        req.setAttribute("listInCurrentPage", listInCurrentPage);
         
-        req.getRequestDispatcher("customer.jsp").forward(req, resp);
     }
     
 }

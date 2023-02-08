@@ -20,7 +20,7 @@ public class Product {
     private int AuthorID;
     private String Translator;
     private int PublisherID;
-    private int ReleaseCompanyID;
+    private int SupplierID;
     private String Language;
     private String Size;
     private double Weight;
@@ -30,9 +30,9 @@ public class Product {
     private Date PublishDate;
     private String PublishingLicense;
     private String Description;
-    private int Discontinued;
+    private boolean Discontinued;
 
-    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int ReleaseCompanyID, String Language, String Size, double Weight, int NumerOfPage, String Format, int Image, Date PublishDate, String PublishingLicense, String Description, int Discontinued) {
+    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumerOfPage, String Format, int Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;
         this.CategoryID = CategoryID;
@@ -42,7 +42,7 @@ public class Product {
         this.AuthorID = AuthorID;
         this.Translator = Translator;
         this.PublisherID = PublisherID;
-        this.ReleaseCompanyID = ReleaseCompanyID;
+        this.SupplierID = SupplierID;
         this.Language = Language;
         this.Size = Size;
         this.Weight = Weight;
@@ -56,24 +56,6 @@ public class Product {
     }
     
     
-    
-
-    public Product(int productID, String productName, int categoryID, String quantityPerUnit, boolean discontinued) {
-        this.ProductID = productID;
-        this.ProductName = productName;
-        this.CategoryID = categoryID;
-        this.QuantityPerUnit = quantityPerUnit;
-        this.Discontinued = discontinued;
-    }
-
-    public Product(String productName, int categoryID, String quantityPerUnit, boolean discontinued) {
-        
-        this.ProductName = productName;
-        this.CategoryID = categoryID;
-        this.QuantityPerUnit = quantityPerUnit;
-        this.Discontinued = discontinued;
-    }
-
     public int getProductID() {
         return ProductID;
     }
@@ -146,12 +128,12 @@ public class Product {
         this.PublisherID = PublisherID;
     }
 
-    public int getReleaseCompanyID() {
-        return ReleaseCompanyID;
+    public int getSupplierID() {
+        return SupplierID;
     }
 
-    public void setReleaseCompanyID(int ReleaseCompanyID) {
-        this.ReleaseCompanyID = ReleaseCompanyID;
+    public void setSupplierID(int ReleaseCompanyID) {
+        this.SupplierID = ReleaseCompanyID;
     }
 
     public String getLanguage() {
@@ -226,20 +208,17 @@ public class Product {
         this.Description = Description;
     }
 
-    public int getDiscontinued() {
+    public boolean isDiscontinued() {
         return Discontinued;
     }
 
-    public void setDiscontinued(int Discontinued) {
+    public void setDiscontinued(boolean Discontinued) {
         this.Discontinued = Discontinued;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "ProductID=" + ProductID + ", ProductName=" + ProductName + ", CategoryID=" + CategoryID + ", GenreID=" + GenreID + ", CoverPrice=" + CoverPrice + ", SalePrice=" + SalePrice + ", AuthorID=" + AuthorID + ", Translator=" + Translator + ", PublisherID=" + PublisherID + ", ReleaseCompanyID=" + ReleaseCompanyID + ", Language=" + Language + ", Size=" + Size + ", Weight=" + Weight + ", NumerOfPage=" + NumerOfPage + ", Format=" + Format + ", Image=" + Image + ", PublishDate=" + PublishDate + ", PublishingLicense=" + PublishingLicense + ", Description=" + Description + ", Discontinued=" + Discontinued + '}';
+        return "Product{" + "ProductID=" + ProductID + ", ProductName=" + ProductName + ", CategoryID=" + CategoryID + ", GenreID=" + GenreID + ", CoverPrice=" + CoverPrice + ", SalePrice=" + SalePrice + ", AuthorID=" + AuthorID + ", Translator=" + Translator + ", PublisherID=" + PublisherID + ", ReleaseCompanyID=" + SupplierID + ", Language=" + Language + ", Size=" + Size + ", Weight=" + Weight + ", NumerOfPage=" + NumerOfPage + ", Format=" + Format + ", Image=" + Image + ", PublishDate=" + PublishDate + ", PublishingLicense=" + PublishingLicense + ", Description=" + Description + ", Discontinued=" + Discontinued + '}';
     }
     
-    
-    
-
 }
