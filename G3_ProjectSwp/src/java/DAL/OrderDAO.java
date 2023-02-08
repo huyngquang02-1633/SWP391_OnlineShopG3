@@ -23,15 +23,13 @@ import java.util.logging.Logger;
  * @author user
  */
 public class OrderDAO extends DBContext{
-    public ArrayList<Order> getAllOrdersOfCus(int accID) {
+    public ArrayList<Order> getAllOrdersOfACus(int cusID) {
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            String sql = "select DISTINCT o.OrderID, o.CustomerID,o.EmployeeID,o.OrderDate,o.RequiredDate,o.ShipAddress,o.ShipName,o.ShipPostalCode,o.ShipRegion,o.ShipCity,o.Freight,o.ShipCountry,o.ShippedDate\n" +
-"from Accounts a,Customers c, Orders o,[Order Details] od where\n" +
-"a.AccountID=? and a.CustomerID=c.CustomerID and c.CustomerID=o.CustomerID and od.OrderID=o.OrderID";
+            String sql = "select * from Orders o where o.CustomerID = ?";
             //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, accID);
+            ps.setInt(1, cusID);
             //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
             //b4 xu ly kqua tra ve
@@ -40,18 +38,17 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 String CustomerID = rs.getString("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
                 String ShipName = rs.getString("ShipName");
                 String ShipAddress = rs.getString("ShipAddress");
                 String ShipCity = rs.getString("ShipCity");
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                double Freight = rs.getDouble("Freight");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                
-                Order o = new Order(OrderID, EmployeeID, CustomerID, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Freight, OrderDate, RequiredDate, ShippedDate);
+                Order o = new Order(OrderID, cusID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
                 orders.add(o);
             }
         } catch (Exception e) {
@@ -60,15 +57,16 @@ public class OrderDAO extends DBContext{
         return orders;
     }
     
-    public ArrayList<Order> getAllCanceledOrdersOfCus(int accID) {
+    public ArrayList<Order> getAllCanceledOrdersOfCus(int cusID) {
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            String sql = "select DISTINCT o.OrderID, o.CustomerID,o.EmployeeID,o.OrderDate,o.RequiredDate,o.ShipAddress,o.ShipName,o.ShipPostalCode,o.ShipRegion,o.ShipCity,o.Freight,o.ShipCountry,o.ShippedDate\n" +
-            "from Accounts a,Customers c, Orders o,[Order Details] od where\n" +
-            "a.AccountID=? and a.CustomerID=c.CustomerID and c.CustomerID=o.CustomerID and od.OrderID=o.OrderID and RequiredDate IS NULL";
+//            String sql = "select DISTINCT o.OrderID, o.CustomerID,o.EmployeeID,o.OrderDate,o.RequiredDate,o.ShipAddress,o.ShipName,o.ShipPostalCode,o.ShipRegion,o.ShipCity,o.Freight,o.ShipCountry,o.ShippedDate\n" +
+//            "from Accounts a,Customers c, Orders o,[Order Details] od where\n" +
+//            "a.AccountID=? and a.CustomerID=c.CustomerID and c.CustomerID=o.CustomerID and od.OrderID=o.OrderID and RequiredDate IS NULL";
+            String sql = "select * from Orders o where o.CustomerID = ? AND RequiredDate IS NULL";
             //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, accID);
+            ps.setInt(1, cusID);
             //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
             //b4 xu ly kqua tra ve
@@ -77,18 +75,17 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 String CustomerID = rs.getString("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
                 String ShipName = rs.getString("ShipName");
                 String ShipAddress = rs.getString("ShipAddress");
                 String ShipCity = rs.getString("ShipCity");
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                double Freight = rs.getDouble("Freight");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                
-                Order o = new Order(OrderID, EmployeeID, CustomerID, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Freight, OrderDate, RequiredDate, ShippedDate);
+                Order o = new Order(OrderID, cusID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
                 orders.add(o);
             }
         } catch (Exception e) {
@@ -111,18 +108,17 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 String CustomerID = rs.getString("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
                 String ShipName = rs.getString("ShipName");
                 String ShipAddress = rs.getString("ShipAddress");
                 String ShipCity = rs.getString("ShipCity");
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                double Freight = rs.getDouble("Freight");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                
-                Order o = new Order(OrderID, EmployeeID, CustomerID, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Freight, OrderDate, RequiredDate, ShippedDate);
+                Order o = new Order(OrderID, EmployeeID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
                 orders.add(o);
             }
         } catch (Exception e) {
@@ -158,18 +154,17 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 String CustomerID = rs.getString("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
                 String ShipName = rs.getString("ShipName");
                 String ShipAddress = rs.getString("ShipAddress");
                 String ShipCity = rs.getString("ShipCity");
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                double Freight = rs.getDouble("Freight");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                
-                Order o = new Order(OrderID, EmployeeID, CustomerID, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Freight, OrderDate, RequiredDate, ShippedDate);
+                Order o = new Order(OrderID, EmployeeID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
                 orders.add(o);
             }
         } catch (Exception e) {
@@ -194,10 +189,10 @@ public class OrderDAO extends DBContext{
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
+                double SalePrice = rs.getDouble("SalePrice");
                 int Quantity = rs.getInt("Quantity");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                double Discount = rs.getDouble("Discount");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, UnitPrice, Discount);
+                int DiscountID = rs.getInt("DiscountID");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
                 orderDetails.add(od);
             }
         } catch (Exception e) {
@@ -206,7 +201,7 @@ public class OrderDAO extends DBContext{
         return orderDetails;
     }
     
-    public ArrayList<OrderDetail> getDetailOfOrderByOdID(int OdID) {
+    public ArrayList<OrderDetail> getDetailsListOfOrderByOdID(int OdID) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
             String sql = "select * from [Order Details] where OrderID=?";
@@ -221,10 +216,10 @@ public class OrderDAO extends DBContext{
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
+                double SalePrice = rs.getDouble("SalePrice");
                 int Quantity = rs.getInt("Quantity");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                double Discount = rs.getDouble("Discount");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, UnitPrice, Discount);
+                int DiscountID = rs.getInt("DiscountID");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
                 orderDetails.add(od);
             }
         } catch (Exception e) {
@@ -245,19 +240,19 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 String CustomerID = rs.getString("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
                 String ShipName = rs.getString("ShipName");
                 String ShipAddress = rs.getString("ShipAddress");
                 String ShipCity = rs.getString("ShipCity");
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                double Freight = rs.getDouble("Freight");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                
-                return new Order(OrderID, EmployeeID, CustomerID, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Freight, OrderDate, RequiredDate, ShippedDate);
-                
+                return new Order(OrderID, EmployeeID, EmployeeID, OrderDate, 
+                        RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, 
+                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
             }
         } catch (Exception e) {
             
@@ -268,19 +263,20 @@ public class OrderDAO extends DBContext{
     
     public void createOrder(Order od) throws SQLException{
         try {
-            String sql = "INSERT INTO Orders(CustomerID,EmployeeID,OrderDate,RequiredDate,ShipName,ShipAddress,ShipCity,ShipPostalCode,ShipCountry,Freight) \n" +
-            "VALUES(?,?,GETDATE(),DATEADD(day, 28,GETDATE()),?,?,?,?,?,?)";
+            String sql = "INSERT INTO Orders VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?)";
             
             PreparedStatement ps1 = connection.prepareStatement(sql);
+            ps1.setInt(1, od.getOrderID());
+            ps1.setInt(2, od.getCustomerID());
+            ps1.setInt(3, od.getEmployeeID());
+            ps1.setDouble(4, od.getFreight());
+            ps1.setString(5, od.getShipName());
+            ps1.setString(6, od.getShipAddress());
+            ps1.setString(7, od.getShipCity());
+            ps1.setString(8, od.getShipRegion());
+            ps1.setString(9, od.getShipPostalCode());
+            ps1.setString(10, od.getShipCountry());
             
-            ps1.setString(1, od.getCustomerID());
-            ps1.setInt(2, od.getEmployeeID());
-            ps1.setString(3, od.getShipName());
-            ps1.setString(4, od.getShipAddress());
-            ps1.setString(5, od.getShipCity());
-            ps1.setString(6, od.getShipPostalCode());
-            ps1.setString(7, od.getShipCountry());
-            ps1.setDouble(8, od.getFreight());
             
             ps1.executeUpdate();
             
@@ -289,7 +285,7 @@ public class OrderDAO extends DBContext{
         }//finally{ connection.close();}
         
     }
-    public void createOrderDetail(OrderDetail odDetail) throws SQLException{
+    public void createDetailOfOrder(OrderDetail odDetail) throws SQLException{
         try {
            
             String sql2 = "INSERT INTO [Order Details](OrderID,ProductID,UnitPrice,Quantity,Discount) VALUES(?,?,?,?,?)";
@@ -297,9 +293,9 @@ public class OrderDAO extends DBContext{
             
             ps2.setInt(1,odDetail.getOrderID());
             ps2.setInt(2, odDetail.getProductID());
-            ps2.setDouble(3, odDetail.getUnitPrice());
+            ps2.setDouble(3, odDetail.getSalePrice());
             ps2.setInt(4, odDetail.getQuantity());
-            ps2.setDouble(5, odDetail.getDiscount());
+            ps2.setDouble(5, odDetail.getDiscountID());
             ps2.executeUpdate();
             
         } catch (Exception e) {
@@ -308,42 +304,34 @@ public class OrderDAO extends DBContext{
         
     }
     
+   
     public int getNewOrderID(){
+        int maxOrderID =0;
         try {
             String sql = "select Max(OrderID) as Maximum from Orders";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            
-            //b4 xu ly kqua tra ve
             while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int maxOrderID = rs.getInt("Maximum");
-                return maxOrderID;
+                maxOrderID = rs.getInt("Maximum");
             }
-            
         } catch (Exception e) {
         }//finally{ connection.close();}
-        return 0;
+        return maxOrderID +1;
     }
     
     
-    public void cancelOrder(int orderID) throws SQLException{
+    public boolean cancelOrder(int orderID) throws SQLException{
+        int result=0;
         try {
             String sql = "update Orders SET RequiredDate=null WHERE OrderID=? AND ShippedDate IS NULL";
             //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, orderID);
-            //b3thuc thi truy van
-            ps.executeUpdate();
-            //b4 xu ly kqua tra ve
-            
-            
+            result = ps.executeUpdate();
         } catch (Exception e) {
             connection.rollback();
         }//finally{ connection.close();}
-        
+        return result>0;
     }
     
 //    public ArrayList<OrderDetail> getOrderByMonth(int month){
@@ -395,10 +383,10 @@ public class OrderDAO extends DBContext{
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
+                double SalePrice = rs.getDouble("SalePrice");
                 int Quantity = rs.getInt("Quantity");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                double Discount = rs.getDouble("Discount");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, UnitPrice, Discount);
+                int DiscountID = rs.getInt("DiscountID");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
                 odDetailList.add(od);
             }
         } catch (Exception e) {
@@ -422,10 +410,10 @@ public class OrderDAO extends DBContext{
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
+                double SalePrice = rs.getDouble("SalePrice");
                 int Quantity = rs.getInt("Quantity");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                double Discount = rs.getDouble("Discount");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, UnitPrice, Discount);
+                int DiscountID = rs.getInt("DiscountID");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
                 odDetailList.add(od);
             }
         } catch (Exception e) {
@@ -442,10 +430,7 @@ public class OrderDAO extends DBContext{
 //        for (OrderDetail orderDetail : od) {
 //            System.out.println(orderDetail);
 //        }  
-        ArrayList<Order> o = new OrderDAO().getAllOrdersOfCus(2);
-        for (Order orderDetail : o) {
-            System.out.println(orderDetail);
-        }  
+        
 
         
 //        try {

@@ -27,13 +27,14 @@ public class CustomerDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String CustomerID = rs.getString("CustomerID");
-                String CompanyName = rs.getString("CompanyName");
-                String ContactName = rs.getString("ContactName");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
                 String ContactTitle = rs.getString("ContactTitle");
+                Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                
-                cus = new Customer(CustomerID, CompanyName, ContactName, ContactTitle, Address,CreateDate);
+                cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
             }
         } catch (Exception e) {
         }
@@ -49,12 +50,14 @@ public class CustomerDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String CustomerID = rs.getString("CustomerID");
-                String CompanyName = rs.getString("CompanyName");
-                String ContactName = rs.getString("ContactName");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
                 String ContactTitle = rs.getString("ContactTitle");
+                Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                cus = new Customer(CustomerID, CompanyName, ContactName, ContactTitle, Address,CreateDate);
+                cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
             }
         } catch (Exception e) {
         }
@@ -69,12 +72,14 @@ public class CustomerDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String CustomerID = rs.getString("CustomerID");
-                String CompanyName = rs.getString("CompanyName");
-                String ContactName = rs.getString("ContactName");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
                 String ContactTitle = rs.getString("ContactTitle");
+                Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, CompanyName, ContactName, ContactTitle, Address,CreateDate);
+                Customer cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
                 cusList.add(cus);
             }
         } catch (Exception e) {
@@ -82,27 +87,25 @@ public class CustomerDAO extends DBContext{
         return cusList;
     }
     
-    public int createCustomer(Customer cus){
+    public boolean createCustomer(Customer cus){
         int result1=0;
             try {
-                String sql="insert into Customers(CustomerID, CompanyName , ContactName,ContactTitle,Address,CreateDate) values(?,?,?,?,?,GETDATE())";
+                String sql="insert into Customers(CustomerID, FirstName , LastName,ContactTitle,DateOfBirth,Address,PhoneNumber,CreateDate) values(?,?,?,?,?,?,?,GETDATE())";
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setString(1,cus.getCustomerID() );
-                ps.setString(2, cus.getCompanyName());
-                ps.setString(3,cus.getContactName() );
+                ps.setString(2, cus.getFirstName());
+                ps.setString(3,cus.getLastName() );
                 ps.setString(4, cus.getContactTitle());
-                ps.setString(5,cus.getAddress());
-                
+                ps.setDate(5, cus.getDateOfBirth());
+                ps.setString(6,cus.getAddress());
+                ps.setString(7, cus.getPhoneNumber());
+                //ps.setDate(8, cus.getCreateDate());
                 result1 = ps.executeUpdate();
             } catch (Exception e) {
+                
             }
+            return result1>0;
             
-            if (result1>0) {
-            return 1;
-        } else {
-            return 0; 
-        }
-        
     }
     public String randomString(int n) {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -131,12 +134,14 @@ public class CustomerDAO extends DBContext{
             //b4 xu ly kqua tra ve
             while(rs.next()){
                 String CustomerID = rs.getString("CustomerID");
-                String CompanyName = rs.getString("CompanyName");
-                String ContactName = rs.getString("ContactName");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
                 String ContactTitle = rs.getString("ContactTitle");
+                Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, CompanyName, ContactName, ContactTitle, Address,CreateDate);
+                Customer cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
                 cusList.add(cus);
             }
         } catch (Exception e) {
@@ -154,12 +159,14 @@ public class CustomerDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String CustomerID = rs.getString("CustomerID");
-                String CompanyName = rs.getString("CompanyName");
-                String ContactName = rs.getString("ContactName");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
                 String ContactTitle = rs.getString("ContactTitle");
+                Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, CompanyName, ContactName, ContactTitle, Address,CreateDate);
+                Customer cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
                 cusList.add(cus);
             }
         } catch (Exception e) {

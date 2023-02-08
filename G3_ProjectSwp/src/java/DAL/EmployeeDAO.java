@@ -26,16 +26,15 @@ public class EmployeeDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int EmployeeID = rs.getInt("EmployeeID");
-                int DepartmentID = rs.getInt("DepartmentID");
-                String LastName = rs.getString("LastName");
                 String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                int DepartmentID = rs.getInt("DepartmentID");
                 String Title = rs.getString("Title");
                 String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
-                String Address = rs.getString("Address");
                 Date BirthDate = rs.getDate("BirthDate");
                 Date HireDate = rs.getDate("HireDate");
-                
-                emp = new Employee(EmployeeID, DepartmentID, LastName, FirstName, Title, TitleOfCourtesy, Address, BirthDate, HireDate);
+                String Address = rs.getString("Address");
+                emp = new Employee(EmployeeID, FirstName, LastName, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address);
             }
         } catch (Exception e) {
         }
@@ -50,16 +49,15 @@ public class EmployeeDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int EmployeeID = rs.getInt("EmployeeID");
-                int DepartmentID = rs.getInt("DepartmentID");
-                String LastName = rs.getString("LastName");
                 String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                int DepartmentID = rs.getInt("DepartmentID");
                 String Title = rs.getString("Title");
                 String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
-                String Address = rs.getString("Address");
                 Date BirthDate = rs.getDate("BirthDate");
                 Date HireDate = rs.getDate("HireDate");
-                
-                Employee emp = new Employee(EmployeeID, DepartmentID, LastName, FirstName, Title, TitleOfCourtesy, Address, BirthDate, HireDate);
+                String Address = rs.getString("Address");
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address);
                 empList.add(emp);
             }
         } catch (Exception e) {

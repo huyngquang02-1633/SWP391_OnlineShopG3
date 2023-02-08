@@ -24,36 +24,25 @@ public class Order {
     private String ShipRegion;
     private String ShipPostalCode;
     private String ShipCountry;
-    
 
-    public Order(int OrderID, int EmployeeID, String CustomerID, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry, double Freight, Date OrderDate, Date RequiredDate, Date ShippedDate) {
+    public Order(int OrderID, int CustomerID, int EmployeeID, Date OrderDate, Date RequiredDate, Date ShippedDate, double Freight, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry) {
         this.OrderID = OrderID;
-        this.EmployeeID = EmployeeID;
         this.CustomerID = CustomerID;
-        this.ShipName = ShipName;
-        this.ShipAddress = ShipAddress;
-        this.ShipCity = ShipCity;
-        this.ShipRegion = ShipRegion;
-        this.ShipPostalCode = ShipPostalCode;
-        this.ShipCountry = ShipCountry;
-        this.Freight = Freight;
+        this.EmployeeID = EmployeeID;
         this.OrderDate = OrderDate;
         this.RequiredDate = RequiredDate;
         this.ShippedDate = ShippedDate;
-    }
-    
-    public Order( int EmployeeID, String CustomerID, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry, double Freight) {
-        this.EmployeeID = EmployeeID;
-        this.CustomerID = CustomerID;
+        this.Freight = Freight;
         this.ShipName = ShipName;
         this.ShipAddress = ShipAddress;
         this.ShipCity = ShipCity;
         this.ShipRegion = ShipRegion;
         this.ShipPostalCode = ShipPostalCode;
         this.ShipCountry = ShipCountry;
-        this.Freight = Freight;
     }
+    
 
+   
     public int getOrderID() {
         return OrderID;
     }
@@ -70,11 +59,11 @@ public class Order {
         this.EmployeeID = EmployeeID;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return CustomerID;
     }
 
-    public void setCustomerID(String CustomerID) {
+    public void setCustomerID(int CustomerID) {
         this.CustomerID = CustomerID;
     }
 
