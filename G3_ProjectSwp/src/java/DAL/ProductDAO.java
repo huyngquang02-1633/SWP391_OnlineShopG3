@@ -38,14 +38,24 @@ public class ProductDAO extends DBContext{
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                
-                Product p = new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
+                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
                 products.add(p);
             }
             
@@ -84,14 +94,24 @@ public class ProductDAO extends DBContext{
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                
-                Product p = new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
+                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
                 products.add(p);
             }
             
@@ -101,7 +121,6 @@ public class ProductDAO extends DBContext{
 //        finally{
 //            connection.close();
 //        }
-        
         return products;
     }
     
@@ -120,24 +139,30 @@ public class ProductDAO extends DBContext{
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                
-                Product p = new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
+                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
                 products.add(p);
             }
             
         } catch (Exception e) {
             
         }
-//        finally{
-//            connection.close();
-//        }
-        
         return products;
     }
     
@@ -153,22 +178,30 @@ public class ProductDAO extends DBContext{
             //b4 xu ly kqua tra ve
             while (rs.next()) { 
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int ProductID = rs.getInt("ProductID"); 
-                String ProductName = rs.getString("ProductName"); 
-                double UnitPrice = rs.getDouble("UnitPrice");
-                String CategoryName = rs.getString("CategoryName"); 
+                int ProductID = rs.getInt("ProductID");
+                String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
-                boolean Discontinued = rs.getBoolean("Discontinued"); 
-                p= new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
-                
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
+                boolean Discontinued = rs.getBoolean("Discontinued");
+                p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
             }
         } catch (Exception e) {
         }
-
         return p;
     }
     
@@ -181,21 +214,30 @@ public class ProductDAO extends DBContext{
             ps.setInt(1, proID);  
             ResultSet rs = ps.executeQuery();  
             while (rs.next()) { 
-                int ProductID = rs.getInt("ProductID"); 
-                String ProductName = rs.getString("ProductName"); 
-                double UnitPrice = rs.getDouble("UnitPrice");
+                int ProductID = rs.getInt("ProductID");
+                String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
-                boolean Discontinued = rs.getBoolean("Discontinued"); 
-                p= new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
-                
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
+                boolean Discontinued = rs.getBoolean("Discontinued");
+                p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
             }
         } catch (Exception e) {
         }
-
         return p;
     }
     
@@ -214,21 +256,30 @@ public class ProductDAO extends DBContext{
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                
-                Product p = new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
+                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
                 products.add(p);
             }
             
         } catch (Exception e) {
             
         }// finally{connection.close();}
-        
         return products;
     }
     public ArrayList<Product> getProductByCategoryID(int catID) {
@@ -246,21 +297,29 @@ public class ProductDAO extends DBContext{
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
-                String QuantityPerUnit = rs.getString("QuantityPerUnit");
-                double UnitPrice = rs.getDouble("UnitPrice");
-                int UnitsInStock = rs.getInt("UnitsInStock");
-                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
-                int ReorderLevel = rs.getInt("ReorderLevel");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                
-                Product p = new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
+                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
                 products.add(p);
             }
-            
         } catch (Exception e) {
             
         }// finally{connection.close();}
-        
         return products;
     }
     
@@ -268,21 +327,48 @@ public class ProductDAO extends DBContext{
         try {
             //connection = DBContext.getInstance().getConnection();
             
-            String sql = "update Products SET ProductName = ?, CategoryID = ?, "
-                    + "QuantityPerUnit = ?, UnitPrice = ?, UnitsInStock = ?, UnitsOnOrder = ?, "
-                    + "ReorderLevel = ?, Discontinued = ? where ProductID = ?";
+            String sql = "update Products SET "
+                    + "ProductName = ?, "
+                    + "CategoryID = ?, "
+                    + "GenreID = ?, "
+                    + "CoverPrice = ?, "
+                    + "SalePrice = ?, "
+                    + "AuthorID = ?, "
+                    + "Translator = ?, "
+                    + "PublisherID = ?, "
+                    + "SupplierID = ?, "
+                    + "Language = ?, "
+                    + "Size = ?, "
+                    + "Weight = ?, "
+                    + "NumerOfPage = ?, "
+                    + "Format = ?, "
+                    + "Image = ?, "
+                    + "PublishDate = ?, "
+                    + "PublishingLicense = ?, "
+                    + "Description = ?, "
+                    + "Discontinued = ? "
+                    + "where ProductID = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql); 
             ps.setString(1, p.getProductName());
             ps.setInt(2, p.getCategoryID());
-            ps.setString(3, p.getQuantityPerUnit());
-            ps.setDouble(4, p.getUnitPrice());
-            ps.setInt(5, p.getUnitsInStock());
-            ps.setInt(6, p.getUnitsOnOrder());
-            ps.setInt(7, p.getReorderLevel());
-            ps.setBoolean(8, p.isDiscontinued());
-            ps.setInt(9, p.getProductID());
-            
+            ps.setInt(3, p.getGenreID());
+            ps.setDouble(5, p.getCoverPrice());
+            ps.setDouble(6, p.getSalePrice());
+            ps.setInt(7, p.getAuthorID());
+            ps.setString(8, p.getTranslator());
+            ps.setInt(9, p.getPublisherID());
+            ps.setInt(10, p.getSupplierID());
+            ps.setString(11, p.getLanguage());
+            ps.setString(12, p.getSize());
+            ps.setDouble(13, p.getWeight());
+            ps.setInt(14, p.getNumerOfPage());
+            ps.setString(15, p.getFormat());
+            ps.setInt(16, p.getImage());
+            ps.setDate(17, p.getPublishDate());
+            ps.setString(18, p.getPublishingLicense());
+            ps.setString(19, p.getDescription());
+            ps.setBoolean(20, p.isDiscontinued());
             ps.executeUpdate();
         } catch (SQLException e) {
             connection.rollback();
@@ -311,21 +397,49 @@ public class ProductDAO extends DBContext{
         return result>0?1:0;
     }
     public void CreateProduct(Product p) throws SQLException {
-        String sql = "insert into Products(ProductName,CategoryID,QuantityPerUnit,UnitPrice,"
-                + "UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued)\n"
-                + "values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into Products("
+                + "ProductName,"
+                + "CategoryID,"
+                + "GenreID,"
+                + "CoverPrice,"
+                + "SalePrice,"
+                + "AuthorID,"
+                + "Translator,"
+                + "PublisherID,"
+                + "SupplierID,"
+                + "Language,"
+                + "Size,"
+                + "Weight,"
+                + "NumerOfPage,"
+                + "Format,"
+                + "Image,"
+                + "PublishDate,"
+                + "PublishingLicense,"
+                + "Description,"
+                + "Discontinued,"
+                + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {            
             //connection = DBContext.getInstance().getConnection();
-            
             PreparedStatement ps = connection.prepareStatement(sql); 
             ps.setString(1, p.getProductName());
             ps.setInt(2, p.getCategoryID());
-            ps.setString(3, p.getQuantityPerUnit());
-            ps.setDouble(4, p.getUnitPrice());
-            ps.setInt(5, p.getUnitsInStock());
-            ps.setInt(6, p.getUnitsOnOrder());
-            ps.setInt(7, p.getReorderLevel());
-            ps.setBoolean(8, p.isDiscontinued());
+            ps.setInt(3, p.getGenreID());
+            ps.setDouble(5, p.getCoverPrice());
+            ps.setDouble(6, p.getSalePrice());
+            ps.setInt(7, p.getAuthorID());
+            ps.setString(8, p.getTranslator());
+            ps.setInt(9, p.getPublisherID());
+            ps.setInt(10, p.getSupplierID());
+            ps.setString(11, p.getLanguage());
+            ps.setString(12, p.getSize());
+            ps.setDouble(13, p.getWeight());
+            ps.setInt(14, p.getNumerOfPage());
+            ps.setString(15, p.getFormat());
+            ps.setInt(16, p.getImage());
+            ps.setDate(17, p.getPublishDate());
+            ps.setString(18, p.getPublishingLicense());
+            ps.setString(19, p.getDescription());
+            ps.setBoolean(20, p.isDiscontinued());
             ps.executeUpdate();
         } catch (SQLException e) {
             connection.rollback();
