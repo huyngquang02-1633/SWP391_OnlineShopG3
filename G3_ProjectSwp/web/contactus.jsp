@@ -33,7 +33,7 @@
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<ul class="tg-addnav">
 								<li>
-									<a href="contactus.html">
+									<a href="contactus.jsp">
 										<i class="icon-envelope"></i>
 										<em>Contact</em>
 									</a>
@@ -59,7 +59,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<strong class="tg-logo"><a href="index.html"><img src="images/logo.png"
+							<strong class="tg-logo"><a href="index.jsp"><img src="images/logo.png"
 										alt="company name here"></a></strong>
 							<div class="tg-wishlistandcart">
 								<div class="dropdown tg-themedropdown tg-wishlistdropdown">
@@ -212,16 +212,16 @@
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -229,18 +229,18 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -248,15 +248,15 @@
 																	<h2>History</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
 																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
 																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -272,7 +272,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -281,35 +281,19 @@
 														<ul>
 															<li>
 																<div class="tg-linkstitle">
-																	<h2>History</h2>
-																</div>
-																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
-																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
-																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
-																</ul>
-																<a class="tg-btnviewall" href="products.html">View
-																	All</a>
-															</li>
-															<li>
-																<div class="tg-linkstitle">
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -317,18 +301,34 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
+																	All</a>
+															</li>
+															<li>
+																<div class="tg-linkstitle">
+																	<h2>History</h2>
+																</div>
+																<ul>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
+																	</li>
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
+																			aliuip</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
+																</ul>
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -344,7 +344,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -356,16 +356,16 @@
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -373,18 +373,18 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -392,15 +392,15 @@
 																	<h2>History</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
 																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
 																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -416,7 +416,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -425,35 +425,19 @@
 														<ul>
 															<li>
 																<div class="tg-linkstitle">
-																	<h2>History</h2>
-																</div>
-																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
-																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
-																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
-																</ul>
-																<a class="tg-btnviewall" href="products.html">View
-																	All</a>
-															</li>
-															<li>
-																<div class="tg-linkstitle">
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -461,18 +445,34 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
+																	All</a>
+															</li>
+															<li>
+																<div class="tg-linkstitle">
+																	<h2>History</h2>
+																</div>
+																<ul>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
+																	</li>
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
+																			aliuip</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
+																</ul>
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -488,7 +488,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -500,16 +500,16 @@
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -517,18 +517,18 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -536,15 +536,15 @@
 																	<h2>History</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
 																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
 																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -560,7 +560,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -569,35 +569,19 @@
 														<ul>
 															<li>
 																<div class="tg-linkstitle">
-																	<h2>History</h2>
-																</div>
-																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
-																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
-																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
-																</ul>
-																<a class="tg-btnviewall" href="products.html">View
-																	All</a>
-															</li>
-															<li>
-																<div class="tg-linkstitle">
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -605,18 +589,34 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
+																	All</a>
+															</li>
+															<li>
+																<div class="tg-linkstitle">
+																	<h2>History</h2>
+																</div>
+																<ul>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
+																	</li>
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
+																			aliuip</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
+																</ul>
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -632,7 +632,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -644,16 +644,16 @@
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -661,18 +661,18 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -680,15 +680,15 @@
 																	<h2>History</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
 																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
 																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -704,7 +704,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -713,35 +713,19 @@
 														<ul>
 															<li>
 																<div class="tg-linkstitle">
-																	<h2>History</h2>
-																</div>
-																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
-																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
-																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
-																</ul>
-																<a class="tg-btnviewall" href="products.html">View
-																	All</a>
-															</li>
-															<li>
-																<div class="tg-linkstitle">
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -749,18 +733,34 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
+																	All</a>
+															</li>
+															<li>
+																<div class="tg-linkstitle">
+																	<h2>History</h2>
+																</div>
+																<ul>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
+																	</li>
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
+																			aliuip</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
+																</ul>
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -776,7 +776,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -788,16 +788,16 @@
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -805,18 +805,18 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -824,15 +824,15 @@
 																	<h2>History</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
 																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
 																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -848,7 +848,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -857,35 +857,19 @@
 														<ul>
 															<li>
 																<div class="tg-linkstitle">
-																	<h2>History</h2>
-																</div>
-																<ul>
-																	<li><a href="products.html">Veniam quis nostrud</a>
-																	</li>
-																	<li><a href="products.html">Exercitation</a></li>
-																	<li><a href="products.html">Laboris nisi ut
-																			aliuip</a></li>
-																	<li><a href="products.html">Commodo conseat</a></li>
-																	<li><a href="products.html">Duis aute irure</a></li>
-																</ul>
-																<a class="tg-btnviewall" href="products.html">View
-																	All</a>
-															</li>
-															<li>
-																<div class="tg-linkstitle">
 																	<h2>Architecture</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Tough As Nails</a></li>
-																	<li><a href="products.html">Pro Grease Monkey</a>
+																	<li><a href="products.jsp">Tough As Nails</a></li>
+																	<li><a href="products.jsp">Pro Grease Monkey</a>
 																	</li>
-																	<li><a href="products.html">Building Memories</a>
+																	<li><a href="products.jsp">Building Memories</a>
 																	</li>
-																	<li><a href="products.html">Bulldozer Boyz</a></li>
-																	<li><a href="products.html">Build Or Leave On Us</a>
+																	<li><a href="products.jsp">Bulldozer Boyz</a></li>
+																	<li><a href="products.jsp">Build Or Leave On Us</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 															<li>
@@ -893,18 +877,34 @@
 																	<h2>Art Forms</h2>
 																</div>
 																<ul>
-																	<li><a href="products.html">Consectetur
+																	<li><a href="products.jsp">Consectetur
 																			adipisicing</a></li>
-																	<li><a href="products.html">Aelit sed do eiusmod</a>
+																	<li><a href="products.jsp">Aelit sed do eiusmod</a>
 																	</li>
-																	<li><a href="products.html">Tempor incididunt
+																	<li><a href="products.jsp">Tempor incididunt
 																			labore</a></li>
-																	<li><a href="products.html">Dolore magna aliqua</a>
+																	<li><a href="products.jsp">Dolore magna aliqua</a>
 																	</li>
-																	<li><a href="products.html">Ut enim ad minim</a>
+																	<li><a href="products.jsp">Ut enim ad minim</a>
 																	</li>
 																</ul>
-																<a class="tg-btnviewall" href="products.html">View
+																<a class="tg-btnviewall" href="products.jsp">View
+																	All</a>
+															</li>
+															<li>
+																<div class="tg-linkstitle">
+																	<h2>History</h2>
+																</div>
+																<ul>
+																	<li><a href="products.jsp">Veniam quis nostrud</a>
+																	</li>
+																	<li><a href="products.jsp">Exercitation</a></li>
+																	<li><a href="products.jsp">Laboris nisi ut
+																			aliuip</a></li>
+																	<li><a href="products.jsp">Commodo conseat</a></li>
+																	<li><a href="products.jsp">Duis aute irure</a></li>
+																</ul>
+																<a class="tg-btnviewall" href="products.jsp">View
 																	All</a>
 															</li>
 														</ul>
@@ -920,7 +920,7 @@
 																			tempor incididunt laebore toloregna aliqua
 																			enim.</p>
 																	</div>
-																	<a class="tg-btn" href="products.html">view all</a>
+																	<a class="tg-btn" href="products.jsp">view all</a>
 																</div>
 															</li>
 														</ul>
@@ -929,13 +929,13 @@
 											</div>
 										</li>
 
-										<li><a href="products.html">Best Selling</a></li>
-										<li><a href="products.html">Weekly Sale</a></li>
-										<li><a href="authors.html">Authors</a></li>
+										<li><a href="products.jsp">Best Selling</a></li>
+										<li><a href="products.jsp">Weekly Sale</a></li>
+										<li><a href="authors.jsp">Authors</a></li>
 
 
-										<li><a href="contactus.html">Contact</a></li>
-										<li><a href="aboutus.html">About Us</a></li>
+										<li><a href="contactus.jsp">Contact</a></li>
+										<li><a href="aboutus.jsp">About Us</a></li>
 									</ul>
 								</div>
 							</nav>
