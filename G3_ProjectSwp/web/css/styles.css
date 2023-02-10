@@ -1,0 +1,8 @@
+/* the carousel */
+    .carousel-indicators .active {
+        background-color: #77b748;
+    }
+
+    .carousel-indicators li {
+        background-color: #ccc;
+    }
