@@ -11,20 +11,21 @@ package models;
 public class OrderDetail {
     private int OrderID;
     private int ProductID;
+    private int WarehouseID;
     private double SalePrice;
     private int Quantity;
     private int DiscountID;
 
-    public OrderDetail(int OrderID, int ProductID, double SalePrice, int Quantity, int DiscountID) {
+    public OrderDetail(int OrderID, int ProductID, int WarehouseID, double SalePrice, int Quantity, int DiscountID) {
         this.OrderID = OrderID;
         this.ProductID = ProductID;
+        this.WarehouseID = WarehouseID;
         this.SalePrice = SalePrice;
         this.Quantity = Quantity;
         this.DiscountID = DiscountID;
     }
 
     
-
     public int getOrderID() {
         return OrderID;
     }
@@ -65,10 +66,20 @@ public class OrderDetail {
         this.DiscountID = DiscountID;
     }
 
+    public int getWarehouseID() {
+        return WarehouseID;
+    }
+
+    public void setWarehouseID(int WarehouseID) {
+        this.WarehouseID = WarehouseID;
+    }
+
     @Override
     public String toString() {
-        return "OrderDetail{" + "OrderID=" + OrderID + ", ProductID=" + ProductID + ", SalePrice=" + SalePrice + ", Quantity=" + Quantity + ", DiscountID=" + DiscountID + '}';
+        return "OrderDetail{" + "OrderID=" + OrderID + ", ProductID=" + ProductID + ", WarehouseID=" + WarehouseID + ", SalePrice=" + SalePrice + ", Quantity=" + Quantity + ", DiscountID=" + DiscountID + '}';
     }
+
+    
 
     
     
