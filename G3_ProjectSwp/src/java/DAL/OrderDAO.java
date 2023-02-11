@@ -190,9 +190,10 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
                 double SalePrice = rs.getDouble("SalePrice");
+                int WarehouseID = rs.getInt("WarehouseID");
                 int Quantity = rs.getInt("Quantity");
                 int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
                 orderDetails.add(od);
             }
         } catch (Exception e) {
@@ -217,9 +218,10 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
                 double SalePrice = rs.getDouble("SalePrice");
+                int WarehouseID = rs.getInt("WarehouseID");
                 int Quantity = rs.getInt("Quantity");
                 int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
                 orderDetails.add(od);
             }
         } catch (Exception e) {
@@ -384,9 +386,10 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
                 double SalePrice = rs.getDouble("SalePrice");
+                int WarehouseID = rs.getInt("WarehouseID");
                 int Quantity = rs.getInt("Quantity");
                 int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
                 odDetailList.add(od);
             }
         } catch (Exception e) {
@@ -411,9 +414,10 @@ public class OrderDAO extends DBContext{
                 int OrderID = rs.getInt("OrderID");
                 int ProductID = rs.getInt("ProductID");
                 double SalePrice = rs.getDouble("SalePrice");
+                int WarehouseID = rs.getInt("WarehouseID");
                 int Quantity = rs.getInt("Quantity");
                 int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, SalePrice, Quantity, DiscountID);
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
                 odDetailList.add(od);
             }
         } catch (Exception e) {

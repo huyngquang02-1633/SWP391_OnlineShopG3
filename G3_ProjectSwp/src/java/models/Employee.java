@@ -14,27 +14,30 @@ public class Employee {
     private int EmployeeID;
     private String FirstName;
     private String LastName;
+    private boolean Gender;
     private int DepartmentID;
     private String Title;
     private String TitleOfCourtesy;
     private Date BirthDate;
     private Date HireDate;
     private String Address;
+    private boolean Status;
 
-    public Employee(int EmployeeID, String FirstName, String LastName, int DepartmentID, String Title, String TitleOfCourtesy, Date BirthDate, Date HireDate, String Address) {
+    public Employee(int EmployeeID, String FirstName, String LastName, boolean Gender, int DepartmentID, String Title, String TitleOfCourtesy, Date BirthDate, Date HireDate, String Address, boolean Status) {
         this.EmployeeID = EmployeeID;
         this.FirstName = FirstName;
         this.LastName = LastName;
+        this.Gender = Gender;
         this.DepartmentID = DepartmentID;
         this.Title = Title;
         this.TitleOfCourtesy = TitleOfCourtesy;
         this.BirthDate = BirthDate;
         this.HireDate = HireDate;
         this.Address = Address;
+        this.Status = Status;
     }
 
     
-
     public int getEmployeeID() {
         return EmployeeID;
     }
@@ -107,10 +110,28 @@ public class Employee {
         this.HireDate = HireDate;
     }
 
+    public boolean isGender() {
+        return Gender;
+    }
+
+    public void setGender(boolean Gender) {
+        this.Gender = Gender;
+    }
+
+    public boolean isStatus() {
+        return Status;
+    }
+
+    public void setStatus(boolean Status) {
+        this.Status = Status;
+    }
+
     @Override
     public String toString() {
-        return "Employee{" + "EmployeeID=" + EmployeeID + ", DepartmentID=" + DepartmentID + ", LastName=" + LastName + ", FirstName=" + FirstName + ", Title=" + Title + ", TitleOfCourtesy=" + TitleOfCourtesy + ", Address=" + Address + ", BirthDate=" + BirthDate + ", HireDate=" + HireDate + '}';
+        return "Employee{" + "EmployeeID=" + EmployeeID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Gender=" + Gender + ", DepartmentID=" + DepartmentID + ", Title=" + Title + ", TitleOfCourtesy=" + TitleOfCourtesy + ", BirthDate=" + BirthDate + ", HireDate=" + HireDate + ", Address=" + Address + ", Status=" + Status + '}';
     }
+
+    
 
     
 }

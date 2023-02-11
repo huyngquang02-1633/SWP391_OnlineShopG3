@@ -14,6 +14,7 @@ public class Customer {
     private String CustomerID;
     private String FirstName;
     private String LastName;
+    private boolean Gender;
     private String ContactTitle;
     private Date DateOfBirth;
     private String Address;
@@ -27,10 +28,11 @@ public class Customer {
         
     }
 
-    public Customer(String CustomerID, String FirstName, String LastName, String ContactTitle, Date DateOfBirth, String Address, String PhoneNumber, Date CreateDate) {
+    public Customer(String CustomerID, String FirstName, String LastName, boolean Gender, String ContactTitle, Date DateOfBirth, String Address, String PhoneNumber, Date CreateDate) {
         this.CustomerID = CustomerID;
         this.FirstName = FirstName;
         this.LastName = LastName;
+        this.Gender = Gender;
         this.ContactTitle = ContactTitle;
         this.DateOfBirth = DateOfBirth;
         this.Address = Address;
@@ -39,7 +41,6 @@ public class Customer {
     }
 
     
-
     public String getCustomerID() {
         return CustomerID;
     }
@@ -104,11 +105,20 @@ public class Customer {
         this.CreateDate = CreateDate;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" + "CustomerID=" + CustomerID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", ContactTitle=" + ContactTitle + ", DateOfBirth=" + DateOfBirth + ", Address=" + Address + ", PhoneNumber=" + PhoneNumber + ", CreateDate=" + CreateDate + '}';
+    public boolean isGender() {
+        return Gender;
     }
 
+    public void setGender(boolean Gender) {
+        this.Gender = Gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "CustomerID=" + CustomerID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Gender=" + Gender + ", ContactTitle=" + ContactTitle + ", DateOfBirth=" + DateOfBirth + ", Address=" + Address + ", PhoneNumber=" + PhoneNumber + ", CreateDate=" + CreateDate + '}';
+    }
+
+    
     
     
     

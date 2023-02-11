@@ -29,12 +29,13 @@ public class CustomerDAO extends DBContext{
                 String CustomerID = rs.getString("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 String ContactTitle = rs.getString("ContactTitle");
                 Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
                 String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
+                cus = new Customer(CustomerID, FirstName, LastName,Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
             }
         } catch (Exception e) {
         }
@@ -52,12 +53,13 @@ public class CustomerDAO extends DBContext{
                 String CustomerID = rs.getString("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 String ContactTitle = rs.getString("ContactTitle");
                 Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
                 String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
+                cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
             }
         } catch (Exception e) {
         }
@@ -74,12 +76,13 @@ public class CustomerDAO extends DBContext{
                 String CustomerID = rs.getString("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 String ContactTitle = rs.getString("ContactTitle");
                 Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
                 String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
+                Customer cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
                 cusList.add(cus);
             }
         } catch (Exception e) {
@@ -136,12 +139,13 @@ public class CustomerDAO extends DBContext{
                 String CustomerID = rs.getString("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 String ContactTitle = rs.getString("ContactTitle");
                 Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
                 String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
+                Customer cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
                 cusList.add(cus);
             }
         } catch (Exception e) {
@@ -161,12 +165,13 @@ public class CustomerDAO extends DBContext{
                 String CustomerID = rs.getString("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 String ContactTitle = rs.getString("ContactTitle");
                 Date DateOfBirth = rs.getDate("DateOfBirth");
                 String Address = rs.getString("Address");
                 String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, FirstName, LastName, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
+                Customer cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
                 cusList.add(cus);
             }
         } catch (Exception e) {
