@@ -28,13 +28,14 @@ public class EmployeeDAO extends DBContext{
                 int EmployeeID = rs.getInt("EmployeeID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 int DepartmentID = rs.getInt("DepartmentID");
                 String Title = rs.getString("Title");
                 String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
                 Date BirthDate = rs.getDate("BirthDate");
                 Date HireDate = rs.getDate("HireDate");
                 String Address = rs.getString("Address");
-                emp = new Employee(EmployeeID, FirstName, LastName, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address);
+                emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, Gender);
             }
         } catch (Exception e) {
         }
@@ -51,13 +52,14 @@ public class EmployeeDAO extends DBContext{
                 int EmployeeID = rs.getInt("EmployeeID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
                 int DepartmentID = rs.getInt("DepartmentID");
                 String Title = rs.getString("Title");
                 String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
                 Date BirthDate = rs.getDate("BirthDate");
                 Date HireDate = rs.getDate("HireDate");
                 String Address = rs.getString("Address");
-                Employee emp = new Employee(EmployeeID, FirstName, LastName, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address);
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, Gender);
                 empList.add(emp);
             }
         } catch (Exception e) {
