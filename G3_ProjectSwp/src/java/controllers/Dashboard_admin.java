@@ -34,7 +34,50 @@ public class Dashboard_admin extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LocalDate today = LocalDate.now();
         
+        ArrayList<Order> OrderInCurrentMonth = new OrderDAO().getOrderByCurrentMonth(today.getMonthValue());
+        ArrayList<Order> OrderInToday = new OrderDAO().getOrderToday();
+        ArrayList<Customer> CustomerList = new CustomerDAO().getNewCustomer(today.getMonthValue());
+        ArrayList<OrderDetail> orderDetailInCurrentMonth = new OrderDAO().getALLOrderDetailInCurrentMonth(today.getMonthValue(),today.getYear());
+        
+        double monthlyRevenue = 0;
+        for (Order order : OrderInCurrentMonth) {
+            for (OrderDetail orderDetail : orderDetailInCurrentMonth) {
+                if(order.getOrderID() == orderDetail.getOrderID()){
+                    monthlyRevenue+= orderDetail.getSalePrice() * orderDetail.getQuantity();
+                }
+            }
+        }
+        double todayRevenue = 0;
+        for (Order order : OrderInToday) {
+            for (OrderDetail orderDetail : orderDetailInCurrentMonth) {
+                if(order.getOrderID() == orderDetail.getOrderID()){
+                    todayRevenue+= orderDetail.getSalePrice() * orderDetail.getQuantity();
+                }
+            }
+        }
+        
+        ArrayList<Double> statisticRevenue = new ArrayList<>();
+        for (int i = 1; i <= today.getMonthValue(); i++) {
+            double revenueInMonth = 0;
+            ArrayList<OrderDetail> odDetailListInMonth = new OrderDAO().getOrderDetailByMonth(i);
+            for (OrderDetail orderDetailEle : odDetailListInMonth) {
+                revenueInMonth += orderDetailEle.getQuantity() * orderDetailEle.getSalePrice();
+            }
+            statisticRevenue.add(revenueInMonth);
+        }
+
+        
+        
+        
+        req.setAttribute("totalOrderInMonth", OrderInCurrentMonth.size());
+        req.setAttribute("totalNewCusInMonth", CustomerList.size());
+        req.setAttribute("monthlyRevenue", Math.round(monthlyRevenue));
+        req.setAttribute("todayRevenue", Math.round(todayRevenue));
+        req.setAttribute("statisticRevenue", statisticRevenue);
+        
+        req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
     }
     
 }

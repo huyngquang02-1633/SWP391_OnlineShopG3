@@ -11,7 +11,7 @@ import java.sql.Date;
  * @author user
  */
 public class Customer {
-    private String CustomerID;
+    private int CustomerID;
     private String FirstName;
     private String LastName;
     private boolean Gender;
@@ -24,11 +24,11 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String CustomerID, String Firstname, String LastName, String ContactTitle, String Address) {
+    public Customer(int CustomerID, String Firstname, String LastName, String ContactTitle, String Address) {
         
     }
 
-    public Customer(String CustomerID, String FirstName, String LastName, boolean Gender, String ContactTitle, Date DateOfBirth, String Address, String PhoneNumber, Date CreateDate) {
+    public Customer(int CustomerID, String FirstName, String LastName, boolean Gender, String ContactTitle, Date DateOfBirth, String Address, String PhoneNumber, Date CreateDate) {
         this.CustomerID = CustomerID;
         this.FirstName = FirstName;
         this.LastName = LastName;
@@ -41,11 +41,11 @@ public class Customer {
     }
 
     
-    public String getCustomerID() {
+    public int getCustomerID() {
         return CustomerID;
     }
 
-    public void setCustomerID(String CustomerID) {
+    public void setCustomerID(int CustomerID) {
         this.CustomerID = CustomerID;
     }
 

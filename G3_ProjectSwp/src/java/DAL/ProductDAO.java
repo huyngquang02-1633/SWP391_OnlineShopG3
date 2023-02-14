@@ -4,7 +4,6 @@
  */
 package DAL;
 
-import models.DBContext;
 import models.Product;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -17,22 +16,42 @@ import java.util.ArrayList;
  * @author ADMIN
  */
 public class ProductDAO extends DBContext{
-    public ArrayList<Product> getProducts(boolean isAdmin) {
-        ArrayList<Product> products = new ArrayList<>();
+    public Product getObject(ResultSet rs){
+        Product product = null;
         try {
-            String sql = "select * from Products";
-            String sql2 = "select * from Products where Discontinued=?";
-            //b2 tao doi tuong nhe
-            PreparedStatement ps;
-            if(isAdmin==true){ 
-                ps= connection.prepareStatement(sql);
-            }else{
-                 ps= connection.prepareStatement(sql2);
-                 ps.setInt(1, 0);
+            while (rs.next()) { 
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int ProductID = rs.getInt("ProductID");
+                String ProductName = rs.getString("ProductName");
+                int CategoryID = rs.getInt("CategoryID");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                int Image = rs.getInt("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicence = rs.getString("PublishingLicence");
+                String Description = rs.getString("Description");
+                boolean Discontinued = rs.getBoolean("Discontinued");
+                product = new Product(ProductID, ProductName, CategoryID, GenreID, 
+                        CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, 
+                        Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
             }
-            //b3thuc thi truy van
-            ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
+        } catch (Exception e) {
+        }
+        return product;
+    }
+    public ArrayList<Product> getObjectList(ResultSet rs){
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
             while (rs.next()) {
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int ProductID = rs.getInt("ProductID");
@@ -55,26 +74,39 @@ public class ProductDAO extends DBContext{
                 String PublishingLicence = rs.getString("PublishingLicence");
                 String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-                products.add(p);
+                productList.add(new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID,
+                        Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, 
+                        Image, PublishDate, PublishingLicence, Description, Discontinued));
             }
-            
+        } catch (Exception e) {
+        }
+        return productList;
+    }
+    public ArrayList<Product> getProducts(boolean isAdmin) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products";
+            String sql2 = "select * from Products where Discontinued=?";
+            PreparedStatement ps;
+            if(isAdmin==true){ 
+                ps= connection.prepareStatement(sql);
+            }else{
+                 ps= connection.prepareStatement(sql2);
+                 ps.setInt(1, 0);
+            }
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
         } catch (Exception e) {
             
         }
-//        finally{
-//            connection.close();
-//        }
-        
-        return products;
+        return productList;
     }
     
     public ArrayList<Product> getProductsByCatNSearch(String sample,int CatID,boolean isAdmin) {
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where CategoryID=? AND ProductName like ?";
             String sql2 = "select * from Products where CategoryID=? AND ProductName like ? AND Discontinued=?";
-            //b2 tao doi tuong nhe
             PreparedStatement ps;
             if(isAdmin==true){ 
                 ps= connection.prepareStatement(sql);
@@ -86,241 +118,79 @@ public class ProductDAO extends DBContext{
                 ps.setString(2, "%"+sample+"%");
                 ps.setInt(3, 0);
             }
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int ProductID = rs.getInt("ProductID");
-                String ProductName = rs.getString("ProductName");
-                int CategoryID = rs.getInt("CategoryID");
-                int GenreID = rs.getInt("GenreID");
-                double CoverPrice = rs.getDouble("CoverPrice");
-                double SalePrice = rs.getDouble("SalePrice");
-                int AuthorID = rs.getInt("AuthorID");
-                String Translator = rs.getString("Translator");
-                int PublisherID = rs.getInt("PublisherID");
-                int SupplierID = rs.getInt("SupplierID");
-                String Language = rs.getString("Language");
-                String Size = rs.getString("Size");
-                double Weight = rs.getDouble("Weight");
-                int NumberOfPage = rs.getInt("NumberOfPage");
-                String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
-                Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
-                String Description = rs.getString("Description");
-                boolean Discontinued = rs.getBoolean("Discontinued");
-                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-                products.add(p);
-            }
-            
+            productList = getObjectList(rs);
         } catch (Exception e) {
             
         }
-//        finally{
-//            connection.close();
-//        }
-        return products;
+        return productList;
     }
     
     public ArrayList<Product> getHotProduct() {
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select top 4 * from (select COUNT(OrderID) as numberOrder, ProductID from [Order Details] \n" +
 "group by ProductID) as A inner join Products on A.ProductID=Products.ProductID ORDER BY numberOrder DESC";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int ProductID = rs.getInt("ProductID");
-                String ProductName = rs.getString("ProductName");
-                int CategoryID = rs.getInt("CategoryID");
-                int GenreID = rs.getInt("GenreID");
-                double CoverPrice = rs.getDouble("CoverPrice");
-                double SalePrice = rs.getDouble("SalePrice");
-                int AuthorID = rs.getInt("AuthorID");
-                String Translator = rs.getString("Translator");
-                int PublisherID = rs.getInt("PublisherID");
-                int SupplierID = rs.getInt("SupplierID");
-                String Language = rs.getString("Language");
-                String Size = rs.getString("Size");
-                double Weight = rs.getDouble("Weight");
-                int NumberOfPage = rs.getInt("NumberOfPage");
-                String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
-                Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
-                String Description = rs.getString("Description");
-                boolean Discontinued = rs.getBoolean("Discontinued");
-                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-                products.add(p);
-            }
-            
+            productList = getObjectList(rs);
         } catch (Exception e) {
             
         }
-        return products;
+        return productList;
     }
     
     public Product getProductInfor(int proID) {
-        Product p = null; 
+        Product product = null; 
         try {
             String sql = "select * from Products,Categories where Products.CategoryID=Categories.CategoryID and ProductID = ? "; 
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql); 
             ps.setInt(1, proID);  
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();  
-            //b4 xu ly kqua tra ve
-            while (rs.next()) { 
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int ProductID = rs.getInt("ProductID");
-                String ProductName = rs.getString("ProductName");
-                int CategoryID = rs.getInt("CategoryID");
-                int GenreID = rs.getInt("GenreID");
-                double CoverPrice = rs.getDouble("CoverPrice");
-                double SalePrice = rs.getDouble("SalePrice");
-                int AuthorID = rs.getInt("AuthorID");
-                String Translator = rs.getString("Translator");
-                int PublisherID = rs.getInt("PublisherID");
-                int SupplierID = rs.getInt("SupplierID");
-                String Language = rs.getString("Language");
-                String Size = rs.getString("Size");
-                double Weight = rs.getDouble("Weight");
-                int NumberOfPage = rs.getInt("NumberOfPage");
-                String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
-                Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
-                String Description = rs.getString("Description");
-                boolean Discontinued = rs.getBoolean("Discontinued");
-                p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-            }
+            product = getObject(rs);
         } catch (Exception e) {
         }
-        return p;
+        return product;
     }
     
     public Product checkProExistInOrder(int proID) {
-        Product p = null; 
+        Product product = null; 
         try {
             String sql = "select DISTINCT * from Products p, [Order Details] od where p.ProductID=od.ProductID AND p.ProductID=?"; 
-           
             PreparedStatement ps = connection.prepareStatement(sql); 
             ps.setInt(1, proID);  
             ResultSet rs = ps.executeQuery();  
-            while (rs.next()) { 
-                int ProductID = rs.getInt("ProductID");
-                String ProductName = rs.getString("ProductName");
-                int CategoryID = rs.getInt("CategoryID");
-                int GenreID = rs.getInt("GenreID");
-                double CoverPrice = rs.getDouble("CoverPrice");
-                double SalePrice = rs.getDouble("SalePrice");
-                int AuthorID = rs.getInt("AuthorID");
-                String Translator = rs.getString("Translator");
-                int PublisherID = rs.getInt("PublisherID");
-                int SupplierID = rs.getInt("SupplierID");
-                String Language = rs.getString("Language");
-                String Size = rs.getString("Size");
-                double Weight = rs.getDouble("Weight");
-                int NumberOfPage = rs.getInt("NumberOfPage");
-                String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
-                Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
-                String Description = rs.getString("Description");
-                boolean Discontinued = rs.getBoolean("Discontinued");
-                p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-            }
+            product = getObject(rs);
         } catch (Exception e) {
         }
-        return p;
+        return product;
     }
     
     public ArrayList<Product> getProductbySearch(String sample) {
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where ProductName like ?";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%"+sample+"%");
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int ProductID = rs.getInt("ProductID");
-                String ProductName = rs.getString("ProductName");
-                int CategoryID = rs.getInt("CategoryID");
-                int GenreID = rs.getInt("GenreID");
-                double CoverPrice = rs.getDouble("CoverPrice");
-                double SalePrice = rs.getDouble("SalePrice");
-                int AuthorID = rs.getInt("AuthorID");
-                String Translator = rs.getString("Translator");
-                int PublisherID = rs.getInt("PublisherID");
-                int SupplierID = rs.getInt("SupplierID");
-                String Language = rs.getString("Language");
-                String Size = rs.getString("Size");
-                double Weight = rs.getDouble("Weight");
-                int NumberOfPage = rs.getInt("NumberOfPage");
-                String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
-                Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
-                String Description = rs.getString("Description");
-                boolean Discontinued = rs.getBoolean("Discontinued");
-                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-                products.add(p);
-            }
-            
+            productList = getObjectList(rs);
         } catch (Exception e) {
             
         }// finally{connection.close();}
-        return products;
+        return productList;
     }
     public ArrayList<Product> getProductByCategoryID(int catID) {
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where CategoryID=?";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, catID);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int ProductID = rs.getInt("ProductID");
-                String ProductName = rs.getString("ProductName");
-                int CategoryID = rs.getInt("CategoryID");
-                int GenreID = rs.getInt("GenreID");
-                double CoverPrice = rs.getDouble("CoverPrice");
-                double SalePrice = rs.getDouble("SalePrice");
-                int AuthorID = rs.getInt("AuthorID");
-                String Translator = rs.getString("Translator");
-                int PublisherID = rs.getInt("PublisherID");
-                int SupplierID = rs.getInt("SupplierID");
-                String Language = rs.getString("Language");
-                String Size = rs.getString("Size");
-                double Weight = rs.getDouble("Weight");
-                int NumberOfPage = rs.getInt("NumberOfPage");
-                String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
-                Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
-                String Description = rs.getString("Description");
-                boolean Discontinued = rs.getBoolean("Discontinued");
-                Product p = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
-                products.add(p);
-            }
+            productList = getObjectList(rs);
         } catch (Exception e) {
             
         }// finally{connection.close();}
-        return products;
+        return productList;
     }
     
     public void update(Product p) throws SQLException {
