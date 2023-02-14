@@ -3,7 +3,6 @@ package DAL;
 
 import models.Account;
 import models.Customer;
-import models.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,11 +15,20 @@ public class AccountDAO extends DBContext{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
+            acc = getObject(rs);
+        } catch (Exception e) {
+        }
+        return acc;
+    }
+    
+    public Account getObject(ResultSet rs){
+        Account acc = null;
+        try {
             while(rs.next()){
                 int AccountID = rs.getInt("AccountID");
                 String Email = rs.getString("Email");
                 String Password = rs.getString("Password");
-                String CustomerID = rs.getString("CustomerID");
+                int CustomerID = rs.getInt("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
                 int Role = rs.getInt("Role");
                 acc = new Account(AccountID, Email, Password, CustomerID, EmployeeID, Role);
@@ -30,6 +38,8 @@ public class AccountDAO extends DBContext{
         return acc;
     }
     
+    
+    
     public Account getAccount(String email, String pass){
         Account acc = null;
         try {
@@ -38,15 +48,7 @@ public class AccountDAO extends DBContext{
             ps.setString(1, email);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                int AccountID = rs.getInt("AccountID");
-                String Email = rs.getString("Email");
-                String Password = rs.getString("Password");
-                String CustomerID = rs.getString("CustomerID");
-                int EmployeeID = rs.getInt("EmployeeID");
-                int Role = rs.getInt("Role");
-                acc = new Account(AccountID, Email, Password, CustomerID, EmployeeID, Role);
-            }
+            acc = getObject(rs);
         } catch (Exception e) {
         }
         return acc;
@@ -58,7 +60,7 @@ public class AccountDAO extends DBContext{
             try {
 //                String sql1="UPDATE Customers SET CompanyName = ?,ContactName = ?,ContactTitle=?, [Address]=? WHERE CustomerID=?";
 //                String sql2="UPDATE Accounts SET [Password] = ? WHERE Email=?";
-                String sql = "exec updateAccount ?, ?, ?, ?, ?, ?, ?,?,?;";
+                String sql = "exec updateAccount ?, ?, ?, ?, ?, ?, ?, ?, ?;";
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setInt(1,createNewCusID() );
                 ps.setString(2, cus.getFirstName());
@@ -158,8 +160,8 @@ public class AccountDAO extends DBContext{
     
     
     public static void main(String[] args) {
-        Account acc = new Account(0, "vuvu1234", "1234", "s2In7", 0, 0);
-        Customer cus = new Customer("s2In7", "vuvu", "vuvu", "vuvu", "vuvu");
+        Account acc = new Account(0, "vuvu1234", "1234", 3333, 0, 0);
+        Customer cus = new Customer(3333, "vuvu", "vuvu", "vuvu", "vuvu");
         AccountDAO accDa0 = new AccountDAO();
         //accDa0.editProfile(cus, acc);
         accDa0.getAccount("vuvu1234", "123");

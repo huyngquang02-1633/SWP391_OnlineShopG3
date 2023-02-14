@@ -5,11 +5,11 @@ public class Account {
     private int AccountID;
     private String Email;
     private String Password;
-    private String CustomerID;
+    private int CustomerID;
     private int EmployeeID;
     private int Role;
 
-    public Account(int AccountID, String Email, String Password, String CustomerID, int EmployeeID, int Role) {
+    public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role) {
         this.AccountID = AccountID;
         this.Email = Email;
         this.Password = Password;
@@ -42,11 +42,11 @@ public class Account {
         this.Password = Password;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return CustomerID;
     }
 
-    public void setCustomerID(String CustomerID) {
+    public void setCustomerID(int CustomerID) {
         this.CustomerID = CustomerID;
     }
 

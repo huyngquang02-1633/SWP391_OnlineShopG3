@@ -1,4 +1,4 @@
-package models;
+package DAL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +28,7 @@ public class DBContext {
         try {
             String user = "sa";
             String pass = "123";
-            String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=BOOKSHOP";
+            String url = "jdbc:sqlserver://LAPTOP-CCIGVFMN\\SQLEXPRESS:1433;databaseName=BOOKSHOP";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
@@ -40,8 +40,4 @@ public class DBContext {
 //    public static void main(String[] args) {
 //        System.out.println(new DBContext().connection);
 //    }
-    
-    public static void main(String[] args) {
-        
-    }
 }
