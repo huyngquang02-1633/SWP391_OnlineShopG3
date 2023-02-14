@@ -76,8 +76,7 @@
                         </div>
                     </div>
                 </div>
-        </div>
-    </div>
+                
     <div class="tg-middlecontainer">
         <div class="container">
             <div class="row">
