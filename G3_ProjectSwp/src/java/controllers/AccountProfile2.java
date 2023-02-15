@@ -26,7 +26,7 @@ import DAL.ProductDAO;
  *
  * @author user
  */
-@WebServlet(name = "AccountProfile2", urlPatterns = {"/account/profile2"})
+@WebServlet(name = "AccountProfileMyOrder", urlPatterns = {"/account/profile_myOrder"})
 public class AccountProfile2 extends HttpServlet {
 
     @Override
@@ -36,8 +36,12 @@ public class AccountProfile2 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(1);
+        ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(1);
         
-        
+        req.setAttribute("orderList", orderList);
+        req.setAttribute("orderDetailList", orderDetailList);
+        req.getRequestDispatcher("/profile_order.jsp").forward(req, resp);
     }
 
 }

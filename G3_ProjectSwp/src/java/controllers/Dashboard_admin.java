@@ -40,6 +40,12 @@ public class Dashboard_admin extends HttpServlet{
         ArrayList<Order> OrderInToday = new OrderDAO().getOrderToday();
         ArrayList<Customer> CustomerList = new CustomerDAO().getNewCustomer(today.getMonthValue());
         ArrayList<OrderDetail> orderDetailInCurrentMonth = new OrderDAO().getALLOrderDetailInCurrentMonth(today.getMonthValue(),today.getYear());
+        ArrayList<Integer> statisticOrderIn6Month = new ArrayList<>();
+        for (int i = -5; i <= 0; i++) {
+            ArrayList<Order> odList = new OrderDAO().getOrderNearest5Month(-i);
+            statisticOrderIn6Month.add(odList.size());
+        }
+        
         
         double monthlyRevenue = 0;
         for (Order order : OrderInCurrentMonth) {
@@ -76,6 +82,7 @@ public class Dashboard_admin extends HttpServlet{
         req.setAttribute("monthlyRevenue", Math.round(monthlyRevenue));
         req.setAttribute("todayRevenue", Math.round(todayRevenue));
         req.setAttribute("statisticRevenue", statisticRevenue);
+        req.setAttribute("statisticOrderIn6Month", statisticOrderIn6Month);
         
         req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
     }

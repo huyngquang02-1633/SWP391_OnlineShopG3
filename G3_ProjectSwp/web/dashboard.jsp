@@ -17,7 +17,7 @@
             <div id="dashboard-1">
                 <div id="dashboard-1-container">
                     <div class="dashboard-item">
-                        <div class="dashboard-item-title">Today Revenue</div>
+                        <div class="dashboard-item-title">Today Revenue${statisticOrderIn6Month.size()}</div>
                         <div class="dashboard-item-content">${todayRevenue}</div>
                     </div>
                     <div class="dashboard-item">

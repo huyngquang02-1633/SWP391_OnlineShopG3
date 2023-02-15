@@ -20,7 +20,6 @@ public class ProductDAO extends DBContext{
         Product product = null;
         try {
             while (rs.next()) { 
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
@@ -38,12 +37,10 @@ public class ProductDAO extends DBContext{
                 String Format = rs.getString("Format");
                 int Image = rs.getInt("Image");
                 Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
+                String PublishingLicense = rs.getString("PublishingLicense");
                 String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                product = new Product(ProductID, ProductName, CategoryID, GenreID, 
-                        CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, 
-                        Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicence, Description, Discontinued);
+                product = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicense, Description, Discontinued);
             }
         } catch (Exception e) {
         }
@@ -71,12 +68,12 @@ public class ProductDAO extends DBContext{
                 String Format = rs.getString("Format");
                 int Image = rs.getInt("Image");
                 Date PublishDate = rs.getDate("PublishDate");
-                String PublishingLicence = rs.getString("PublishingLicence");
+                String PublishingLicense = rs.getString("PublishingLicense");
                 String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
                 productList.add(new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID,
                         Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, 
-                        Image, PublishDate, PublishingLicence, Description, Discontinued));
+                        Image, PublishDate, PublishingLicense, Description, Discontinued));
             }
         } catch (Exception e) {
         }
@@ -143,7 +140,7 @@ public class ProductDAO extends DBContext{
     public Product getProductInfor(int proID) {
         Product product = null; 
         try {
-            String sql = "select * from Products,Categories where Products.CategoryID=Categories.CategoryID and ProductID = ? "; 
+            String sql = "select * from Products where ProductID = ? "; 
             PreparedStatement ps = connection.prepareStatement(sql); 
             ps.setInt(1, proID);  
             ResultSet rs = ps.executeQuery();  
@@ -165,6 +162,7 @@ public class ProductDAO extends DBContext{
         }
         return product;
     }
+   
     
     public ArrayList<Product> getProductbySearch(String sample) {
         ArrayList<Product> productList = new ArrayList<>();
@@ -179,7 +177,7 @@ public class ProductDAO extends DBContext{
         }// finally{connection.close();}
         return productList;
     }
-    public ArrayList<Product> getProductByCategoryID(int catID) {
+    public ArrayList<Product> getProductListByCategoryID(int catID) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where CategoryID=?";
@@ -232,7 +230,7 @@ public class ProductDAO extends DBContext{
             ps.setString(11, p.getLanguage());
             ps.setString(12, p.getSize());
             ps.setDouble(13, p.getWeight());
-            ps.setInt(14, p.getNumerOfPage());
+            ps.setInt(14, p.getNumberOfPage());
             ps.setString(15, p.getFormat());
             ps.setInt(16, p.getImage());
             ps.setDate(17, p.getPublishDate());
@@ -303,7 +301,7 @@ public class ProductDAO extends DBContext{
             ps.setString(11, p.getLanguage());
             ps.setString(12, p.getSize());
             ps.setDouble(13, p.getWeight());
-            ps.setInt(14, p.getNumerOfPage());
+            ps.setInt(14, p.getNumberOfPage());
             ps.setString(15, p.getFormat());
             ps.setInt(16, p.getImage());
             ps.setDate(17, p.getPublishDate());
@@ -319,11 +317,10 @@ public class ProductDAO extends DBContext{
     }
     
     public static void main(String[] args) {
-        ArrayList<Product> list = new ProductDAO().getProductsByCatNSearch("",1,true);
-        System.out.println(list.size());
-        for (Product product : list) {
-            System.out.println(product);
-        }
+        Product p = new ProductDAO().getProductInfor(6);
+        System.out.println(p.getAuthorID());
+  
+        
     }
             
 }
