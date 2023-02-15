@@ -69,12 +69,12 @@ public class CustomerDAO extends DBContext{
     
     
     
-    public Customer getCustomerByID(String ID){
+    public Customer getCustomerByID(int ID){
         Customer cus = null;
         try {
             String sql = "select * from Customers c where c.CustomerID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, ID);
+            ps.setInt(1, ID);
             ResultSet rs = ps.executeQuery();
             cus = getObject(rs);
         } catch (Exception e) {
@@ -157,8 +157,8 @@ public class CustomerDAO extends DBContext{
     }
     
     
-    public static void main(String[] args) {
-        Customer cus = new CustomerDAO().getCustomerByID("0oYbA");
-        System.out.println(cus);
-    }
+//    public static void main(String[] args) {
+//        Customer cus = new CustomerDAO().getCustomerByID("0oYbA");
+//        System.out.println(cus);
+//    }
 }

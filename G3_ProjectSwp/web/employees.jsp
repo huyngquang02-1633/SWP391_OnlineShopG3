@@ -1,29 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <link href="css/style-admin.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-</head>
-<body>
-    <div id="container">
-        <div id="header">
-            <div id="logo-admin">
-                Ecommerce Admin
-            </div>
-            <div id="banner-admin">
-                <ul>
-                    <li><a href="#">SignOut</a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="content">
+<%@include file="templates/header_admin.jsp" %>
             <div id="content-left">
                 <ul>
-                    <h6><a href="dashboard.html"><li>Dashboard</li></a></h6>
+                    <h6><a href="dashboard.html"><li>Dashboards</li></a></h6>
                     <h6><a href="order.html"><li>Orders</li></a></h6>
                     <h6><a href="product.html"><li>Products</li></a></h6>
                     <h6><a href="customer.html"><li>Customers</li></a></h6>
@@ -36,7 +14,7 @@
                     <div id="content-main-dashboard">
                         <div id="product-title-header">
                             <div id="product-title-1" style="width: 25%;">
-                                <b>Filter by Catetory:</b>
+                                <b>Filter by Departments:</b>
                                 <form>
                                     <select name="ddlCategory">
                                         <option value="catid1">--- Select ---</option>
@@ -49,25 +27,26 @@
                                 </form>
                             </div>
                             <div id="product-title-2" style="width: 55%;">
-                                <form>
-                                    <input type="text" name="txtSearch" placeholder="Enter product name to search"/>
-                                    <input type="submit" value="Search"
+                                <form style="padding-bottom: 40px;">
+                                    <input type="text" name="txtSearch" placeholder="Enter employee name to search"/>
+                                    <input type="submit" value="Search"/>
                                 </form>
                             </div>
                             <div id="product-title-3" style="width: 20%;">
-                                <a href="create-product.html">Create a new Product</a>
+                                <a href="create-employee.html">Create a new Employee</a>
                             </div>
                         </div>
                         <div id="order-table-admin">
                             <table id="orders">
                                 <tr>
-                                  <th>ProductID</th>
-                                  <th>ProductName</th>
-                                  <th>UnitPrice</th>
-                                  <th>Unit</th>
-                                  <th>UnitsInStock</th>
-                                  <th>Category</th>
-                                  <th>Discontinued</th>
+                                  <th>EmployeeID</th>
+                                  <th>LastName</th>
+                                  <th>FirstName</th>
+                                  <th>DepartmentName</th>
+                                  <th>Title</th>
+                                  <th>TitleOfCourtesy</th>
+                                  <th>HireDate</th>
+                                  <th>Address</th>
                                   <th></th>
                                 </tr>
                                 <tr>
@@ -78,6 +57,7 @@
                                     <td>50</td>
                                     <td>Smart Phone</td>
                                     <td>false</td>
+                                    <td></td>
                                     <td>
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
@@ -91,6 +71,7 @@
                                     <td>100</td>
                                     <td>Smart Phone</td>
                                     <td>false</td>
+                                    <td></td>
                                     <td>
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
@@ -104,6 +85,7 @@
                                     <td>20</td>
                                     <td>Labtop</td>
                                     <td>false</td>
+                                    <td></td>
                                     <td>
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
@@ -117,6 +99,7 @@
                                     <td>30</td>
                                     <td>Labtop</td>
                                     <td>false</td>
+                                    <td></td>
                                     <td>
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
@@ -130,6 +113,7 @@
                                     <td>10</td>
                                     <td>Electronic</td>
                                     <td>false</td>
+                                    <td></td>
                                     <td>
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
