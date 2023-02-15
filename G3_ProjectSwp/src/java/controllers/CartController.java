@@ -1,5 +1,6 @@
 package controllers;
 
+import DAL.CartDAO;
 import models.Cart;
 import models.Item;
 import models.Product;
@@ -22,7 +23,7 @@ import jakarta.servlet.annotation.WebServlet;
  *
  * @author user
  */
-@WebServlet(name = "CartController", urlPatterns = {"/cartController"})
+@WebServlet(name = "CartController", urlPatterns = {"/account/cart"})
 public class CartController extends HttpServlet {
 
     @Override
@@ -32,6 +33,14 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int proID = Integer.parseInt(req.getParameter("proID"));
+        try {
+            CartDAO cartDAO = new CartDAO();
+            cartDAO.addToCart(new Cart(1, proID, 4));
+        } catch (Exception e) {
+            req.setAttribute("addToCartFail", "add this product to cart fail!");
+        }
+        req.getRequestDispatcher("../productDetail").forward(req, resp);
     }
 
 }

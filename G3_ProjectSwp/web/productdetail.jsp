@@ -1,4 +1,5 @@
 <%@include file="templates/header.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<!--************************************
 				Inner Banner Start
 		*************************************-->
@@ -73,10 +74,10 @@
 													<figure class="tg-featureimg"><img src="images/books/img-07.jpg" alt="image description"></figure>
 													<div class="tg-postbookcontent">
 														<span class="tg-bookprice">
-															<ins>$25.18</ins>
-															<del>$27.20</del>
+															<ins>${productInfor.getSalePrice()}</ins>
+															<del>${productInfor.getCoverPrice()}</del>
 														</span>
-														<span class="tg-bookwriter">You save $4.02</span>
+														<span class="tg-bookwriter">You save ${productInfor.getCoverPrice()-productInfor.getSalePrice()}</span>
 														<ul class="tg-delevrystock">
 															<li><i class="icon-rocket"></i><span>Free delivery worldwide</span></li>
 															<li><i class="icon-checkmark-circle"></i><span>Dispatch from the USA in 2 working days </span></li>
@@ -87,7 +88,7 @@
 															<input type="text" class="result" value="0" id="quantity1" name="quantity">
 															<em class="plus">+</em>
 														</div>
-														<a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Add To Basket</a>
+														<a class="tg-btn tg-active tg-btn-lg" href="<%=path%>/account/cart?proID=${productInfor.getProductID()}">Add To Cart</a>
 														<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 															<span>add to wishlist</span>
 														</a>
@@ -97,13 +98,28 @@
 											<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 												<div class="tg-productcontent">
 													<ul class="tg-bookscategories">
-														<li><a href="javascript:void(0);">Art &amp; Photography</a></li>
+														<li>
+                                                                                                                    <c:forEach items="${cateList}" var="cate"> 
+                                                                                                                        <c:if test="${cate.getCategoryID() == productInfor.getCategoryID()}">
+                                                                                                                            <a href="javascript:void(0);">
+                                                                                                                                ${cate.getCategoryName()}
+                                                                                                                            </a>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+
+                                                                                                                </li>
 													</ul>
 													<div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
 													<div class="tg-booktitle">
-														<h3>Drive Safely, No Bumping</h3>
+														<h3>${productInfor.getProductName()}</h3>
 													</div>
-													<span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+                                                                                                                <span class="tg-bookwriter">By: 
+                                                                                                                    <c:forEach items="${authorList}" var="author"> 
+                                                                                                                        <c:if test="${author.getAuthorID() == productInfor.getAuthorID()}">
+                                                                                                                            <a href="javascript:void(0);">${author.getAuthorName()}</a>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+                                                                                                                </span>
 													<span class="tg-stars"><span></span></span>
 													<span class="tg-addreviews"><a href="javascript:void(0);">Add Your Review</a></span>
 													<div class="tg-share">
@@ -124,16 +140,48 @@
 														<h2>Product Details</h2>
 													</div>
 													<ul class="tg-productinfo">
-														<li><span>Format:</span><span>Hardback</span></li>
-														<li><span>Pages:</span><span>528 pages</span></li>
-														<li><span>Dimensions:</span><span>153 x 234 x 43mm | 758g</span></li>
-														<li><span>Publication Date:</span><span>June 27, 2017</span></li>
-														<li><span>Publisher:</span><span>Sunshine Orlando</span></li>
-														<li><span>Language:</span><span>English</span></li>
-														<li><span>Illustrations note:</span><span>b&amp;w images thru-out; 1 x 16pp colour plates</span></li>
-														<li><span>ISBN10:</span><span>1234567890</span></li>
-														<li><span>ISBN13:</span><span>1234567890000</span></li>
-														<li><span>Other Fomate:</span><span>CD-Audio, Paperback, E-Book</span></li>
+														
+														<li><span>Author: </span>
+                                                                                                                    <c:forEach items="${authorList}" var="author"> 
+                                                                                                                        <c:if test="${author.getAuthorID() == productInfor.getAuthorID()}">
+                                                                                                                            <span>${author.getAuthorName()}</span>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+                                                                                                                </li>
+														<li><span>Translator: </span><span>${productInfor.getTranslator()}</span></li>
+                                                                                                                <li><span>Language: </span><span>${productInfor.getLanguage()}</span></li>
+														<li><span>Format: </span><span>${productInfor.getFormat()}</span></li>
+														<li><span>Size: </span><span>${productInfor.getSize()}mm | ${productInfor.getWeight()}g</span></li>
+														<li><span>Number of page: </span><span>${productInfor.getNumberOfPage()}</span></li>
+                                                                                                                <li><span>Category: </span>
+                                                                                                                    <c:forEach items="${cateList}" var="cate"> 
+                                                                                                                        <c:if test="${cate.getCategoryID() == productInfor.getCategoryID()}">
+                                                                                                                            <span>${cate.getCategoryName()}</span>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+                                                                                                                </li>
+														<li><span>Genre: </span>
+                                                                                                                    <c:forEach items="${genreList}" var="genre"> 
+                                                                                                                        <c:if test="${genre.getGenreID() == productInfor.getGenreID()}">
+                                                                                                                            <span>${genre.getGenreName()}</span>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+                                                                                                                </li>
+														<li><span>Publisher: </span>
+                                                                                                                    <c:forEach items="${supplierList}" var="publisher"> 
+                                                                                                                        <c:if test="${publisher.getSupplierID() == productInfor.getPublisherID()}">
+                                                                                                                            <span>${publisher.getSupplierName()}</span>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+                                                                                                                </li>
+														<li><span>Supplier: </span>
+                                                                                                                    <c:forEach items="${supplierList}" var="supplier"> 
+                                                                                                                        <c:if test="${supplier.getSupplierID() == productInfor.getSupplierID()}">
+                                                                                                                            <span>${supplier.getSupplierName()}</span>
+                                                                                                                        </c:if>
+                                                                                                                    </c:forEach>
+                                                                                                                </li>
+                                                                                                                <li><span>Publish date: </span><span>${productInfor.getPublishDate()}</span></li>
 													</ul>
 													<div class="tg-alsoavailable">
 														<figure>
@@ -510,17 +558,10 @@ voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntu
 										</div>
 										<div class="tg-widgetcontent">
 											<ul>
-												<li><a href="javascript:void(0);"><span>Art &amp; Photography</span><em>28245</em></a></li>
-												<li><a href="javascript:void(0);"><span>Biography</span><em>4856</em></a></li>
-												<li><a href="javascript:void(0);"><span>Children’s Book</span><em>8654</em></a></li>
-												<li><a href="javascript:void(0);"><span>Craft &amp; Hobbies</span><em>6247</em></a></li>
-												<li><a href="javascript:void(0);"><span>Crime &amp; Thriller</span><em>888654</em></a></li>
-												<li><a href="javascript:void(0);"><span>Fantasy &amp; Horror</span><em>873144</em></a></li>
-												<li><a href="javascript:void(0);"><span>Fiction</span><em>18465</em></a></li>
-												<li><a href="javascript:void(0);"><span>Fod &amp; Drink</span><em>3148</em></a></li>
-												<li><a href="javascript:void(0);"><span>Graphic, Anime &amp; Manga</span><em>77531</em></a></li>
-												<li><a href="javascript:void(0);"><span>Science Fiction</span><em>9247</em></a></li>
-												<li><a href="javascript:void(0);"><span>View All</span></a></li>
+                                                                                            <c:forEach items="${cateList}" var="cate">
+                                                                                                <li><a href="javascript:void(0);"><span>${cate.getCategoryName()}</span><em>28245</em></a></li>
+                                                                                            </c:forEach>
+												
 											</ul>
 										</div>
 									</div>

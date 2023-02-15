@@ -24,9 +24,9 @@
     }
 
     function CustomersChart(){
-        var xValues = ["Total", "New customer"];
-        var yValues = [200, 50,300];
-        var barColors = ["green", "red"];
+        var xValues = ["1", "2", "3", "4", "5", "6"];
+        var yValues = ${statisticOrderIn6Month};
+        var barColors = ["green", "red", "red", "red", "red", "red"];
 
         new Chart("myChart2", {
         type: "bar",

@@ -67,7 +67,7 @@ public class OrderDAO extends DBContext{
         return orderDetails;
     }
     
-    public ArrayList<Order> getAllOrdersOfACus(int cusID) {
+    public ArrayList<Order> getAllOrdersByCusID(int cusID) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "select * from Orders o where o.CustomerID = ?";
@@ -137,13 +137,12 @@ public class OrderDAO extends DBContext{
         return orderList;
     }
     
-    public ArrayList<OrderDetail> getDetailOfOrderByAcc(int accID) {
+    public ArrayList<OrderDetail> getDetailOfOrderByCusID(int cusID) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
-            String sql = "select od.OrderID,od.ProductID,od.UnitPrice,od.Quantity,od.Discount from Accounts a,Customers c, Orders o,[Order Details] od where\n" +
-            "a.AccountID=? and a.CustomerID=c.CustomerID and c.CustomerID=o.CustomerID and od.OrderID=o.OrderID";
+            String sql = "select * from [Order Details] od , Orders o where od.OrderID=o.OrderID AND o.CustomerID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, accID);
+            ps.setInt(1, cusID);
             ResultSet rs = ps.executeQuery();
             orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
@@ -285,6 +284,20 @@ public class OrderDAO extends DBContext{
         }//finally{ connection.close();}
         return orderList;
     }
+    public ArrayList<Order> getOrderNearest5Month(int diffMonth){
+        ArrayList<Order> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders where Month(OrderDate) = Month(DATEADD(month, ?, getDate())) AND YEAR(OrderDate) = Year(DATEADD(month, ?, getDate()))";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, diffMonth);
+            ps.setInt(2, diffMonth);
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectOrderList(rs);
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return orderList;
+    }
     
     public ArrayList<Order> getOrderToday(){
         ArrayList<Order> orderList = new ArrayList<>();
@@ -331,6 +344,7 @@ public class OrderDAO extends DBContext{
     
     public static void main(String[] args) {
         OrderDAO odDAO = new OrderDAO();
-
+        ArrayList<Order> abc = odDAO.getOrderNearest5Month(-1);
+        System.out.println(abc.size());
     }
 }

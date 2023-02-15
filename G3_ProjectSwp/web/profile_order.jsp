@@ -29,35 +29,51 @@
                                             My Orders
                                         </div>
                                         <div class="card-body p-4">
-                                            <div class="card shadow-0 border mb-4">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
-                                                                 class="img-fluid" alt="Phone">
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0">Samsung Galaxy</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">White</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Capacity: 64GB</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Qty: 1</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">$499</p>
-                                                        </div>
+                                            <c:forEach items="${orderList}" var="odList">
+                                                <div class="card shadow-0 border mb-4" style="border: 1px solid grey;">
+                                                    <div style="margin: 10px 0px; background-color: pink; " >
+                                                        <span style="margin: 0px 100px 0px 0px;">OrderID: ${odList.getOrderID()}</span>
+                                                        <span style="margin: 0px 100px;">Order date: ${odList.getOrderDate()}</span>
+                                                        <c:choose>
+                                                            <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()!=null}"><span style="margin: 0px 100px; color: red;">Canceled</span></c:when>
+                                                            <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()==null}"><span style="margin: 0px 100px; color: blue;">Pending</span></c:when>
+                                                            <c:when test="${odList.getRequiredDate()==null && odList.getShippedDate()==null}"><span style="margin: 0px 100px; color: green;">Completed</span></c:when>
+                                                        </c:choose>
                                                     </div>
-                                                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
-                                                    <div class="row d-flex align-items-center">
+                                                    <c:forEach items="${orderDetailList}" var="odDetailList">
+                                                        <c:if test="${odList.getOrderID() == odDetailList.getOrderID()}">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
+                                                                             class="img-fluid" alt="Phone">
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                        <p class="text-muted mb-0">${odDetailList.getProductID()}</p>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                        <p class="text-muted mb-0 small">White</p>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                        <p class="text-muted mb-0 small">Capacity: 64GB</p>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                        <p class="text-muted mb-0 small">Qty: ${odDetailList.getQuantity()}</p>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                        <p class="text-muted mb-0 small">${odDetailList.getSalePrice()}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                                                <div class="row d-flex align-items-center">
 
-                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:if>
+                                                    </c:forEach>
                                                 </div>
-                                            </div>
+
+                                            </c:forEach>
                                             <div class="card shadow-0 border mb-4">
                                                 <div class="card-body">
                                                     <div class="row">
