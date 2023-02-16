@@ -197,6 +197,7 @@
 <script src="js/appear.js"></script>
 <script src="js/gmap3.js"></script>
 <script src="js/main.js"></script>
+<script src="js/javascript.js"></script>
 </body>
 
 </html>
