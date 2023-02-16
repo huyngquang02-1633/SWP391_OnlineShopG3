@@ -5,7 +5,8 @@
 
 
 function getData() {
-    let userGetData = localStorage.getItem('userlogin');
+//    let userGetData = localStorage.getItem('userlogin');
+    let userGetData = sessionStorage.getItem('userlogin');
     let convertValue = JSON.parse(userGetData);
 
     document.getElementById('nameprofile').innerHTML = convertValue.name;

@@ -54,23 +54,14 @@ function testAPI() {                      // Testing Graph API after login.  See
         };
 
         let convertuserData = JSON.stringify(userData);
-        localStorage.setItem('userlogin', convertuserData);
+
+//        localStorage.setItem('userlogin', convertuserData);
+        sessionStorage.setItem('userlogin', convertuserData);
         window.location.href = "./home.jsp";
 
 //        document.getElementById('nameprofile').innerHTML = response.name;
 //
 //        document.getElementById("imgprofile").src = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=" + response.id + "&height=50&width=50&ext=1679128895&hash=AeTUdjLLENIW-ySdbEQ";
-
-//        function getData() {
-//            let userGetData = localStorage.getItem('userlogin');
-//            let convertValue = JSON.parse(userGetData);
-//
-//            document.getElementById('nameprofile').innerHTML = convertValue.name;
-//            document.getElementById("imgprofile").src = convertValue.avt;
-//        }
-
-        getData();
-
 
     });
 }
@@ -102,7 +93,8 @@ function handleCredentialResponse(response) {
     };
 
     let convertuserData = JSON.stringify(userData);
-    localStorage.setItem('userlogin', convertuserData);
+//    localStorage.setItem('userlogin', convertuserData);
+    sessionStorage.setItem('userlogin', convertuserData);
     window.location.href = "./home.jsp";
 
 }
