@@ -45,7 +45,10 @@ public class OrderManage_admin extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        OrderDAO dao = new OrderDAO();
+        ArrayList<Order> ArrayList = dao.getAllOrders();
+        req.setAttribute("listOrder", ArrayList);
+        req.getRequestDispatcher("order.jsp").forward(req, resp);
     }
     
 }
