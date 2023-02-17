@@ -24,7 +24,7 @@ public class Product {
     private String Language;
     private String Size;
     private double Weight;
-    private int NumerOfPage;
+    private int NumberOfPage;
     private String Format;
     private int Image;
     private Date PublishDate;
@@ -32,7 +32,7 @@ public class Product {
     private String Description;
     private boolean Discontinued;
 
-    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumerOfPage, String Format, int Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
+    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumberOfPage, String Format, int Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;
         this.CategoryID = CategoryID;
@@ -46,7 +46,7 @@ public class Product {
         this.Language = Language;
         this.Size = Size;
         this.Weight = Weight;
-        this.NumerOfPage = NumerOfPage;
+        this.NumberOfPage = NumberOfPage;
         this.Format = Format;
         this.Image = Image;
         this.PublishDate = PublishDate;
@@ -160,12 +160,12 @@ public class Product {
         this.Weight = Weight;
     }
 
-    public int getNumerOfPage() {
-        return NumerOfPage;
+    public int getNumberOfPage() {
+        return NumberOfPage;
     }
 
-    public void setNumerOfPage(int NumerOfPage) {
-        this.NumerOfPage = NumerOfPage;
+    public void setNumberOfPage(int NumerOfPage) {
+        this.NumberOfPage = NumerOfPage;
     }
 
     public String getFormat() {
@@ -218,7 +218,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "ProductID=" + ProductID + ", ProductName=" + ProductName + ", CategoryID=" + CategoryID + ", GenreID=" + GenreID + ", CoverPrice=" + CoverPrice + ", SalePrice=" + SalePrice + ", AuthorID=" + AuthorID + ", Translator=" + Translator + ", PublisherID=" + PublisherID + ", ReleaseCompanyID=" + SupplierID + ", Language=" + Language + ", Size=" + Size + ", Weight=" + Weight + ", NumerOfPage=" + NumerOfPage + ", Format=" + Format + ", Image=" + Image + ", PublishDate=" + PublishDate + ", PublishingLicense=" + PublishingLicense + ", Description=" + Description + ", Discontinued=" + Discontinued + '}';
+        return "Product{" + "ProductID=" + ProductID + ", ProductName=" + ProductName + ", CategoryID=" + CategoryID + ", GenreID=" + GenreID + ", CoverPrice=" + CoverPrice + ", SalePrice=" + SalePrice + ", AuthorID=" + AuthorID + ", Translator=" + Translator + ", PublisherID=" + PublisherID + ", ReleaseCompanyID=" + SupplierID + ", Language=" + Language + ", Size=" + Size + ", Weight=" + Weight + ", NumerOfPage=" + NumberOfPage + ", Format=" + Format + ", Image=" + Image + ", PublishDate=" + PublishDate + ", PublishingLicense=" + PublishingLicense + ", Description=" + Description + ", Discontinued=" + Discontinued + '}';
     }
     
 }

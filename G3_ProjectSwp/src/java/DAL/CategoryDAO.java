@@ -2,7 +2,6 @@
 package DAL;
 
 import models.Category;
-import models.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

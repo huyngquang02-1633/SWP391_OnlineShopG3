@@ -4,10 +4,7 @@
  */
 package DAL;
 
-import models.Account;
 import models.Customer;
-import models.DBContext;
-import models.Order;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,15 +15,11 @@ import java.util.ArrayList;
  * @author user
  */
 public class CustomerDAO extends DBContext{
-    public Customer getCustomerByEmail(String email){
+    public Customer getObject(ResultSet rs){
         Customer cus = null;
         try {
-            String sql = "select * from Customers c,Accounts a where c.CustomerID=a.CustomerID AND a.Email=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String CustomerID = rs.getString("CustomerID");
+                int CustomerID = rs.getInt("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
                 boolean Gender = rs.getBoolean("Gender");
@@ -41,16 +34,11 @@ public class CustomerDAO extends DBContext{
         }
         return cus;
     }
-    
-    public Customer getCustomerByID(String ID){
-        Customer cus = null;
+    public ArrayList<Customer> getObjectList(ResultSet rs){
+        ArrayList<Customer> cusList = new ArrayList<>();
         try {
-            String sql = "select * from Customers c where c.CustomerID=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, ID);
-            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String CustomerID = rs.getString("CustomerID");
+                int CustomerID = rs.getInt("CustomerID");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
                 boolean Gender = rs.getBoolean("Gender");
@@ -59,8 +47,36 @@ public class CustomerDAO extends DBContext{
                 String Address = rs.getString("Address");
                 String PhoneNumber = rs.getString("PhoneNumber");
                 Date CreateDate = rs.getDate("CreateDate");
-                cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
+                cusList.add(new Customer(CustomerID, FirstName, LastName,
+                        Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate));
             }
+        } catch (Exception e) {
+        }
+        return cusList;
+    }
+    public Customer getCustomerByEmail(String email){
+        Customer cus = null;
+        try {
+            String sql = "select * from Customers c,Accounts a where c.CustomerID=a.CustomerID AND a.Email=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            cus = getObject(rs);
+        } catch (Exception e) {
+        }
+        return cus;
+    }
+    
+    
+    
+    public Customer getCustomerByID(int ID){
+        Customer cus = null;
+        try {
+            String sql = "select * from Customers c where c.CustomerID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            cus = getObject(rs);
         } catch (Exception e) {
         }
         return cus;
@@ -72,19 +88,7 @@ public class CustomerDAO extends DBContext{
             String sql = "select * from Customers";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                String CustomerID = rs.getString("CustomerID");
-                String FirstName = rs.getString("FirstName");
-                String LastName = rs.getString("LastName");
-                boolean Gender = rs.getBoolean("Gender");
-                String ContactTitle = rs.getString("ContactTitle");
-                Date DateOfBirth = rs.getDate("DateOfBirth");
-                String Address = rs.getString("Address");
-                String PhoneNumber = rs.getString("PhoneNumber");
-                Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
-                cusList.add(cus);
-            }
+            cusList = getObjectList(rs);
         } catch (Exception e) {
         }
         return cusList;
@@ -95,7 +99,7 @@ public class CustomerDAO extends DBContext{
             try {
                 String sql="insert into Customers(CustomerID, FirstName , LastName,ContactTitle,DateOfBirth,Address,PhoneNumber,CreateDate) values(?,?,?,?,?,?,?,GETDATE())";
                 PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setString(1,cus.getCustomerID() );
+                ps.setInt(1,cus.getCustomerID() );
                 ps.setString(2, cus.getFirstName());
                 ps.setString(3,cus.getLastName() );
                 ps.setString(4, cus.getContactTitle());
@@ -105,7 +109,7 @@ public class CustomerDAO extends DBContext{
                 //ps.setDate(8, cus.getCreateDate());
                 result1 = ps.executeUpdate();
             } catch (Exception e) {
-                
+                return false;
             }
             return result1>0;
             
@@ -129,25 +133,10 @@ public class CustomerDAO extends DBContext{
         ArrayList<Customer> cusList = new ArrayList<>();
         try {
             String sql = "select * from Customers where  Year(CreateDate)=YEAR(GETDATE()) AND MONTH(CreateDate)=?";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, month);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while(rs.next()){
-                String CustomerID = rs.getString("CustomerID");
-                String FirstName = rs.getString("FirstName");
-                String LastName = rs.getString("LastName");
-                boolean Gender = rs.getBoolean("Gender");
-                String ContactTitle = rs.getString("ContactTitle");
-                Date DateOfBirth = rs.getDate("DateOfBirth");
-                String Address = rs.getString("Address");
-                String PhoneNumber = rs.getString("PhoneNumber");
-                Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
-                cusList.add(cus);
-            }
+            cusList = getObjectList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
@@ -161,27 +150,15 @@ public class CustomerDAO extends DBContext{
                     + "(select c.CustomerID from Accounts a , Customers c where a.CustomerID=c.CustomerID)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                String CustomerID = rs.getString("CustomerID");
-                String FirstName = rs.getString("FirstName");
-                String LastName = rs.getString("LastName");
-                boolean Gender = rs.getBoolean("Gender");
-                String ContactTitle = rs.getString("ContactTitle");
-                Date DateOfBirth = rs.getDate("DateOfBirth");
-                String Address = rs.getString("Address");
-                String PhoneNumber = rs.getString("PhoneNumber");
-                Date CreateDate = rs.getDate("CreateDate");
-                Customer cus = new Customer(CustomerID, FirstName, LastName, Gender, ContactTitle,DateOfBirth, Address,PhoneNumber,CreateDate);
-                cusList.add(cus);
-            }
+            cusList = getObjectList(rs);
         } catch (Exception e) {
         }
         return cusList;
     }
     
     
-    public static void main(String[] args) {
-        Customer cus = new CustomerDAO().getCustomerByID("0oYbA");
-        System.out.println(cus);
-    }
+//    public static void main(String[] args) {
+//        Customer cus = new CustomerDAO().getCustomerByID("0oYbA");
+//        System.out.println(cus);
+//    }
 }

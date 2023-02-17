@@ -4,7 +4,6 @@
  */
 package DAL;
 
-import models.DBContext;
 import models.Order;
 import models.OrderDetail;
 import models.Product;
@@ -17,26 +16,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Customer;
 
 /**
  *
  * @author user
  */
 public class OrderDAO extends DBContext{
-    public ArrayList<Order> getAllOrdersOfACus(int cusID) {
-        ArrayList<Order> orders = new ArrayList<>();
+    
+    public ArrayList<Order> getObjectOrderList(ResultSet rs){
+        ArrayList<Order> orderList = new ArrayList<>();
         try {
-            String sql = "select * from Orders o where o.CustomerID = ?";
-            //b2 tao doi tuong nhe
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, cusID);
-            //b3thuc thi truy van
-            ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
             while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int OrderID = rs.getInt("OrderID");
-                String CustomerID = rs.getString("CustomerID");
+                int CustomerID = rs.getInt("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
                 Date OrderDate = rs.getDate("OrderDate");
                 Date RequiredDate = rs.getDate("RequiredDate");
@@ -48,89 +41,77 @@ public class OrderDAO extends DBContext{
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                Order o = new Order(OrderID, cusID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
-                orders.add(o);
+                orderList.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName,
+                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry));
             }
+        } catch (Exception e) {
+        }
+        return orderList;
+    }
+    public ArrayList<OrderDetail> getObjectOrderDetailList(ResultSet rs){
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                double SalePrice = rs.getDouble("SalePrice");
+                int WarehouseID = rs.getInt("WarehouseID");
+                int Quantity = rs.getInt("Quantity");
+                int DiscountID = rs.getInt("DiscountID");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
+                orderDetails.add(od);
+            }
+        } catch (Exception e) {
+        }
+        return orderDetails;
+    }
+    
+    public ArrayList<Order> getAllOrdersByCusID(int cusID) {
+        ArrayList<Order> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders o where o.CustomerID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cusID);
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectOrderList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
-        return orders;
+        return orderList;
     }
     
     public ArrayList<Order> getAllCanceledOrdersOfCus(int cusID) {
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<Order> orderList = new ArrayList<>();
         try {
-//            String sql = "select DISTINCT o.OrderID, o.CustomerID,o.EmployeeID,o.OrderDate,o.RequiredDate,o.ShipAddress,o.ShipName,o.ShipPostalCode,o.ShipRegion,o.ShipCity,o.Freight,o.ShipCountry,o.ShippedDate\n" +
-//            "from Accounts a,Customers c, Orders o,[Order Details] od where\n" +
-//            "a.AccountID=? and a.CustomerID=c.CustomerID and c.CustomerID=o.CustomerID and od.OrderID=o.OrderID and RequiredDate IS NULL";
             String sql = "select * from Orders o where o.CustomerID = ? AND RequiredDate IS NULL";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cusID);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                String CustomerID = rs.getString("CustomerID");
-                int EmployeeID = rs.getInt("EmployeeID");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                double Freight = rs.getDouble("Freight");
-                String ShipName = rs.getString("ShipName");
-                String ShipAddress = rs.getString("ShipAddress");
-                String ShipCity = rs.getString("ShipCity");
-                String ShipRegion = rs.getString("ShipRegion");
-                String ShipPostalCode = rs.getString("ShipPostalCode");
-                String ShipCountry = rs.getString("ShipCountry");
-                Order o = new Order(OrderID, cusID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
-                orders.add(o);
-            }
+            orderList = getObjectOrderList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
-        return orders;
+        return orderList;
     }
     
     public ArrayList<Order> getAllOrders() {
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "select * from Orders";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                String CustomerID = rs.getString("CustomerID");
-                int EmployeeID = rs.getInt("EmployeeID");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                double Freight = rs.getDouble("Freight");
-                String ShipName = rs.getString("ShipName");
-                String ShipAddress = rs.getString("ShipAddress");
-                String ShipCity = rs.getString("ShipCity");
-                String ShipRegion = rs.getString("ShipRegion");
-                String ShipPostalCode = rs.getString("ShipPostalCode");
-                String ShipCountry = rs.getString("ShipCountry");
-                Order o = new Order(OrderID, EmployeeID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
-                orders.add(o);
-            }
+            orderList = getObjectOrderList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
-        return orders;
+        return orderList;
     }
     
     
     
     public ArrayList<Order> getOrderInRange(String fromDate, String toDate) {
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "";
             PreparedStatement ps=null;
@@ -149,53 +130,21 @@ public class OrderDAO extends DBContext{
                 ps.setDate(2, Date.valueOf(toDate));
             }
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                String CustomerID = rs.getString("CustomerID");
-                int EmployeeID = rs.getInt("EmployeeID");
-                Date OrderDate = rs.getDate("OrderDate");
-                Date RequiredDate = rs.getDate("RequiredDate");
-                Date ShippedDate = rs.getDate("ShippedDate");
-                double Freight = rs.getDouble("Freight");
-                String ShipName = rs.getString("ShipName");
-                String ShipAddress = rs.getString("ShipAddress");
-                String ShipCity = rs.getString("ShipCity");
-                String ShipRegion = rs.getString("ShipRegion");
-                String ShipPostalCode = rs.getString("ShipPostalCode");
-                String ShipCountry = rs.getString("ShipCountry");
-                Order o = new Order(OrderID, EmployeeID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
-                orders.add(o);
-            }
+            orderList = getObjectOrderList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
-        return orders;
+        return orderList;
     }
     
-    public ArrayList<OrderDetail> getDetailOfOrderByAcc(int accID) {
+    public ArrayList<OrderDetail> getDetailOfOrderByCusID(int cusID) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
-            String sql = "select od.OrderID,od.ProductID,od.UnitPrice,od.Quantity,od.Discount from Accounts a,Customers c, Orders o,[Order Details] od where\n" +
-            "a.AccountID=? and a.CustomerID=c.CustomerID and c.CustomerID=o.CustomerID and od.OrderID=o.OrderID";
-            //b2 tao doi tuong nhe
+            String sql = "select * from [Order Details] od , Orders o where od.OrderID=o.OrderID AND o.CustomerID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, accID);
-            //b3thuc thi truy van
+            ps.setInt(1, cusID);
             ResultSet rs = ps.executeQuery();
-            
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                int ProductID = rs.getInt("ProductID");
-                double SalePrice = rs.getDouble("SalePrice");
-                int WarehouseID = rs.getInt("WarehouseID");
-                int Quantity = rs.getInt("Quantity");
-                int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
-                orderDetails.add(od);
-            }
+            orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
@@ -206,24 +155,10 @@ public class OrderDAO extends DBContext{
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
             String sql = "select * from [Order Details] where OrderID=?";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, OdID);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                int ProductID = rs.getInt("ProductID");
-                double SalePrice = rs.getDouble("SalePrice");
-                int WarehouseID = rs.getInt("WarehouseID");
-                int Quantity = rs.getInt("Quantity");
-                int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
-                orderDetails.add(od);
-            }
+            orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
@@ -240,7 +175,7 @@ public class OrderDAO extends DBContext{
             while (rs.next()) {
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
                 int OrderID = rs.getInt("OrderID");
-                String CustomerID = rs.getString("CustomerID");
+                int CustomerID = rs.getInt("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
                 Date OrderDate = rs.getDate("OrderDate");
                 Date RequiredDate = rs.getDate("RequiredDate");
@@ -336,136 +271,80 @@ public class OrderDAO extends DBContext{
         return result>0;
     }
     
-//    public ArrayList<OrderDetail> getOrderByMonth(int month){
-//        ArrayList<OrderDetail> orders = new ArrayList<>();
-//        try {
-//            String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND MONTH(OrderDate)=?";
-//            //b2 tao doi tuong nhe
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ps.setInt(1, month);
-//            //b3thuc thi truy van
-//            ResultSet rs = ps.executeQuery();
-//            //b4 xu ly kqua tra ve
-//            while (rs.next()) {
-//                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-//                int OrderID = rs.getInt("OrderID");
-//                String CustomerID = rs.getString("CustomerID");
-//                int EmployeeID = rs.getInt("EmployeeID");
-//                String ShipName = rs.getString("ShipName");
-//                String ShipAddress = rs.getString("ShipAddress");
-//                String ShipCity = rs.getString("ShipCity");
-//                String ShipRegion = rs.getString("ShipRegion");
-//                String ShipPostalCode = rs.getString("ShipPostalCode");
-//                String ShipCountry = rs.getString("ShipCountry");
-//                double Freight = rs.getDouble("Freight");
-//                Date OrderDate = rs.getDate("OrderDate");
-//                Date RequiredDate = rs.getDate("RequiredDate");
-//                Date ShippedDate = rs.getDate("ShippedDate");
-//                
-//                Order o = new Order(OrderID, EmployeeID, CustomerID, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Freight, OrderDate, RequiredDate, ShippedDate);
-//                orders.add(o);
-//            }
-//        } catch (Exception e) {
-//            
-//        }//finally{ connection.close();}
-//        return orders;
-//    }
-    
-    public ArrayList<OrderDetail> getOrderDetailByMonth(int month){
-        ArrayList<OrderDetail> odDetailList = new ArrayList<>();
+    public ArrayList<Order> getOrderByCurrentMonth(int month){
+        ArrayList<Order> orderList = new ArrayList<>();
         try {
-            String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=YEAR(GETDATE()) AND MONTH(OrderDate)=?";
-            //b2 tao doi tuong nhe
+            String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND MONTH(OrderDate)=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, month);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                int ProductID = rs.getInt("ProductID");
-                double SalePrice = rs.getDouble("SalePrice");
-                int WarehouseID = rs.getInt("WarehouseID");
-                int Quantity = rs.getInt("Quantity");
-                int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
-                odDetailList.add(od);
-            }
+            orderList = getObjectOrderList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
-        return odDetailList;
+        return orderList;
+    }
+    public ArrayList<Order> getOrderNearest5Month(int diffMonth){
+        ArrayList<Order> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders where Month(OrderDate) = Month(DATEADD(month, ?, getDate())) AND YEAR(OrderDate) = Year(DATEADD(month, ?, getDate()))";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, diffMonth);
+            ps.setInt(2, diffMonth);
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectOrderList(rs);
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return orderList;
     }
     
-    public ArrayList<OrderDetail> getOrderDetailByMonth(int month,int year){
-        ArrayList<OrderDetail> odDetailList = new ArrayList<>();
+    public ArrayList<Order> getOrderToday(){
+        ArrayList<Order> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND DAY(OrderDate)=DAY(GETDATE())";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectOrderList(rs);
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return orderList;
+    }
+    
+    public ArrayList<OrderDetail> getOrderDetailByMonth(int month){
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
+        try {
+            String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=YEAR(GETDATE()) AND MONTH(OrderDate)=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, month);
+            ResultSet rs = ps.executeQuery();
+            orderDetails = getObjectOrderDetailList(rs);
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return orderDetails;
+    }
+    
+    public ArrayList<OrderDetail> getALLOrderDetailInCurrentMonth(int month,int year){
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
             String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=? AND MONTH(OrderDate)=?";
-            //b2 tao doi tuong nhe
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, year);
             ps.setInt(2, month);
-            //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            //b4 xu ly kqua tra ve
-            while (rs.next()) {
-                //doc du lieu tu 'rs' gan cho cac bien cuc bo
-                int OrderID = rs.getInt("OrderID");
-                int ProductID = rs.getInt("ProductID");
-                double SalePrice = rs.getDouble("SalePrice");
-                int WarehouseID = rs.getInt("WarehouseID");
-                int Quantity = rs.getInt("Quantity");
-                int DiscountID = rs.getInt("DiscountID");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
-                odDetailList.add(od);
-            }
+            orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
             
         }//finally{ connection.close();}
-        return odDetailList;
+        return orderDetails;
     }
     
     
     public static void main(String[] args) {
         OrderDAO odDAO = new OrderDAO();
-//        ArrayList<Order> o = new OrderDAO().getAllOrdersOfCus(2);
-//        ArrayList<OrderDetail> od = new OrderDAO().getDetailOfOrder(1);
-//        for (OrderDetail orderDetail : od) {
-//            System.out.println(orderDetail);
-//        }  
-        
-
-        
-//        try {
-//            int result = odDAO.cancelOrder(11072);
-//            System.out.println(result);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
-        
-//        try {
-//            Order od = new Order( 1, "FRANK", "vu", "vu", "vu", "vu", "vu", "vu", 0);
-//            odDAO.createOrder(od);
-//            OrderDetail odDetail=new OrderDetail(new OrderDAO().getNewOrderID(), 12, 2,100-100*0.2, 0.2);
-//            odDAO.createOrderDetail(odDetail);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-//            LocalDate today = LocalDate.now();
-//            int month = today.getMonthValue();
-//            System.out.println("month = " + month);
-//            for (int i = 1; i <= month; i++) {
-//                ArrayList<Order> odList= new OrderDAO().getOrderByMonth(i);
-//                System.out.println(odList.size());
-//            }
-           
-            
-//        ArrayList<Order> odList = new OrderDAO().getOrderByMonth(10);
-//       for (Order oddList : odList) {
-//           System.out.println(oddList);
-//        } 
+        ArrayList<Order> abc = odDAO.getOrderNearest5Month(-1);
+        System.out.println(abc.size());
     }
 }

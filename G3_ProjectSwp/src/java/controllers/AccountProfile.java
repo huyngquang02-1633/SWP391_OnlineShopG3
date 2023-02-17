@@ -20,18 +20,27 @@ import jakarta.servlet.annotation.WebServlet;
  * @author user
  */
 @WebServlet(name = "AccountProfile", urlPatterns = {"/account/profile"})
-public class AccountProfile extends HttpServlet{
+public class AccountProfile extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      
-       
-        
+//        if (req.getSession().getAttribute("AccSession") != null) {
+//            Account a = (Account) req.getSession().getAttribute("AccSession");
+//            Account account = new AccountDAO().getAccountByEmail(a.getEmail());
+            Customer customer = new CustomerDAO().getCustomerByID(10);
+            req.setAttribute("customer", customer);
+//            req.setAttribute("account", account);
+
+            req.getRequestDispatcher("../profile.jsp").forward(req, resp);
+//        } else {
+//
+//            resp.getWriter().print("Access denied");
+//        }
     }
 
 }
