@@ -58,15 +58,14 @@
                         </ul>
 
                         <div class="tg-userlogin dropdown">
-                            <img id="imgprofile" src="images/users/icon-user.png" width="50" height="50" style=" border-radius: 50%" alt="" >
-                            <a id="nameprofile" href="profile.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
+                            <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="50" height="50" style=" border-radius: 50%" alt="" >
+                            <a id="nameprofile" href="<%=path%>/account/profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<%=path%>/profile.jsp">Profile</a>
-                                <a class="dropdown-item" href="#">My Orders</a>
-                                <a class="dropdown-item" href="#" onclick="logout()">Log out</a>
+                                <div style="text-align: center;" ><a class="dropdown-item" href="<%=path%>/account/profile">Profile</a></div>
+                                <div style="text-align: center;" ><a class="dropdown-item" href="<%=path%>/account/profile_myOrder">My Orders</a></div>
+                                <div style="text-align: center;" ><a class="dropdown-item" href="#" onclick="logout()">Log out</a></div>
                             </div>
                         </div>
-
 
 
                     </div>
@@ -77,7 +76,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <strong class="tg-logo"><a href="home.jsp"><img src="<%=path%>/images/logo.png"
+
+                        <strong class="tg-logo"><a href="<%=path%>/homepage"><img src="<%=path%>/images/logo.png"
+
                                                                                                   alt="company name here"></a></strong>
                         <div class="tg-wishlistandcart">
                             <div class="dropdown tg-themedropdown tg-wishlistdropdown">
@@ -141,7 +142,9 @@
                                         </a>
                                         <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
                                         <div class="tg-btns">
-                                            <a class="tg-btn tg-active" href="javascript:void(0);">View Cart</a>
+
+                                            <a class="tg-btn tg-active" href="<%=path%>/account/cart">View Cart</a>
+
                                             <a class="tg-btn" href="javascript:void(0);">Checkout</a>
                                         </div>
                                     </div>
@@ -182,46 +185,13 @@
                                         <a href="javascript:void(0);">All Categories</a>
                                         <div class="mega-menu">
                                             <ul class="tg-themetabnav" role="tablist">
-                                                <li role="presentation" class="active">
-                                                    <a href="#artandphotography" aria-controls="artandphotography"
-                                                       role="tab" data-toggle="tab">Art &amp; Photography</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#biography" aria-controls="biography" role="tab"
-                                                       data-toggle="tab">Biography</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#childrensbook" aria-controls="childrensbook"
-                                                       role="tab" data-toggle="tab">Childrenâs Book</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#craftandhobbies" aria-controls="craftandhobbies"
-                                                       role="tab" data-toggle="tab">Craft &amp; Hobbies</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#crimethriller" aria-controls="crimethriller"
-                                                       role="tab" data-toggle="tab">Crime &amp; Thriller</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#fantasyhorror" aria-controls="fantasyhorror"
-                                                       role="tab" data-toggle="tab">Fantasy &amp; Horror</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#fiction" aria-controls="fiction" role="tab"
-                                                       data-toggle="tab">Fiction</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#fooddrink" aria-controls="fooddrink" role="tab"
-                                                       data-toggle="tab">Food &amp; Drink</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#graphicanimemanga" aria-controls="graphicanimemanga"
-                                                       role="tab" data-toggle="tab">Graphic, Anime &amp; Manga</a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#sciencefiction" aria-controls="sciencefiction"
-                                                       role="tab" data-toggle="tab">Science Fiction</a>
-                                                </li>
+                                                <c:forEach items="${cateList}" var="cate">
+                                                    <li role="presentation" class="active">
+                                                        <a href="#" aria-controls="artandphotography"
+                                                           role="tab" data-toggle="tab">${cate.getCategoryName()}</a>
+                                                    </li>
+                                                </c:forEach>
+                                                
                                             </ul>
                                             <div class="tab-content tg-themetabcontent">
                                                 <div role="tabpanel" class="tab-pane active" id="artandphotography">
