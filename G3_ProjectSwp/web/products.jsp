@@ -45,7 +45,7 @@
                                     <div class="tg-featureditm">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-                                                <figure><img src="images/img-04.png" alt="image description"></figure>
+                                                <figure><img src="<%=path%>/images/img-04.png" alt="image description"></figure>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                                 <div class="tg-featureditmcontent">
@@ -94,8 +94,8 @@
                                             <div class="tg-postbook">
                                                 <figure class="tg-featureimg">
                                                     <div class="tg-bookimg">
-                                                        <div class="tg-frontcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-                                                        <div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
+                                                        <div class="tg-frontcover"><img src="<%=path%>/images/books/img-01.jpg" alt="image description"></div>
+                                                        <div class="tg-backcover"><img src="<%=path%>/images/books/img-01.jpg" alt="image description"></div>
                                                     </div>
                                                     <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                         <i class="icon-heart"></i>
@@ -104,17 +104,20 @@
                                                 </figure>
                                                 <div class="tg-postbookcontent">
                                                     <ul class="tg-bookscategories">
-                                                        <li>
-                                                            <c:forEach items="${cateList}" var="cate">
-                                                                <c:if test="${cate.getCategoryID() == product.getCategoryID()}">
-                                                                    <a href="javascript:void(0);">${cate.getCategoryName()}</a>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </li>
+                                                        <c:forEach items="${cateList}" var="cate">
+                                                            <c:if test="${product.getCategoryID() == cate.getCategoryID()}">
+                                                                  <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}">${cate.getCategoryName()}</a></li>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        <c:forEach items="${genreList}" var="genre">
+                                                            <c:if test="${product.getGenreID() == genre.getGenreID()}">
+                                                                  <li><a href="<%=path%>/productList?genreID=${genre.getGenreID()}">${genre.getGenreName()}</a></li>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </ul>
                                                     <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                                     <div class="tg-booktitle">
-                                                        <h3><a href="javascript:void(0);">${product.getProductName()}</a></h3>
+                                                        <h3><a href="<%=path%>/productDetail?proID=${product.getProductID()}">${product.getProductName()}</a></h3>
                                                     </div>
                                                     <span class="tg-bookwriter">By:
                                                         <c:forEach items="${authorList}" var="author">
@@ -159,7 +162,7 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <c:forEach items="${cateList}" var="cate">
-                                            <li><a href="javascript:void(0);"><span>${cate.getCategoryName()}</span><em>28245</em></a></li>
+                                            <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>></em></a></li>
                                         </c:forEach>
                                         <li><a href="javascript:void(0);"><span>View All</span></a></li>
                                     </ul>
