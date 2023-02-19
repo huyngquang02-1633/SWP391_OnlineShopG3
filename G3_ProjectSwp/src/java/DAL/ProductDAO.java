@@ -35,7 +35,7 @@ public class ProductDAO extends DBContext{
                 double Weight = rs.getDouble("Weight");
                 int NumberOfPage = rs.getInt("NumberOfPage");
                 String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
+                String Image = rs.getString("Image");
                 Date PublishDate = rs.getDate("PublishDate");
                 String PublishingLicense = rs.getString("PublishingLicense");
                 String Description = rs.getString("Description");
@@ -66,7 +66,7 @@ public class ProductDAO extends DBContext{
                 double Weight = rs.getDouble("Weight");
                 int NumberOfPage = rs.getInt("NumberOfPage");
                 String Format = rs.getString("Format");
-                int Image = rs.getInt("Image");
+                String Image = rs.getString("Image");
                 Date PublishDate = rs.getDate("PublishDate");
                 String PublishingLicense = rs.getString("PublishingLicense");
                 String Description = rs.getString("Description");
@@ -190,6 +190,53 @@ public class ProductDAO extends DBContext{
         }// finally{connection.close();}
         return productList;
     }
+    public ArrayList<Product> getProductListByGenreID(int genreID) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where GenreID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, genreID);
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+            
+        }// finally{connection.close();}
+        return productList;
+    }
+    public ArrayList<Product> getProductByAuthorID(int authorID) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where AuthorID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, authorID);
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+            
+        }// finally{connection.close();}
+        return productList;
+    }
+    
+    public ArrayList<Product> getNewReleaseList(int mode) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql="";
+            PreparedStatement ps ;
+            if(mode != 0){
+                sql = "select TOP 3 * from Products WHERE PublishDate IS NOT NULL AND Discontinued = 0 Order by PublishDate DESC";
+                ps = connection.prepareStatement(sql);
+                //ps.setInt(1, mode);
+            }else{
+                sql = "select * from Products WHERE PublishDate IS NOT NULL AND Discontinued = 0 Order by PublishDate DESC";
+                ps = connection.prepareStatement(sql);
+            }
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+            
+        }// finally{connection.close();}
+        return productList;
+    }
     
     public void update(Product p) throws SQLException {
         try {
@@ -208,7 +255,7 @@ public class ProductDAO extends DBContext{
                     + "Language = ?, "
                     + "Size = ?, "
                     + "Weight = ?, "
-                    + "NumerOfPage = ?, "
+                    + "NumberOfPage = ?, "
                     + "Format = ?, "
                     + "Image = ?, "
                     + "PublishDate = ?, "
@@ -232,7 +279,7 @@ public class ProductDAO extends DBContext{
             ps.setDouble(13, p.getWeight());
             ps.setInt(14, p.getNumberOfPage());
             ps.setString(15, p.getFormat());
-            ps.setInt(16, p.getImage());
+            ps.setString(16, p.getImage());
             ps.setDate(17, p.getPublishDate());
             ps.setString(18, p.getPublishingLicense());
             ps.setString(19, p.getDescription());
@@ -278,7 +325,7 @@ public class ProductDAO extends DBContext{
                 + "Language,"
                 + "Size,"
                 + "Weight,"
-                + "NumerOfPage,"
+                + "NumberOfPage,"
                 + "Format,"
                 + "Image,"
                 + "PublishDate,"
@@ -303,7 +350,7 @@ public class ProductDAO extends DBContext{
             ps.setDouble(13, p.getWeight());
             ps.setInt(14, p.getNumberOfPage());
             ps.setString(15, p.getFormat());
-            ps.setInt(16, p.getImage());
+            ps.setString(16, p.getImage());
             ps.setDate(17, p.getPublishDate());
             ps.setString(18, p.getPublishingLicense());
             ps.setString(19, p.getDescription());
@@ -316,26 +363,9 @@ public class ProductDAO extends DBContext{
         }
     }
     
-//    public static void main(String[] args) {
-//<<<<<<< HEAD
-//<<<<<<< Updated upstream
-//        ArrayList<Product> list = new ProductDAO().getProductsByCatNSearch("",1,true);
-//        System.out.println(list.size());
-//        for (Product product : list) {
-//            System.out.println(product);
-//        }
-//=======
-//        ArrayList<Product> p = new ProductDAO().getProducts(false);
-//        System.out.println(p.get(0).getAuthorID());
-//  
-//        
-//>>>>>>> Stashed changes
-//=======
-//        Product p = new ProductDAO().getProductInfor(6);
-//        System.out.println(p.getAuthorID());
-//  
-//        
-//>>>>>>> 4d10deee2db37bac8249fdeaf944af361ec08c15
-//    }
+    public static void main(String[] args) {
+        ArrayList<Product> abc = new ProductDAO().getNewReleaseList(3);
+        System.out.println(abc.get(0).getAuthorID());
+    }
             
 }
