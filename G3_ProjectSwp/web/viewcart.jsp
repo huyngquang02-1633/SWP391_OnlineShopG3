@@ -1,62 +1,33 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%@include file="templates/header.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<body>
+    <!--************************************
+                        Inner Banner Start
+        *************************************-->
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Cart</title>
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-        <style>
-            .form-control,
-            .btn {
-                width: 50px;
-                border-radius: 0;
-                box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-                    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-                border: none;
-                outline: none;
-            }
-
-            @media (min-width: 1025px) {
-                .h-custom {
-                    height: 100vh !important;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <%@include file="templates/header.jsp" %>
-
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!--************************************
-                            Inner Banner Start
-            *************************************-->
-        
-        <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="<%=path%>/images/parallax/bgparallax-07.jpg">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tg-innerbannercontent">
-                            <h1>Cart</h1>
-                            <ol class="tg-breadcrumb">
-                                <li>Home</li>
-                                <li class="tg-active">My Cart</li>
-                            </ol>
-                        </div>
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="<%=path%>/images/parallax/bgparallax-07.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-innerbannercontent">
+                        <h1>Cart</h1>
+                        <ol class="tg-breadcrumb">
+                            <li>Home</li>
+                            <li class="tg-active">My Cart</li>
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
-        <!--************************************
-                        Inner Banner End
-        *************************************-->
+    </div>
+    <!--************************************
+                    Inner Banner End
+    *************************************-->
         <main id="tg-main" class="tg-main tg-haslayout">
             <div class="tg-sectionspace tg-haslayout">
                 <div class="container">
@@ -194,20 +165,18 @@
             </div>
 
         </main>
-        <%@include file="templates/footer.jsp" %>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-        crossorigin="anonymous"></script>
+    <%@include file="templates/footer.jsp" %>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-                integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
 
-        <%
-            String pathh = request.getContextPath();
-        %>
-        <script src="<%=pathh%>/js/cart.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    </body>
-</html>
+    <%
+        String pathh = request.getContextPath();
+    %>
+    <script src="<%=pathh%>/js/cart.js" type="text/javascript"></script>

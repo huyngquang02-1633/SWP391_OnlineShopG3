@@ -37,10 +37,6 @@ window.fbAsyncInit = function () {
 function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me?fields=email,name,picture', function (response) {
-        //      console.log('Successful login for: ' + response.name);
-
-//        document.getElementById('status').innerHTML =
-//                'Thanks for logging in, ' + response.name + '!';
 
         let name = response.name;
         let email = response.email;
@@ -57,7 +53,7 @@ function testAPI() {                      // Testing Graph API after login.  See
 
 //        localStorage.setItem('userlogin', convertuserData);
         sessionStorage.setItem('userlogin', convertuserData);
-        window.location.href = "./home.jsp";
+        window.location.href = "./index.jsp";
 
 //        document.getElementById('nameprofile').innerHTML = response.name;
 //
@@ -69,14 +65,12 @@ function testAPI() {                      // Testing Graph API after login.  See
 function handleCredentialResponse(response) {
 
     const responsePayload = decodeJwtResponse(response.credential);
-//    console.log(response);
-//    console.log(responsePayload);
-    console.log("ID" + responsePayload.sub);
-    console.log('Name: ' + responsePayload.name);
-    console.log('Given Name: ' + responsePayload.given_name);
-    console.log('Family Name: ' + responsePayload.family_name);
-    console.log("Email" + responsePayload.email);
-    console.log("Picture " + responsePayload.picture);
+//    console.log("ID" + responsePayload.sub);
+//    console.log('Name: ' + responsePayload.name);
+//    console.log('Given Name: ' + responsePayload.given_name);
+//    console.log('Family Name: ' + responsePayload.family_name);
+//    console.log("Email" + responsePayload.email);
+//    console.log("Picture " + responsePayload.picture);
 
 //    document.getElementById('nameprofile').innerHTML = responsePayload.name;
 //    document.getElementById('imgprofile').src = responsePayload.picture;
@@ -95,7 +89,7 @@ function handleCredentialResponse(response) {
     let convertuserData = JSON.stringify(userData);
 //    localStorage.setItem('userlogin', convertuserData);
     sessionStorage.setItem('userlogin', convertuserData);
-    window.location.href = "./home.jsp";
+    window.location.href = "./index.jsp";
 
 }
 

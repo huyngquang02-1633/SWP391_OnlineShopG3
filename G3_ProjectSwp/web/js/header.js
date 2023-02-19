@@ -3,6 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+$(document).ready(function () {
+
+    $(".account").hide();
+
+    if (sessionStorage.getItem('userlogin') !== null) {
+        $(".login").hide();
+        $(".account").show();
+    }
+});
 
 function getData() {
 //    let userGetData = localStorage.getItem('userlogin');
@@ -16,6 +25,6 @@ function getData() {
 getData();
 
 function logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     location.href = './index.jsp';
 }
