@@ -14,9 +14,11 @@
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="#"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
-                    <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+
+                    <li class="active"><a href="<%=path%>/account/profile"> <i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="<%=path%>/account/profile_myOrder"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
+                    <li><a href="<%=path%>/account/profile"> <i class="fa fa-edit"></i> Edit profile</a></li>
+
                     <li><a href="#"> <i class="glyphicon glyphicon-plane"></i> Ship Address</a></li>
                 </ul>
             </div>
@@ -53,7 +55,9 @@
                         <div class="bio-row">
                             <p><span>Gender </span>: ${c.isGender()}</p>
                         </div>
-                        <a href="<%=path%>/account/profile"><i class="fa fa-edit"></i> Edit Profile</a>          
+
+                        <a href="<%=path%>/profile_edit.jsp"><i class="fa fa-edit"></i> Edit Profile</a>          
+
                     </div>
                 </div>
             </div>

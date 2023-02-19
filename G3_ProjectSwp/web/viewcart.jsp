@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,10 +33,13 @@
     <body>
         <%@include file="templates/header.jsp" %>
 
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!--************************************
                             Inner Banner Start
             *************************************-->
-        <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
+        
+        <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="<%=path%>/images/parallax/bgparallax-07.jpg">
+
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -61,10 +65,10 @@
                             <div class="container h-100 py-5">
                                 <div class="row d-flex justify-content-center h-100">
                                     <div class="col">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive" style="border-radius: 10px;">
                                             <table id="table" class="table table-bordered">
                                                 <thead>
-                                                    <tr>
+                                                    <tr style="background-color:  pink; padding: 10px;">
                                                         <th scope="col">Image</th>
                                                         <th scope="col">Product</th>
                                                         <th scope="col">Quantity</th>
@@ -74,150 +78,73 @@
                                                         <th scope="col">Total</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td scope="row">
-                                                            <img src="https://st.quantrimang.com/photos/image/2018/10/10/may-anh-gia-re-duoc-danh-gia-cao-7.jpg"
-                                                                 class="img-fluid" style="width: 120px" alt="Book" />
-                                                        </td>
 
-                                                        <td>
-                                                            <div class="flex-column">
-                                                                <p class="mb-2">MASSA AST</p>
-                                                                <p class="mb-0">Color: black, Material: metal</p>
-                                                            </div>
-                                                        </td>
+                                                <tbody> 
+                                                    <c:forEach items="${cartList}" var="cartItem">
+                                                        <tr>
+                                                            <td scope="row">
+                                                                <img src="<%=path%>/images/books/img-03.jpg"
+                                                                     class="img-fluid" style="width: 120px" alt="Book" />
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex-column">
+                                                                    <c:forEach items="${productList}" var="product">
+                                                                        <c:if test="${product.getProductID() == cartItem.getProductID()  }">
 
-                                                        <td>
-                                                            <div class="d-flex flex-row">
-                                                                <button class="btn btn-light px-2 btn-minus" onclick="miniusQuant(this);">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-                                                                <input id="form1" min="0" name="quantity" value="2" type="number"
-                                                                       class="form-control form-control-sm" onchange="updateValue(this);" />
 
-                                                                <button class="btn btn-light px-2 btn-plus" onclick="plusQuant(this);">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </button>
+                                                                            <p class="mb-2">${product.getProductName()}</p>
+                                                                            <p class="mb-0">Format: ${product.getFormat()}, Genre: Business</p>
 
-                                                                <button class="btn btn-danger px-2 btn-remove" onclick="deleteRow(this);">
-                                                                    <i class="fas fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
 
-                                                        <td>
-                                                            <p class="mb-0">$120.00</p>
-                                                        </td>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </div>
+                                                            </td>
 
-                                                        <td>
-                                                            <p class="mb-0">$25.00</p>
-                                                        </td>
+                                                            <td>
+                                                                <div class="d-flex flex-row">
+                                                                    <button class="btn btn-light px-2 btn-minus" onclick="miniusQuant(this);">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                    <input id="form1" min="0" name="quantity" value="${cartItem.getQuantity()}" type="number"
+                                                                           class="form-control form-control-sm" onchange="updateValue(this);" />
 
-                                                        <td>
-                                                            <p class="mb-0"></p>
-                                                        </td>
+                                                                    <button class="btn btn-light px-2 btn-plus" onclick="plusQuant(this);">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
 
-                                                        <td>
-                                                            <p class="mb-0"></p>
-                                                        </td>
-                                                    </tr>
+                                                                    <button class="btn btn-danger px-2 btn-remove" onclick="deleteRow(this);">
+                                                                        <i class="fas fa-xmark"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
 
-                                                    <tr>
-                                                        <td scope="row">
-                                                            <img src="https://toplist.vn/images/800px/canon-eos-m10-522883.jpg"
-                                                                 class="img-fluid" style="width: 120px" alt="Book" />
-                                                        </td>
+                                                            <td>
+                                                                <c:forEach items="${productList}" var="product">
+                                                                        <c:if test="${product.getProductID() == cartItem.getProductID()  }">
+                                                                            <p class="mb-0">${product.getSalePrice()}</p>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                
+                                                            </td>
 
-                                                        <td>
-                                                            <div class="flex-column">
-                                                                <p class="mb-2">MASSA AST</p>
-                                                                <p class="mb-0">Color: black, Material: metal</p>
-                                                            </div>
-                                                        </td>
+                                                            <td>
+                                                                <p class="mb-0">$25.00</p>
+                                                            </td>
 
-                                                        <td>
-                                                            <div class="d-flex flex-row">
-                                                                <button class="btn btn-light px-2 btn-minus" onclick="miniusQuant(this);">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-                                                                <input id="form1" min="0" name="quantity" value="2" type="number"
-                                                                       class="form-control form-control-sm" onchange="updateValue(this);" />
+                                                            <td>
+                                                                <p class="mb-0"></p>
+                                                            </td>
 
-                                                                <button class="btn btn-light px-2 btn-plus" onclick="plusQuant(this);">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </button>
+                                                            <td>
+                                                                <p class="mb-0"></p>
+                                                            </td>
+                                                        </tr>
 
-                                                                <button class="btn btn-danger px-2 btn-remove" onclick="deleteRow(this);">
-                                                                    <i class="fas fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
+                                                    </c:forEach> 
+                                                    
 
-                                                        <td>
-                                                            <p class="mb-0">$7.00</p>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0">--</p>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0"></p>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0"></p>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td scope="row">
-                                                            <img src="https://salt.tikicdn.com/cache/w1200/ts/product/3c/57/59/6c7ff53728a295a4f8219f18fcbba130.jpg"
-                                                                 class="img-fluid" style="width: 120px" alt="Book" />
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="flex-column">
-                                                                <p class="mb-2">MASSA AST</p>
-                                                                <p class="mb-0">Color: black, Material: metal</p>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="d-flex flex-row">
-                                                                <button class="btn btn-light px-2 btn-minus" onclick="miniusQuant(this);">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-                                                                <input id="form1" min="0" name="quantity" value="2" type="number"
-                                                                       class="form-control form-control-sm" onchange="updateValue(this);" />
-
-                                                                <button class="btn btn-light px-2 btn-plus" onclick="plusQuant(this);">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-danger px-2 btn-remove" onclick="deleteRow(this);">
-                                                                    <i class="fas fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0">$120.00</p>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0">$25.00</p>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0"></p>
-                                                        </td>
-
-                                                        <td>
-                                                            <p class="mb-0"></p>
-                                                        </td>
-                                                    </tr>
+  
 
                                                     <tr>
                                                         <td class="text-end" scope="row" colspan="6">
@@ -277,6 +204,10 @@
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script src="js/cart.js" type="text/javascript"></script>
+        <%
+            String pathh = request.getContextPath();
+        %>
+        <script src="<%=pathh%>/js/cart.js" type="text/javascript"></script>
+
     </body>
 </html>

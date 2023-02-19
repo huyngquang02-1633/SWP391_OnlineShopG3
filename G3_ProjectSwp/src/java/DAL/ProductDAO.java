@@ -316,11 +316,26 @@ public class ProductDAO extends DBContext{
         }
     }
     
-    public static void main(String[] args) {
-        Product p = new ProductDAO().getProductInfor(6);
-        System.out.println(p.getAuthorID());
-  
-        
-    }
+//    public static void main(String[] args) {
+//<<<<<<< HEAD
+//<<<<<<< Updated upstream
+//        ArrayList<Product> list = new ProductDAO().getProductsByCatNSearch("",1,true);
+//        System.out.println(list.size());
+//        for (Product product : list) {
+//            System.out.println(product);
+//        }
+//=======
+//        ArrayList<Product> p = new ProductDAO().getProducts(false);
+//        System.out.println(p.get(0).getAuthorID());
+//  
+//        
+//>>>>>>> Stashed changes
+//=======
+//        Product p = new ProductDAO().getProductInfor(6);
+//        System.out.println(p.getAuthorID());
+//  
+//        
+//>>>>>>> 4d10deee2db37bac8249fdeaf944af361ec08c15
+//    }
             
 }
