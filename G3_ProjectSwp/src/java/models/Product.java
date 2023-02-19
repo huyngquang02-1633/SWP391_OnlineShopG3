@@ -26,13 +26,13 @@ public class Product {
     private double Weight;
     private int NumberOfPage;
     private String Format;
-    private int Image;
+    private String Image;
     private Date PublishDate;
     private String PublishingLicense;
     private String Description;
     private boolean Discontinued;
 
-    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumberOfPage, String Format, int Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
+    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumberOfPage, String Format, String Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;
         this.CategoryID = CategoryID;
@@ -176,11 +176,11 @@ public class Product {
         this.Format = Format;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int Image) {
+    public void setImage(String Image) {
         this.Image = Image;
     }
 

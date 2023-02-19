@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AuthorDAO;
 import DAL.CategoryDAO;
 import models.Account;
 import models.Cart;
@@ -25,9 +26,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import DAL.CustomerDAO;
+import DAL.GenreDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import models.Author;
 import models.Category;
+import models.Genre;
 import models.Product;
 @WebServlet(name = "HomePage", urlPatterns = {"/homepage"})
 public class HomePage extends HttpServlet {
@@ -36,10 +40,16 @@ public class HomePage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<Product> productList = new ProductDAO().getProducts(false);
         ArrayList<Category> cateList = new CategoryDAO().getCategory();
+        ArrayList<Genre> genreList = new GenreDAO().getGenreList();
+        ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
+        ArrayList<Product> newReleaseList = new ProductDAO().getNewReleaseList(3);
+        
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);
+        req.setAttribute("genreList", genreList);
+        req.setAttribute("authorList", authorList);
+        req.setAttribute("newReleaseList", newReleaseList);
         req.getRequestDispatcher("index.jsp").forward(req, resp);
-
     }
 
     @Override
