@@ -68,15 +68,29 @@
                                     </figure>
                                     <div class="tg-postbookcontent">
                                         <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);"></a></li>
-                                            <li><a href="javascript:void(0);">${product.getFormat()}</a></li>
+                                            <c:forEach items="${cateList}" var="cate">
+                                                <c:if test="${product.getCategoryID() == cate.getCategoryID()}">
+                                                    <li><a href="<%=path%>/productList?categoryID=${product.getCategoryID()}">${cate.getCategoryName()}</a></li>
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:forEach items="${genreList}" var="genre">
+                                                <c:if test="${product.getGenreID() == genre.getGenreID()}">
+                                                    <li><a href="<%=path%>/productList?genreID=${product.getGenreID()}">${genre.getGenreName()}</a></li>
+                                                </c:if>
+                                            </c:forEach>
+                                            
                                         </ul>
                                         <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                         <div class="tg-booktitle">
                                             <h3><a href="<%=path%>/productDetail?proID=${product.getProductID()}">${product.getProductName()}</a></h3>
                                         </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
-                                                Gunning</a></span>
+                                        <span class="tg-bookwriter">By: 
+                                            <c:forEach items="${authorList}" var="author">
+                                                <c:if test="${product.getAuthorID() == author.getAuthorID()}">
+                                                    <a href="<%=path%>/productList?authorID=${product.getAuthorID()}">${author.getAuthorName()}</a>
+                                                </c:if>
+                                            </c:forEach>
+                                        </span>
                                         <span class="tg-stars"><span></span></span>
                                         <span class="tg-bookprice">
                                             <ins>${product.getSalePrice()}</ins>
@@ -91,157 +105,6 @@
                             </div>
                         </c:forEach>
 
-                        <div class="item">
-                            <div class="tg-postbook">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/books/img-02.jpg"
-                                                                        alt="image description"></div>
-                                        <div class="tg-backcover"><img src="images/books/img-02.jpg"
-                                                                       alt="image description"></div>
-                                    </div>
-                                    <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                        <i class="icon-heart"></i>
-                                        <span>add to wishlist</span>
-                                    </a>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <ul class="tg-bookscategories">
-                                        <li><a href="javascript:void(0);">Adventure</a></li>
-                                        <li><a href="javascript:void(0);">Fun</a></li>
-                                    </ul>
-                                    <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
-                                    <div class="tg-booktitle">
-
-                                        <h3><a href="<%=path%>/productDetail">Drive Safely, No Bumping</a></h3>
-
-
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
-                                            Gunning</a></span>
-                                    <span class="tg-stars"><span></span></span>
-                                    <span class="tg-bookprice">
-                                        <ins>$25.18</ins>
-                                        <del>$27.20</del>
-                                    </span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tg-postbook tg-notag">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/books/img-03.jpg"
-                                                                        alt="image description"></div>
-                                        <div class="tg-backcover"><img src="images/books/img-03.jpg"
-                                                                       alt="image description"></div>
-                                    </div>
-                                    <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                        <i class="icon-heart"></i>
-                                        <span>add to wishlist</span>
-                                    </a>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <ul class="tg-bookscategories">
-                                        <li><a href="javascript:void(0);">Adventure</a></li>
-                                        <li><a href="javascript:void(0);">Fun</a></li>
-                                    </ul>
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Let The Good Times Roll Up</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
-                                            Gunning</a></span>
-                                    <span class="tg-stars"><span></span></span>
-                                    <span class="tg-bookprice">
-                                        <ins>$25.18</ins>
-                                        <del>$27.20</del>
-                                    </span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tg-postbook">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/books/img-04.jpg"
-                                                                        alt="image description"></div>
-                                        <div class="tg-backcover"><img src="images/books/img-04.jpg"
-                                                                       alt="image description"></div>
-                                    </div>
-                                    <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                        <i class="icon-heart"></i>
-                                        <span>add to wishlist</span>
-                                    </a>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <ul class="tg-bookscategories">
-                                        <li><a href="javascript:void(0);">Adventure</a></li>
-                                        <li><a href="javascript:void(0);">Fun</a></li>
-                                    </ul>
-                                    <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Our State Fair Is A Great State
-                                                Fair</a>
-                                        </h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
-                                            Gunning</a></span>
-                                    <span class="tg-stars"><span></span></span>
-                                    <span class="tg-bookprice">
-                                        <ins>$25.18</ins>
-                                        <del>$27.20</del>
-                                    </span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tg-postbook tg-notag">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/books/img-05.jpg"
-                                                                        alt="image description"></div>
-                                        <div class="tg-backcover"><img src="images/books/img-05.jpg"
-                                                                       alt="image description"></div>
-                                    </div>
-                                    <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                        <i class="icon-heart"></i>
-                                        <span>add to wishlist</span>
-                                    </a>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <ul class="tg-bookscategories">
-                                        <li><a href="javascript:void(0);">Adventure</a></li>
-                                        <li><a href="javascript:void(0);">Fun</a></li>
-                                    </ul>
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Put The Petal To The Metal</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
-                                            Gunning</a></span>
-                                    <span class="tg-stars"><span></span></span>
-                                    <span class="tg-bookprice">
-                                        <ins>$25.18</ins>
-                                        <del>$27.20</del>
-                                    </span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                         <div class="item">
                             <div class="tg-postbook">
                                 <figure class="tg-featureimg">
@@ -389,96 +252,51 @@
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row">
                             <div class="tg-newreleasebooks">
-                                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                                    <div class="tg-postbook">
-                                        <figure class="tg-featureimg">
-                                            <div class="tg-bookimg">
-                                                <div class="tg-frontcover"><img src="images/books/img-07.jpg"
-                                                                                alt="image description"></div>
-                                                <div class="tg-backcover"><img src="images/books/img-07.jpg"
-                                                                               alt="image description"></div>
+                                <c:forEach items="${newReleaseList}" var="newRelease">
+                                        <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
+                                        <div class="tg-postbook">
+                                            <figure class="tg-featureimg">
+                                                <div class="tg-bookimg">
+                                                    <div class="tg-frontcover"><img src="<%=path%>/images/books/img-07.jpg"
+                                                                                    alt="<%=path%>/image description"></div>
+                                                    <div class="tg-backcover"><img src="<%=path%>/images/books/img-07.jpg"
+                                                                                   alt="<%=path%>/image description"></div>
+                                                </div>
+                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                                    <i class="icon-heart"></i>
+                                                    <span>add to wishlist</span>
+                                                </a>
+                                            </figure>
+                                            <div class="tg-postbookcontent">
+                                                <ul class="tg-bookscategories">
+                                                    <c:forEach items="${cateList}" var="cate">
+                                                        <c:if test="${newRelease.getCategoryID() == cate.getCategoryID()}">
+                                                              <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}">${cate.getCategoryName()}</a></li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    <c:forEach items="${genreList}" var="genre">
+                                                        <c:if test="${newRelease.getGenreID() == genre.getGenreID()}">
+                                                              <li><a href="<%=path%>/productList?genreID=${genre.getGenreID()}">${genre.getGenreName()}</a></li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </ul>
+                                                <div class="tg-booktitle">
+                                                    <h3><a href="javascript:void(0);">${newRelease.getProductName()}</a>
+                                                    </h3>
+                                                </div>
+                                                <span class="tg-bookwriter">By: 
+                                                    <c:forEach items="${authorList}" var="author">
+                                                        <c:if test="${newRelease.getAuthorID() == author.getAuthorID()}">
+                                                            <a href="<%=path%>/productList?authorID=${author.getAuthorID()}">${author.getAuthorName()}</a>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    
+                                                </span>
+                                                <span class="tg-stars"><span></span></span>
                                             </div>
-                                            <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                <i class="icon-heart"></i>
-                                                <span>add to wishlist</span>
-                                            </a>
-                                        </figure>
-                                        <div class="tg-postbookcontent">
-                                            <ul class="tg-bookscategories">
-                                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                                <li><a href="javascript:void(0);">Fun</a></li>
-                                            </ul>
-                                            <div class="tg-booktitle">
-                                                <h3><a href="javascript:void(0);">Help Me Find My Stomach</a>
-                                                </h3>
-                                            </div>
-                                            <span class="tg-bookwriter">By: <a
-                                                    href="javascript:void(0);">Kathrine
-                                                    Culbertson</a></span>
-                                            <span class="tg-stars"><span></span></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                                    <div class="tg-postbook">
-                                        <figure class="tg-featureimg">
-                                            <div class="tg-bookimg">
-                                                <div class="tg-frontcover"><img src="images/books/img-08.jpg"
-                                                                                alt="image description"></div>
-                                                <div class="tg-backcover"><img src="images/books/img-08.jpg"
-                                                                               alt="image description"></div>
-                                            </div>
-                                            <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                <i class="icon-heart"></i>
-                                                <span>add to wishlist</span>
-                                            </a>
-                                        </figure>
-                                        <div class="tg-postbookcontent">
-                                            <ul class="tg-bookscategories">
-                                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                                <li><a href="javascript:void(0);">Fun</a></li>
-                                            </ul>
-                                            <div class="tg-booktitle">
-                                                <h3><a href="javascript:void(0);">Drive Safely, No Bumping</a>
-                                                </h3>
-                                            </div>
-                                            <span class="tg-bookwriter">By: <a
-                                                    href="javascript:void(0);">Sunshine
-                                                    Orlando</a></span>
-                                            <span class="tg-stars"><span></span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4 hidden-md">
-                                    <div class="tg-postbook">
-                                        <figure class="tg-featureimg">
-                                            <div class="tg-bookimg">
-                                                <div class="tg-frontcover"><img src="images/books/img-09.jpg"
-                                                                                alt="image description"></div>
-                                                <div class="tg-backcover"><img src="images/books/img-09.jpg"
-                                                                               alt="image description"></div>
-                                            </div>
-                                            <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                <i class="icon-heart"></i>
-                                                <span>add to wishlist</span>
-                                            </a>
-                                        </figure>
-                                        <div class="tg-postbookcontent">
-                                            <ul class="tg-bookscategories">
-                                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                                <li><a href="javascript:void(0);">Fun</a></li>
-                                            </ul>
-                                            <div class="tg-booktitle">
-                                                <h3><a href="javascript:void(0);">Let The Good Times Roll Up</a>
-                                                </h3>
-                                            </div>
-                                            <span class="tg-bookwriter">By: <a
-                                                    href="javascript:void(0);">Elisabeth
-                                                    Ronning</a></span>
-                                            <span class="tg-stars"><span></span></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </c:forEach>
                             </div>
                         </div>
                     </div>

@@ -42,7 +42,7 @@
 											<div class="tg-featureditm">
 												<div class="row">
 													<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-														<figure><img src="images/img-04.png" alt="image description"></figure>
+														<figure><img src="<%=path%>/images/img-04.png" alt="image description"></figure>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 														<div class="tg-featureditmcontent">
@@ -71,7 +71,7 @@
 										<div class="row">
 											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 												<div class="tg-postbook">
-													<figure class="tg-featureimg"><img src="images/books/img-07.jpg" alt="image description"></figure>
+													<figure class="tg-featureimg"><img src="<%=path%>/images/books/img-07.jpg" alt="image description"></figure>
 													<div class="tg-postbookcontent">
 														<span class="tg-bookprice">
 															<ins>${productInfor.getSalePrice()}</ins>
@@ -116,7 +116,7 @@
                                                                                                                 <span class="tg-bookwriter">By: 
                                                                                                                     <c:forEach items="${authorList}" var="author"> 
                                                                                                                         <c:if test="${author.getAuthorID() == productInfor.getAuthorID()}">
-                                                                                                                            <a href="javascript:void(0);">${author.getAuthorName()}</a>
+                                                                                                                            <a href="<%=path%>/productList?authorID=${author.getAuthorID()}">${author.getAuthorName()}</a>
                                                                                                                         </c:if>
                                                                                                                     </c:forEach>
                                                                                                                 </span>
@@ -559,7 +559,7 @@ voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntu
 										<div class="tg-widgetcontent">
 											<ul>
                                                                                             <c:forEach items="${cateList}" var="cate">
-                                                                                                <li><a href="javascript:void(0);"><span>${cate.getCategoryName()}</span><em>28245</em></a></li>
+                                                                                                <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>28245</em></a></li>
                                                                                             </c:forEach>
 												
 											</ul>
