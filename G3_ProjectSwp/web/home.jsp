@@ -1,4 +1,7 @@
 <%@include file="templates/header.jsp" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
         <!--************************************
                         Header End
         *************************************-->
@@ -45,7 +48,10 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="tg-bestsellingbooksslider"
                                  class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
-                                <div class="item">
+
+                                <c:forEach items="${productList}" var="product">
+                                    <div class="item">
+
                                     <div class="tg-postbook">
                                         <figure class="tg-featureimg">
                                             <div class="tg-bookimg">
@@ -61,19 +67,23 @@
                                         </figure>
                                         <div class="tg-postbookcontent">
                                             <ul class="tg-bookscategories">
-                                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                                <li><a href="javascript:void(0);">Fun</a></li>
+
+                                                <li><a href="javascript:void(0);"></a></li>
+                                                <li><a href="javascript:void(0);">${product.getFormat()}</a></li>
                                             </ul>
                                             <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                             <div class="tg-booktitle">
-                                                <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
+                                                <h3><a href="javascript:void(0);">${product.getProductName()}</a></h3>
+
                                             </div>
                                             <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
                                                     Gunning</a></span>
                                             <span class="tg-stars"><span></span></span>
                                             <span class="tg-bookprice">
-                                                <ins>$25.18</ins>
-                                                <del>$27.20</del>
+
+                                                <ins>${product.getSalePrice()}</ins>
+                                                <del>${product.getCoverPrice()}</del>
+
                                             </span>
                                             <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                                 <i class="fa fa-shopping-basket"></i>
@@ -82,6 +92,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                </c:forEach>
+
                                 <div class="item">
                                     <div class="tg-postbook">
                                         <figure class="tg-featureimg">
@@ -103,7 +116,10 @@
                                             </ul>
                                             <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                             <div class="tg-booktitle">
-                                                <h3><a href="javascript:void(0);">Drive Safely, No Bumping</a></h3>
+
+                                                <h3><a href="<%=path%>/account/cart?proID=1">Drive Safely, No Bumping</a></h3>
+
+                                                
                                             </div>
                                             <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela
                                                     Gunning</a></span>
