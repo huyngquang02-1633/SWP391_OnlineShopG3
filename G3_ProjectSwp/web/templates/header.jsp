@@ -22,16 +22,14 @@
         <link rel="stylesheet" href="<%=path%>/css/main.css">
         <link rel="stylesheet" href="<%=path%>/css/color.css">
         <link rel="stylesheet" href="<%=path%>/css/responsive.css">
-<<<<<<< HEAD
+
         <link href="<%=path%>/css/styles.css" rel="stylesheet" type="text/css"/>
         <link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-=======
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
->>>>>>> 48bc278600b399a290241b3beed73c47ad790499
 
 
     <div id="fb-root"></div>
