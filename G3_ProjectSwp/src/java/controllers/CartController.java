@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import DAL.ProductDAO;
 import jakarta.servlet.annotation.WebServlet;
+import java.util.Enumeration;
+import javax.mail.Session;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,14 +35,40 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int proID = Integer.parseInt(req.getParameter("proID"));
-        try {
-            CartDAO cartDAO = new CartDAO();
-            cartDAO.addToCart(new Cart(1, proID, 4));
-        } catch (Exception e) {
-            req.setAttribute("addToCartFail", "add this product to cart fail!");
+
+        Enumeration<String> enumeration = req.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String parameterName = (String) enumeration.nextElement();
+            if (parameterName.equals("proID")) {
+                req.getSession().setAttribute("mode", 1);
+            }
+            if (parameterName.equals("dddlCategory")) {
+                req.getSession().setAttribute("mode", 2);
+            }
         }
-        req.getRequestDispatcher("../productDetail").forward(req, resp);
+        
+        if(req.getSession().getAttribute("mode") != null){
+            if((int) req.getSession().getAttribute("mode") == 1){
+                req.getSession().removeAttribute("mode");
+                int proID = Integer.parseInt(req.getParameter("proID"));
+                try {
+                    CartDAO cartDAO = new CartDAO();
+                    cartDAO.addToCart(new Cart(1, proID, 4));
+                } catch (Exception e) {
+                    req.setAttribute("addToCartFail", "add this product to cart fail!");
+                }
+                req.getRequestDispatcher("../productDetail").forward(req, resp);
+            }
+            
+        }else{
+            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(1);
+            ArrayList<Product> productList = new ProductDAO().getProducts(false);
+            
+            req.setAttribute("cartList", cartList);
+            req.setAttribute("productList", productList);
+            req.getRequestDispatcher("/viewcart.jsp").forward(req, resp);
+        }
+
     }
 
 }

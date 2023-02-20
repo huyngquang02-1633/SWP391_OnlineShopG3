@@ -91,4 +91,10 @@ public class CartDAO extends DBContext{
         }
         return result>0;
     }
+
+    public static void main(String[] args) {
+            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(1);
+            System.out.println(cartList.get(0).getAccountID());
+    }
+
 }

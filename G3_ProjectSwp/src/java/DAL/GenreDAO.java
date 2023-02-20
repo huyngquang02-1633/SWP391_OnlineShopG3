@@ -17,7 +17,7 @@ public class GenreDAO extends DBContext{
             while (rs.next()) {
                 int GenreID = rs.getInt("GenreID");
                 String GenreName = rs.getString("GenreName");
-                genreList.add(new Genre(GenreID, GenreName));
+                genreList.add(new Genre(GenreID,GenreName));
             }
         } catch (Exception e) {
         }

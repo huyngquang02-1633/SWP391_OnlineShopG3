@@ -39,7 +39,10 @@ public class ProductDetailController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Product product = new ProductDAO().getProductInfor(1);
+
+        int proID = Integer.parseInt(req.getParameter("proID"));
+        Product product = new ProductDAO().getProductInfor(proID);
+
         ArrayList<Category> cateList = new CategoryDAO().getCategory();
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
