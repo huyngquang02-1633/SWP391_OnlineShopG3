@@ -45,6 +45,10 @@ public class OrderManage_admin extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("AccAdminSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
         OrderDAO dao = new OrderDAO();
         ArrayList<Order> ArrayList = dao.getAllOrders();
         req.setAttribute("listOrder", ArrayList);

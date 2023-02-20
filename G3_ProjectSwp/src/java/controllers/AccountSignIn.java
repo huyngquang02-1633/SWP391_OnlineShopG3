@@ -9,16 +9,55 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import DAL.AccountDAO;
 import DAL.CustomerDAO;
-
+import jakarta.servlet.annotation.WebServlet;
+@WebServlet(name = "AccountSignUp", urlPatterns = {"/account/login"})
 public class AccountSignIn extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       
+       if(req.getSession().getAttribute("AccAdminSession")!=null){
+            req.getSession().removeAttribute("AccAdminSession");
+            resp.sendRedirect("../homepage");
+        }else{
+            req.getRequestDispatcher("../login.jsp").forward(req, resp);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String txtEmail = req.getParameter("txtEmail");
+        String txtPassword = req.getParameter("txtPassword");
+        String msgEmail = "", msgPass="";
+        
+        if (txtEmail.equals("")) {
+            msgEmail = "Email is required";
+            req.setAttribute("msgEmail", msgEmail);
+        }
+        if(txtEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")==false && (!txtEmail.equals(""))){
+            msgEmail = "Format Email is wrong!";
+            req.setAttribute("msgEmail", msgEmail);
+        }
+        if(txtPassword.equals("")){
+            msgPass = "Password is required";
+            req.setAttribute("msgPass", msgPass);
+        }
+        
+        if(!msgEmail.equals("") || !msgPass.equals("")){
+            req.getRequestDispatcher("../login.jsp").forward(req, resp);
+        }else{
+            Account acc = new AccountDAO().getAccount(txtEmail, txtPassword);
+            if (acc!=null) {
+                if(acc.getRole()==1){
+                    req.getSession().setAttribute("AccAdminSession", acc);
+                    resp.sendRedirect(req.getContextPath()+"/dashboard_admin");
+                }else if(acc.getRole()==2){
+                    
+                }
+            }else{
+                req.setAttribute("msg", "This account does not exist");
+                req.getRequestDispatcher("../login.jsp").forward(req, resp);
+            }
+        }
         
     }
     
