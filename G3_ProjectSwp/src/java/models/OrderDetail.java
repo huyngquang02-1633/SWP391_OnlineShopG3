@@ -25,6 +25,10 @@ public class OrderDetail {
         this.DiscountID = DiscountID;
     }
 
+    public OrderDetail(int OrderID, int ProductID, int Quantity, double SalePrice, double Discount) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     public int getOrderID() {
         return OrderID;
