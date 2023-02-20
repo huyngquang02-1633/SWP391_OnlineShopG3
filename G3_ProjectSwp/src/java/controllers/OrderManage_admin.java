@@ -42,6 +42,7 @@ public class OrderManage_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         PaginationObject paging = new PaginationObject();
         int currentPage = 1;
         if (req.getParameter("currentPage") != null) {
@@ -138,6 +139,15 @@ public class OrderManage_admin extends HttpServlet {
         req.getSession().setAttribute("currentPage", currentPage);
         req.getSession().setAttribute("orderList", orderList);
         req.setAttribute("listInCurrentPage", listInCurrentPage);
+
+
+        //if(req.getSession().getAttribute("AccAdminSession")==null){
+            //resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            //return;
+        //}
+        //OrderDAO dao = new OrderDAO();
+        //ArrayList<Order> ArrayList = dao.getAllOrders();
+        //req.setAttribute("listOrder", ArrayList);
 
         req.getRequestDispatcher("order.jsp").forward(req, resp);
     }

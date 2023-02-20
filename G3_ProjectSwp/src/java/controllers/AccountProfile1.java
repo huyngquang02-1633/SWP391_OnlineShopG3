@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.CustomerDAO;
 import models.Account;
 import models.Order;
 import models.OrderDetail;
@@ -21,6 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import java.sql.Date;
+import models.Customer;
 
 /**
  *
@@ -36,8 +39,11 @@ public class AccountProfile1 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        
+        Customer customer = new CustomerDAO().getCustomerByID(10);
+        req.setAttribute("customer", customer);
+//            req.setAttribute("account", account);
+
+        req.getRequestDispatcher("../profile_edit.jsp").forward(req, resp);
     }
 
 }

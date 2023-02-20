@@ -181,10 +181,11 @@
     <!--************************************
                     Footer End
     *************************************-->
-</div>
+
 <!--************************************
                 Wrapper End
 *************************************-->
+
 <script src="js/vendor/jquery-library.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
@@ -197,7 +198,6 @@
 <script src="js/appear.js"></script>
 <script src="js/gmap3.js"></script>
 <script src="js/main.js"></script>
-<script src="js/javascript.js"></script>
 </body>
 
 </html>
