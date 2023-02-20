@@ -37,10 +37,6 @@ window.fbAsyncInit = function () {
 function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me?fields=email,name,picture', function (response) {
-        //      console.log('Successful login for: ' + response.name);
-
-//        document.getElementById('status').innerHTML =
-//                'Thanks for logging in, ' + response.name + '!';
 
         let name = response.name;
         let email = response.email;
@@ -54,23 +50,14 @@ function testAPI() {                      // Testing Graph API after login.  See
         };
 
         let convertuserData = JSON.stringify(userData);
-        localStorage.setItem('userlogin', convertuserData);
-        window.location.href = "./home.jsp";
+
+//        localStorage.setItem('userlogin', convertuserData);
+        sessionStorage.setItem('userlogin', convertuserData);
+        window.location.href = "./index.jsp";
 
 //        document.getElementById('nameprofile').innerHTML = response.name;
 //
 //        document.getElementById("imgprofile").src = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=" + response.id + "&height=50&width=50&ext=1679128895&hash=AeTUdjLLENIW-ySdbEQ";
-
-//        function getData() {
-//            let userGetData = localStorage.getItem('userlogin');
-//            let convertValue = JSON.parse(userGetData);
-//
-//            document.getElementById('nameprofile').innerHTML = convertValue.name;
-//            document.getElementById("imgprofile").src = convertValue.avt;
-//        }
-
-        getData();
-
 
     });
 }
@@ -78,14 +65,12 @@ function testAPI() {                      // Testing Graph API after login.  See
 function handleCredentialResponse(response) {
 
     const responsePayload = decodeJwtResponse(response.credential);
-//    console.log(response);
-//    console.log(responsePayload);
-    console.log("ID" + responsePayload.sub);
-    console.log('Name: ' + responsePayload.name);
-    console.log('Given Name: ' + responsePayload.given_name);
-    console.log('Family Name: ' + responsePayload.family_name);
-    console.log("Email" + responsePayload.email);
-    console.log("Picture " + responsePayload.picture);
+//    console.log("ID" + responsePayload.sub);
+//    console.log('Name: ' + responsePayload.name);
+//    console.log('Given Name: ' + responsePayload.given_name);
+//    console.log('Family Name: ' + responsePayload.family_name);
+//    console.log("Email" + responsePayload.email);
+//    console.log("Picture " + responsePayload.picture);
 
 //    document.getElementById('nameprofile').innerHTML = responsePayload.name;
 //    document.getElementById('imgprofile').src = responsePayload.picture;
@@ -102,8 +87,9 @@ function handleCredentialResponse(response) {
     };
 
     let convertuserData = JSON.stringify(userData);
-    localStorage.setItem('userlogin', convertuserData);
-    window.location.href = "./home.jsp";
+//    localStorage.setItem('userlogin', convertuserData);
+    sessionStorage.setItem('userlogin', convertuserData);
+    window.location.href = "./index.jsp";
 
 }
 

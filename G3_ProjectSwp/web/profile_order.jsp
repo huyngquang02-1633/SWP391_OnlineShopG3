@@ -13,10 +13,19 @@
                         </div>
 
                         <ul class="nav nav-pills nav-stacked">
+<<<<<<< HEAD
                             <li><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
                             <li  class="active"><a href="#"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
                             <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
 
+=======
+
+                            <li class="active"><a href="<%=path%>/account/profile"> <i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="<%=path%>/account/profile_myOrder"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
+                            <li><a href="<%=path%>/account/profile"> <i class="fa fa-edit"></i> Edit profile</a></li>
+
+                            <li><a href="#"> <i class="glyphicon glyphicon-plane"></i> Ship Address</a></li>
+>>>>>>> 48bc278600b399a290241b3beed73c47ad790499
                         </ul>
                     </div>
                 </div>
@@ -31,8 +40,10 @@
                                         </div>
                                         <div class="card-body p-4">
                                             <c:forEach items="${orderList}" var="odList">
-                                                <div class="card shadow-0 border mb-4" style="border: 1px solid grey;">
-                                                    <div style="margin: 10px 0px; background-color: pink; " >
+
+                                                <div class="card shadow-0 border mb-4" style="border: 1px solid grey; border-radius: 10px; margin-bottom: 20px;">
+                                                    <div style="margin: 0px 0px 10px 0px; background-color: pink; padding: 10px; border-radius: 10px;" >
+
                                                         <span style="margin: 0px 100px 0px 0px;">OrderID: ${odList.getOrderID()}</span>
                                                         <span style="margin: 0px 100px;">Order date: ${odList.getOrderDate()}</span>
                                                         <c:choose>
@@ -46,17 +57,19 @@
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <div class="col-md-2">
-                                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
+
+                                                                        <img src="<%=path%>/images/books/img-04.jpg"
                                                                              class="img-fluid" alt="Phone">
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0">${odDetailList.getProductID()}</p>
+                                                                        <p class="text-muted mb-0">ID: ${odDetailList.getProductID()}</p>
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0 small">White</p>
+                                                                        <p class="text-muted mb-0 small">Vietnamese</p>
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0 small">Capacity: 64GB</p>
+                                                                        <p class="text-muted mb-0 small"></p>
+
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                         <p class="text-muted mb-0 small">Qty: ${odDetailList.getQuantity()}</p>
@@ -75,32 +88,7 @@
                                                 </div>
 
                                             </c:forEach>
-                                            <div class="card shadow-0 border mb-4">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
-                                                                 class="img-fluid" alt="Phone">
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0">iPad</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Pink rose</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Capacity: 32GB</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Qty: 1</p>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">$399</p>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
-                                                </div>
-                                            </div>
+
 
                                             <div class="d-flex justify-content-between pt-2">
                                                 <p class="fw-bold mb-0">Order Details</p>
