@@ -1,4 +1,5 @@
 <%@include file="templates/header.jsp" %>
+<link rel="stylesheet" href="<%=path%>/css/profile.css">  
         <div class="container bootstrap snippets bootdey">
             <div class="row">
                 <div class="profile-nav col-md-3">
@@ -12,12 +13,19 @@
                         </div>
 
                         <ul class="nav nav-pills nav-stacked">
+<<<<<<< HEAD
+                            <li><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                            <li  class="active"><a href="#"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
+                            <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+
+=======
 
                             <li class="active"><a href="<%=path%>/account/profile"> <i class="fa fa-user"></i> Profile</a></li>
                             <li><a href="<%=path%>/account/profile_myOrder"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
                             <li><a href="<%=path%>/account/profile"> <i class="fa fa-edit"></i> Edit profile</a></li>
 
                             <li><a href="#"> <i class="glyphicon glyphicon-plane"></i> Ship Address</a></li>
+>>>>>>> 48bc278600b399a290241b3beed73c47ad790499
                         </ul>
                     </div>
                 </div>
