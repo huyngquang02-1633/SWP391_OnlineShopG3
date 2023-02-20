@@ -1,4 +1,5 @@
 <%@include file="templates/header.jsp" %>
+<link rel="stylesheet" href="<%=path%>/css/profile.css">    
 <c:set var="a" value="${account}" />
 <c:set var="c" value="${customer}" />        
 <div class="container bootstrap snippets bootdey">
@@ -14,19 +15,17 @@
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
-
                     <li class="active"><a href="<%=path%>/account/profile"> <i class="fa fa-user"></i> Profile</a></li>
                     <li><a href="<%=path%>/account/profile_myOrder"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
                     <li><a href="<%=path%>/account/profile"> <i class="fa fa-edit"></i> Edit profile</a></li>
 
-                    <li><a href="#"> <i class="glyphicon glyphicon-plane"></i> Ship Address</a></li>
                 </ul>
             </div>
         </div>
         <div class="profile-info col-md-9">
             <div class="panel">
                 <div class="bio-graph-heading">
-                    Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna metus.
+                    Personal Information
                 </div>
                 <div class="panel-body bio-graph-info">
                     <h1>Bio Graph</h1>
@@ -53,10 +52,9 @@
                             <p><span>Create Date </span>: ${c.getCreateDate()}</p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Gender </span>: ${c.isGender()}</p>
+                            <p><span>Gender </span>: Male</p>
                         </div>
-
-                        <a href="<%=path%>/profile_edit.jsp"><i class="fa fa-edit"></i> Edit Profile</a>          
+                        <a href="<%=path%>/account/profile1"><i class="fa fa-edit"></i> Edit Profile</a>          
 
                     </div>
                 </div>
