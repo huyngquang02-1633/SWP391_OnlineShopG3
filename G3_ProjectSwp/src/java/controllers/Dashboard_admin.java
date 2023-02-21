@@ -34,6 +34,10 @@ public class Dashboard_admin extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("AccAdminSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
         LocalDate today = LocalDate.now();
         
         ArrayList<Order> OrderInCurrentMonth = new OrderDAO().getOrderByCurrentMonth(today.getMonthValue());

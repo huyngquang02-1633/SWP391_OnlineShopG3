@@ -88,7 +88,18 @@ public class ProductList_Customer extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      
+        String txtSearch = req.getParameter("txtSearch");
+        ArrayList<Product> productList = new ProductDAO().getProductbySearch(txtSearch);
+        ArrayList<Category> cateList = new CategoryDAO().getCategory();
+        ArrayList<Genre> genreList = new GenreDAO().getGenreList();
+        ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
+        
+        req.setAttribute("productList", productList);
+        req.setAttribute("cateList", cateList);
+        req.setAttribute("genreList", genreList);
+        req.setAttribute("authorList", authorList);
+        req.getRequestDispatcher("/products.jsp").forward(req, resp);
+        
     }
     
     

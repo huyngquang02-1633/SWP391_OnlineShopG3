@@ -108,6 +108,33 @@ public class OrderDAO extends DBContext{
         return orderList;
     }
     
+    public ArrayList<OrderDetail> getDetailOfOrderByOdID(int OdID) {
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
+        try {
+            String sql = "select * from [Order Details] where OrderID=?";
+            //b2 tao doi tuong nhe
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, OdID);
+            //b3thuc thi truy van
+            ResultSet rs = ps.executeQuery();
+            
+            //b4 xu ly kqua tra ve
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                int WarehouseID = rs.getInt("WarehouseID");
+                int Quantity = rs.getInt("Quantity");
+                double SalePrice = rs.getDouble("SalePrice");
+                double Discount = rs.getDouble("Discount");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, SalePrice, Discount);
+                orderDetails.add(od);
+            }
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return orderDetails;
+    }
     
     
     public ArrayList<Order> getOrderInRange(String fromDate, String toDate) {

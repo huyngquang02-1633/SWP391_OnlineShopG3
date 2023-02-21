@@ -33,7 +33,13 @@ public class ProductManage_admin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        if(req.getSession().getAttribute("AccAdminSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
+        List<Product> productList=new ProductDAO().getProducts(true);
+        req.setAttribute("productList", productList);
+        req.getRequestDispatcher("product.jsp").forward(req, resp);
     }
 
 }

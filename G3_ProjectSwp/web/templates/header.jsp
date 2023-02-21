@@ -22,6 +22,11 @@
         <link rel="stylesheet" href="<%=path%>/css/main.css">
         <link rel="stylesheet" href="<%=path%>/css/color.css">
         <link rel="stylesheet" href="<%=path%>/css/responsive.css">
+
+        <link href="<%=path%>/css/styles.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -152,10 +157,10 @@
                         </div>
                     </div>
                     <div class="tg-searchbox">
-                        <form class="tg-formtheme tg-formsearch">
+                        <form class="tg-formtheme tg-formsearch" method="POST" action="<%=path%>/productList">
                             <fieldset>
-                                <input type="text" name="search" class="typeahead form-control"
-                                       placeholder="Search by Title, Author, Keyword, ISBN">
+                                <input type="text" name="txtSearch" class="typeahead form-control"
+                                       placeholder="Search by Title, Author">
                                 <button type="submit"><i class="icon-magnifier"></i></button>
                             </fieldset>
                         </form>
@@ -187,7 +192,7 @@
                                         <ul class="tg-themetabnav" role="tablist">
                                             <c:forEach items="${cateList}" var="cate">
                                                 <li role="presentation" class="active">
-                                                    <a href="#" aria-controls="artandphotography"
+                                                    <a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}" aria-controls="artandphotography"
                                                        role="tab" data-toggle="tab">${cate.getCategoryName()}</a>
                                                 </li>
                                             </c:forEach>
