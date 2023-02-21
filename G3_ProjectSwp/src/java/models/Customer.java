@@ -21,8 +21,20 @@ public class Customer {
     private String PhoneNumber;
     private Date CreateDate;
 
+    
     public Customer() {
     }
+
+    public Customer(int CustomerID, String FirstName, String LastName, String ContactTitle, String Address, String PhoneNumber) {
+        this.CustomerID = CustomerID;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.ContactTitle = ContactTitle;
+        this.Address = Address;
+        this.PhoneNumber = PhoneNumber;
+    }
+    
+    
 
     public Customer(int CustomerID, String Firstname, String LastName, String ContactTitle, String Address) {
         

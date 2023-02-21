@@ -54,8 +54,10 @@
                                     <td>Smart Phone</td>
                                     <td>false</td>
                                     <td>
+                                        <div style="display: flex">
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -67,8 +69,10 @@
                                     <td>Smart Phone</td>
                                     <td>false</td>
                                     <td>
+                                        <div style="display: flex">
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -80,8 +84,10 @@
                                     <td>Labtop</td>
                                     <td>false</td>
                                     <td>
+                                        <div style="display: flex">
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -93,8 +99,10 @@
                                     <td>Labtop</td>
                                     <td>false</td>
                                     <td>
+                                        <div style="display: flex">
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -106,8 +114,10 @@
                                     <td>Electronic</td>
                                     <td>false</td>
                                     <td>
+                                        <div style="display: flex">
                                         <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                               </table>

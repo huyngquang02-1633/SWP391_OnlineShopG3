@@ -52,7 +52,7 @@
                             <p><span>Create Date </span>: ${c.getCreateDate()}</p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Gender </span>: Male</p>
+                            <p><span>Gender </span>: ${c.isGender()==true?"Male":"Female"}</p>
                         </div>
                         <a href="<%=path%>/account/profile1"><i class="fa fa-edit"></i> Edit Profile</a>          
 

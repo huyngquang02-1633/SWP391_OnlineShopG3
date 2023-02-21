@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AccountDAO;
 import DAL.CustomerDAO;
 import models.Account;
 import models.Order;
@@ -34,16 +35,36 @@ public class AccountProfile1 extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String firstName = req.getParameter("txtFirstName");
+        String lastName = req.getParameter("txtLastName");
+        String address = req.getParameter("txtAddress");
+        String contactTitle = req.getParameter("txtContactTitle");
+//        Date birthday = req.getParameter("txtBirthday");
+        String Phone = req.getParameter("txtPhone");
+//        Date creatDate = req.getParameter("txtCreatDate");
+//        Boolean gender = req.getParameter("txtGender");
+        int customerID = req.getIntHeader("txtCustomerID");
+
+        Customer cus = new Customer(1, firstName, lastName, contactTitle, address, Phone);
+//        customer.setCustomerID(customerID);
+//        customer.setFirstName(firstName);
+//        customer.setLastName(lastName);
+//        customer.setContactTitle(contactTitle);
+//        customer.setAddress(address);
+//        customer.setPhoneNumber(Phone);
         
+        new AccountDAO().editInfo(cus);
+        
+        req.getRequestDispatcher("../profile.jsp").forward(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Customer customer = new CustomerDAO().getCustomerByID(10);
+        Customer customer = new CustomerDAO().getCustomerByID(1);
         req.setAttribute("customer", customer);
 //            req.setAttribute("account", account);
 
-        req.getRequestDispatcher("../profile_edit.jsp").forward(req, resp);
+        req.getRequestDispatcher("/profile_edit.jsp").forward(req, resp);
     }
 
 }
