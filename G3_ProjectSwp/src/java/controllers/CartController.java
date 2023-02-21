@@ -53,7 +53,7 @@ public class CartController extends HttpServlet {
                 int proID = Integer.parseInt(req.getParameter("proID"));
                 try {
                     CartDAO cartDAO = new CartDAO();
-                    cartDAO.addToCart(new Cart(1, proID, 4));
+                    cartDAO.addToCart(new Cart(1, proID, 1));
                 } catch (Exception e) {
                     req.setAttribute("addToCartFail", "add this product to cart fail!");
                 }

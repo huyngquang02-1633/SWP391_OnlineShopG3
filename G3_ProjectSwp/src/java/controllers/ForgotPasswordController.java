@@ -22,7 +22,8 @@ public class ForgotPasswordController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String email = req.getParameter("txtEmail");
+        String email = req.getParameter("txtEmail");
+        req.getSession().setAttribute("emailSession", email);
         String msg = "";
         if (email.equals("")) {
             msg += "Email is required";

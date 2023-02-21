@@ -37,7 +37,7 @@
             <div id="dashboard-2">
                 <div id="chart" style="text-align: center;">
                     <div id="chart1">
-                        <h3>Statistic Orders (Month)</h3>
+                        <h3>Statistic Revenue (Month)</h3>
                         <canvas id="myChart1" style="width: 100%;"></canvas>
                     </div>
                     <div id="chart2">

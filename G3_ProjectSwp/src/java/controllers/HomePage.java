@@ -43,12 +43,14 @@ public class HomePage extends HttpServlet {
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Product> newReleaseList = new ProductDAO().getNewReleaseList(3);
+        Product comingSoon = new ProductDAO().getComingSoon();
         
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);
         req.setAttribute("genreList", genreList);
         req.setAttribute("authorList", authorList);
         req.setAttribute("newReleaseList", newReleaseList);
+        req.setAttribute("comingSoon", comingSoon);
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 

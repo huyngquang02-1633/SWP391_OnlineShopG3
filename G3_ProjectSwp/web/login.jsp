@@ -49,9 +49,9 @@
                 <p class="small">or use your email account:</p>
                 <form id="sign-in-form" method="POST" action="<%=path%>/account/login">    
                     <c:if test="${msgEmail!=null}"><div style="color: red;">${msgEmail}</div></c:if>
-                    <input type="email" placeholder="Email" name="txtEmail"/>
+                    <input type="email" placeholder="Email" name="txtEmail" value="${emailSession}"/>
                     <c:if test="${msgPass!=null}"><div style="color: red;">${msgPass}</div></c:if>
-                    <input type="password" placeholder="Password" name="txtPassword"/>
+                    <input type="password" placeholder="Password" name="txtPassword" value="${passwordSession}"/>
                     <p class="forgot-password"><a href="<%=path%>/account/forgotpass">Forgot your password?</a></p>
                     <button class="control-button in">Sign In</button>
                     <c:if test="${msg!=null}"><div style="color: red;">${msg}</div></c:if>
