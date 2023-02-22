@@ -60,7 +60,7 @@ public class AccountProfile1 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Customer customer = new CustomerDAO().getCustomerByID(1);
+        Customer customer = new CustomerDAO().getCustomerByID(2);
         req.setAttribute("customer", customer);
 //            req.setAttribute("account", account);
 

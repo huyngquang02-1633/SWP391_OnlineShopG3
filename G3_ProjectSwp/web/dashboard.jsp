@@ -58,9 +58,9 @@
                             <b>From</b>: <input type="date" name="txtStartOrderDate"/> <br>
                             <b>To</b>: <input type="date" name="txtEndOrderDate"/>
                             <input type="submit" value="Filter">
-                        </form>
+                            </form> 
 
-                    </div>
+                        </div>
 
                 </div>
             </div>
