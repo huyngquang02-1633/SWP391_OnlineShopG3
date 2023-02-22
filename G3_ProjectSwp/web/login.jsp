@@ -47,11 +47,14 @@
                     </div>
                 </div>
                 <p class="small">or use your email account:</p>
-                <form id="sign-in-form">      
-                    <input type="email" placeholder="Email"/>
-                    <input type="password" placeholder="Password"/>
-                    <p class="forgot-password">Forgot your password?</p>
+                <form id="sign-in-form" method="POST" action="<%=path%>/account/login">    
+                    <c:if test="${msgEmail!=null}"><div style="color: red;">${msgEmail}</div></c:if>
+                    <input type="email" placeholder="Email" name="txtEmail"/>
+                    <c:if test="${msgPass!=null}"><div style="color: red;">${msgPass}</div></c:if>
+                    <input type="password" placeholder="Password" name="txtPassword"/>
+                    <p class="forgot-password"><a href="<%=path%>/account/forgotpass">Forgot your password?</a></p>
                     <button class="control-button in">Sign In</button>
+                    <c:if test="${msg!=null}"><div style="color: red;">${msg}</div></c:if>
                 </form>
             </div>
             <div class="sign-up" id="sign-up-info">

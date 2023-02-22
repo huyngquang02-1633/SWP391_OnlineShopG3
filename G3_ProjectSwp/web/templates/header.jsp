@@ -157,10 +157,10 @@
                         </div>
                     </div>
                     <div class="tg-searchbox">
-                        <form class="tg-formtheme tg-formsearch">
+                        <form class="tg-formtheme tg-formsearch" method="POST" action="<%=path%>/productList">
                             <fieldset>
-                                <input type="text" name="search" class="typeahead form-control"
-                                       placeholder="Search by Title, Author, Keyword, ISBN">
+                                <input type="text" name="txtSearch" class="typeahead form-control"
+                                       placeholder="Search by Title, Author">
                                 <button type="submit"><i class="icon-magnifier"></i></button>
                             </fieldset>
                         </form>
@@ -192,7 +192,7 @@
                                         <ul class="tg-themetabnav" role="tablist">
                                             <c:forEach items="${cateList}" var="cate">
                                                 <li role="presentation" class="active">
-                                                    <a href="#" aria-controls="artandphotography"
+                                                    <a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}" aria-controls="artandphotography"
                                                        role="tab" data-toggle="tab">${cate.getCategoryName()}</a>
                                                 </li>
                                             </c:forEach>

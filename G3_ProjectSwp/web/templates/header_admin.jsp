@@ -23,7 +23,7 @@
             </div>
             <div id="banner-admin">
                 <ul>
-                    <li><a href="<%=path%>/account/signin">SignOut</a></li>
+                    <li><a href="<%=path%>/account/login">SignOut</a></li>
                 </ul>
             </div>
         </div>
