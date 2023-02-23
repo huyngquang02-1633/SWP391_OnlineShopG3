@@ -32,7 +32,7 @@ public class AccountProfile extends HttpServlet {
 //        if (req.getSession().getAttribute("AccSession") != null) {
 //            Account a = (Account) req.getSession().getAttribute("AccSession");
 //            Account account = new AccountDAO().getAccountByEmail(a.getEmail());
-            Customer customer = new CustomerDAO().getCustomerByID(10);
+            Customer customer = new CustomerDAO().getCustomerByID(1);
             req.setAttribute("customer", customer);
 //            req.setAttribute("account", account);
 

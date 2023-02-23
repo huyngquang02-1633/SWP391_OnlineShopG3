@@ -13,6 +13,10 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+.nav a{
+    font-weight: 500;
+}
+
 .profile-nav, .profile-info{
     margin-top:30px;
 }
@@ -92,7 +96,7 @@ body {
 }
 
 .r-activity {
-    margin: 6px 0 0;
+    margin: 10px;
     font-size: 12px;
 }
 
@@ -119,11 +123,11 @@ body {
     color: #fff;
     text-align: center;
     font-style: italic;
-    padding: 40px 110px;
+    padding: 10px;
     border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 14px;
 }
 
 .bio-graph-info {
@@ -148,6 +152,22 @@ body {
 
 }
 
+.bio-row input{
+    width: 60%;
+    height: 28px;
+    /* width: 100%; */
+    /* background-color: brown; */
+    /* color: #fff; */
+    /* margin-bottom: 15px; */
+    line-height: 40px;
+    border-radius: 5px;
+    /* border: none; */
+    box-shadow: 1px 2px #77b748;
+    border-color: #666;
+    border: #77b748;
+    border-radius: 6px;
+}
+
 .bio-row p span {
     width: 100px;
     display: inline-block;
@@ -165,13 +185,13 @@ body {
 /*.bio-desk {
     width: 60%;
 }*/
-.panel-body a{
-    padding: 5px;
+.panel-body a, .panel-body input[type="submit"]{
+    padding: 6px;
     display: flex;
     margin: auto;
     width: 110px;
     border: solid 1px #bcb3aa;
-    border-radius: 10%;
+    border-radius: 8px;
     justify-content: center;
     color: white;
     background-color: #77b748
@@ -235,6 +255,28 @@ ul.summary-list > li  {
 
 ul.summary-list > li:last-child  {
     border-right: none;
+}
+
+img {
+    margin: 6px;
+}
+
+.odt-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background: #a8729a;
+    color: aliceblue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-footer{
+    color: white;
+    padding: 8px 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 20px;
+
 }
 
 /*.activity {
