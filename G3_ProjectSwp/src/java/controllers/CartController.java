@@ -36,6 +36,10 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if(req.getSession().getAttribute("AccCustomerSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
         Enumeration<String> enumeration = req.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String parameterName = (String) enumeration.nextElement();

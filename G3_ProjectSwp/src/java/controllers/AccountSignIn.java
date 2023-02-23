@@ -16,10 +16,13 @@ public class AccountSignIn extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       if(req.getSession().getAttribute("AccAdminSession")!=null){
+       if(req.getSession().getAttribute("AccAdminSession")!=null && req.getSession().getAttribute("AccCustomerSession")==null){
             req.getSession().removeAttribute("emailSession");
             req.getSession().removeAttribute("passwordSession");
             req.getSession().removeAttribute("AccAdminSession");
+            resp.sendRedirect("../homepage");
+        }else if(req.getSession().getAttribute("AccAdminSession")==null && req.getSession().getAttribute("AccCustomerSession")!=null){
+            req.getSession().removeAttribute("AccCustomerSession");
             resp.sendRedirect("../homepage");
         }else{
             req.getRequestDispatcher("../login.jsp").forward(req, resp);

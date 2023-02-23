@@ -89,7 +89,7 @@ function handleCredentialResponse(response) {
     let convertuserData = JSON.stringify(userData);
 //    localStorage.setItem('userlogin', convertuserData);
     sessionStorage.setItem('userlogin', convertuserData);
-    window.location.href = "./index.jsp";
+    window.location.href = "./homepage";
 
 }
 
