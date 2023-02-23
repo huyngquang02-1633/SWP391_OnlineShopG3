@@ -40,8 +40,10 @@ public class AccountProfile2 extends HttpServlet {
             resp.sendRedirect(req.getContextPath()+"/404error.jsp");
             return;
         }
-        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(1);
-        ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(1);
+        Account accCustomer = (Account)req.getSession().getAttribute("AccCustomerSession");
+        
+        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(accCustomer.getCustomerID());
+        ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(accCustomer.getCustomerID());
         
         req.setAttribute("orderList", orderList);
         req.setAttribute("orderDetailList", orderDetailList);

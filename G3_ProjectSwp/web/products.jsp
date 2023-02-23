@@ -137,7 +137,11 @@
                                                         <ins>${product.getSalePrice()}</ins>
                                                         <del>${product.getCoverPrice()}</del>
                                                     </span>
-                                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                                        <c:url value="/account/cart" var="AddToCart">
+                                                            <c:param name="previousURL" value="../productList" />
+                                                            <c:param name="proID" value="${product.getProductID()}" />
+                                                        </c:url>
+                                                    <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                                         <i class="fa fa-shopping-basket"></i>
                                                         <em>Add To Basket</em>
                                                     </a>

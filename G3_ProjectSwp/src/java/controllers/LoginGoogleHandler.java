@@ -41,7 +41,7 @@ public class LoginGoogleHandler extends HttpServlet {
 			throws ServletException, IOException {
 		String code = request.getParameter("code");
 		String accessToken = getToken(code);
-		UserGoogleDto userGoogle = getUserInfo(accessToken);
+		UserGoogleDto userGoogle = getUserInfo(accessToken);  request.getSession().setAttribute("userGoogle", userGoogle);
 		//System.out.println(user);
                 AccountDAO accDAO = new AccountDAO();
                 Account AccCustomer = accDAO.getAccountByEmail(userGoogle.getEmail());

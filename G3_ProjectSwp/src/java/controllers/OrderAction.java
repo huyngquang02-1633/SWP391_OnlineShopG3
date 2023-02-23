@@ -46,11 +46,14 @@ public class OrderAction extends HttpServlet {
         String txtPhoneNumber = req.getParameter("txtPhoneNumber");
         String txtAddress = req.getParameter("txtAddress");
         String txtCity = req.getParameter("txtCity");
-        ArrayList<Cart> cart =  new CartDAO().getCartListByAccID(1);
+        
+        Account accCustomer = (Account)req.getSession().getAttribute("AccCustomerSession");
+        ArrayList<Cart> cart =  new CartDAO().getCartListByAccID(accCustomer.getAccountID());
         OrderDAO odDAO = new OrderDAO();
+        
         try {
             int newOrderID = odDAO.getNewOrderID();
-            Order od = new Order(newOrderID, 1, 1, "", txtAddress, txtCity, "", "", "Viet Nam");
+            Order od = new Order(newOrderID, accCustomer.getCustomerID(), 1, "", txtAddress, txtCity, "", "", "Viet Nam");
             odDAO.createOrder(od);
             for (Cart item : cart) {
                 OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, 100000, item.getQuantity(), "AHJGSU");
