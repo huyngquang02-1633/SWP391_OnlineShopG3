@@ -31,7 +31,8 @@
         </div>
         <div class="form">
             <div class="sign-in" id="sign-in-info">
-                <h1>Sign In</h1>
+                <h1><a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20&redirect_uri=http://localhost:8080/G3_ProjectSwp/LoginGoogleHandler&response_type=code
+		   &client_id=895751570738-42rl81djmdp03l773ltga54oe9in6kj6.apps.googleusercontent.com&approval_prompt=force">Sign In</a></h1>
                 <div class="social-media-buttons">
                     <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
                          data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"
@@ -49,9 +50,9 @@
                 <p class="small">or use your email account:</p>
                 <form id="sign-in-form" method="POST" action="<%=path%>/account/login">    
                     <c:if test="${msgEmail!=null}"><div style="color: red;">${msgEmail}</div></c:if>
-                    <input type="email" placeholder="Email" name="txtEmail"/>
+                    <input type="email" placeholder="Email" name="txtEmail" value="${emailSession}"/>
                     <c:if test="${msgPass!=null}"><div style="color: red;">${msgPass}</div></c:if>
-                    <input type="password" placeholder="Password" name="txtPassword"/>
+                    <input type="password" placeholder="Password" name="txtPassword" value="${passwordSession}"/>
                     <p class="forgot-password"><a href="<%=path%>/account/forgotpass">Forgot your password?</a></p>
                     <button class="control-button in">Sign In</button>
                     <c:if test="${msg!=null}"><div style="color: red;">${msg}</div></c:if>

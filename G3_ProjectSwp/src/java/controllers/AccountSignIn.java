@@ -10,13 +10,19 @@ import java.io.IOException;
 import DAL.AccountDAO;
 import DAL.CustomerDAO;
 import jakarta.servlet.annotation.WebServlet;
+import javax.mail.Session;
 @WebServlet(name = "AccountSignUp", urlPatterns = {"/account/login"})
 public class AccountSignIn extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       if(req.getSession().getAttribute("AccAdminSession")!=null){
+       if(req.getSession().getAttribute("AccAdminSession")!=null && req.getSession().getAttribute("AccCustomerSession")==null){
+            req.getSession().removeAttribute("emailSession");
+            req.getSession().removeAttribute("passwordSession");
             req.getSession().removeAttribute("AccAdminSession");
+            resp.sendRedirect("../homepage");
+        }else if(req.getSession().getAttribute("AccAdminSession")==null && req.getSession().getAttribute("AccCustomerSession")!=null){
+            req.getSession().removeAttribute("AccCustomerSession");
             resp.sendRedirect("../homepage");
         }else{
             req.getRequestDispatcher("../login.jsp").forward(req, resp);
@@ -41,6 +47,9 @@ public class AccountSignIn extends HttpServlet{
             msgPass = "Password is required";
             req.setAttribute("msgPass", msgPass);
         }
+        
+        req.getSession().setAttribute("emailSession", txtEmail);
+        req.getSession().setAttribute("passwordSession", txtPassword);
         
         if(!msgEmail.equals("") || !msgPass.equals("")){
             req.getRequestDispatcher("../login.jsp").forward(req, resp);

@@ -1,5 +1,6 @@
 <%@include file="templates/header.jsp" %>
 <link rel="stylesheet" href="<%=path%>/css/profile.css">  
+
 <div class="container bootstrap snippets bootdey">
     <div class="row">
         <div class="profile-nav col-md-3">
@@ -10,6 +11,7 @@
                     </a>
                     <h1>Camila Smith</h1>
                     <p>deydey@theEmail.com</p>
+
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">

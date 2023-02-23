@@ -29,6 +29,10 @@ public class AccountProfile extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("AccCustomerSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
 //        if (req.getSession().getAttribute("AccSession") != null) {
 //            Account a = (Account) req.getSession().getAttribute("AccSession");
 //            Account account = new AccountDAO().getAccountByEmail(a.getEmail());

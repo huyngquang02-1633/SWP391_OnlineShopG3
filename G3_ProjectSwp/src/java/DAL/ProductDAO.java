@@ -162,6 +162,18 @@ public class ProductDAO extends DBContext{
         }
         return product;
     }
+    
+    public Product getComingSoon() {
+        Product product = null; 
+        try {
+            String sql = "select TOP 1 * from Products where PublishDate > getdate() order by PublishDate ASC"; 
+            PreparedStatement ps = connection.prepareStatement(sql); 
+            ResultSet rs = ps.executeQuery();  
+            product = getObject(rs);
+        } catch (Exception e) {
+        }
+        return product;
+    }
    
     
     public ArrayList<Product> getProductbySearch(String sample) {
@@ -223,7 +235,7 @@ public class ProductDAO extends DBContext{
             String sql="";
             PreparedStatement ps ;
             if(mode != 0){
-                sql = "select TOP 3 * from Products WHERE PublishDate IS NOT NULL AND Discontinued = 0 Order by PublishDate DESC";
+                sql = "select TOP 3 * from Products WHERE PublishDate IS NOT NULL AND PublishDate < getdate() AND Discontinued = 0  Order by PublishDate DESC";
                 ps = connection.prepareStatement(sql);
                 //ps.setInt(1, mode);
             }else{

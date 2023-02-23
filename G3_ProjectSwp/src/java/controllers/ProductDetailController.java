@@ -47,13 +47,14 @@ public class ProductDetailController extends HttpServlet{
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
         ArrayList<Supplier> supplierList = new SupplierDAO().getSupplierList();
-        
+        Product comingSoon = new ProductDAO().getComingSoon();
         
         req.setAttribute("productInfor", product);
         req.setAttribute("cateList", cateList);
         req.setAttribute("authorList", authorList);
         req.setAttribute("genreList", genreList);
         req.setAttribute("supplierList", supplierList);
+        req.setAttribute("comingSoon", comingSoon);
         
         req.getRequestDispatcher("/productdetail.jsp").forward(req, resp);
     }

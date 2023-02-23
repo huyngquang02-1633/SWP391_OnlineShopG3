@@ -36,6 +36,10 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if(req.getSession().getAttribute("AccCustomerSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
         Enumeration<String> enumeration = req.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String parameterName = (String) enumeration.nextElement();
@@ -53,7 +57,7 @@ public class CartController extends HttpServlet {
                 int proID = Integer.parseInt(req.getParameter("proID"));
                 try {
                     CartDAO cartDAO = new CartDAO();
-                    cartDAO.addToCart(new Cart(1, proID, 4));
+                    cartDAO.addToCart(new Cart(1, proID, 1));
                 } catch (Exception e) {
                     req.setAttribute("addToCartFail", "add this product to cart fail!");
                 }
