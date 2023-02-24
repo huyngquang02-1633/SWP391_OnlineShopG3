@@ -77,15 +77,18 @@ public class AccountDAO extends DBContext {
 
     public void editInfo(Customer c) {
         try {
-            String sql = "update Customers set FirstName = ? , LastName = ?, ContactTitle = ?, Address = ?, PhoneNumber = ? where CustomerID = ?";
+            String sql = "update Customers set FirstName = ? , LastName = ?, Gender = ?, ContactTitle = ?,DateOfBirth = ?, Address = ?, PhoneNumber = ?, CreateDate = ? where CustomerID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setString(1, c.getFirstName());
             ps.setString(2, c.getLastName());
-            ps.setString(3, c.getContactTitle());
-            ps.setString(4, c.getAddress());
-            ps.setString(5, c.getPhoneNumber());
-            ps.setInt(6, c.getCustomerID());
+            ps.setBoolean(3, c.isGender());
+            ps.setString(4, c.getContactTitle());
+            ps.setDate(5, c.getDateOfBirth());
+            ps.setString(6, c.getAddress());
+            ps.setString(7, c.getPhoneNumber());
+            ps.setDate(8, c.getCreateDate());
+            ps.setInt(9, c.getCustomerID());
 
             ps.executeUpdate();
 
@@ -185,8 +188,4 @@ public class AccountDAO extends DBContext {
         return rs > 0;
     }
 
-    public static void main(String[] args) {
-        Customer cus = new Customer(1, "a", "b", "c", "d", "e");
-        new AccountDAO().editInfo(cus);
-    }
 }
