@@ -36,7 +36,7 @@ public class Customer {
     
     
 
-    public Customer(int CustomerID, String Firstname, String LastName, String ContactTitle, String Address) {
+    public Customer(int CustomerID, String FirstName, String LastName, String ContactTitle, String Address) {
         this.CustomerID = CustomerID;
         this.FirstName = FirstName;
         this.LastName = LastName;
