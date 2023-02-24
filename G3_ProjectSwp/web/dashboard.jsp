@@ -5,7 +5,7 @@
     <ul>
         <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
         <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
-        <h6><a href="<%=path%>/product.jsp"><li>Products</li></a></h6>
+        <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
         <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
         <h6><a href="<%=path%>/employees.jsp"><li>Employees</li></a></h6>
     </ul>
@@ -17,7 +17,7 @@
             <div id="dashboard-1">
                 <div id="dashboard-1-container">
                     <div class="dashboard-item">
-                        <div class="dashboard-item-title">Today Revenue${statisticOrderIn6Month.size()}</div>
+                        <div class="dashboard-item-title">Today Revenue</div>
                         <div class="dashboard-item-content">${todayRevenue}</div>
                     </div>
                     <div class="dashboard-item">
@@ -37,7 +37,7 @@
             <div id="dashboard-2">
                 <div id="chart" style="text-align: center;">
                     <div id="chart1">
-                        <h3>Statistic Orders (Month)</h3>
+                        <h3>Statistic Revenue (Month)</h3>
                         <canvas id="myChart1" style="width: 100%;"></canvas>
                     </div>
                     <div id="chart2">
@@ -58,9 +58,9 @@
                             <b>From</b>: <input type="date" name="txtStartOrderDate"/> <br>
                             <b>To</b>: <input type="date" name="txtEndOrderDate"/>
                             <input type="submit" value="Filter">
-                        </form>
+                            </form> 
 
-                    </div>
+                        </div>
 
                 </div>
             </div>

@@ -60,7 +60,11 @@ public class AccountProfile1 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Customer customer = new CustomerDAO().getCustomerByID(1);
+        if(req.getSession().getAttribute("AccCustomerSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
+        Customer customer = new CustomerDAO().getCustomerByID(10);
         req.setAttribute("customer", customer);
 //            req.setAttribute("account", account);
 

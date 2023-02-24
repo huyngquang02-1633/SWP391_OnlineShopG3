@@ -5,6 +5,7 @@ import models.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class AccountDAO extends DBContext {
 
@@ -93,25 +94,24 @@ public class AccountDAO extends DBContext {
     }
 
     public boolean createAccount(Customer cus, Account acc) {
-        int result = 0;
-        try {
-//                String sql1="insert into Customers(CustomerID, CompanyName , ContactName,ContactTitle,Address,CreateDate) values(?,?,?,?,?,GETDATE())";
-//                String sql2="insert into Accounts(Email, Password,CustomerID,Role) values(?,?,?,?)";
-            String sql = "exec createAccount ?, ?, ?, ?, ?, ?, ?,?,?;";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, createNewCusID());
-            ps.setString(2, cus.getFirstName());
-            ps.setString(3, cus.getLastName());
-            ps.setString(4, cus.getContactTitle());
-            ps.setDate(5, cus.getDateOfBirth());
-            ps.setString(6, cus.getAddress());
-            ps.setString(7, cus.getPhoneNumber());
-            ps.setString(8, acc.getEmail());
-            ps.setString(9, acc.getPassword());
-            result = ps.executeUpdate();
-        } catch (Exception e) {
-        }
-        return result > 0;
+        int result=0;
+            try {
+                String sql = "exec createAccount ?,?,?,?,?,?,?,?,?,?;";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1,createNewCusID() );
+                ps.setString(2, cus.getFirstName());
+                ps.setString(3, cus.getLastName());
+                ps.setString(4, cus.getContactTitle());
+                ps.setDate(5, cus.getDateOfBirth());
+                ps.setString(6, cus.getAddress());
+                ps.setString(7, cus.getPhoneNumber());
+                ps.setInt(8, createNewAccID());
+                ps.setString(9, acc.getEmail());
+                ps.setString(10, acc.getPassword());
+                result = ps.executeUpdate();
+            } catch (Exception e) {
+            }
+            return result>0;
     }
 
     public int createNewCusID() {
@@ -127,7 +127,21 @@ public class AccountDAO extends DBContext {
         }
         return maxCusID + 1;
     }
-
+    public int createNewAccID(){
+        int maxAccID=0;
+        try {
+            String sql = "select Max(Accounts.AccountID) as 'MaxAccID' from Accounts";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                maxAccID = rs.getInt("MaxAccID");
+            }
+        } catch (Exception e) {
+        }
+        return maxAccID+1;
+    }
+    
+    
     private String randomString(int n) {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"

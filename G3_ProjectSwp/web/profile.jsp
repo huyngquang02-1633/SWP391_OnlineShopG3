@@ -8,7 +8,7 @@
             <div class="panel">
                 <div class="user-heading round">
                     <a href="#">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                        <img src="${userGoogle.getPicture().replace("=s96-c", "")}" alt="">
                     </a>
                     <h1>${c.getLastName()}</h1>
                     <p>${a.getEmail()}</p>
@@ -16,8 +16,8 @@
 
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="<%=path%>/account/profile"> <i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="<%=path%>/account/profile_myOrder"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning pull-right r-activity">9</span></a></li>
-                    <li><a href="<%=path%>/account/profile"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                    <li><a href="<%=path%>/account/profile_myOrder"> <i class="fa fa-calendar"></i> All Order <span class="label label-warning r-activity">9</span></a></li>
+                    <li><a href="<%=path%>/account/profile1"> <i class="fa fa-edit"></i> Edit profile</a></li>
 
                 </ul>
             </div>
@@ -28,7 +28,6 @@
                     Personal Information
                 </div>
                 <div class="panel-body bio-graph-info">
-                    <h1>Bio Graph</h1>
                     <div class="row">
                         <div class="bio-row">
                             <p><span>First Name </span>: ${c.getFirstName()}</p>

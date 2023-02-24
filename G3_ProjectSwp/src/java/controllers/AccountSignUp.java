@@ -22,7 +22,7 @@ import jakarta.servlet.annotation.WebServlet;
  *
  * @author user
  */
-@WebServlet(name = "AccountSignUp", urlPatterns = {"/account/signUp"})
+@WebServlet(name = "AccountSignUp", urlPatterns = {"/account/signup"})
 public class AccountSignUp extends HttpServlet{
 
     @Override

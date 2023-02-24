@@ -14,15 +14,19 @@ public class OrderDetail {
     private int WarehouseID;
     private double SalePrice;
     private int Quantity;
-    private int DiscountID;
+    private String DiscountID;
 
-    public OrderDetail(int OrderID, int ProductID, int WarehouseID, double SalePrice, int Quantity, int DiscountID) {
+    public OrderDetail(int OrderID, int ProductID, int WarehouseID, double SalePrice, int Quantity, String DiscountID) {
         this.OrderID = OrderID;
         this.ProductID = ProductID;
         this.WarehouseID = WarehouseID;
         this.SalePrice = SalePrice;
         this.Quantity = Quantity;
         this.DiscountID = DiscountID;
+    }
+
+    public OrderDetail(int OrderID, int ProductID, int Quantity, double SalePrice, double Discount) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
@@ -58,11 +62,11 @@ public class OrderDetail {
         this.SalePrice = SalePrice;
     }
 
-    public int getDiscountID() {
+    public String getDiscountID() {
         return DiscountID;
     }
 
-    public void setDiscountID(int DiscountID) {
+    public void setDiscountID(String DiscountID) {
         this.DiscountID = DiscountID;
     }
 

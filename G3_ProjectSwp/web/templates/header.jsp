@@ -60,8 +60,18 @@
                         </ul>
                         <div class="tg-userlogin dropdown">
                             <!--<<<<<<< Updated upstream-->
-                            <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="50" height="50" style=" border-radius: 50%" alt="" >
-                            <a class="login" href="login.jsp"style="text-decoration:none; color: #454545">Login</a>
+                            <c:choose>
+                                <c:when test="${userGoogle == null}">
+                                    <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="50" height="50" style=" border-radius: 50%" alt="" >
+                                    <a class="login" href="login.jsp"style="text-decoration:none; color: #454545">Login</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <img id="imgprofile" src="${userGoogle.getPicture()}" width="50" height="50" style=" border-radius: 50%" alt="" >
+                                    <a class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545">${userGoogle.getName()}</a>
+                                </c:otherwise>
+                            </c:choose>
+                            
+                            
                             <div class="account" >
                                 <a id="nameprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
 
@@ -102,44 +112,31 @@
                         <div class="dropdown tg-themedropdown tg-minicartdropdown">
                             <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="tg-themebadge">3</span>
+                                <span class="tg-themebadge">${cartSize}</span>
                                 <i class="icon-cart"></i>
                                 <span>$123.00</span>
                             </a>
                             <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
-                                <div class="tg-minicartbody">
-                                    <div class="tg-minicarproduct">
-                                        <figure>
-                                            <img src="images/products/img-01.jpg" alt="image description">
+                                <c:forEach items="${cartList}" var="cartItem">
+                                    <c:forEach items="${productList}" var="product">
+                                        <c:if test="${cartItem.getProductID() == product.getProductID()}">
+                                            <div class="tg-minicartbody">
+                                                <div class="tg-minicarproduct">
 
-                                        </figure>
-                                        <div class="tg-minicarproductdata">
-                                            <h5><a href="javascript:void(0);">Our State Fair Is A Great
-                                                    Function</a></h5>
-                                            <h6><a href="javascript:void(0);">$ 12.15</a></h6>
-                                        </div>
-                                    </div>
-                                    <div class="tg-minicarproduct">
-                                        <figure>
-                                            <img src="<%=path%>/images/products/img-02.jpg" alt="image description">
+                                                    <figure>
+                                                        <img src="<%=path%>/images/products/img-01.jpg" alt="image description">
+                                                    </figure>
+                                                    <div class="tg-minicarproductdata">
+                                                        <h5><a href="javascript:void(0);">${product.getProductName()}</a></h5>
+                                                        <h6><a href="javascript:void(0);">${product.getSalePrice()}</a></h6>
+                                                    </div>
 
-                                        </figure>
-                                        <div class="tg-minicarproductdata">
-                                            <h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
-                                            <h6><a href="javascript:void(0);">$ 12.15</a></h6>
-                                        </div>
-                                    </div>
-                                    <div class="tg-minicarproduct">
-                                        <figure>
-                                            <img src="images/products/img-03.jpg" alt="image description">
-
-                                        </figure>
-                                        <div class="tg-minicarproductdata">
-                                            <h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
-                                            <h6><a href="javascript:void(0);">$ 12.15</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
+                                                </div>
+                                            </div>
+                                        </c:if>>
+                                    </c:forEach>
+                                </c:forEach>
+                                
                                 <div class="tg-minicartfoot">
                                     <a class="tg-btnemptycart" href="javascript:void(0);">
                                         <i class="fa fa-trash-o"></i>
@@ -157,10 +154,10 @@
                         </div>
                     </div>
                     <div class="tg-searchbox">
-                        <form class="tg-formtheme tg-formsearch">
+                        <form class="tg-formtheme tg-formsearch" method="POST" action="<%=path%>/productList">
                             <fieldset>
-                                <input type="text" name="search" class="typeahead form-control"
-                                       placeholder="Search by Title, Author, Keyword, ISBN">
+                                <input type="text" name="txtSearch" class="typeahead form-control"
+                                       placeholder="Search by Title, Author">
                                 <button type="submit"><i class="icon-magnifier"></i></button>
                             </fieldset>
                         </form>
@@ -192,7 +189,7 @@
                                         <ul class="tg-themetabnav" role="tablist">
                                             <c:forEach items="${cateList}" var="cate">
                                                 <li role="presentation" class="active">
-                                                    <a href="#" aria-controls="artandphotography"
+                                                    <a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}" aria-controls="artandphotography"
                                                        role="tab" data-toggle="tab">${cate.getCategoryName()}</a>
                                                 </li>
                                             </c:forEach>

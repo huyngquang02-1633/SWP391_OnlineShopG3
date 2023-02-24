@@ -58,7 +58,7 @@ public class OrderDAO extends DBContext{
                 double SalePrice = rs.getDouble("SalePrice");
                 int WarehouseID = rs.getInt("WarehouseID");
                 int Quantity = rs.getInt("Quantity");
-                int DiscountID = rs.getInt("DiscountID");
+                String DiscountID = rs.getString("DiscountID");
                 OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
                 orderDetails.add(od);
             }
@@ -108,6 +108,33 @@ public class OrderDAO extends DBContext{
         return orderList;
     }
     
+    public ArrayList<OrderDetail> getDetailOfOrderByOdID(int OdID) {
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
+        try {
+            String sql = "select * from [Order Details] where OrderID=?";
+            //b2 tao doi tuong nhe
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, OdID);
+            //b3thuc thi truy van
+            ResultSet rs = ps.executeQuery();
+            
+            //b4 xu ly kqua tra ve
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                int WarehouseID = rs.getInt("WarehouseID");
+                int Quantity = rs.getInt("Quantity");
+                double SalePrice = rs.getDouble("SalePrice");
+                double Discount = rs.getDouble("Discount");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, SalePrice, Discount);
+                orderDetails.add(od);
+            }
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return orderDetails;
+    }
     
     
     public ArrayList<Order> getOrderInRange(String fromDate, String toDate) {
@@ -200,7 +227,9 @@ public class OrderDAO extends DBContext{
     
     public void createOrder(Order od) throws SQLException{
         try {
-            String sql = "INSERT INTO Orders VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?)";
+            String sql = "SET IDENTITY_INSERT [dbo].[Orders] ON \n" +
+"INSERT INTO Orders([OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [Freight], [ShipName], [ShipAddress], [ShipCity], [ShipRegion], [ShipPostalCode], [ShipCountry]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?)\n" +
+"SET IDENTITY_INSERT [dbo].[Orders] OFF";
             
             PreparedStatement ps1 = connection.prepareStatement(sql);
             ps1.setInt(1, od.getOrderID());
@@ -213,8 +242,6 @@ public class OrderDAO extends DBContext{
             ps1.setString(8, od.getShipRegion());
             ps1.setString(9, od.getShipPostalCode());
             ps1.setString(10, od.getShipCountry());
-            
-            
             ps1.executeUpdate();
             
         } catch (Exception e) {
@@ -225,18 +252,19 @@ public class OrderDAO extends DBContext{
     public void createDetailOfOrder(OrderDetail odDetail) throws SQLException{
         try {
            
-            String sql2 = "INSERT INTO [Order Details](OrderID,ProductID,UnitPrice,Quantity,Discount) VALUES(?,?,?,?,?)";
+            String sql2 = "INSERT [dbo].[Order Details] ([OrderID], [ProductID], [WarehouseID], [SalePrice], [Quantity], [DiscountID])  VALUES(?,?,?,?,?,null)";
             PreparedStatement ps2 = connection.prepareStatement(sql2);
             
             ps2.setInt(1,odDetail.getOrderID());
             ps2.setInt(2, odDetail.getProductID());
-            ps2.setDouble(3, odDetail.getSalePrice());
-            ps2.setInt(4, odDetail.getQuantity());
-            ps2.setDouble(5, odDetail.getDiscountID());
+            ps2.setInt(3, odDetail.getWarehouseID());
+            ps2.setDouble(4, odDetail.getSalePrice());
+            ps2.setInt(5, odDetail.getQuantity());
+            //ps2.setString(6, odDetail.getDiscountID());
             ps2.executeUpdate();
             
         } catch (Exception e) {
-            connection.rollback();
+            //connection.rollback();
         }//finally{ connection.close();}
         
     }
@@ -346,5 +374,10 @@ public class OrderDAO extends DBContext{
         OrderDAO odDAO = new OrderDAO();
         ArrayList<Order> abc = odDAO.getOrderNearest5Month(-1);
         System.out.println(abc.size());
+        try {
+            odDAO.createDetailOfOrder(new OrderDetail(10526, 2, 1, 100000, 1,"ahf"));
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

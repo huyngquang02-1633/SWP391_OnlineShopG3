@@ -19,6 +19,10 @@ public class Cart {
         this.ProductID = ProductID;
         this.Quantity = Quantity;
     }
+    public Cart( int ProductID, int Quantity) {
+        this.ProductID = ProductID;
+        this.Quantity = Quantity;
+    }
 
     public int getAccountID() {
         return AccountID;

@@ -41,7 +41,7 @@
             legend: {display: false},
             title: {
             display: true,
-            text: "New Customers (30 daily Avg)"
+            text: "New Order (6 month earlier)"
             }
         }
         });
