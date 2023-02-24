@@ -94,7 +94,11 @@
 															<input type="text" class="result" value="0" id="quantity1" name="quantity">
 															<em class="plus">+</em>
 														</div>
-														<a class="tg-btn tg-active tg-btn-lg" href="<%=path%>/account/cart?proID=${productInfor.getProductID()}">Add To Cart</a>
+                                                                                                                <c:url value="/account/cart" var="AddToCart">
+                                                                                                                    <c:param name="previousURL" value="../productDetail?proID=${productInfor.getProductID()}" />
+                                                                                                                    <c:param name="proID" value="${productInfor.getProductID()}" />
+                                                                                                                </c:url>
+														<a class="tg-btn tg-active tg-btn-lg" href="${AddToCart}">Add To Cart</a>
 														<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 															<span>add to wishlist</span>
 														</a>

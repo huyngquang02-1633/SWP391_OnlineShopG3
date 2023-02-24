@@ -39,7 +39,11 @@ public class ProductDetailController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        if(req.getParameter("proID")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
+        
         int proID = Integer.parseInt(req.getParameter("proID"));
         Product product = new ProductDAO().getProductInfor(proID);
 

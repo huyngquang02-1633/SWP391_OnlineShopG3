@@ -5,6 +5,7 @@
 package controllers;
 
 import DAL.AuthorDAO;
+import DAL.CartDAO;
 import DAL.CategoryDAO;
 import models.Account;
 import models.Cart;
@@ -44,6 +45,16 @@ public class HomePage extends HttpServlet {
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Product> newReleaseList = new ProductDAO().getNewReleaseList(3);
         Product comingSoon = new ProductDAO().getComingSoon();
+        if(req.getSession().getAttribute("AccCustomerSession")!= null){
+            Account googleAcc = (Account)req.getSession().getAttribute("AccCustomerSession");
+            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(googleAcc.getAccountID());
+            req.setAttribute("cartList", cartList);
+            req.setAttribute("cartSize", cartList.size());
+        }else{
+            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(1);
+            req.setAttribute("cartList", cartList);
+        }
+        
         
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);
@@ -51,6 +62,7 @@ public class HomePage extends HttpServlet {
         req.setAttribute("authorList", authorList);
         req.setAttribute("newReleaseList", newReleaseList);
         req.setAttribute("comingSoon", comingSoon);
+        
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
