@@ -96,7 +96,11 @@
                                             <ins>${product.getSalePrice()}</ins>
                                             <del>${product.getCoverPrice()}</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                            <c:url value="/account/cart" var="AddToCart">
+                                                <c:param name="previousURL" value="../homepage" />
+                                                <c:param name="proID" value="${product.getProductID()}" />
+                                            </c:url>
+                                        <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                             <i class="fa fa-shopping-basket"></i>
                                             <em>Add To Basket</em>
                                         </a>
@@ -201,20 +205,25 @@
                         <div class="tg-featureditmcontent">
                             <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
                             <div class="tg-booktitle">
-                                <h3><a href="javascript:void(0);">Things To Know About Green Flat Design</a>
+                                <h3><a href="javascript:void(0);">${comingSoon.getProductName()}</a>
                                 </h3>
                             </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Farrah
-                                    Whisenhunt</a></span>
+                            <span class="tg-bookwriter">By: 
+                                <c:forEach items="${authorList}" var="author">
+                                    <c:if test="${comingSoon.getAuthorID() == author.getAuthorID()}">
+                                        <a href="<%=path%>/productList?authorID=${product.getAuthorID()}">${author.getAuthorName()}</a>
+                                    </c:if>
+                                </c:forEach>
+                            </span>
                             <span class="tg-stars"><span></span></span>
                             <div class="tg-priceandbtn">
                                 <span class="tg-bookprice">
-                                    <ins>$23.18</ins>
-                                    <del>$30.20</del>
+                                    <ins>${comingSoon.getSalePrice()}</ins>
+                                    <del>${comingSoon.getCoverPrice()}</del>
                                 </span>
                                 <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
                                     <i class="fa fa-shopping-basket"></i>
-                                    <em>Add To Basket</em>
+                                    <em>Coming Soon</em>
                                 </a>
                             </div>
                         </div>
@@ -316,7 +325,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="tg-sectionhead">
-                        <h2><span>Some Great Books</span>Picked By Authors</h2>
+                        <h2><span>Some Great Books</span>Highest Rating</h2>
                         <a class="tg-btn" href="javascript:void(0);">View All</a>
                     </div>
                 </div>

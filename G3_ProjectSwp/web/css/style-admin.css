@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Playfair+Display:400,700|Work+Sans:300,400,500,600,700);
-*{margin: 0px; padding: 0px;font-size: 17px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif}
-#container{
+*{overflow: auto; margin: 0px; padding: 0px;font-size: 17px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif}
+#container{ 
     width: 80%;
     margin: 0px auto;
     border: 1px solid #666;
@@ -785,6 +785,8 @@
 
  #order-table-admin{
     margin-top: -30px;
+    width: 100%;
+    overflow: auto;
  }
 
  #order-table-admin a{

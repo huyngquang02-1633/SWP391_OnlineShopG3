@@ -37,7 +37,7 @@
             <div id="dashboard-2">
                 <div id="chart" style="text-align: center;">
                     <div id="chart1">
-                        <h3>Statistic Orders (Month)</h3>
+                        <h3>Statistic Revenue (Month)</h3>
                         <canvas id="myChart1" style="width: 100%;"></canvas>
                     </div>
                     <div id="chart2">
@@ -58,9 +58,9 @@
                             <b>From</b>: <input type="date" name="txtStartOrderDate"/> <br>
                             <b>To</b>: <input type="date" name="txtEndOrderDate"/>
                             <input type="submit" value="Filter">
-                        </form>
+                            </form> 
 
-                    </div>
+                        </div>
 
                 </div>
             </div>
