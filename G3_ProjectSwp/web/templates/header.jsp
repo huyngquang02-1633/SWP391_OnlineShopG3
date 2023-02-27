@@ -133,7 +133,7 @@
 
                                                 </div>
                                             </div>
-                                        </c:if>>
+                                        </c:if>
                                     </c:forEach>
                                 </c:forEach>
                                 

@@ -33,13 +33,101 @@ public class ProductManage_admin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession().getAttribute("AccAdminSession")==null){
+        
+        
+        
+        if (req.getSession().getAttribute("AccAdminSession") == null) {
             resp.sendRedirect(req.getContextPath()+"/404error.jsp");
             return;
         }
-        List<Product> productList=new ProductDAO().getProducts(true);
-        req.setAttribute("productList", productList);
-        req.getRequestDispatcher("product.jsp").forward(req, resp);
+        PaginationObject paging = new PaginationObject();
+
+        int currentPage = 1;
+        if ( req.getParameter("currentPage")!=null) {
+            currentPage = Integer.parseInt(req.getParameter("currentPage"));
+        }
+
+        ArrayList<Product> proList = null;
+        List<Product> listInCurrentPage = null;
+        
+        
+        Enumeration<String> enumeration = req.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String parameterName = (String) enumeration.nextElement();
+            if (parameterName.equals("txtSearch2")) {
+                req.getSession().setAttribute("mode", 1);
+            }
+            if (parameterName.equals("categoryFilter")) {
+                req.getSession().setAttribute("mode", 2);
+            }
+        }
+        String sample = req.getParameter("txtSearch2");
+        if (req.getSession().getAttribute("mode") != null) {
+            if ((int) req.getSession().getAttribute("mode") == 1) {
+                if (!sample.isEmpty()) {
+                    proList = new ProductDAO().getProductbySearch(sample);
+                    req.getSession().setAttribute("searchSession", proList);
+                    req.getSession().setAttribute("sampleSession", sample);
+                } else{
+                    proList = new ProductDAO().getProducts(true);
+                    req.getSession().removeAttribute("searchSession");
+                    req.getSession().removeAttribute("categorySession");
+                    req.getSession().removeAttribute("sampleSession");
+                    req.getSession().removeAttribute("categoryIDSession");
+                    req.getSession().removeAttribute("ProductsByCatNSearch");
+                }
+            }
+
+            if ((int) req.getSession().getAttribute("mode") == 2) {
+                if (req.getParameter("categoryFilter") != null ) {
+                    int catID=Integer.parseInt(req.getParameter("categoryFilter"));
+                    String sampleSession = (String)req.getSession().getAttribute("sampleSession");
+                    if(catID==0 && req.getSession().getAttribute("searchSession")!=null){
+                        proList = new ProductDAO().getProductbySearch(sampleSession);
+                        req.getSession().removeAttribute("categorySession");
+                        req.getSession().removeAttribute("categoryIDSession");
+                    }else if(catID==0 && req.getSession().getAttribute("searchSession")==null){
+                        proList = new ProductDAO().getProducts(true);
+                        req.getSession().removeAttribute("categorySession");
+                        req.getSession().removeAttribute("categoryIDSession");
+                    }else{
+                        proList = new ProductDAO().getProductListByCategoryID(catID);
+                        req.getSession().setAttribute("categoryIDSession", catID);
+                        req.getSession().setAttribute("categorySession", proList);
+                    }
+                    
+
+                }
+            }
+            if(req.getSession().getAttribute("searchSession")!=null && req.getSession().getAttribute("categorySession")!=null){
+                String sampleSession = (String)req.getSession().getAttribute("sampleSession");
+                int categoryIDSession = (int) req.getSession().getAttribute("categoryIDSession");
+                proList= new ProductDAO().getProductsByCatNSearch(sampleSession,categoryIDSession , true);
+                req.getSession().setAttribute("ProductsByCatNSearch", proList);
+            }
+        } else {
+            if (req.getSession().getAttribute("searchSession") != null && req.getSession().getAttribute("categorySession") == null) {
+                proList = (ArrayList<Product>) req.getSession().getAttribute("searchSession");
+            } else if (req.getSession().getAttribute("categorySession") != null && req.getSession().getAttribute("searchSession") == null) {
+                proList = (ArrayList<Product>) req.getSession().getAttribute("categorySession");
+            }else if(req.getSession().getAttribute("modeProductsByCatNSearch")!=null){
+                proList = (ArrayList<Product>) req.getSession().getAttribute("ProductsByCatNSearch");
+            }else {
+                proList = new ProductDAO().getProducts(true);
+            }
+
+        }
+        if(proList.isEmpty()){
+            req.setAttribute("emptyListMsg", "There is nothing in Product List!");
+        }
+
+        req.getSession().removeAttribute("mode");
+        req.setAttribute("categoryList", new CategoryDAO().getCategory());
+        listInCurrentPage = paging.getListInCurrentPage(proList, currentPage);
+        req.setAttribute("numberOfPage", paging.getNumberOfPage(proList));
+        req.getSession().setAttribute("currentPage", currentPage);
+        req.setAttribute("productList", listInCurrentPage);
+        req.getRequestDispatcher("/product.jsp").forward(req, resp);
     }
 
 }
