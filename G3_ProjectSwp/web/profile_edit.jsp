@@ -56,7 +56,16 @@
                                 <p><span>Create Date </span>: <input type="date" name="txtCreatDate" value="${c.getCreateDate()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Gender </span>: <input type="text" name="txtGender" value="${c.isGender()==true?"Male":"Female"}"></p>
+                                <p><span>Gender </span>: <select name="txtGender" >
+                                        <c:if test="${c.isGender()==true}">
+                                            <option selected value="true">Male</option>
+                                            <option value="false">Female</option>
+                                        </c:if>
+                                        <c:if test="${c.isGender()!=true}">
+                                            <option value="true">Male</option>
+                                            <option selected="false">Female</option>
+                                        </c:if>
+                                    </select></p></p>
                             </div>
                             <input type="submit" value="Save" />
                     </form>

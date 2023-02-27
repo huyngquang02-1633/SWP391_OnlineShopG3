@@ -29,22 +29,18 @@ public class AccountProfile extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession().getAttribute("AccCustomerSession")==null){
-            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-            return;
-        }
-//        if (req.getSession().getAttribute("AccSession") != null) {
-//            Account a = (Account) req.getSession().getAttribute("AccSession");
-//            Account account = new AccountDAO().getAccountByEmail(a.getEmail());
-            Customer customer = new CustomerDAO().getCustomerByID(1);
+        if (req.getSession().getAttribute("AccCustomerSession") != null) {
+            Account a = (Account) req.getSession().getAttribute("AccCustomerSession");
+            Customer customer = new CustomerDAO().getCustomerByID(a.getCustomerID());
             req.setAttribute("customer", customer);
-//            req.setAttribute("account", account);
+            req.setAttribute("account", a);
 
             req.getRequestDispatcher("../profile.jsp").forward(req, resp);
-//        } else {
+        } else {
 //
-//            resp.getWriter().print("Access denied");
-//        }
+            resp.sendRedirect(req.getContextPath() + "/404error.jsp");
+            return;
+        }
     }
 
 }
