@@ -4,9 +4,17 @@
         <servlet-name>OrderManage_admin</servlet-name>
         <servlet-class>controllers.OrderManage_admin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>employeeManager_admin</servlet-name>
+        <servlet-class>controllers.EmployeeManage_admin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OrderManage_admin</servlet-name>
         <url-pattern>/orderManage_admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>employeeManager_admin</servlet-name>
+        <url-pattern>/employeeManager_admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,8 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-
         <welcome-file>homepage</welcome-file>
-
     </welcome-file-list>
 </web-app>

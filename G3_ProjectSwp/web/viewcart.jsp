@@ -150,19 +150,17 @@
                                                 </tbody>
                                             </table>
                                             <div class="form-group">
-                                                <form method="post" action="<%=path%>/orderAction">
+                                                <form method="post" action="<%=path%>/orderAction" style="text-align: center;">
                                                     <div id="customer-info">
                                                         <div id="customer-info-content">
                                                             <h3>Order INFORMATION:</h3>
                                                             <div id="customer-info-detail">
-                                                                <div id="customer-info-left">
                                                                     <input type="text" placeholder="Receiver Name *" name="txtReceiver"/><br/>
+                                                                    <input type="text" placeholder="Email *" name="txtEmail"/><br/>
                                                                     <input type="text" placeholder="Phone Number *" name="txtPhoneNumber"/><br/>
-                                                                </div>
-                                                                <div id="customer-info-right">
+                                                                
                                                                     <input type="text" placeholder="Address *" name="txtAddress"/><br/>
                                                                     <input type="text" placeholder="Ship City *" name="txtShipCity"/><br/>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
