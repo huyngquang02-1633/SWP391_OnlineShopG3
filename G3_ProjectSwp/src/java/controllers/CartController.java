@@ -2,7 +2,6 @@ package controllers;
 
 import DAL.CartDAO;
 import models.Cart;
-import models.Item;
 import models.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
