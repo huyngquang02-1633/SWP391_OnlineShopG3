@@ -2159,6 +2159,10 @@ li.menu-item-has-mega-menu {
     font-size: 16px;
     font-weight: 500;
     line-height: 19px;
+
+    text-overflow: ellipsis; /* enables ellipsis */
+    white-space: nowrap; /* keeps the text in a single line */
+    overflow: hidden; /* keeps the element from overflowing its parent */
 }
 .tg-bookwriter {
     width: 100%;
@@ -2166,6 +2170,10 @@ li.menu-item-has-mega-menu {
     font-size: 13px;
     line-height: 13px;
     padding: 0 0 6px;
+
+    text-overflow: ellipsis; /* enables ellipsis */
+    white-space: nowrap; /* keeps the text in a single line */
+    overflow: hidden; /* keeps the element from overflowing its parent */
 }
 .tg-bookwriter a {
     color: #666;
@@ -2187,6 +2195,14 @@ li.menu-item-has-mega-menu {
     color: #666;
     font-size: 13px;
     padding-left: 10px;
+}
+
+.tg-bookprice ins::after {
+        content:" ₫";
+}
+
+.tg-bookprice del::after {
+        content:" ₫";
 }
 .tg-postbookcontent .tg-btn {
     width: 100%;
@@ -4144,12 +4160,13 @@ blockquote .tg-bookwriter{
 }
 .tg-productcontent .tg-booktitle h3{
     font-size:30px;
-    line-height:25px;
+    line-height:40px;
 }
 .tg-productcontent .tg-bookwriter{
     font-size:16px;
     line-height:16px;
     padding:0 0 10px;
+
 }
 .tg-addreviews{
     float:left;

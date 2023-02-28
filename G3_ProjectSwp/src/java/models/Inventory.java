@@ -12,11 +12,22 @@ public class Inventory {
     private int WarehouseID;
     private int ProductID;
     private int UnitInStock;
+    private int Pending;
 
-    public Inventory(int WarehouseID, int ProductID, int UnitInStock) {
+    public Inventory(int WarehouseID, int ProductID, int UnitInStock, int Pending) {
         this.WarehouseID = WarehouseID;
         this.ProductID = ProductID;
         this.UnitInStock = UnitInStock;
+        this.Pending = Pending;
+        
+    }
+
+    public int getPending() {
+        return Pending;
+    }
+
+    public void setPending(int Pending) {
+        this.Pending = Pending;
     }
 
     public int getWarehouseID() {

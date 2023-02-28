@@ -56,10 +56,8 @@
                                 <div class="tg-postbook">
                                     <figure class="tg-featureimg">
                                         <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/books/img-01.jpg"
-                                                                            alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/books/img-01.jpg"
-                                                                           alt="image description"></div>
+                                            <div class="tg-frontcover"><img src="${product.getImage()}" alt="image description"></div>
+                                            <div class="tg-backcover"><img src="${product.getImage()}" alt="image description"></div>
                                         </div>
                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                             <i class="icon-heart"></i>
@@ -266,10 +264,8 @@
                                         <div class="tg-postbook">
                                             <figure class="tg-featureimg">
                                                 <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img src="<%=path%>/images/books/img-07.jpg"
-                                                                                    alt="<%=path%>/image description"></div>
-                                                    <div class="tg-backcover"><img src="<%=path%>/images/books/img-07.jpg"
-                                                                                   alt="<%=path%>/image description"></div>
+                                                    <div class="tg-frontcover"><img src="${newRelease.getImage()}"></div>
+                                                    <div class="tg-backcover"><img src="${newRelease.getImage()}"alt="image description"></div>
                                                 </div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
