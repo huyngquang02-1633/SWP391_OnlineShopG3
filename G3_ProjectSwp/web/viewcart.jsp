@@ -6,28 +6,6 @@
 <%@include file="templates/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body>
-    <!--************************************
-                        Inner Banner Start
-        *************************************-->
-
-    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="zimages/parallax/bgparallax-07.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="tg-innerbannercontent">
-                        <h1>Cart</h1>
-                        <ol class="tg-breadcrumb">
-                            <li>Home</li>
-                            <li class="tg-active">My Cart</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--************************************
-                    Inner Banner End
-    *************************************-->
         <main id="tg-main" class="tg-main tg-haslayout">
             <div class="tg-sectionspace tg-haslayout">
                 <div class="container">
@@ -150,19 +128,17 @@
                                                 </tbody>
                                             </table>
                                             <div class="form-group">
-                                                <form method="post" action="<%=path%>/orderAction">
+                                                <form method="post" action="<%=path%>/orderAction" style="text-align: center;">
                                                     <div id="customer-info">
                                                         <div id="customer-info-content">
                                                             <h3>Order INFORMATION:</h3>
                                                             <div id="customer-info-detail">
-                                                                <div id="customer-info-left">
                                                                     <input type="text" placeholder="Receiver Name *" name="txtReceiver"/><br/>
+                                                                    <input type="text" placeholder="Email *" name="txtEmail"/><br/>
                                                                     <input type="text" placeholder="Phone Number *" name="txtPhoneNumber"/><br/>
-                                                                </div>
-                                                                <div id="customer-info-right">
+                                                                
                                                                     <input type="text" placeholder="Address *" name="txtAddress"/><br/>
                                                                     <input type="text" placeholder="Ship City *" name="txtShipCity"/><br/>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

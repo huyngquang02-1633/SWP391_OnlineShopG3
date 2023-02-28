@@ -5,7 +5,7 @@
         <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
         <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
         <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
-        <h6><a href="<%=path%>/employees.jsp"><li>Employees</li></a></h6>
+        <h6><a href="<%=path%>/employeeManager_admin"><li>Employees</li></a></h6>
                 </ul>
             </div>
             <div id="content-right">

@@ -31,6 +31,8 @@ public class Product {
     private String PublishingLicense;
     private String Description;
     private boolean Discontinued;
+    private double AverageRating;
+    private int AvailableInStock;
 
     public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumberOfPage, String Format, String Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
         this.ProductID = ProductID;
@@ -53,6 +55,50 @@ public class Product {
         this.PublishingLicense = PublishingLicense;
         this.Description = Description;
         this.Discontinued = Discontinued;
+        
+    }
+    
+    public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumberOfPage, String Format, String Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued, double AverageRating, int AvailableInStock) {
+        this.ProductID = ProductID;
+        this.ProductName = ProductName;
+        this.CategoryID = CategoryID;
+        this.GenreID = GenreID;
+        this.CoverPrice = CoverPrice;
+        this.SalePrice = SalePrice;
+        this.AuthorID = AuthorID;
+        this.Translator = Translator;
+        this.PublisherID = PublisherID;
+        this.SupplierID = SupplierID;
+        this.Language = Language;
+        this.Size = Size;
+        this.Weight = Weight;
+        this.NumberOfPage = NumberOfPage;
+        this.Format = Format;
+        this.Image = Image;
+        this.PublishDate = PublishDate;
+        this.PublishingLicense = PublishingLicense;
+        this.Description = Description;
+        this.Discontinued = Discontinued;
+        this.AverageRating = AverageRating;
+        this.AvailableInStock = AvailableInStock;
+    }
+
+    public int getAvailableInStock() {
+        return AvailableInStock;
+    }
+
+    public void setAvailableInStock(int AvailableInStock) {
+        this.AvailableInStock = AvailableInStock;
+    }
+
+    
+
+    public double getAverageRating() {
+        return AverageRating;
+    }
+
+    public void setAverageRating(int Rating) {
+        this.AverageRating = Rating;
     }
     
     
