@@ -23,10 +23,6 @@
         <link rel="stylesheet" href="<%=path%>/css/color.css">
         <link rel="stylesheet" href="<%=path%>/css/responsive.css">
 
-        <link href="<%=path%>/css/styles.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css"/>
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -70,8 +66,8 @@
                                     <a class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545">${userGoogle.getName()}</a>
                                 </c:otherwise>
                             </c:choose>
-                            
-                            
+
+
                             <div class="account" >
                                 <a id="nameprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
 
@@ -94,7 +90,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <strong class="tg-logo"><a href="<%=path%>/homepage"><img src="<%=path%>/images/logo.png"
-                                                                     alt="company name here"></a></strong>
+                                                                              alt="company name here"></a></strong> 
                     <div class="tg-wishlistandcart">
                         <div class="dropdown tg-themedropdown tg-wishlistdropdown">
                             <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown"
@@ -136,7 +132,7 @@
                                         </c:if>
                                     </c:forEach>
                                 </c:forEach>
-                                
+
                                 <div class="tg-minicartfoot">
                                     <a class="tg-btnemptycart" href="javascript:void(0);">
                                         <i class="fa fa-trash-o"></i>

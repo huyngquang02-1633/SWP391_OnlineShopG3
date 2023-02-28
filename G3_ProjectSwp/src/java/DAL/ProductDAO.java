@@ -40,7 +40,12 @@ public class ProductDAO extends DBContext{
                 String PublishingLicense = rs.getString("PublishingLicense");
                 String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
-                product = new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, Image, PublishDate, PublishingLicense, Description, Discontinued);
+                double aveRating = getAveRatingOfProduct(ProductID);
+                int availableInStock = getAvailableInStock(ProductID);
+                product = new Product(ProductID, ProductName, CategoryID, GenreID, 
+                        CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, 
+                        NumberOfPage, Format, Image, PublishDate, PublishingLicense, Description, Discontinued, 
+                        aveRating, availableInStock);
             }
         } catch (Exception e) {
         }
@@ -71,9 +76,11 @@ public class ProductDAO extends DBContext{
                 String PublishingLicense = rs.getString("PublishingLicense");
                 String Description = rs.getString("Description");
                 boolean Discontinued = rs.getBoolean("Discontinued");
+                double aveRating = getAveRatingOfProduct(ProductID);
+                int availableInStock = getAvailableInStock(ProductID);
                 productList.add(new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID,
                         Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, 
-                        Image, PublishDate, PublishingLicense, Description, Discontinued));
+                        Image, PublishDate, PublishingLicense, Description, Discontinued, aveRating, availableInStock));
             }
         } catch (Exception e) {
         }
@@ -173,6 +180,44 @@ public class ProductDAO extends DBContext{
         } catch (Exception e) {
         }
         return product;
+    }
+    
+    public double getAveRatingOfProduct(int productID){
+        double aveRating =0;
+        try {
+            String sql = "select Avg(CAST(Rating AS float)) as [aveRating] from Reviews where ProductID= ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, productID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                aveRating = rs.getDouble("aveRating");
+            }
+        } catch (Exception e) {
+        }//finally{ connection.close();}
+        return aveRating;
+    }
+    
+    public int getAvailableInStock(int productID){
+        int availableInStock =0;
+        int Pending = 0;
+        try {
+            String sql1 = "select SUM(UnitsInStock) as [AvailableInStock] from Inventories where ProductID=?";
+            String sql2 = "select SUM(Quantity) as [Pending] from Orders od, [Order Details] odd where od.OrderID=odd.OrderID AND ShippedDate IS NULL AND odd.ProductID = ?";
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
+            PreparedStatement ps2 = connection.prepareStatement(sql2);
+            ps1.setInt(1, productID);
+            ps2.setInt(1, productID);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                availableInStock = rs1.getInt("AvailableInStock");
+            }
+            ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                Pending = rs2.getInt("Pending");
+            }
+        } catch (Exception e) {
+        }//finally{ connection.close();}
+        return availableInStock - Pending;
     }
    
     
@@ -376,8 +421,8 @@ public class ProductDAO extends DBContext{
     }
     
     public static void main(String[] args) {
-        ArrayList<Product> abc = new ProductDAO().getNewReleaseList(3);
-        System.out.println(abc.get(0).getAuthorID());
+        ProductDAO abc = new ProductDAO();
+        System.out.println(abc.getAvailableInStock(6));
     }
             
 }
