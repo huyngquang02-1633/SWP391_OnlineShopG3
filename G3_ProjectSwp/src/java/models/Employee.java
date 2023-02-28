@@ -11,126 +11,134 @@ import java.sql.Date;
  * @author user
  */
 public class Employee {
-    private int EmployeeID;
-    private String FirstName;
-    private String LastName;
-    private boolean Gender;
-    private int DepartmentID;
-    private String Title;
-    private String TitleOfCourtesy;
-    private Date BirthDate;
-    private Date HireDate;
-    private String Address;
-    private boolean Status;
+    private int employeeID;
+    private String firstName;
+    private String lastName;
+    private boolean gender;
+    private int departmentID;
+    private String title;
+    private String titleOfCourtesy;
+    private Date birthDate;
+    private Date hireDate;
+    private String address;
+    private boolean status;
 
-    public Employee(int EmployeeID, String FirstName, String LastName, boolean Gender, int DepartmentID, String Title, String TitleOfCourtesy, Date BirthDate, Date HireDate, String Address, boolean Status) {
-        this.EmployeeID = EmployeeID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Gender = Gender;
-        this.DepartmentID = DepartmentID;
-        this.Title = Title;
-        this.TitleOfCourtesy = TitleOfCourtesy;
-        this.BirthDate = BirthDate;
-        this.HireDate = HireDate;
-        this.Address = Address;
-        this.Status = Status;
+    public Employee() {
     }
-
     
+
+    public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, boolean status) {
+        this.employeeID = employeeID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.departmentID = departmentID;
+        this.title = title;
+        this.titleOfCourtesy = titleOfCourtesy;
+        this.birthDate = birthDate;
+        this.hireDate = hireDate;
+        this.address = address;
+        this.status = status;
+    }
+
     public int getEmployeeID() {
-        return EmployeeID;
+        return employeeID;
     }
 
-    public void setEmployeeID(int EmployeeID) {
-        this.EmployeeID = EmployeeID;
-    }
-
-    public int getDepartmentID() {
-        return DepartmentID;
-    }
-
-    public void setDepartmentID(int DepartmentID) {
-        this.DepartmentID = DepartmentID;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getTitle() {
-        return Title;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
-    }
-
-    public String getTitleOfCourtesy() {
-        return TitleOfCourtesy;
-    }
-
-    public void setTitleOfCourtesy(String TitleOfCourtesy) {
-        this.TitleOfCourtesy = TitleOfCourtesy;
-    }
-
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String Address) {
-        this.Address = Address;
-    }
-
-    public Date getBirthDate() {
-        return BirthDate;
-    }
-
-    public void setBirthDate(Date BirthDate) {
-        this.BirthDate = BirthDate;
-    }
-
-    public Date getHireDate() {
-        return HireDate;
-    }
-
-    public void setHireDate(Date HireDate) {
-        this.HireDate = HireDate;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean isGender() {
-        return Gender;
+        return gender;
     }
 
-    public void setGender(boolean Gender) {
-        this.Gender = Gender;
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public int getDepartmentID() {
+        return departmentID;
+    }
+
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitleOfCourtesy() {
+        return titleOfCourtesy;
+    }
+
+    public void setTitleOfCourtesy(String titleOfCourtesy) {
+        this.titleOfCourtesy = titleOfCourtesy;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public boolean isStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(boolean Status) {
-        this.Status = Status;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "EmployeeID=" + EmployeeID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Gender=" + Gender + ", DepartmentID=" + DepartmentID + ", Title=" + Title + ", TitleOfCourtesy=" + TitleOfCourtesy + ", BirthDate=" + BirthDate + ", HireDate=" + HireDate + ", Address=" + Address + ", Status=" + Status + '}';
+        return "Employee{" + "employeeID=" + employeeID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", departmentID=" + departmentID + ", title=" + title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate + ", address=" + address + ", status=" + status + '}';
     }
 
+    public void setDepartmentID(String sdepartmentID) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
     
 
     
