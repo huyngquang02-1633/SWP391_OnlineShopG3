@@ -16,7 +16,7 @@ a:active,
 .tg-widget ul li a:hover,
 .tg-widget ul li:hover a span,
 .tg-widget ul li:hover a em,
-.tg-relatedbooks .tg-postbook .tg-bookprice ins{ color: #77b748; }
+.tg-relatedbooks .tg-postbook .tg-bookprice ins{ color: #345082 !important; }
 /*=============================================
 			Theme Background Color
 =============================================*/
@@ -35,7 +35,7 @@ a:active,
 .tg-quantityholder .plus:hover,
 .tg-themetabs li a:before,
 .tg-tag:hover,
-.tg-btnreply:hover{background:#77b748;}
+.tg-btnreply:hover{background:#345082 !important;}
 /*=============================================
 			Theme Border Color
 =============================================*/
@@ -56,7 +56,7 @@ input:focus,
 .tg-tag:hover,
 .tg-comments li .tg-authorbox:hover,
 .tg-comments li .tg-authorbox:hover .tg-bottomarrow,
-.tg-btnreply:hover{ border-color: #77b748;}
+.tg-btnreply:hover{ border-color: #345082 !important;}
 /*=============================================
 			Theme Shadow Color
 =============================================*/

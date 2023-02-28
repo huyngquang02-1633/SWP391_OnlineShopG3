@@ -46,6 +46,7 @@ public class OrderAction extends HttpServlet {
         String txtPhoneNumber = req.getParameter("txtPhoneNumber");
         String txtAddress = req.getParameter("txtAddress");
         String txtCity = req.getParameter("txtCity");
+        String txtDiscountID = req.getParameter("txtDiscountId");
         
         Account accCustomer = (Account)req.getSession().getAttribute("AccCustomerSession");
         ArrayList<Cart> cart =  new CartDAO().getCartListByAccID(accCustomer.getAccountID());

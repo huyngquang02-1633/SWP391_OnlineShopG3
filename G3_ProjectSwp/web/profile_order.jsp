@@ -7,7 +7,7 @@
             <div class="panel">
                 <div class="user-heading round">
                     <a href="#">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                        <img src="${userGoogle.getPicture().replace("=s96-c", "")}" alt="">
                     </a>
                     <h1>Camila Smith</h1>
                     <p>deydey@theEmail.com</p>
