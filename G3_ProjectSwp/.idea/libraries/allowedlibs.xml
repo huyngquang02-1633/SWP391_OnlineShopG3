@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="allowedlibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/allowedlibs/smtp-1.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/allowedlibs/jakarta.servlet.jsp.jstl-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/allowedlibs/jakarta.servlet.jsp.jstl-api-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/allowedlibs/sqljdbc42.jar!/" />
+      <root url="jar://$PROJECT_DIR$/allowedlibs/javax.mail-1.6.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

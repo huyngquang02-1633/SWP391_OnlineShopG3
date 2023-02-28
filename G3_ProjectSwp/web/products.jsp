@@ -1,27 +1,6 @@
 <%@include file="templates/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--************************************
-                Inner Banner Start
-*************************************-->
-<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="tg-innerbannercontent">
-                    <h1>All Products</h1>
-                    <ol class="tg-breadcrumb">
-                        <li><a href="javascript:void(0);">home</a></li>
-                        <li class="tg-active">Products</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--************************************
-                Inner Banner End
-*************************************-->
-<!--************************************
                 Main Start
 *************************************-->
 <main id="tg-main" class="tg-main tg-haslayout">
@@ -36,45 +15,7 @@
                         <div id="tg-content" class="tg-content">
                             <div class="tg-products">
                                 <div class="tg-sectionhead">
-                                    <h2><span>People’s Choice</span>Bestselling Books</h2>
-                                </div>
-                                <div class="tg-featurebook alert" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <div class="tg-featureditm">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-                                                <figure><img src="<%=path%>/images/img-04.png" alt="image description"></figure>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                                <div class="tg-featureditmcontent">
-                                                    <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                                                    <div class="tg-booktitle">
-                                                        <h3><a href="javascript:void(0);">${comingSoon.getProductName()}</a></h3>
-                                                    </div>
-                                                    <span class="tg-bookwriter">By: 
-                                                        <c:forEach items="${authorList}" var="author">
-                                                            <c:if test="${comingSoon.getAuthorID() == author.getAuthorID()}">
-                                                                <a href="<%=path%>/productList?authorID=${product.getAuthorID()}">${author.getAuthorName()}</a>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </span>
-                                                    <span class="tg-stars"><span></span></span>
-                                                    <div class="tg-priceandbtn">
-                                                        <span class="tg-bookprice">
-                                                            <ins>${comingSoon.getSalePrice()}</ins>
-                                                            <del>${comingSoon.getCoverPrice()}</del>
-                                                        </span>
-                                                        <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
-                                                            <i class="fa fa-shopping-basket"></i>
-                                                            <em>Coming Soon</em>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <h2><span>People's Choice</span>Bestselling Books</h2>
                                 </div>
                                 <div class="tg-productgrid">
                                     <div class="tg-refinesearch">
