@@ -249,6 +249,24 @@ public class OrderDAO extends DBContext{
         }//finally{ connection.close();}
         
     }
+    public void createOrderInDB(Order od,int accountID) throws SQLException{
+        try {
+            String sql = "exec OrderAction ?,?,?,?,?,?,?";
+            
+            PreparedStatement ps1 = connection.prepareStatement(sql);
+            ps1.setInt(1, accountID);
+            ps1.setInt(2, od.getOrderID());
+            ps1.setInt(3, od.getCustomerID());
+            ps1.setString(4, od.getShipAddress());
+            ps1.setString(5, od.getShipCity());
+            ps1.setString(6, od.getShipPostalCode());
+            ps1.setString(7, "SALE3/3/2023");
+            ps1.executeUpdate();
+        } catch (Exception e) {
+            connection.rollback();
+        }//finally{ connection.close();}
+        
+    }
     public void createDetailOfOrder(OrderDetail odDetail) throws SQLException{
         try {
            

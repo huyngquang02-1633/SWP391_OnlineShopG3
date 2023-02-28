@@ -48,7 +48,7 @@ public class SendMail {
     Transport transport = getMailSession.getTransport("smtp");
  
     // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
-    transport.connect("smtp.gmail.com", "vuvthe163299@fpt.edu.vn", "ljaxsoswxmesevze"); 
+    transport.connect("smtp.gmail.com", "vuvthe163299@fpt.edu.vn", "ctqunelwtwiwvqms"); 
     transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
     transport.close();
   }
@@ -80,7 +80,7 @@ public class SendMail {
     Transport transport = getMailSession.getTransport("smtp");
  
     // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
-    transport.connect("smtp.gmail.com", "vuvthe163299@fpt.edu.vn", "ljaxsoswxmesevze"); 
+    transport.connect("smtp.gmail.com", "vuvthe163299@fpt.edu.vn", "ctqunelwtwiwvqms"); 
     transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
     transport.close();
   }
