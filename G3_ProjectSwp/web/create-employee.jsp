@@ -1,13 +1,4 @@
 <%@include file="templates/header_admin.jsp" %>
-            <div id="content-left">
-                <ul>
-                    <h6><a href="dashboard.html"><li>Dashboard</li></a></h6>
-                    <h6><a href="order.html"><li>Orders</li></a></h6>
-                    <h6><a href="product.html"><li>Products</li></a></h6>
-                    <h6><a href="customer.html"><li>Customers</li></a></h6>
-                    <h6><a href="employees.html"><li>Employees</li></a></h6>
-                </ul>
-            </div>
             <div id="content-right">
                 <div class="path-admin">CREATE A NEW EMPLOYEE</div>
                 <div class="content-main">
