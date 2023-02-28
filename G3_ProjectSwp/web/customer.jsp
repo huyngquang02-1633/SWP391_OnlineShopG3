@@ -1,4 +1,16 @@
 <%@include file="templates/header_admin.jsp" %>
+<<<<<<< HEAD
+=======
+            <div id="content-left">
+                <ul>
+                    <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
+        <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
+        <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
+        <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
+        <h6><a href="<%=path%>/employeeManager_admin"><li>Employees</li></a></h6>
+                </ul>
+            </div>
+>>>>>>> e33e2e690c19bc4d386adabaa589a80832950d02
             <div id="content-right">
                 <div class="path-admin">PRODUCTS LIST</b></div>
                 <div class="content-main">

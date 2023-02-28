@@ -7,13 +7,19 @@
                         <div id="product-title-header">
                             <div id="product-title-1" style="width: 25%;">
                                 <b>Filter by Catetory:</b>
-                                <form>
-                                    <select name="ddlCategory">
-                                        <option value="catid1">--- Select ---</option>
-                                        <option value="catid1">Smart Phone</option>
-                                        <option value="catid2">Computer</option>
-                                        <option value="catid3">Television</option>
-                                        <option value="catid4">Electronic</option>
+                                <form action="productManage_admin" method="">
+                                    <select name="categoryFilter">
+                                        <option value="0">No Filter</option>
+                                        <c:forEach items="${categoryList}" var="cate">
+                                            <c:choose>
+                                                <c:when test="${cate.getCategoryID() == categoryIDSession}">
+                                                    <option value="${cate.getCategoryID()}" selected="selected"><c:out value="${cate.getCategoryName()}"/></option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${cate.getCategoryID()}"><c:out value="${cate.getCategoryName()}"/></option>
+                                                </c:otherwise>
+                                            </c:choose>                               
+                                        </c:forEach>
                                     </select>
                                     <input type="submit" value="Filter">
                                 </form>
@@ -84,17 +90,39 @@
                               </table>
                         </div>
                         <div id="paging">
-                            <div class="pagination">
-                                <a href="#">&laquo;</a>
-                                <a href="#">1</a>
-                                <a href="#" class="active">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#">5</a>
-                                <a href="#">6</a>
-                                <a href="#">&raquo;</a>
-                            </div>
-                        </div>
+                    <div class="pagination">
+
+                    <c:if test="${currentPage>1}">
+                        <c:url value="/productManage_admin" var="paginationPrevous">
+                            <c:param name="currentPage" value="${currentPage-1}" />
+                        </c:url>
+                        <a href="${paginationPrevous}">&laquo;</a>
+                    </c:if>
+
+                    <c:forEach begin="1" end="${numberOfPage}" step="1" var="stepValue">
+                        <c:choose>
+                            <c:when test="${stepValue == currentPage}">
+                                <a href="#" class="active">${stepValue}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <c:url value="/productManage_admin" var="pagination">
+                                    <c:param name="currentPage" value="${stepValue}" />
+                                </c:url>
+                                <a href="${pagination}">${stepValue}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${currentPage<numberOfPage}">
+                        <c:url value="/productManage_admin" var="paginationNext">
+                            <c:param name="currentPage" value="${currentPage+1}" />
+                        </c:url>
+                        <a href="${paginationNext}">&raquo;</a>
+                    </c:if>
+
+
+                </div>
+            </div>
                     </div>
                 </div>
             </div>
