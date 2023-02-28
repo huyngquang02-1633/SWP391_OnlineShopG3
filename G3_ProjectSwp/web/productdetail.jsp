@@ -48,18 +48,24 @@
 														<div class="tg-featureditmcontent">
 															<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
 															<div class="tg-booktitle">
-																<h3><a href="javascript:void(0);">Things To Know About Green Flat Design</a></h3>
+																<h3><a href="javascript:void(0);">${comingSoon.getProductName()}</a></h3>
 															</div>
-															<span class="tg-bookwriter">By: <a href="javascript:void(0);">Farrah Whisenhunt</a></span>
+															<span class="tg-bookwriter">By: 
+                                                                                                                            <c:forEach items="${authorList}" var="author">
+                                                                                                                                <c:if test="${comingSoon.getAuthorID() == author.getAuthorID()}">
+                                                                                                                                    <a href="<%=path%>/productList?authorID=${product.getAuthorID()}">${author.getAuthorName()}</a>
+                                                                                                                                </c:if>
+                                                                                                                            </c:forEach>
+                                                                                                                        </span>
 															<span class="tg-stars"><span></span></span>
 															<div class="tg-priceandbtn">
-																<span class="tg-bookprice">
-																	<ins>$23.18</ins>
-																	<del>$30.20</del>
-																</span>
+                                                                                                                            <span class="tg-bookprice">
+                                                                                                                                <ins>${comingSoon.getSalePrice()}</ins>
+                                                                                                                                <del>${comingSoon.getCoverPrice()}</del>
+                                                                                                                            </span>
 																<a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
 																	<i class="fa fa-shopping-basket"></i>
-																	<em>Add To Basket</em>
+																	<em>Coming Soon</em>
 																</a>
 															</div>
 														</div>
@@ -88,7 +94,11 @@
 															<input type="text" class="result" value="0" id="quantity1" name="quantity">
 															<em class="plus">+</em>
 														</div>
-														<a class="tg-btn tg-active tg-btn-lg" href="<%=path%>/account/cart?proID=${productInfor.getProductID()}">Add To Cart</a>
+                                                                                                                <c:url value="/account/cart" var="AddToCart">
+                                                                                                                    <c:param name="previousURL" value="../productDetail?proID=${productInfor.getProductID()}" />
+                                                                                                                    <c:param name="proID" value="${productInfor.getProductID()}" />
+                                                                                                                </c:url>
+														<a class="tg-btn tg-active tg-btn-lg" href="${AddToCart}">Add To Cart</a>
 														<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 															<span>add to wishlist</span>
 														</a>

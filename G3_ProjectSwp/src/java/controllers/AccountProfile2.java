@@ -36,8 +36,14 @@ public class AccountProfile2 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(1);
-        ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(1);
+        if(req.getSession().getAttribute("AccCustomerSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
+        Account accCustomer = (Account)req.getSession().getAttribute("AccCustomerSession");
+        
+        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(accCustomer.getCustomerID());
+        ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(accCustomer.getCustomerID());
         
         req.setAttribute("orderList", orderList);
         req.setAttribute("orderDetailList", orderDetailList);

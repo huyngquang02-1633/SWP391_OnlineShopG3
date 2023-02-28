@@ -10,7 +10,7 @@
                         Inner Banner Start
         *************************************-->
 
-    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="<%=path%>/images/parallax/bgparallax-07.jpg">
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="zimages/parallax/bgparallax-07.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -37,7 +37,7 @@
                                 <div class="row d-flex justify-content-center h-100">
                                     <div class="col">
                                         <div class="table-responsive" style="border-radius: 10px;">
-                                            <table id="table" class="table table-bordered">
+                                            <table id="table" class="table table-bordered" style="tr:nth-child(even) {background-color: #f2f2f2;}">
                                                 <thead>
                                                     <tr style="background-color:  pink; padding: 10px;">
                                                         <th scope="col">Image</th>
@@ -150,11 +150,41 @@
                                                 </tbody>
                                             </table>
                                             <div class="form-group">
-                                                 <textarea class="form-control" name="note" ></textarea>
-                                                <button class="btn btn-success float-right"
+                                                <form method="post" action="<%=path%>/orderAction" style="text-align: center;">
+                                                    <div id="customer-info">
+                                                        <div id="customer-info-content">
+                                                            <h3>Order INFORMATION:</h3>
+                                                            <div id="customer-info-detail">
+                                                                    <input type="text" placeholder="Receiver Name *" name="txtReceiver"/><br/>
+                                                                    <input type="text" placeholder="Email *" name="txtEmail"/><br/>
+                                                                    <input type="text" placeholder="Phone Number *" name="txtPhoneNumber"/><br/>
+                                                                
+                                                                    <input type="text" placeholder="Address *" name="txtAddress"/><br/>
+                                                                    <input type="text" placeholder="Ship City *" name="txtShipCity"/><br/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="customer-info">
+                                                        <div id="customer-info-content">
+                                                            <h3>PAYMENT METHODS:</h3>
+                                                            <div id="customer-info-payment">
+                                                                <div>
+                                                                    <input type="radio" name="rbPaymentMethod" checked/>
+                                                                    Payment C.O.D - Payment on delivery
+                                                                </div>
+                                                                <div>
+                                                                    <input type="radio" name="rbPaymentMethod" disabled/>
+                                                                    Payment via online payment gateway
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-success float-right" style="width: 80px;"
                                                         type="submit">
-                                                    Next
-                                                </button>
+                                                        Order
+                                                    </button>
+                                                </form>
+                                                
                                             </div>
                                         </div>
                                     </div>

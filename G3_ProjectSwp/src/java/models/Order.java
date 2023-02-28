@@ -40,6 +40,17 @@ public class Order {
         this.ShipPostalCode = ShipPostalCode;
         this.ShipCountry = ShipCountry;
     }
+    public Order(int OrderID, int CustomerID, int EmployeeID, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry) {
+        this.OrderID = OrderID;
+        this.CustomerID = CustomerID;
+        this.EmployeeID = EmployeeID;
+        this.ShipName = ShipName;
+        this.ShipAddress = ShipAddress;
+        this.ShipCity = ShipCity;
+        this.ShipRegion = ShipRegion;
+        this.ShipPostalCode = ShipPostalCode;
+        this.ShipCountry = ShipCountry;
+    }
     
 
    
