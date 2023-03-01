@@ -1,4 +1,5 @@
 <%@include file="templates/header_admin.jsp" %>
+
 <div id="content-right">
                 <div class="path-admin">CREATE A NEW EMPLOYEE</b></div>
                 <div class="content-main">
@@ -43,6 +44,7 @@
                             <br/> 
                         </div>
 
+ 
                             <input style="margin: auto;" type="submit" value="Save"/>
                         
                     </form>
