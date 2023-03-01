@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DAL.CategoryDAO;
+import DAL.CrudDAO;
 import DAL.ProductDAO;
 import jakarta.servlet.annotation.WebServlet;
 
@@ -25,7 +26,8 @@ public class CreateProduct_admin extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       
+       CrudDAO dao=new CrudDAO();
+        List<Category> cate=dao.getAllCategory();
     }
 
     @Override
