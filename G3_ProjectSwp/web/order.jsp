@@ -15,13 +15,21 @@
                 <table id="orders">
                     <tr>
                         <th>OrderID</th>
+                        <th>CustomerID</th>
+                        <th>EmployeeID</th>
                         <th>OrderDate</th>
                         <th>RequiredDate</th>
                         <th>ShippedDate</th>
-                        <th>Employee</th>
-                        <th>Customer</th>
                         <th>Freight($)</th>
+                        <th>ShipName</th>
+                        <th>ShipAddress</th>
+                        <th>ShipCity</th>
+                        <th>ShipRegion</th>
+                        <th>ShipPostalCode</th>
+                        <th>ShipCountry</th>
                         <th>Status</th>
+
+
                     </tr>
                     <%--<c:forEach items = "${listOrder}" var="x" >
                         <tr>

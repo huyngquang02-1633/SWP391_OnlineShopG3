@@ -18,8 +18,9 @@
                                     <a href="detail.html"><img src="img/2.jpg" width="100%"/></a>
                                  </div>
                                  <div class="profile-order-content-col2">Product 12</div>
-                                 <div class="profile-order-content-col3">Quantity: 1</div>
-                                 <div class="profile-order-content-col4">1000 $</div>
+                                 <div class="profile-order-content-col3">warehouse 12</div>
+                                 <div class="profile-order-content-col4">Quantity: 1</div>
+                                 <div class="profile-order-content-col5">1000 $</div>
                             </div>
                             <div class="profile-order-content" style="background-color: white;">
                                 <div class="profile-order-content-col1">
@@ -29,6 +30,9 @@
                                 <div class="profile-order-content-col3">Quantity: 2</div>
                                 <div class="profile-order-content-col4">2000 $</div>
                            </div>
+                           <div style="    display: flex;
+                           justify-content: end;
+                           padding: 15px;"><a href=""><i style="font-size: 22px; cursor: pointer;" class="fa-regular fa-pen-to-square"></i></a></div>
                             
                         </div>
                     </div>
