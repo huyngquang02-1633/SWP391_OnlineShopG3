@@ -1,13 +1,96 @@
 <%@include file="templates/header_admin.jsp" %>
-            <div id="content-left">
-                <ul>
-                   <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
-        <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
-        <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
-        <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
-        <h6><a href="<%=path%>/employees.jsp"><li>Employees</li></a></h6>
-                </ul>
-            </div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span> <br>
+        <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
+        <div class="content-main">
+                    <form id="content-main-product">
+                        <div class="content-main-1">
+                            <label>Product name (*):</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            <label>Category Name(*):</label><br/>
+                            <select name="ddlCategory">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                                <option value="catid3">Television</option>
+                                <option value="catid4">Electronic</option>
+                            </select>
+                            <label>Genre Name:</label><br/>
+                            <select name="ddlGenre">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                                <option value="catid3">Television</option>
+                                <option value="catid4">Electronic</option>
+                            </select>
+                            <label>Cover Price:</label><br/>
+                            <input type="text" name="txtUnitPrice" id=""><br/>
+                            <label>Sale Price:</label><br/>
+                            <input type="text" name="txtQuantityPerUnit" id=""><br/>
+                            <label>Author Name:</label><br/>
+                            <select name="ddlAuthor">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                                <option value="catid3">Television</option>
+                                <option value="catid4">Electronic</option>
+                            </select>
+                            <label>Discontinued (*): </label>
+                            <input style="    width: 15px;
+                            position: relative;
+                            top: 5px;
+                            left: 5px;" type="checkbox" name="chkDiscontinued" id=""><br/>
+                            
+                        </div>
+                        <div class="content-main-1">
+                            <label>Translator:</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            <label>Publisher Name:</label><br/>
+                            <select name="ddlAuthor">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                                <option value="catid3">Television</option>
+                                <option value="catid4">Electronic</option>
+                            </select>
+                            <label>Author Name:</label><br/>
+                            <select name="ddlAuthor">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                                <option value="catid3">Television</option>
+                                <option value="catid4">Electronic</option>
+                            </select>
+                            <label>Language:</label><br/>
+                            <select name="ddlCategory">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                            </select>
+                            <label>Book Size:</label><br/>
+                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <label>Book Weight:</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            
+                        </div>
+                        <div class="content-main-1">
+                            <label>Number Of Page:</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            <label>Format:</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            <label>Image:</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            <label>Publish Date:</label><br/>
+                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <label>Publish License:</label><br/>
+                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <label>Description:</label><br/>
+                            <input type="text" name="txtUnitsInStock" id=""><br/>
+                            <br/> 
+                        </div>
+
+                            <input style="margin: auto;" type="submit" value="Save"/>
+                        
+                    </form>
+                </div>
+    </div>
+
+</div>            
             <div id="content-right">
                 <div class="path-admin">PRODUCTS LIST</b></div>
                 <div class="content-main">
@@ -39,7 +122,7 @@
                                 </form>
                             </div>
                             <div id="product-title-3" style="width: 20%;">
-                                <a href="create-product.html">Create a new Product</a>
+                                <a href="create-product.jsp">Create a new Product</a>
                             </div>
                         </div>
                         <div id="order-table-admin">
@@ -88,7 +171,7 @@
                                     <td>${product.getDescription()}</td>
                                     <td>${product.isDiscontinued()}</td>
                                     <td>
-                                        <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
+                                        <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
                                         <a class="delete" href="delete.html?id=5">Delete</a>
                                     </td>
                                 </tr>
@@ -138,4 +221,31 @@
         <div id="footer-admin">Mai la anh em</div>
     </div>
 </body>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
 </html>

@@ -1,13 +1,4 @@
 <%@include file="templates/header_admin.jsp" %>
-            <div id="content-left">
-                <ul>
-                   <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
-        <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
-        <h6><a href="<%=path%>/product.jsp"><li>Products</li></a></h6>
-        <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
-        <h6><a href="<%=path%>/employees.jsp"><li>Employees</li></a></h6>
-                </ul>
-            </div>
             <div id="content-right">
                 <div class="path-admin">ORDER DETAIL</b></div>
                 <div class="content-main">
@@ -27,8 +18,9 @@
                                     <a href="detail.html"><img src="img/2.jpg" width="100%"/></a>
                                  </div>
                                  <div class="profile-order-content-col2">Product 12</div>
-                                 <div class="profile-order-content-col3">Quantity: 1</div>
-                                 <div class="profile-order-content-col4">1000 $</div>
+                                 <div class="profile-order-content-col3">warehouse 12</div>
+                                 <div class="profile-order-content-col4">Quantity: 1</div>
+                                 <div class="profile-order-content-col5">1000 $</div>
                             </div>
                             <div class="profile-order-content" style="background-color: white;">
                                 <div class="profile-order-content-col1">
@@ -38,6 +30,9 @@
                                 <div class="profile-order-content-col3">Quantity: 2</div>
                                 <div class="profile-order-content-col4">2000 $</div>
                            </div>
+                           <div style="    display: flex;
+                           justify-content: end;
+                           padding: 15px;"><a href=""><i style="font-size: 22px; cursor: pointer;" class="fa-regular fa-pen-to-square"></i></a></div>
                             
                         </div>
                     </div>
