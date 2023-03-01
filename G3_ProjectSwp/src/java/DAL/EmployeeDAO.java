@@ -71,7 +71,9 @@ public class EmployeeDAO extends DBContext {
     public void insertEmployee(Employee employee) {
 //        enableInsertMode("Employees");
         String sql = "SET IDENTITY_INSERT Employees ON;"
+
                 + " insert into [Employees] ([EmployeeID],[LastName]\n"
+
                 + "      ,[FirstName]\n"
                 + "      ,[Gender]\n"
                 + "      ,[DepartmentID]\n"
