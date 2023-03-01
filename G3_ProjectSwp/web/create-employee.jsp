@@ -40,7 +40,7 @@
                         <option value="catid2">2</option>
                     </select>
                     <br/>
-                    <input type="checkbox" name="chkDiscontinued" id=""><br/>
+                    <input type="checkbox" name="chkDiscontinued" id="" value="1"><br/>
                     <input style="justify-content: end;" type="submit" value="Save"/>
                 </div>
 

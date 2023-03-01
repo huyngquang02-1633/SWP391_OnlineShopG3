@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import models.Employee;
 
+
 /**
  *
  * @author Thanh Dao
@@ -62,7 +63,7 @@ public class CreateEmployee_admin extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -75,6 +76,9 @@ public class CreateEmployee_admin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        EmployeeDAO dao = new EmployeeDAO();
+        //int semployeeID = Integer.parseInt(request.getParameter("employeeID"));  
+        int EmployeeID = dao.getNewEmployeeID();
         String slastName = request.getParameter("lastName");
         String sfirstName = request.getParameter("firstName");
         String stitle = request.getParameter("title");
@@ -84,8 +88,9 @@ public class CreateEmployee_admin extends HttpServlet {
         String sbirthDate = request.getParameter("birthDate");
         String shireDate = request.getParameter("hireDate");
         String sdepartmentID = request.getParameter("departmentID");
-        String sstatus = request.getParameter("status");
+        String sstatus = request.getParameter("status"); 
         Employee employee = new Employee();
+        employee.setEmployeeID(EmployeeID);    
         employee.setAddress(saddress);
         employee.setFirstName(sfirstName);
         employee.setLastName(slastName);
@@ -93,12 +98,12 @@ public class CreateEmployee_admin extends HttpServlet {
         employee.setTitleOfCourtesy(stitleOfCourtesy);
         employee.setGender(true);
         employee.setStatus(true);
-        Date birthDate = Date.valueOf(sbirthDate);
-        Date hireDate = Date.valueOf(shireDate);
-        employee.setDepartmentID(0);
+        Date birthDate = Date.valueOf("2022-02-02");
+        Date hireDate = Date.valueOf("2022-02-02");
+        employee.setDepartmentID(2);
         employee.setBirthDate(birthDate);
         employee.setHireDate(hireDate);
-        EmployeeDAO dao = new EmployeeDAO();
+        
         dao.insertEmployee(employee);
 
         response.sendRedirect("employeeManager_admin");
