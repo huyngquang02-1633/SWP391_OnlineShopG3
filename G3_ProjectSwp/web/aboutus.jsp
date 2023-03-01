@@ -1,26 +1,5 @@
 <%@include file="templates/header.jsp"%>
 <!--************************************
-                Inner Banner Start
-*************************************-->
-<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="tg-innerbannercontent">
-                    <h1>About Us</h1>
-                    <ol class="tg-breadcrumb">
-                        <li><a href="javascript:void(0);">home</a></li>
-                        <li class="tg-active">About Us</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--************************************
-                Inner Banner End
-*************************************-->
-<!--************************************
                 Main Start
 *************************************-->
 <main id="tg-main" class="tg-main tg-haslayout">
@@ -57,27 +36,6 @@
     </section>
     <!--************************************
                     About Us End
-    *************************************-->
-    <!--************************************
-                    Call to Action Start
-    *************************************-->
-    <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-06.jpg">
-        <div class="tg-sectionspace tg-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tg-calltoaction">
-                            <h2>Fully Loaded Template</h2>
-                            <h3>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore.</h3>
-                            <a class="tg-btn tg-active" href="javascript:void(0);">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--************************************
-                    Call to Action End
     *************************************-->
     <!--************************************
                     Success Start
@@ -139,48 +97,7 @@
     <!--************************************
                     Success End
     *************************************-->
-    <!--************************************
-                    Testimonials Start
-    *************************************-->
-    <section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
-        <div class="tg-sectionspace tg-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
-                        <div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
-                            <div class="item tg-testimonial">
-                                <figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-                                <blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
-                                <div class="tg-testimonialauthor">
-                                    <h3>Holli Fenstermacher</h3>
-                                    <span>Manager @ CIFP</span>
-                                </div>
-                            </div>
-                            <div class="item tg-testimonial">
-                                <figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-                                <blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
-                                <div class="tg-testimonialauthor">
-                                    <h3>Holli Fenstermacher</h3>
-                                    <span>Manager @ CIFP</span>
-                                </div>
-                            </div>
-                            <div class="item tg-testimonial">
-                                <figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-                                <blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
-                                <div class="tg-testimonialauthor">
-                                    <h3>Holli Fenstermacher</h3>
-                                    <span>Manager @ CIFP</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--************************************
-                    Testimonials End
-    *************************************-->
+   
     <!--************************************
                     Authors Start
     *************************************-->
