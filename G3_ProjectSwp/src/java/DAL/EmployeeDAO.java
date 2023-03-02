@@ -34,7 +34,8 @@ public class EmployeeDAO extends DBContext {
                 Date BirthDate = rs.getDate("BirthDate");
                 Date HireDate = rs.getDate("HireDate");
                 String Address = rs.getString("Address");
-                emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, Gender);
+                boolean Status = rs.getBoolean("Status");
+                emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, Status);
             }
         } catch (Exception e) {
         }
@@ -44,21 +45,22 @@ public class EmployeeDAO extends DBContext {
     public ArrayList<Employee> getAllEmloyees() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
-            String sql = "select * from Employees where status = 1";
+            String sql = "select * from Employees where Status = 1";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int employeeID = rs.getInt("EmployeeID");
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
-                boolean gender = rs.getBoolean("Gender");
-                int departmentID = rs.getInt("DepartmentID");
-                String title = rs.getString("Title");
-                String titleOfCourtesy = rs.getString("TitleOfCourtesy");
-                Date birthDate = rs.getDate("BirthDate");
-                Date hireDate = rs.getDate("HireDate");
-                String address = rs.getString("Address");
-                Employee emp = new Employee(employeeID, firstName, lastName, gender, departmentID, title, titleOfCourtesy, birthDate, hireDate, address, gender);
+                int EmployeeID = rs.getInt("EmployeeID");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String Title = rs.getString("Title");
+                String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
+                Date BirthDate = rs.getDate("BirthDate");
+                Date HireDate = rs.getDate("HireDate");
+                String Address = rs.getString("Address");
+                boolean Status = rs.getBoolean("Status");
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, Status);
                 empList.add(emp);
             }
         } catch (Exception e) {
@@ -69,7 +71,9 @@ public class EmployeeDAO extends DBContext {
     public void insertEmployee(Employee employee) {
 //        enableInsertMode("Employees");
         String sql = "SET IDENTITY_INSERT Employees ON;"
-                + " insert into [Employees] ([LastName]\n"
+
+                + " insert into [Employees] ([EmployeeID],[LastName]\n"
+
                 + "      ,[FirstName]\n"
                 + "      ,[Gender]\n"
                 + "      ,[DepartmentID]\n"
@@ -79,21 +83,22 @@ public class EmployeeDAO extends DBContext {
                 + "      ,[HireDate]\n"
                 + "      ,[Address]\n"
                 + "      ,[Status])\n"
-                + "values(?,?,?,?,?,?,?,?,?,?);"
+                + "values(?,?,?,?,?,?,?,?,?,?,?);"
                 + " SET IDENTITY_INSERT Employees off";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, employee.getLastName());
-            ps.setString(2, employee.getFirstName());
-            ps.setBoolean(3, employee.isGender());
-            ps.setInt(4, employee.getDepartmentID());
-            ps.setString(5, employee.getTitle());
-            ps.setBoolean(10, employee.isStatus());
-            ps.setString(6, employee.getTitleOfCourtesy());
-            ps.setString(9, employee.getAddress());
-            ps.setDate(7, employee.getBirthDate());
-            ps.setDate(8, employee.getHireDate());
+            ps.setInt(1, employee.getEmployeeID());
+            ps.setString(2, employee.getLastName());
+            ps.setString(3, employee.getFirstName());
+            ps.setBoolean(4, employee.isGender());
+            ps.setInt(5, employee.getDepartmentID());
+            ps.setString(6, employee.getTitle());
+            ps.setString(7, employee.getTitleOfCourtesy());
+            ps.setDate(8, employee.getBirthDate());
 
+            ps.setDate(9, employee.getHireDate());
+            ps.setString(10, employee.getAddress());
+            ps.setBoolean(11, employee.isStatus());
             ps.executeUpdate();
 //            disbleInsertMode("Employees");
         } catch (Exception e) {
@@ -106,21 +111,35 @@ public class EmployeeDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, tableName);
-             ps.executeUpdate();
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-        public void disbleInsertMode(String tableName) {
+
+    public void disbleInsertMode(String tableName) {
         String sql = "SET IDENTITY_INSERT ? OFF";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, tableName);
-             ps.executeUpdate();
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int getNewEmployeeID() {
+        int EmployeeID = 0;
+        try {
+            String sql = "select Max(EmployeeID) as Maximum from Employees";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                EmployeeID = rs.getInt("Maximum");
+            }
+        } catch (Exception e) {
+        }//finally{ connection.close();}
+        return EmployeeID + 1;
     }
 
     public void deleteEmployee(String EmployeeID) {
@@ -136,7 +155,9 @@ public class EmployeeDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        Employee emp = new EmployeeDAO().getEmloyeeByID(1);
-        System.out.println(emp);
+        Date birthDate = Date.valueOf("2022-02-02");
+        Date hireDate = Date.valueOf("2022-02-02");
+        EmployeeDAO abc = new EmployeeDAO();
+        abc.insertEmployee(new Employee(1223, "vvv", "vvv", true, 2, "vvv", "vvv", birthDate, hireDate, "vvv", true));
     }
 }
