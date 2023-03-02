@@ -36,7 +36,7 @@
                         <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard <i class="fa-solid fa-chart-line"></i></li></a></h6>
                         <h6><a href="<%=path%>/orderManage_admin"><li>Orders <i class="fa-solid fa-cart-shopping"></i></li></a></h6>
                         <h6><a href="<%=path%>/productManage_admin"><li>Products <i class="fa-solid fa-book"></i></li></a></h6>
-                        <h6><a href="<%=path%>/customer.jsp"><li>Customers <i class="fa-solid fa-users"></i></li></a></h6>
-                        <h6><a href="<%=path%>/employees.jsp"><li>Employees <i class="fa-solid fa-user"></i></li></a></h6>
+                        <h6><a href="<%=path%>/customerManage_admin"><li>Customers <i class="fa-solid fa-users"></i></li></a></h6>
+                        <h6><a href="<%=path%>/employeeManager_admin"><li>Employees <i class="fa-solid fa-user"></i></li></a></h6>
                     </ul>
                 </div>
