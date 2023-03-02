@@ -67,6 +67,7 @@ public class EmployeeDAO extends DBContext {
         }
         return empList;
     }
+    
 
     public void insertEmployee(Employee employee) {
 //        enableInsertMode("Employees");
@@ -153,6 +154,7 @@ public class EmployeeDAO extends DBContext {
             e.printStackTrace();
         }
     }
+    
 
     public static void main(String[] args) {
         Date birthDate = Date.valueOf("2022-02-02");
@@ -160,4 +162,6 @@ public class EmployeeDAO extends DBContext {
         EmployeeDAO abc = new EmployeeDAO();
         abc.insertEmployee(new Employee(1223, "vvv", "vvv", true, 2, "vvv", "vvv", birthDate, hireDate, "vvv", true));
     }
+    
+    
 }
