@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="tg-postbook">
-                                            <figure class="tg-featureimg"><img src="<%=path%>/images/books/img-07.jpg" alt="image description"></figure>
+                                            <figure class="tg-featureimg"><img src="${productInfor.getImage()}"></figure>
                                             <div class="tg-postbookcontent">
                                                 <span class="tg-bookprice">
                                                     <ins>${productInfor.getSalePrice()}</ins>
@@ -26,7 +26,7 @@
                                                 <span class="tg-bookwriter">You save ${productInfor.getCoverPrice()-productInfor.getSalePrice()}</span>
                                                 <ul class="tg-delevrystock">
                                                     <li><i class="icon-rocket"></i><span>Free delivery worldwide</span></li>
-                                                    <li><i class="icon-checkmark-circle"></i><span>Dispatch from the USA in 2 working days </span></li>
+                                                    <li><i class="icon-checkmark-circle"></i><span>Dispatch from the Vietnam in 2 working days </span></li>
                                                     <li><i class="icon-store"></i><span>Status: <em>In Stock</em></span></li>
                                                 </ul>
                                                 <div class="tg-quantityholder">
@@ -83,8 +83,7 @@
                                                 </ul>
                                             </div>
                                             <div class="tg-description">
-                                                <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore etdoloreat magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laborisi nisi ut aliquip ex ea commodo consequat aute.</p>
-                                                <p>Arure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla aetur excepteur sint occaecat cupidatat non proident, sunt in culpa quistan officia serunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus... <a href="javascript:void(0);">More</a></p>
+                                                <p>${productInfor.getDescription()}</p>
                                             </div>
                                             <div class="tg-sectionhead">
                                                 <h2>Product Details</h2>
@@ -135,7 +134,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tg-productdescription">
+<!--                                    <div class="tg-productdescription">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="tg-sectionhead">
                                                 <h2>Product Description</h2>
@@ -189,7 +188,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="tg-aboutauthor">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="tg-sectionhead">
