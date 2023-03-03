@@ -87,9 +87,9 @@
                             <th>LastName</th>
                             <th>FirstName</th>
                             <th>Gender</th>
-                            <th>DepartmentName</th>
+                            <th>Department Name</th>
+                            <!--<th>Title</th>-->
                             <th>Title</th>
-                            <th>TitleOfCourtesy</th>
                             <th>Birthday</th>
                             <th>HireDate</th>
                             <th>Address</th>
@@ -110,7 +110,7 @@
                                 <%--<c:if test="${x.getDepartmentID() == emp.getDepartmentID()}"><td>${emp.getFirstName()}</td></c:if>--%>
                             <%--</c:forEach>--%>
                             </td>
-                            <td>${x.getTitle()}</td> 
+                            <!--<td>${x.getTitle()}</td>--> 
                             <td>${x.getTitleOfCourtesy()}</td> 
                             <td>${x.getBirthDate()}</td> 
                             <td>${x.getHireDate()}</td> 

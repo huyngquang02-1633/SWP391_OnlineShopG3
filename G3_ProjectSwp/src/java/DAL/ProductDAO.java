@@ -422,7 +422,7 @@ public class ProductDAO extends DBContext{
     
     public static void main(String[] args) {
         ProductDAO abc = new ProductDAO();
-        System.out.println(abc.getAvailableInStock(6));
+        System.out.println(abc.getAvailableInStock(1));
     }
             
 }

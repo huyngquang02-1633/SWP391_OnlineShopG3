@@ -59,6 +59,10 @@ public class DeleteEmployee_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("AccAdminSession")==null){
+            response.sendRedirect(request.getContextPath()+"/404error.jsp");
+            return;
+        }
         String EmployeeID = request.getParameter("sEmployeeID");
         EmployeeDAO dao = new EmployeeDAO();
         dao.deleteEmployee(EmployeeID);
