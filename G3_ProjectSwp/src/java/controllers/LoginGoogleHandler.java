@@ -41,13 +41,14 @@ public class LoginGoogleHandler extends HttpServlet {
 			throws ServletException, IOException {
 		String code = request.getParameter("code");
 		String accessToken = getToken(code);
-		UserGoogleDto userGoogle = getUserInfo(accessToken);  request.getSession().setAttribute("userGoogle", userGoogle);
+		UserGoogleDto userGoogle = getUserInfo(accessToken);  
+                request.getSession().setAttribute("userGoogle", userGoogle);
 		//System.out.println(user);
                 AccountDAO accDAO = new AccountDAO();
                 Account AccCustomer = accDAO.getAccountByEmail(userGoogle.getEmail());
                 try {
                     if(AccCustomer==null){
-                        Account acc = new Account(0, userGoogle.getEmail(), "", 0, 0, 2);
+                        Account acc = new Account(0, userGoogle.getEmail(), "", 0, 0, 2,userGoogle.getPicture() );
                         Customer cus = new Customer(0, userGoogle.getGiven_name(), userGoogle.getFamily_name(),userGoogle.getName(),"");
                         accDAO.createAccount(cus, acc);
                         AccCustomer = accDAO.getAccountByEmail(userGoogle.getEmail());

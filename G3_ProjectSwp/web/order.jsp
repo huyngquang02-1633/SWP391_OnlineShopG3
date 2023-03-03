@@ -24,7 +24,7 @@
                         <th>ShipName</th>
                         <th>ShipAddress</th>
                         <th>ShipCity</th>
-                        <th>ShipRegion</th>
+                        <!--<th>ShipRegion</th>-->
                         <th>ShipCountry</th>
                         <th>Status</th>
 
@@ -68,7 +68,7 @@
                             <td>${od.getShipName()}</td>
                             <td>${od.getShipAddress()}</td>
                             <td>${od.getShipCity()}</td> 
-                            <td>${od.getShipRegion()}</td> 
+                            <!--<td>${od.getShipRegion()}</td>--> 
                             <td>${od.getShipCountry()}</td> 
                          
                             <c:choose>

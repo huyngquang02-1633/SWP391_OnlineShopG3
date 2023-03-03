@@ -36,10 +36,10 @@ public class ProductManage_admin extends HttpServlet {
         
         
         
-//        if (req.getSession().getAttribute("AccAdminSession") == null) {
-//            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-//            return;
-//        }
+        if (req.getSession().getAttribute("AccAdminSession") == null) {
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
         PaginationObject paging = new PaginationObject();
 
         int currentPage = 1;
