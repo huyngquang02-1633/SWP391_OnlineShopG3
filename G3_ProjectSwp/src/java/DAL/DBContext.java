@@ -29,7 +29,7 @@ public class DBContext {
             String user = "sa";
 
             String pass = "123";
-            String url = "jdbc:sqlserver://QUYENKTHHS16072\\MSSQLSERVER01:1433;databaseName=BOOKSHOPxx";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=BOOKSHOP";
 
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
