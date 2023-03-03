@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -155,6 +156,60 @@ public class CustomerDAO extends DBContext{
         }
         return cusList;
     }
+    
+    public void deleteCustomer(int id){
+        String sql="select top 1 AccountID from Accounts where CustomerID=?";
+        try {
+            PreparedStatement st=connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs=st.executeQuery();
+            while(rs.next()){
+                int AccountID=rs.getInt("AccountID");
+                String sql2="delete from Cart where AccountID=?";
+                st=connection.prepareStatement(sql2);
+                st.setInt(1, AccountID);
+                st.executeUpdate();
+                String sql3="delete from Accounts where CustomerID=?";
+                st=connection.prepareStatement(sql3);
+                st.setInt(1, id);
+                st.executeUpdate();
+                String sql4="delete from Customers where CustomerID=?";
+                st=connection.prepareStatement(sql4);
+                st.setInt(1, id);
+                st.executeUpdate();
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public List<Customer> searchByName(String search){
+        List<Customer> list=new ArrayList<>();
+        String sql="select * from Customers where FirstName like ? OR LastName like ?";
+        try {
+            PreparedStatement st=connection.prepareStatement(sql);
+            st.setString(1, "%"+search+"%");
+            st.setString(2, "%"+search+"%");
+            ResultSet rs=st.executeQuery();
+            while(rs.next()){
+                Customer c=new Customer();
+                c.setCustomerID(rs.getInt("CustomerID"));
+                c.setFirstName(rs.getString("FirstName"));
+                c.setLastName(rs.getString("LastName"));
+               c.setGender(rs.getBoolean("Gender"));
+                c.setContactTitle(rs.getString("ContactTitle"));
+                c.setDateOfBirth(rs.getDate("DateOfBirth"));
+                c.setAddress(rs.getString("Address"));
+               c.setPhoneNumber(rs.getString("PhoneNumber"));
+                c.setCreateDate(rs.getDate("CreateDate"));
+                list.add(c);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     
     
 //    public static void main(String[] args) {
