@@ -57,12 +57,12 @@
                         <div class="tg-userlogin dropdown">
                             <!--<<<<<<< Updated upstream-->
                             <c:choose>
-                                <c:when test="${userGoogle == null}">
+                                <c:when test="${AccCustomerSession == null}">
                                     <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="50" height="50" style=" border-radius: 50%" alt="" >
                                     <a class="login" href="login.jsp"style="text-decoration:none; color: #454545">Login</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <img id="imgprofile" src="${userGoogle.getPicture()}" width="50" height="50" style=" border-radius: 50%" alt="" >
+                                    <img id="imgprofile" src="${AccCustomerSession.getImage()}" width="50" height="50" style=" border-radius: 50%" alt="" >
                                     <a class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545">${userGoogle.getName()}</a>
                                 </c:otherwise>
                             </c:choose>

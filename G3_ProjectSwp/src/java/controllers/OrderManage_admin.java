@@ -42,6 +42,10 @@ public class OrderManage_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if(req.getSession().getAttribute("AccAdminSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
 
         PaginationObject paging = new PaginationObject();
         int currentPage = 1;
@@ -95,8 +99,9 @@ public class OrderManage_admin extends HttpServlet {
                     req.setAttribute("productList", proList);
                     req.setAttribute("order", order);
                     req.setAttribute("orderDetailList", odDetailList);
-                    req.getRequestDispatcher("order_detail.jsp").forward(req, resp);
-                    break;
+                    req.getRequestDispatcher("order-detail.jsp").forward(req, resp);
+                    return;
+                    //break;
                 case 3:
                     int idCancel = Integer.parseInt(req.getParameter("idCancel"));
                     try {
