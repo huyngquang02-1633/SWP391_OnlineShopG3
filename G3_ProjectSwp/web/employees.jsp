@@ -87,84 +87,46 @@
                             <th>LastName</th>
                             <th>FirstName</th>
                             <th>Gender</th>
-                            <th>DepartmentName</th>
+                            <th>Department Name</th>
+                            <!--<th>Title</th>-->
                             <th>Title</th>
-                            <th>TitleOfCourtesy</th>
                             <th>Birthday</th>
                             <th>HireDate</th>
                             <th>Address</th>
                             <th>Status</th>
                         </tr>
+                        <c:forEach items = "${empList}" var="x" >
                         <tr>
-                            <td><a href="order-detail.html?id=5">#5</a></td>
-                            <td>IPhone 14 Pro Max</td>
-                            <td>2000</td>
-                            <td>pieces</td>
-                            <td>50</td>
-                            <td>Smart Phone</td>
-                            <td>false</td>
-                            <td></td>
+                            <td>${x.getEmployeeID()}</td>
+                            <td>${x.getLastName()}</td> 
+                            <td>${x.getFirstName()}</td>
                             <td>
-                                <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                <a class="delete" href="delete.html?id=5">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="order-detail.html?id=5">#4</a></td>
-                            <td>IPhone 13 Pro Max</td>
-                            <td>1000</td>
-                            <td>pieces</td>
-                            <td>100</td>
-                            <td>Smart Phone</td>
-                            <td>false</td>
-                            <td></td>
+                                <c:if test="${x.isGender() == true}">Male</c:if>
+                                <c:if test="${x.isGender() == false}">Female</c:if>
+                            </td> 
                             <td>
-                                <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                <a class="delete" href="delete.html?id=5">Delete</a>
+                                ${x.getDepartmentID()}
+                            <%--<c:forEach var="emp" items="${empList}">--%> 
+                                <%--<c:if test="${x.getDepartmentID() == emp.getDepartmentID()}"><td>${emp.getFirstName()}</td></c:if>--%>
+                            <%--</c:forEach>--%>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="order-detail.html?id=5">#3</a></td>
-                            <td>Macbook Pro 2021</td>
-                            <td>2100</td>
-                            <td>pieces</td>
-                            <td>20</td>
-                            <td>Labtop</td>
-                            <td>false</td>
-                            <td></td>
+                            <!--<td>${x.getTitle()}</td>--> 
+                            <td>${x.getTitleOfCourtesy()}</td> 
+                            <td>${x.getBirthDate()}</td> 
+                            <td>${x.getHireDate()}</td> 
+                            <td>${x.getAddress()}</td> 
                             <td>
-                                <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                <a class="delete" href="delete.html?id=5">Delete</a>
-                            </td>
+                                <c:if test="${x.isStatus() == true}">Active</c:if>  
+                                <a href="#" onclick="showMess(${x.getEmployeeID()})">Delete</a>
+                            </td> 
+                           
+
+                            
+                                
+
                         </tr>
-                        <tr>
-                            <td><a href="order-detail.html?id=5">#2</a></td>
-                            <td>Dell XPS</td>
-                            <td>2000</td>
-                            <td>pieces</td>
-                            <td>30</td>
-                            <td>Labtop</td>
-                            <td>false</td>
-                            <td></td>
-                            <td>
-                                <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                <a class="delete" href="delete.html?id=5">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="order-detail.html?id=5">#1</a></td>
-                            <td>Bosh Wash</td>
-                            <td>1000</td>
-                            <td>pieces</td>
-                            <td>10</td>
-                            <td>Electronic</td>
-                            <td>false</td>
-                            <td></td>
-                            <td>
-                                <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                <a class="delete" href="delete.html?id=5">Delete</a>
-                            </td>
-                        </tr>
+                    </c:forEach>
+                        
                     </table>
                 </div>
                 <div id="paging">
@@ -186,6 +148,15 @@
 <div id="footer-admin">Mai la anh em</div>
 </div>
 </body>
+<script>
+    function showMess(getEmployeeID) {
+        var option = confirm('are you sure to delete?');
+        if(option === true){
+            window.location.href = 'deleteEmployee_admin?sEmployeeID='+getEmployeeID;
+        }
+    
+}
+</script>
 <script>
     // Get the modal
     var modal = document.getElementById("myModal");

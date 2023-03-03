@@ -11,6 +11,7 @@
                 <div class="container">
                     <div class="row">
                         <section class="h-100 h-custom">
+                            <c:if test="${msgOutOfStock!=null}"><div style="color: red; font-size: 20px;margin: 10px 0px; text-align: center;">${msgOutOfStock}</div></c:if>
                             <div class="container h-100 py-5">
                                 <div class="row d-flex justify-content-center h-100">
                                     <div class="col">
@@ -28,7 +29,7 @@
                                                     </tr>
                                                 </thead>
 
-                                                <tbody> 
+                                                <tbody id="ajax"> 
                                                     <c:forEach items="${cartList}" var="cartItem">
                                                         <tr>
                                                             <td scope="row">
@@ -128,39 +129,40 @@
                                                 </tbody>
                                             </table>
                                             <div class="form-group">
-                                                <form method="post" action="<%=path%>/orderAction" style="text-align: center;">
+                                                <form method="post" action="<%=path%>/orderAction" style="background-color:#c4e3f3 ; text-align: center; width: 55%; padding: 20px 0px; margin: auto auto; box-shadow: 1px 1px 1px 1px; border-radius: 10px;">
                                                     <div id="customer-info">
                                                         <div id="customer-info-content">
-                                                            <h3>Order INFORMATION:</h3>
+                                                            <h3 style="font-size: 35px; color: orange;"><b>Order INFORMATION</b></h3>
                                                             <div id="customer-info-detail">
-                                                                    <input type="text" placeholder="Receiver Name *" name="txtReceiver"/><br/>
-                                                                    <input type="text" placeholder="Email *" name="txtEmail"/><br/>
-                                                                    <input type="text" placeholder="Phone Number *" name="txtPhoneNumber"/><br/>
-                                                                
-                                                                    <input type="text" placeholder="Address *" name="txtAddress"/><br/>
-                                                                    <input type="text" placeholder="Ship City *" name="txtShipCity"/><br/>
+                                                                <input type="text" placeholder="Receiver Name *" name="txtReceiver" style="width: 500px; margin-top: 30px;"/><br/>
+                                                                    <input type="text" placeholder="Email *" name="txtEmail" style="width: 500px; margin-top: 30px;"/><br/>
+                                                                    <input type="text" placeholder="Phone Number *" name="txtPhoneNumber" style="width: 500px; margin-top: 30px;"/><br/>
+                                                                    <input type="text" placeholder="Address *" name="txtAddress" style="width: 500px; margin-top: 30px;"/><br/>
+                                                                    <input type="text" placeholder="Ship City *" name="txtShipCity" style="width: 500px; margin-top: 30px;"/><br/>
+                                                                    <input type="text" placeholder="Voucher ID" name="txtDiscountID" style="width: 500px; margin-top: 30px;"/><br/>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div id="customer-info">
                                                         <div id="customer-info-content">
-                                                            <h3>PAYMENT METHODS:</h3>
+                                                            <h3 style="margin-top: 20px;">PAYMENT METHODS:</h3>
                                                             <div id="customer-info-payment">
                                                                 <div>
-                                                                    <input type="radio" name="rbPaymentMethod" checked/>
+                                                                    <input style="margin-top: 20px;" type="radio" name="rbPaymentMethod" checked/>
                                                                     Payment C.O.D - Payment on delivery
                                                                 </div>
                                                                 <div>
-                                                                    <input type="radio" name="rbPaymentMethod" disabled/>
+                                                                    <input style="margin-top: 20px;" type="radio" name="rbPaymentMethod" disabled/>
                                                                     Payment via online payment gateway
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-success float-right" style="width: 80px;"
+                                                    <button style="margin-top: 20px;" class="btn btn-success float-right" style="width: 100px;"
                                                         type="submit">
                                                         Order
                                                     </button>
+                                                    
                                                 </form>
                                                 
                                             </div>

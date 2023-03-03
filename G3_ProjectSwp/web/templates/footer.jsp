@@ -166,6 +166,61 @@
 <script src="js/appear.js"></script>
 <script src="js/gmap3.js"></script>
 <script src="js/main.js"></script>
+<script>
+                        
+    function searchByName(param){
+        var txtSearch = param.value;
+        $.ajax({
+            url: "/Project_banhang/searchAjax",
+            type: "get", //send it through get method
+            data: {
+                txt: txtSearch
+            },
+            success: function (data) {
+                var row = document.getElementById("content");
+                row.innerHTML = data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+    
+    function plusQuantityCart(param){
+        var changeQuantity = 1;
+        $.ajax({
+            url: "/G3_ProjectSwp/cartAjax",
+            type: "get", //send it through get method
+            data: {
+                txt: txtSearch
+            },
+            success: function (data) {
+                var row = document.getElementById("ajax");
+                row.innerHTML = data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+    function minusQuantityCart(param){
+        var txtSearch = -1;
+        $.ajax({
+            url: "/G3_ProjectSwp/cartAjax",
+            type: "get", //send it through get method
+            data: {
+                txt: txtSearch
+            },
+            success: function (data) {
+                var row = document.getElementById("ajax");
+                row.innerHTML = data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+        </script>  
 </body>
 
 </html>

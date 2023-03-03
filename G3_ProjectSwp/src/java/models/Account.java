@@ -8,6 +8,7 @@ public class Account {
     private int CustomerID;
     private int EmployeeID;
     private int Role;
+    private String Image;
 
     public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role) {
         this.AccountID = AccountID;
@@ -17,7 +18,25 @@ public class Account {
         this.EmployeeID = EmployeeID;
         this.Role = Role;
     }
+    public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role, String Image) {
+        this.AccountID = AccountID;
+        this.Email = Email;
+        this.Password = Password;
+        this.CustomerID = CustomerID;
+        this.EmployeeID = EmployeeID;
+        this.Role = Role;
+        this.Image = Image;
+    }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
+    }
+
+    
     public int getAccountID() {
         return AccountID;
     }
