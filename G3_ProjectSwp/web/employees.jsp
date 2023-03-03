@@ -1,15 +1,59 @@
 <%@include file="templates/header_admin.jsp" %>
-<div id="content-left">
-    <ul>
-        <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
-        <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
-        <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
-        <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
-        <h6><a href="<%=path%>/employeeManager_admin"><li>Employees</li></a></h6>
-    </ul>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span> <br>
+        <div class="path-admin">UPDATE EMPLOYEE INFORMATION</b></div>
+                        <div class="content-main">
+                    <form id="content-main-product">
+                        <div class="content-main-1">
+                            <label>Last Name (*):</label><br/>
+                            <input type="text" name="txtProductName" id=""><br/>
+                            <label>First Name:</label><br/>
+                            <input type="text" name="txtUnitPrice" id=""><br/>
+                            <label>Title:</label><br/>
+                            <input type="text" name="txtUnitPrice" id=""><br/>
+                            <label>Status:</label><br/>
+                            <select name="ddlCategory">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                            </select>
+                        </div>
+                        <div class="content-main-1">
+                            <label>TitleOfCourtesy:</label><br/>
+                            <input type="text" name="txtUnitPrice" id=""><br/>
+                            <label>Address:</label><br/>
+                            <input type="text" name="txtUnitsInStock" id=""><br/>
+                            <label>Department (*):</label><br/>
+                            <select name="ddlCategory">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                                <option value="catid3">Television</option>
+                                <option value="catid4">Electronic</option>
+                            </select>
+                            <br/>
+                        </div>
+                        <div class="content-main-1">
+                            <label>Birth Date:</label><br/>
+                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <label>Hire Date (*):</label><br/>
+                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <label>Gender:</label><br/>
+                            <select name="ddlCategory">
+                                <option value="catid1">Smart Phone</option>
+                                <option value="catid2">Computer</option>
+                            </select>
+                            <br/> 
+                        </div>
+
+                            <input style="margin: auto;" type="submit" value="Save"/>
+                        
+                    </form>
+                </div>
+    </div>
+
 </div>
 <div id="content-right">
-    <div class="path-admin">PRODUCTS LIST</b></div>
+    <div class="path-admin">EMPLOYEES LIST</b></div>
     <div class="content-main">
         <div id="content-main-dashboard">
             <div id="product-title-header">
@@ -17,9 +61,11 @@
                     <b>Filter by Departments:</b>
                     <form>
                         <select name="ddlCategory">
-                            <option value="catid1">1</option>
-                            <option value="catid1">2</option>
-
+                            <option value="catid1">--- Select ---</option>
+                            <option value="catid1">Smart Phone</option>
+                            <option value="catid2">Computer</option>
+                            <option value="catid3">Television</option>
+                            <option value="catid4">Electronic</option>
                         </select>
                         <input type="submit" value="Filter">
                     </form>
@@ -27,55 +73,115 @@
                 <div id="product-title-2" style="width: 55%;">
                     <form style="padding-bottom: 40px;">
                         <input type="text" name="txtSearch" placeholder="Enter employee name to search"/>
-                        <input type="submit" value="Search"/>
-                    </form>
+                        <input type="submit" value="Search"
+                               </form>
+                        </div>
+                        <div id="product-title-3" style="width: 20%;">
+                            <a href="create-employee.jsp">Create a new Employee</a>
+                        </div>
                 </div>
-                <div id="product-title-3" style="width: 20%;">
-                    <a href="create-employee.jsp">Create a new Employee</a>
-                </div>
-            </div>
-            <div id="order-table-admin">
-                <table id="orders">
-                    <tr>
-                        <th>EmployeeID</th>
-                        <th>LastName</th>
-                        <th>FirstName</th>
-<!--                        <th>Gender</th>-->
-                        <th>DepartmentID</th>
-                        <th>Title</th>
-                        <th>TitleOfCourtesy</th>
-                        <th>HireDate</th>
-                        <th>Address</th>
-
-                    </tr>
-                    <c:forEach items = "${empList}" var="x" >
+                <div id="order-table-admin">
+                    <table id="orders">
                         <tr>
-                            <td>${x.employeeID}</td>
-                            <td>${x.lastName}</td> 
-                            <td>${x.firstName}</td>                          
-<!--                            <td>
-                                <%--<c:if test="${x.gender == true}">Male</c:if>--%>
-                                <%--<c:if test="${x.gender == false}">Female</c:if>--%>
-                            </td>-->
-                            <td>${x.departmentID}</td> 
-                            <td>${x.title}</td>
-                            <td>${x.titleOfCourtesy}</td> 
-                            <td>${x.hireDate}</td> 
-                            <td>${x.address}</td> 
-                            <td>
-                                <a href="deleteEmployee_admin?sEmployeeID=${x.employeeID}">Delete</a>
-                            </td>
+                            <th>EmployeeID</th>
+                            <th>LastName</th>
+                            <th>FirstName</th>
+                            <th>Gender</th>
+                            <th>DepartmentName</th>
+                            <th>Title</th>
+                            <th>TitleOfCourtesy</th>
+                            <th>Birthday</th>
+                            <th>HireDate</th>
+                            <th>Address</th>
+                            <th>Status</th>
                         </tr>
-                    </c:forEach>    
+                        <c:forEach items = "${empList}" var="x" >
+                        <tr>
+                            <td>${x.getEmployeeID()}</td>
+                            <td>${x.getLastName()}</td> 
+                            <td>${x.getFirstName()}</td>
+                            <td>
+                                <c:if test="${x.isGender() == true}">Male</c:if>
+                                <c:if test="${x.isGender() == false}">Female</c:if>
+                            </td> 
+                            <td>
+                                ${x.getDepartmentID()}
+                            <%--<c:forEach var="emp" items="${empList}">--%> 
+                                <%--<c:if test="${x.getDepartmentID() == emp.getDepartmentID()}"><td>${emp.getFirstName()}</td></c:if>--%>
+                            <%--</c:forEach>--%>
+                            </td>
+                            <td>${x.getTitle()}</td> 
+                            <td>${x.getTitleOfCourtesy()}</td> 
+                            <td>${x.getBirthDate()}</td> 
+                            <td>${x.getHireDate()}</td> 
+                            <td>${x.getAddress()}</td> 
+                            <td>
+                                <c:if test="${x.isStatus() == true}">Active</c:if>  
+                                <a href="#" onclick="showMess(${x.getEmployeeID()})">Delete</a>
+                            </td> 
+                           
+
+                            
+                                
+
+                        </tr>
+                    </c:forEach>
                         
                     </table>
                 </div>
-                
+                <div id="paging">
+                    <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#">1</a>
+                        <a href="#" class="active">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
+<div id="footer-admin">Mai la anh em</div>
 </div>
 </body>
+<script>
+    function showMess(getEmployeeID) {
+        var option = confirm('are you sure to delete?');
+        if(option === true){
+            window.location.href = 'deleteEmployee_admin?sEmployeeID='+getEmployeeID;
+        }
+    
+}
+</script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
 </html>

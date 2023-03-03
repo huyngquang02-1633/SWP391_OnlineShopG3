@@ -1,13 +1,4 @@
 <%@include file="templates/header_admin.jsp" %>
-<div id="content-left">
-    <ul>
-                   <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
-        <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
-        <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
-        <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
-        <h6><a href="<%=path%>/employees.jsp"><li>Employees</li></a></h6>
-    </ul>
-</div>
 <div id="content-right">
     <div class="path-admin">ORDERS LIST</b></div>
     <div class="content-main">
@@ -24,13 +15,20 @@
                 <table id="orders">
                     <tr>
                         <th>OrderID</th>
+                        <th>CustomerID</th>
+                        <th>EmployeeID</th>
                         <th>OrderDate</th>
                         <th>RequiredDate</th>
                         <th>ShippedDate</th>
-                        <th>Employee</th>
-                        <th>Customer</th>
                         <th>Freight($)</th>
+                        <th>ShipName</th>
+                        <th>ShipAddress</th>
+                        <th>ShipCity</th>
+                        <th>ShipRegion</th>
+                        <th>ShipCountry</th>
                         <th>Status</th>
+
+
                     </tr>
                     <%--<c:forEach items = "${listOrder}" var="x" >
                         <tr>
@@ -61,16 +59,18 @@
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>
                             <td><a href="<%=path%>/orderManage_admin?idOdDetail=${od.getOrderID()}">${od.getOrderID()}</a></td>
+                            <td>${od.getCustomerID()}</td>
+                            <td>${od.getEmployeeID()}</td>
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
                             <td>${od.getShippedDate()}</td>
-                            <c:forEach var="emp" items="${empList}"> 
-                                <c:if test="${od.getEmployeeID()==emp.getEmployeeID()}"><td>${emp.getFirstName()}</td></c:if>
-                            </c:forEach>
-                            <c:forEach var="cus" items="${cusList}"> 
-                                <c:if test="${od.getCustomerID()==cus.getCustomerID()}"><td>${cus.getContactTitle()}</td></c:if>
-                            </c:forEach>
-                            <td>${od.getFreight()}</td>
+                            <td>${od.getFreight()}</td>                  
+                            <td>${od.getShipName()}</td>
+                            <td>${od.getShipAddress()}</td>
+                            <td>${od.getShipCity()}</td> 
+                            <td>${od.getShipRegion()}</td> 
+                            <td>${od.getShipCountry()}</td> 
+                         
                             <c:choose>
                                 <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()!=null}"><td style="color: green;">Completed</td></c:when>
                                 <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()==null}"><td style="color: blue;">Pending|  <button onclick="cancle(${od.getOrderID()},${currentPage})">Cancel</button></td></c:when>

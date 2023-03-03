@@ -1,15 +1,5 @@
 <%@include file="templates/header_admin.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<div id="content-left">
-    <ul>
-        <h6><a href="<%=path%>/dashboard_admin"><li>Dashboard</li></a></h6>
-        <h6><a href="<%=path%>/orderManage_admin"><li>Orders</li></a></h6>
-        <h6><a href="<%=path%>/productManage_admin"><li>Products</li></a></h6>
-        <h6><a href="<%=path%>/customer.jsp"><li>Customers</li></a></h6>
-        <h6><a href="<%=path%>/employeeManager_admin"><li>Employees</li></a></h6>
-    </ul>
-</div>
 <div id="content-right">
     <div class="path-admin">DASHBOARD</b></div>
     <div class="content-main">

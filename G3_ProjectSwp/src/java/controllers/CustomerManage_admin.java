@@ -22,16 +22,33 @@ import DAL.CustomerDAO;
  * @author user
  */
 @WebServlet(name = "CustomerManage_admin", urlPatterns = {"/customerManage_admin"})
-public class CustomerManage_admin extends HttpServlet{
+public class CustomerManage_admin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        PaginationObject paging = new PaginationObject();
+
+        int currentPage = 1;
+        if (req.getParameter("currentPage") != null) {
+            currentPage = Integer.parseInt(req.getParameter("currentPage"));
+        }
+        ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
+        req.setAttribute("cusList", cusList);
+        List<Customer> listInCurrentPage = paging.getListInCurrentPage(cusList, currentPage);
+
+        int numberOfPage = paging.getNumberOfPage(cusList);
+        req.setAttribute("numberOfPage", numberOfPage);
+
+        req.getSession().setAttribute("currentPage", currentPage);
+        req.getSession().setAttribute("cusList", cusList);
+        req.setAttribute("listInCurrentPage", listInCurrentPage);
+
+        req.getRequestDispatcher("customer.jsp").forward(req, resp);
     }
-    
+
 }
