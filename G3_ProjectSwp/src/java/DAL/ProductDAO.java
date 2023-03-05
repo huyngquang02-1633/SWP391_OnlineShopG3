@@ -1,4 +1,4 @@
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -15,11 +15,12 @@ import java.util.ArrayList;
  *
  * @author ADMIN
  */
-public class ProductDAO extends DBContext{
-    public Product getObject(ResultSet rs){
+public class ProductDAO extends DBContext {
+
+    public Product getObject(ResultSet rs) {
         Product product = null;
         try {
-            while (rs.next()) { 
+            while (rs.next()) {
                 int ProductID = rs.getInt("ProductID");
                 String ProductName = rs.getString("ProductName");
                 int CategoryID = rs.getInt("CategoryID");
@@ -42,16 +43,17 @@ public class ProductDAO extends DBContext{
                 boolean Discontinued = rs.getBoolean("Discontinued");
                 double aveRating = getAveRatingOfProduct(ProductID);
                 int availableInStock = getAvailableInStock(ProductID);
-                product = new Product(ProductID, ProductName, CategoryID, GenreID, 
-                        CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight, 
-                        NumberOfPage, Format, Image, PublishDate, PublishingLicense, Description, Discontinued, 
+                product = new Product(ProductID, ProductName, CategoryID, GenreID,
+                        CoverPrice, SalePrice, AuthorID, Translator, PublisherID, SupplierID, Language, Size, Weight,
+                        NumberOfPage, Format, Image, PublishDate, PublishingLicense, Description, Discontinued,
                         aveRating, availableInStock);
             }
         } catch (Exception e) {
         }
         return product;
     }
-    public ArrayList<Product> getObjectList(ResultSet rs){
+
+    public ArrayList<Product> getObjectList(ResultSet rs) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             while (rs.next()) {
@@ -79,111 +81,112 @@ public class ProductDAO extends DBContext{
                 double aveRating = getAveRatingOfProduct(ProductID);
                 int availableInStock = getAvailableInStock(ProductID);
                 productList.add(new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID,
-                        Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format, 
+                        Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format,
                         Image, PublishDate, PublishingLicense, Description, Discontinued, aveRating, availableInStock));
             }
         } catch (Exception e) {
         }
         return productList;
     }
+
     public ArrayList<Product> getProducts(boolean isAdmin) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products";
             String sql2 = "select * from Products where Discontinued=?";
             PreparedStatement ps;
-            if(isAdmin==true){ 
-                ps= connection.prepareStatement(sql);
-            }else{
-                 ps= connection.prepareStatement(sql2);
-                 ps.setInt(1, 0);
+            if (isAdmin == true) {
+                ps = connection.prepareStatement(sql);
+            } else {
+                ps = connection.prepareStatement(sql2);
+                ps.setInt(1, 0);
             }
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }
         return productList;
     }
-    
-    public ArrayList<Product> getProductsByCatNSearch(String sample,int CatID,boolean isAdmin) {
+
+    public ArrayList<Product> getProductsByCatNSearch(String sample, int CatID, boolean isAdmin) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where CategoryID=? AND ProductName like ?";
             String sql2 = "select * from Products where CategoryID=? AND ProductName like ? AND Discontinued=?";
             PreparedStatement ps;
-            if(isAdmin==true){ 
-                ps= connection.prepareStatement(sql);
+            if (isAdmin == true) {
+                ps = connection.prepareStatement(sql);
                 ps.setInt(1, CatID);
-                ps.setString(2, "%"+sample+"%");
-            }else{
-                ps= connection.prepareStatement(sql2);
+                ps.setString(2, "%" + sample + "%");
+            } else {
+                ps = connection.prepareStatement(sql2);
                 ps.setInt(1, CatID);
-                ps.setString(2, "%"+sample+"%");
+                ps.setString(2, "%" + sample + "%");
                 ps.setInt(3, 0);
             }
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }
         return productList;
     }
-    
+
     public ArrayList<Product> getHotProduct() {
         ArrayList<Product> productList = new ArrayList<>();
         try {
-            String sql = "select top 4 * from (select COUNT(OrderID) as numberOrder, ProductID from [Order Details] \n" +
-"group by ProductID) as A inner join Products on A.ProductID=Products.ProductID ORDER BY numberOrder DESC";
+            String sql = "select top 4 * from (select COUNT(OrderID) as numberOrder, ProductID from [Order Details] \n"
+                    + "group by ProductID) as A inner join Products on A.ProductID=Products.ProductID ORDER BY numberOrder DESC";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }
         return productList;
     }
-    
+
     public Product getProductInfor(int proID) {
-        Product product = null; 
+        Product product = null;
         try {
-            String sql = "select * from Products where ProductID = ? "; 
-            PreparedStatement ps = connection.prepareStatement(sql); 
-            ps.setInt(1, proID);  
-            ResultSet rs = ps.executeQuery();  
+            String sql = "select * from Products where ProductID = ? ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, proID);
+            ResultSet rs = ps.executeQuery();
             product = getObject(rs);
         } catch (Exception e) {
         }
         return product;
     }
-    
+
     public Product checkProExistInOrder(int proID) {
-        Product product = null; 
+        Product product = null;
         try {
-            String sql = "select DISTINCT * from Products p, [Order Details] od where p.ProductID=od.ProductID AND p.ProductID=?"; 
-            PreparedStatement ps = connection.prepareStatement(sql); 
-            ps.setInt(1, proID);  
-            ResultSet rs = ps.executeQuery();  
+            String sql = "select DISTINCT * from Products p, [Order Details] od where p.ProductID=od.ProductID AND p.ProductID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, proID);
+            ResultSet rs = ps.executeQuery();
             product = getObject(rs);
         } catch (Exception e) {
         }
         return product;
     }
-    
+
     public Product getComingSoon() {
-        Product product = null; 
+        Product product = null;
         try {
-            String sql = "select TOP 1 * from Products where PublishDate > getdate() order by PublishDate ASC"; 
-            PreparedStatement ps = connection.prepareStatement(sql); 
-            ResultSet rs = ps.executeQuery();  
+            String sql = "select TOP 1 * from Products where PublishDate > getdate() order by PublishDate ASC";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             product = getObject(rs);
         } catch (Exception e) {
         }
         return product;
     }
-    
-    public double getAveRatingOfProduct(int productID){
-        double aveRating =0;
+
+    public double getAveRatingOfProduct(int productID) {
+        double aveRating = 0;
         try {
             String sql = "select Avg(CAST(Rating AS float)) as [aveRating] from Reviews where ProductID= ?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -196,9 +199,9 @@ public class ProductDAO extends DBContext{
         }//finally{ connection.close();}
         return aveRating;
     }
-    
-    public int getAvailableInStock(int productID){
-        int availableInStock =0;
+
+    public int getAvailableInStock(int productID) {
+        int availableInStock = 0;
         int Pending = 0;
         try {
             String sql1 = "select SUM(UnitsInStock) as [AvailableInStock] from Inventories where ProductID=?";
@@ -219,21 +222,21 @@ public class ProductDAO extends DBContext{
         }//finally{ connection.close();}
         return availableInStock - Pending;
     }
-   
-    
+
     public ArrayList<Product> getProductbySearch(String sample) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where ProductName like ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, "%"+sample+"%");
+            ps.setString(1, "%" + sample + "%");
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }// finally{connection.close();}
         return productList;
     }
+
     public ArrayList<Product> getProductListByCategoryID(int catID) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
@@ -243,10 +246,11 @@ public class ProductDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }// finally{connection.close();}
         return productList;
     }
+
     public ArrayList<Product> getProductListByGenreID(int genreID) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
@@ -256,10 +260,11 @@ public class ProductDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }// finally{connection.close();}
         return productList;
     }
+
     public ArrayList<Product> getProductByAuthorID(int authorID) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
@@ -269,36 +274,36 @@ public class ProductDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }// finally{connection.close();}
         return productList;
     }
-    
+
     public ArrayList<Product> getNewReleaseList(int mode) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
-            String sql="";
-            PreparedStatement ps ;
-            if(mode != 0){
+            String sql = "";
+            PreparedStatement ps;
+            if (mode != 0) {
                 sql = "select TOP 3 * from Products WHERE PublishDate IS NOT NULL AND PublishDate < getdate() AND Discontinued = 0  Order by PublishDate DESC";
                 ps = connection.prepareStatement(sql);
                 //ps.setInt(1, mode);
-            }else{
+            } else {
                 sql = "select * from Products WHERE PublishDate IS NOT NULL AND Discontinued = 0 Order by PublishDate DESC";
                 ps = connection.prepareStatement(sql);
             }
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
-            
+
         }// finally{connection.close();}
         return productList;
     }
-    
+
     public void update(Product p) throws SQLException {
         try {
             //connection = DBContext.getInstance().getConnection();
-            
+
             String sql = "update Products SET "
                     + "ProductName = ?, "
                     + "CategoryID = ?, "
@@ -321,7 +326,7 @@ public class ProductDAO extends DBContext{
                     + "Discontinued = ? "
                     + "where ProductID = ?";
 
-            PreparedStatement ps = connection.prepareStatement(sql); 
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, p.getProductName());
             ps.setInt(2, p.getCategoryID());
             ps.setInt(3, p.getGenreID());
@@ -348,26 +353,27 @@ public class ProductDAO extends DBContext{
             //DBContext.releaseJBDCObject(rs, ps, connection);
         }
     }
-    
+
     public int Delete(int ID) throws SQLException {
-        int result=0;
+        int result = 0;
         String sql1 = "DELETE FROM Products WHERE ProductID = ?";
         //String sql2 = "delete from [Order Details] where ProductID = ?";
         try {
             //connection = DBContext.getInstance().getConnection();
-            PreparedStatement ps1 = connection.prepareStatement(sql1); 
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
             //PreparedStatement ps2 = connection.prepareStatement(sql2); 
             ps1.setInt(1, ID);
             //ps2.setInt(1, ID);
-            result=ps1.executeUpdate();
+            result = ps1.executeUpdate();
             //ps2.executeUpdate();
         } catch (SQLException e) {
             connection.rollback();
         } finally {
             //DBContext.releaseJBDCObject(rs, ps, connection);
         }
-        return result>0?1:0;
+        return result > 0 ? 1 : 0;
     }
+
     public void CreateProduct(Product p) throws SQLException {
         String sql = "insert into Products("
                 + "ProductName,"
@@ -390,9 +396,9 @@ public class ProductDAO extends DBContext{
                 + "Description,"
                 + "Discontinued,"
                 + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try {            
+        try {
             //connection = DBContext.getInstance().getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql); 
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, p.getProductName());
             ps.setInt(2, p.getCategoryID());
             ps.setInt(3, p.getGenreID());
@@ -419,10 +425,55 @@ public class ProductDAO extends DBContext{
             //DBContext.releaseJBDCObject(rs, ps, connection);
         }
     }
+
+    public void deleteProduct(int id) {
+        String sql = "select * from [Order Details] where ProductID=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int OrderID = rs.getInt("OrderID");
+                sql = "delete from Reviews where OrderID=?";
+                st = connection.prepareStatement(sql);
+                st.setInt(1, OrderID);
+                st.executeUpdate();
+            }
+            sql = "delete from Inventories where ProductID=?";
+            st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            sql = "delete from [Order Details] where ProductID=?";
+            st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            sql = "delete from Products where ProductID=?";
+            st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     
+    
+    public ArrayList<Product> SearchProductByName(String search) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where ProductName like ?";
+             PreparedStatement st=connection.prepareStatement(sql);
+            st.setString(1, "%"+search+"%");
+            ResultSet rs=st.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
+        return productList;
+    }
+
     public static void main(String[] args) {
         ProductDAO abc = new ProductDAO();
         System.out.println(abc.getAvailableInStock(1));
     }
-            
+
 }
