@@ -279,6 +279,20 @@ public class ProductDAO extends DBContext {
         return productList;
     }
 
+    public ArrayList<Product> getProductListBySupplierID(int SupplierID) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where SupplierID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, SupplierID);
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
+        return productList;
+    }
+
     public ArrayList<Product> getNewReleaseList(int mode) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
