@@ -14,7 +14,7 @@ import DAL.ProductDAO;
  */
 public class PaginationObject<T> {
 
-    private static int numberOfRowEachPage = 5;
+    private static int numberOfRowEachPage = 10;
 
     public int getNumberOfRowEachPage() {
         return numberOfRowEachPage;

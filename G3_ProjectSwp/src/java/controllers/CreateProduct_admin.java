@@ -26,7 +26,11 @@ public class CreateProduct_admin extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       CrudDAO dao=new CrudDAO();
+       if(req.getSession().getAttribute("AccAdminSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
+        CrudDAO dao=new CrudDAO();
         List<Category> cate=dao.getAllCategory();
     }
 
