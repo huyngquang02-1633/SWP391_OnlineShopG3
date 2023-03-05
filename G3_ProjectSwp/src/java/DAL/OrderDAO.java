@@ -14,9 +14,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Customer;
+import models.Discount;
 
 /**
  *
@@ -46,6 +48,7 @@ public class OrderDAO extends DBContext{
             }
         } catch (Exception e) {
         }
+        Collections.reverse(orderList);
         return orderList;
     }
     public ArrayList<OrderDetail> getObjectOrderDetailList(ResultSet rs){
@@ -249,7 +252,7 @@ public class OrderDAO extends DBContext{
         }//finally{ connection.close();}
         
     }
-    public void createOrderInDB(Order od,int accountID) throws SQLException{
+    public void createOrderInDB(Order od,int accountID, String DiscountID) throws SQLException{
         try {
             String sql = "exec OrderAction ?,?,?,?,?,?,?";
             
@@ -260,7 +263,7 @@ public class OrderDAO extends DBContext{
             ps1.setString(4, od.getShipAddress());
             ps1.setString(5, od.getShipCity());
             ps1.setString(6, od.getShipPostalCode());
-            ps1.setString(7, "SALE3/3/2023");
+            ps1.setString(7, DiscountID);
             ps1.executeUpdate();
         } catch (Exception e) {
             connection.rollback();
@@ -300,6 +303,29 @@ public class OrderDAO extends DBContext{
         } catch (Exception e) {
         }//finally{ connection.close();}
         return maxOrderID +1;
+    }
+    
+    public Discount getVoucher(String voucher){
+        Discount discount =null;
+        try {
+            String sql = "select * from Discount where DiscountID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, voucher);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String DiscountID = rs.getString("DiscountID");
+                String itle = rs.getString("Title");
+                String Description = rs.getString("Description");
+                Date StartDate = rs.getDate("StartDate");
+                Date EndDate = rs.getDate("EndDate");
+                double MinOrderValue = rs.getDouble("MinOrderValue");
+                double Percentage = rs.getDouble("Percentage");
+                int Type = rs.getInt("Type");
+                discount = new Discount(DiscountID, itle, Description, StartDate, EndDate, MinOrderValue, Percentage, Type);
+            }
+        } catch (Exception e) {
+        }//finally{ connection.close();}
+        return discount;
     }
     
     

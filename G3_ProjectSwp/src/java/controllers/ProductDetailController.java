@@ -44,14 +44,17 @@ public class ProductDetailController extends HttpServlet{
             return;
         }
         
+        ProductDAO proDAO = new ProductDAO();
         int proID = Integer.parseInt(req.getParameter("proID"));
-        Product product = new ProductDAO().getProductInfor(proID);
+        Product product = proDAO.getProductInfor(proID);
 
         ArrayList<Category> cateList = new CategoryDAO().getCategory();
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
         ArrayList<Supplier> supplierList = new SupplierDAO().getSupplierList();
+        ArrayList<Product> similarProductList = proDAO.getProductListByGenreID(product.getGenreID());
         Product comingSoon = new ProductDAO().getComingSoon();
+        int availableInStock = proDAO.getAvailableInStock(proID);
         
         req.setAttribute("productInfor", product);
         req.setAttribute("cateList", cateList);
@@ -59,6 +62,8 @@ public class ProductDetailController extends HttpServlet{
         req.setAttribute("genreList", genreList);
         req.setAttribute("supplierList", supplierList);
         req.setAttribute("comingSoon", comingSoon);
+        req.setAttribute("availableInStock", availableInStock);
+        req.setAttribute("similarProductList", similarProductList);
         
         req.getRequestDispatcher("/productdetail.jsp").forward(req, resp);
     }
