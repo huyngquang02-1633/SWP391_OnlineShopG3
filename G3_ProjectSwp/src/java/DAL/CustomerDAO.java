@@ -165,20 +165,38 @@ public class CustomerDAO extends DBContext{
             ResultSet rs=st.executeQuery();
             while(rs.next()){
                 int AccountID=rs.getInt("AccountID");
-                String sql2="delete from Cart where AccountID=?";
-                st=connection.prepareStatement(sql2);
+                sql="delete from Cart where AccountID=?";
+                st=connection.prepareStatement(sql);
                 st.setInt(1, AccountID);
                 st.executeUpdate();
-                String sql3="delete from Accounts where CustomerID=?";
-                st=connection.prepareStatement(sql3);
+                sql="delete from Accounts where CustomerID=?";
+                st=connection.prepareStatement(sql);
                 st.setInt(1, id);
                 st.executeUpdate();
-                String sql4="delete from Customers where CustomerID=?";
-                st=connection.prepareStatement(sql4);
-                st.setInt(1, id);
-                st.executeUpdate();
-                
             }
+            
+            sql="select OrderID from orders where CustomerId=?";
+            st=connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs2=st.executeQuery();
+            while(rs2.next()){
+                int OrderID=rs2.getInt("OrderID");
+                sql="delete from [Order Details] where OrderID=?";
+                st=connection.prepareStatement(sql);
+                st.setInt(1, OrderID);
+                st.executeUpdate();
+            }
+             sql="delete from Orders where CustomerID=?";
+                st=connection.prepareStatement(sql);
+                st.setInt(1, id);
+                st.executeUpdate();
+            sql="delete from customers where CustomerId=?";
+            st=connection.prepareStatement(sql);
+            st.setInt(1,id);
+            st.executeUpdate();
+            
+          
+            
         } catch (Exception e) {
             System.out.println(e);
         }

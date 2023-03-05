@@ -60,7 +60,7 @@
                     </form>
                 </div>
                 <div id="product-title-2" style="width: 55%;">
-                    <form style="padding-bottom: 40px;" action="search" method="post">
+                    <form style="padding-bottom: 40px;" action="search_cus" method="post">
                         <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter customer name to search"/>
                         <input type="submit" value="Search">
                      </form>
