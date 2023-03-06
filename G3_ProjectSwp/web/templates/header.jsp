@@ -36,899 +36,884 @@
 </head>
 <body>
     <header id="tg-header" class="tg-header tg-haslayout">
-        <div class="tg-topbar">
+        <div class="tg-middlecontainer">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <ul class="tg-addnav">
-                            <li>
-                                <a href="contactus.jsp">
-                                    <i class="icon-envelope"></i>
-                                    <em>Contact</em>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <i class="icon-question-circle"></i>
-                                    <em>Help</em>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tg-userlogin dropdown">
-                            <!--<<<<<<< Updated upstream-->
-                            <c:choose>
-                                <c:when test="${AccCustomerSession == null}">
-                                    <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="50" height="50" style=" border-radius: 50%" alt="" >
-                                    <a class="login" href="login.jsp"style="text-decoration:none; color: #454545">Login</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <img id="imgprofile" src="${AccCustomerSession.getImage()}" width="50" height="50" style=" border-radius: 50%" alt="" >
-                                    <a class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545">${userGoogle.getName()}</a>
-                                </c:otherwise>
-                            </c:choose>
+                        <strong class="tg-logo"><a href="<%=path%>/homepage"><img src="<%=path%>/images/logo.png"
+                                                                                  alt="company name here"></a></strong> 
+                        <div class="tg-wishlistandcart">
+                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
+
+                                <c:choose>
+                                    <c:when test="${AccCustomerSession == null}">
+                                        <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="25" height="25" style=" border-radius: 50%" alt="" >
+                                        <a class="login tg-btnthemedropdown" style="display: inline-block;" href="login.jsp"style="text-decoration:none; color: #454545"><span>Login</span></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img id="imgprofile" src="${AccCustomerSession.getImage()}" width="25   " height="25" style=" border-radius: 50%" alt="" >
+                                        <a  class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545" id="tg-wishlisst" class="tg-btnthemedropdown"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>${userGoogle.getName()}</span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
 
 
-                            <div class="account" >
-                                <a id="nameprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
+                                <a id="nameprofile" style="display: inline-block;" class="account tg-btnthemedropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>User</span></a>
 
-
-                                <ul class="dropdown-menu">
-                                    <li style="text-align: center;"><a class="dropdown-item" href="<%=path%>/account/profile">Profile</a></li>
-                                    <li style="text-align: center;"><a class="dropdown-item" href="<%=path%>/account/profile_myOrder">My Orders</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li style="text-align: center;"><a class="dropdown-item" href="#" onclick="logout()">Log out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tg-middlecontainer">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <strong class="tg-logo"><a href="<%=path%>/homepage"><img src="<%=path%>/images/logo.png"
-                                                                              alt="company name here"></a></strong> 
-                    <div class="tg-wishlistandcart">
-                        <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-                            <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="tg-themebadge">3</span>
-                                <i class="icon-heart"></i>
-                                <span>Wishlist</span>
-                            </a>
-                            <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-                                <div class="tg-description">
-                                    <p>No products were added to the wishlist!</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown tg-themedropdown tg-minicartdropdown">
-                            <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="tg-themebadge">${cartSize}</span>
-                                <i class="icon-cart"></i>
-                                <span>$123.00</span>
-                            </a>
-                            <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
-                                <c:forEach items="${cartList}" var="cartItem">
-                                    <c:forEach items="${productList}" var="product">
-                                        <c:if test="${cartItem.getProductID() == product.getProductID()}">
-                                            <div class="tg-minicartbody">
-                                                <div class="tg-minicarproduct">
-
-                                                    <figure>
-                                                        <img src="<%=path%>/images/products/img-01.jpg" alt="image description">
-                                                    </figure>
-                                                    <div class="tg-minicarproductdata">
-                                                        <h5><a href="javascript:void(0);">${product.getProductName()}</a></h5>
-                                                        <h6><a href="javascript:void(0);">${product.getSalePrice()}</a></h6>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:forEach>
-
-                                <div class="tg-minicartfoot">
-                                    <a class="tg-btnemptycart" href="javascript:void(0);">
-                                        <i class="fa fa-trash-o"></i>
-                                        <span>Clear Your Cart</span>
-                                    </a>
-                                    <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
-                                    <div class="tg-btns">
-
-                                        <a class="tg-btn tg-active" href="<%=path%>/account/cart">View Cart</a>
-
-                                        <a class="tg-btn" href="javascript:void(0);">Checkout</a>
+                                <div class="dropdown-menu tg-themedropdownmenu" style="width: 50px" aria-labelledby="tg-wishlisst">
+                                    <div class="tg-description">
+                                        <a href="<%=path%>/account/profile">Profile</a>
+                                    </div>
+                                    <div class="tg-description">
+                                        <a href="<%=path%>/account/profile_myOrder">My Orders</a>
+                                    </div>
+                                    <div class="tg-description">
+                                        <a href="#" onclick="logout()">Log out</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tg-searchbox">
-                        <form class="tg-formtheme tg-formsearch" method="POST" action="<%=path%>/productList">
-                            <fieldset>
-                                <input type="text" name="txtSearch" class="typeahead form-control"
-                                       placeholder="Search by Title, Author">
-                                <button type="submit"><i class="icon-magnifier"></i></button>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tg-navigationarea">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <nav id="tg-nav" class="tg-nav">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                    data-target="#tg-navigation" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
-                            <ul>
-                                <li><a href="<%=path%>/homepage">Home</a></li>
-                                <li class="menu-item-has-children menu-item-has-mega-menu">
-                                    <a href="javascript:void(0);">All Categories</a>
-                                    <div class="mega-menu">
-                                        <ul class="tg-themetabnav" role="tablist">
-                                            <c:forEach items="${cateList}" var="cate">
-                                                <li role="presentation" class="active">
-                                                    <a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}" aria-controls="artandphotography"
-                                                       role="tab" data-toggle="tab">${cate.getCategoryName()}</a>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                        <div class="tab-content tg-themetabcontent">
-                                            <div role="tabpanel" class="tab-pane active" id="artandphotography">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
+
+                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
+                                <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="tg-themebadge">3</span>
+                                    <i class="icon-heart"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                                <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
+                                    <div class="tg-description">
+                                        <p>No products were added to the wishlist!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown tg-themedropdown tg-minicartdropdown">
+                                <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="tg-themebadge">${cartSize}</span>
+                                    <i class="icon-cart"></i>
+                                    <span>$123.00</span>
+                                </a>
+                                <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
+                                    <c:forEach items="${cartList}" var="cartItem">
+                                        <c:forEach items="${productList}" var="product">
+                                            <c:if test="${cartItem.getProductID() == product.getProductID()}">
+                                                <div class="tg-minicartbody">
+                                                    <div class="tg-minicarproduct">
+
+                                                        <figure>
+                                                            <img src="<%=path%>/images/products/img-01.jpg" alt="image description">
+                                                        </figure>
+                                                        <div class="tg-minicarproductdata">
+                                                            <h5><a href="javascript:void(0);">${product.getProductName()}</a></h5>
+                                                            <h6><a href="javascript:void(0);">${product.getSalePrice()}</a></h6>
                                                         </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="<%=path%>/productList">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="biography">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="<%=path%>/productList">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="childrensbook">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="craftandhobbies">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="crimethriller">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="fantasyhorror">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="fiction">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="fooddrink">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="graphicanimemanga">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/images/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="sciencefiction">
-                                                <ul>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Architecture</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Tough As Nails</a></li>
-                                                            <li><a href="products.jsp">Pro Grease Monkey</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Building Memories</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Bulldozer Boyz</a></li>
-                                                            <li><a href="products.jsp">Build Or Leave On Us</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>Art Forms</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Consectetur
-                                                                    adipisicing</a></li>
-                                                            <li><a href="products.jsp">Aelit sed do eiusmod</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Tempor incididunt
-                                                                    labore</a></li>
-                                                            <li><a href="products.jsp">Dolore magna aliqua</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Ut enim ad minim</a>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="tg-linkstitle">
-                                                            <h2>History</h2>
-                                                        </div>
-                                                        <ul>
-                                                            <li><a href="products.jsp">Veniam quis nostrud</a>
-                                                            </li>
-                                                            <li><a href="products.jsp">Exercitation</a></li>
-                                                            <li><a href="products.jsp">Laboris nisi ut
-                                                                    aliuip</a></li>
-                                                            <li><a href="products.jsp">Commodo conseat</a></li>
-                                                            <li><a href="products.jsp">Duis aute irure</a></li>
-                                                        </ul>
-                                                        <a class="tg-btnviewall" href="products.jsp">View
-                                                            All</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <figure><img src="<%=path%>/s/img-01.png"
-                                                                     alt="image description"></figure>
-                                                        <div class="tg-textbox">
-                                                            <h3>More Than<span>12,0657,53</span>Books Collection
-                                                            </h3>
-                                                            <div class="tg-description">
-                                                                <p>Consectetur adipisicing elit sed doe eiusmod
-                                                                    tempor incididunt laebore toloregna aliqua
-                                                                    enim.</p>
-                                                            </div>
-                                                            <a class="tg-btn" href="products.jsp">view all</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:forEach>
+
+                                    <div class="tg-minicartfoot">
+                                        <a class="tg-btnemptycart" href="javascript:void(0);">
+                                            <i class="fa fa-trash-o"></i>
+                                            <span>Clear Your Cart</span>
+                                        </a>
+                                        <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
+                                        <div class="tg-btns">
+
+                                            <a class="tg-btn tg-active" href="<%=path%>/account/cart">View Cart</a>
+
+                                            <a class="tg-btn" href="javascript:void(0);">Checkout</a>
                                         </div>
                                     </div>
-                                </li>
-
-                                <li><a href="products.jsp">Best Selling</a></li>
-                                <li><a href="products.jsp">Weekly Sale</a></li>
-                                <li><a href="authors.jsp">Authors</a></li>
-
-
-                                <li><a href="contactus.jsp">Contact</a></li>
-                                <li><a href="aboutus.jsp">About Us</a></li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
-                    </nav>
+
+                        <div class="tg-searchbox">
+                            <form class="tg-formtheme tg-formsearch" style="width: 90%;" method="POST" action="<%=path%>/productList">
+                                <fieldset>
+                                    <input type="text" name="txtSearch" class="typeahead form-control"
+                                           placeholder="Search by Title, Author">
+                                    <button type="submit"><i class="icon-magnifier"></i></button>
+                                </fieldset>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+        <div class="tg-navigationarea">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <nav id="tg-nav" class="tg-nav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                        data-target="#tg-navigation" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                                <ul>
+                                    <li><a href="<%=path%>/homepage">Home</a></li>
+                                    <li class="menu-item-has-children menu-item-has-mega-menu">
+                                        <a href="javascript:void(0);">All Categories</a>
+                                        <div class="mega-menu">
+                                            <ul class="tg-themetabnav" role="tablist">
+                                                <c:forEach items="${cateList}" var="cate">
+                                                    <li role="presentation" class="active">
+                                                        <a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}" aria-controls="artandphotography"
+                                                           role="tab" data-toggle="tab">${cate.getCategoryName()}</a>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                            <div class="tab-content tg-themetabcontent">
+                                                <div role="tabpanel" class="tab-pane active" id="artandphotography">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="<%=path%>/productList">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="biography">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="<%=path%>/productList">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="childrensbook">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="craftandhobbies">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="crimethriller">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="fantasyhorror">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="fiction">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="fooddrink">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="graphicanimemanga">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/images/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="sciencefiction">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Architecture</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Tough As Nails</a></li>
+                                                                <li><a href="products.jsp">Pro Grease Monkey</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Building Memories</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Bulldozer Boyz</a></li>
+                                                                <li><a href="products.jsp">Build Or Leave On Us</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>Art Forms</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Consectetur
+                                                                        adipisicing</a></li>
+                                                                <li><a href="products.jsp">Aelit sed do eiusmod</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Tempor incididunt
+                                                                        labore</a></li>
+                                                                <li><a href="products.jsp">Dolore magna aliqua</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Ut enim ad minim</a>
+                                                                </li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="tg-linkstitle">
+                                                                <h2>History</h2>
+                                                            </div>
+                                                            <ul>
+                                                                <li><a href="products.jsp">Veniam quis nostrud</a>
+                                                                </li>
+                                                                <li><a href="products.jsp">Exercitation</a></li>
+                                                                <li><a href="products.jsp">Laboris nisi ut
+                                                                        aliuip</a></li>
+                                                                <li><a href="products.jsp">Commodo conseat</a></li>
+                                                                <li><a href="products.jsp">Duis aute irure</a></li>
+                                                            </ul>
+                                                            <a class="tg-btnviewall" href="products.jsp">View
+                                                                All</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            <figure><img src="<%=path%>/s/img-01.png"
+                                                                         alt="image description"></figure>
+                                                            <div class="tg-textbox">
+                                                                <h3>More Than<span>12,0657,53</span>Books Collection
+                                                                </h3>
+                                                                <div class="tg-description">
+                                                                    <p>Consectetur adipisicing elit sed doe eiusmod
+                                                                        tempor incididunt laebore toloregna aliqua
+                                                                        enim.</p>
+                                                                </div>
+                                                                <a class="tg-btn" href="products.jsp">view all</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
-<script src="<%=path%>/js/header.js" type="text/javascript"></script>
+                                    <li><a href="products.jsp">Best Selling</a></li>
+                                    <li><a href="products.jsp">Weekly Sale</a></li>
+                                    <li><a href="authors.jsp">Authors</a></li>
+
+
+                                    <li><a href="contactus.jsp">Contact</a></li>
+                                    <li><a href="aboutus.jsp">About Us</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script src="<%=path%>/js/header.js" type="text/javascript"></script>

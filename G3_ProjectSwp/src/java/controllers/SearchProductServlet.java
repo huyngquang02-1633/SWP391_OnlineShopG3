@@ -4,7 +4,9 @@
  */
 package controllers;
 
+import DAL.CategoryDAO;
 import DAL.CustomerDAO;
+import DAL.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,14 +15,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import models.Customer;
+import models.Product;
 
 /**
  *
  * @author kthq2
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "SearchProductServlet", urlPatterns = {"/search_product"})
+public class SearchProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +35,15 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String search=request.getParameter("txtSearch");
-        CustomerDAO dao=new CustomerDAO();
-        List<Customer> listInCurrentPage=dao.searchByName(search);
-        request.setAttribute("listInCurrentPage",listInCurrentPage);
-        request.setAttribute("searchValue", search);
-        request.getRequestDispatcher("customer.jsp").forward(request, response);
-        
-       }
-    
+        String search=request.getParameter("txtSearch");
+        ProductDAO dao=new ProductDAO();
+        List<Product> list=dao.SearchProductByName(search);
+                request.setAttribute("searchValue", search);
+
+        request.setAttribute("productList", list);
+        request.setAttribute("categoryList", new CategoryDAO().getCategory());
+                request.getRequestDispatcher("/product.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -69,7 +71,9 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+              processRequest(request, response);
+
+
     }
 
     /**
