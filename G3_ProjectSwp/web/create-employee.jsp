@@ -25,6 +25,9 @@
                     <select name="departmentID">
                         <option value="empid1">1</option>
                         <option value="empid2">2</option>
+                        <option value="empid3">3</option>
+                        <option value="empid4">4</option>
+                        <option value="empid5">5</option>
                     </select>
                     <br/>
                 </div>
