@@ -18,8 +18,8 @@ import java.io.PrintWriter;
  *
  * @author Thanh Dao
  */
-@WebServlet(name = "DeleteEmployee_admin", urlPatterns = {"/deleteEmployee_admin"})
-public class DeleteEmployee_admin extends HttpServlet {
+@WebServlet(name = "ChangeStatusEmployee_admin", urlPatterns = {"/changeStatusEmployee_admin"})
+public class ChangeStatusEmployee_admin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class DeleteEmployee_admin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteEmployee_admin</title>");            
+            out.println("<title>Servlet ChangeStatusEmployee_admin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteEmployee_admin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangeStatusEmployee_admin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,13 +59,9 @@ public class DeleteEmployee_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getSession().getAttribute("AccAdminSession")==null){
-            response.sendRedirect(request.getContextPath()+"/404error.jsp");
-            return;
-        }
         String EmployeeID = request.getParameter("sEmployeeID");
         EmployeeDAO dao = new EmployeeDAO();
-        dao.deleteEmployee(EmployeeID);       
+        dao.changeStatusEmployee(EmployeeID);
         response.sendRedirect("employeeManager_admin");
     }
 
@@ -80,7 +76,7 @@ public class DeleteEmployee_admin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
