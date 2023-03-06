@@ -116,10 +116,10 @@
                                 </form>
                             </div>
                             <div id="product-title-2" style="width: 55%;">
-                                <form>
-                                    <input type="text" name="txtSearch" placeholder="Enter product name to search"/>
-                                    <input type="submit" value="Search"
-                                </form>
+                                <form style="padding-bottom: 40px;" action="search_product" method="post">
+                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter product name to search"/>
+                        <input type="submit" value="Search">
+                     </form>
                             </div>
                             <div id="product-title-3" style="width: 20%;">
                                 <a href="create-product.jsp">Create a new Product</a>
@@ -172,7 +172,7 @@
                                     <td>${product.isDiscontinued()}</td>
                                     <td>
                                         <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                        <a class="delete" href="delete.html?id=5">Delete</a>
+                                        <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
                                     </td>
                                 </tr>
                                 </c:forEach>

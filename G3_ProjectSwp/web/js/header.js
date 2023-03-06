@@ -7,15 +7,14 @@ $(document).ready(function () {
 
     $(".account").hide();
 
-    if (sessionStorage.getItem('userlogin') !== null) {
+    if (localStorage.getItem('userlogin') !== null) {
         $(".login").hide();
         $(".account").show();
     }
 });
 
 function getData() {
-//    let userGetData = localStorage.getItem('userlogin');
-    let userGetData = sessionStorage.getItem('userlogin');
+    let userGetData = localStorage.getItem('userlogin');
     let convertValue = JSON.parse(userGetData);
 
     document.getElementById('nameprofile').innerHTML = convertValue.name;
@@ -25,6 +24,6 @@ function getData() {
 getData();
 
 function logout() {
-    sessionStorage.clear();
-    location.href = './index.jsp';
+    localStorage.clear();
+    window.location.href = "./homepage";
 }

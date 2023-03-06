@@ -21,6 +21,10 @@ public class Author {
         this.Address = Address;
     }
 
+    public Author() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getAuthorID() {
         return AuthorID;
     }

@@ -14,16 +14,21 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DAL.CategoryDAO;
+import DAL.CustomerDAO;
 import DAL.ProductDAO;
 import jakarta.servlet.annotation.WebServlet;
 @WebServlet(name = "DeleteProduct_admin", urlPatterns = {"/deleteProduct_admin"})
 public class DeleteProduct_admin extends HttpServlet {
 
-    private final ProductDAO productDAO = new ProductDAO();
+   
+    
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       
+       int id=Integer.parseInt(req.getParameter("id"));
+        ProductDAO dao=new ProductDAO();
+        dao.deleteProduct(id);
+        resp.sendRedirect("productManage_admin");
     }
 
 }
