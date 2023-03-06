@@ -73,7 +73,7 @@ public class OrderDAO extends DBContext{
     public ArrayList<Order> getAllOrdersByCusID(int cusID) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
-            String sql = "select * from Orders o where o.CustomerID = ?";
+            String sql = "select * from Orders o where o.CustomerID = ? Order by o.OrderDate ASC";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cusID);
             ResultSet rs = ps.executeQuery();
@@ -416,10 +416,10 @@ public class OrderDAO extends DBContext{
     
     public static void main(String[] args) {
         OrderDAO odDAO = new OrderDAO();
-        ArrayList<Order> abc = odDAO.getOrderNearest5Month(-1);
-        System.out.println(abc.size());
+        int newOrderID = odDAO.getNewOrderID();
+                Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam");
         try {
-            odDAO.createDetailOfOrder(new OrderDetail(10526, 2, 1, 100000, 1,"ahf"));
+            odDAO.createOrderInDB(od, 1, "SALELON10%");
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
