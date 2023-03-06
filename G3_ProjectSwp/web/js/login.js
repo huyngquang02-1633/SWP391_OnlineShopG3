@@ -9,7 +9,7 @@ var leftText = document.getElementById("sign-in");
 var rightText = document.getElementById("sign-up");
 
 // The forms
-var accountForm = document.getElementById("sign-in-info")
+var accountForm = document.getElementById("sign-in-info");
 var signinForm = document.getElementById("sign-up-info");
 
 // Open the Sign Up page
@@ -19,7 +19,7 @@ openSignUp = () => {
     overlay.classList.remove("open-sign-in");
     rightText.classList.remove("overlay-text-right-animation");
     // Add classes for animations
-    accountForm.className += " form-left-slide-out"
+    accountForm.className += " form-left-slide-out";
     rightText.className += " overlay-text-right-animation-out";
     overlay.className += " open-sign-up";
     leftText.className += " overlay-text-left-animation";
@@ -34,7 +34,7 @@ openSignUp = () => {
         signinForm.style.display = "flex";
         signinForm.classList += " form-right-slide-in";
     }, 200);
-}
+};
 
 // Open the Sign In page
 openSignIn = () => {
@@ -49,19 +49,19 @@ openSignIn = () => {
     rightText.className += " overlay-text-right-animation";
     // hide the sign in form once it is out of view
     setTimeout(function () {
-        signinForm.classList.remove("form-right-slide-in")
+        signinForm.classList.remove("form-right-slide-in");
         signinForm.style.display = "none";
-        signinForm.classList.remove("form-right-slide-out")
+        signinForm.classList.remove("form-right-slide-out");
     }, 700);
     // display the sign up form once the overlay begins moving left
     setTimeout(function () {
         accountForm.style.display = "flex";
         accountForm.classList += " form-left-slide-in";
     }, 200);
-}
+};
 
 // When a 'switch' button is pressed, switch page
 window.onload = function () {
     openSignUpButton.addEventListener("click", openSignUp, false);
     openSignInButton.addEventListener("click", openSignIn, false);
-}
+};

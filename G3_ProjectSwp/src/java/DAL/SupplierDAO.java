@@ -39,4 +39,9 @@ public class SupplierDAO extends DBContext{
         }
         return supplierList;
     }
+    
+        public static void main(String[] args) {
+        SupplierDAO abc = new SupplierDAO();
+        System.out.println(abc.getSupplierList());
+    }
 }
