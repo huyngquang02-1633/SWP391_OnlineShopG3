@@ -31,7 +31,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        
     }
 
     @Override
@@ -51,6 +51,7 @@ public class CartController extends HttpServlet {
                 if((int) req.getSession().getAttribute("mode") == 1){
                     req.getSession().removeAttribute("mode");
                     int proID = Integer.parseInt(req.getParameter("proID"));
+                    //int quantity = Integer.parseInt(req.getParameter("quantity"));
                     try {
                         CartDAO cartDAO = new CartDAO();
                         cartDAO.addToCart(new Cart(accCustomer.getAccountID(), proID, 1));

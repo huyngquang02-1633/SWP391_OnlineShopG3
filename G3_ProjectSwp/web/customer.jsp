@@ -60,113 +60,81 @@
                     </form>
                 </div>
                 <div id="product-title-2" style="width: 55%;">
-                    <form style="padding-bottom: 40px;">
-                        <input type="text" name="txtSearch" placeholder="Enter customer name to search"/>
-                        <input type="submit" value="Search"
-                               </form>
+                    <form style="padding-bottom: 40px;" action="search_cus" method="post">
+                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter customer name to search"/>
+                        <input type="submit" value="Search">
+                     </form>
                         </div>
                         </div>
                         <div id="order-table-admin">
-                            <table id="orders">
+                             <table id="orders">
                                 <tr>
-                                    <th>CustomerID</th>
-                                    <th>LastName</th>
+                                    <th>CustomerID</th>  
                                     <th>FirstName</th>
-                                    <th>Gender</th>
+                                    <th>LastName</th>
                                     <th>ContactTitle</th>
-                                    <th>DateOfBirth</th>
+                                    <th>Gender</th>
                                     <th>Address</th>
-                                    <th>PhoneNumber</th>
-                                    <th>CreateDate</th>
                                     <th></th>
                                 </tr>
-                                <tr>
-                                    <td><a href="order-detail.html?id=5">#5</a></td>
-                                    <td>IPhone </td>
-                                    <td>2000</td>
-                                    <td>pieces</td>
-                                    <td>50</td>
-                                    <td>Smart Phone</td>
-                                    <td>false</td>
-                                    <td>
-                                        <div style="display: flex">
-                                            <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
-                                            <a class="delete" href="delete.html?id=5">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail.html?id=5">#4</a></td>
-                                    <td>IPhone </td>
-                                    <td>1000</td>
-                                    <td>pieces</td>
-                                    <td>100</td>
-                                    <td>Smart Phone</td>
-                                    <td>false</td>
-                                    <td>
-                                        <div style="display: flex">
-                                            <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
-                                            <a class="delete" href="delete.html?id=5">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail.html?id=5">#3</a></td>
-                                    <td>Macbook Pro</td>
-                                    <td>2100</td>
-                                    <td>pieces</td>
-                                    <td>20</td>
-                                    <td>Labtop</td>
-                                    <td>false</td>
-                                    <td>
-                                        <div style="display: flex">
-                                            <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
-                                            <a class="delete" href="delete.html?id=5">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail.html?id=5">#2</a></td>
-                                    <td>Dell XPS</td>
-                                    <td>2000</td>
-                                    <td>pieces</td>
-                                    <td>30</td>
-                                    <td>Labtop</td>
-                                    <td>false</td>
-                                    <td>
-                                        <div style="display: flex">
-                                            <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
-                                            <a class="delete" href="delete.html?id=5">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail.html?id=5">#1</a></td>
-                                    <td>Bosh Wash</td>
-                                    <td>1000</td>
-                                    <td>pieces</td>
-                                    <td>10</td>
-                                    <td>Electronic</td>
-                                    <td>false</td>
-                                    <td>
-                                        <div style="display: flex">
-                                            <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
-                                            <a class="delete" href="delete.html?id=5">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${listInCurrentPage}" var="c">
+                                    <tr>
+                                        <td>${c.getCustomerID()}</td>
+                                        <td>${c.getFirstName()}</td>
+                                        <td>${c.getLastName()}</td>
+                                        <td>${c.getContactTitle()}</td>
+                                        <td>${c.isGender()}</td>
+                                        <!--                                        <td>
+                                        <%--<c:if test="${c.isGender == true} ">Male</c:if>--%>
+                                        <%--<c:if test="${c.isGender == false} ">Female</c:if>--%>
+                                    </td>-->
+                                        <td>${c.getAddress()}</td>
+
+                                        <td>
+                                            <div style="display: flex">
+                                               <a href="edit.html?id=5">Edit</a> &nbsp; | &nbsp; 
+                                                <a class="delete" href="delete_cus?id=${c.getCustomerID()}">Delete</a>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </c:forEach>
+
                             </table>
                         </div>
-                        <div id="paging">
-                            <div class="pagination">
-                                <a href="#">&laquo;</a>
-                                <a href="#">1</a>
-                                <a href="#" class="active">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#">5</a>
-                                <a href="#">6</a>
-                                <a href="#">&raquo;</a>
+                         <c:if test="${sessionMsg!=null}"><div>${sessionMsg}</div> </c:if>
+                            <div id="paging">
+                                <div class="pagination">
+
+                                <c:if test="${currentPage>1}">
+                                    <c:url value="/customerManage_admin" var="paginationPrevous">
+                                        <c:param name="currentPage" value="${currentPage-1}" />
+                                    </c:url>
+                                    <a href="${paginationPrevous}">&laquo;</a>
+                                </c:if>
+
+                                <c:forEach begin="1" end="${numberOfPage}" step="1" var="stepValue">
+                                    <c:choose>
+                                        <c:when test="${stepValue == currentPage}">
+                                            <a href="#" class="active">${stepValue}</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:url value="/customerManage_admin" var="pagination">
+                                                <c:param name="currentPage" value="${stepValue}" />
+                                            </c:url>
+                                            <a href="${pagination}">${stepValue}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+
+                                <c:if test="${currentPage<numberOfPage}">
+                                    <c:url value="/customerManage_admin" var="paginationNext">
+                                        <c:param name="currentPage" value="${currentPage+1}" />
+                                    </c:url>
+                                    <a href="${paginationNext}">&raquo;</a>
+                                </c:if>
+
+
                             </div>
                         </div>
                 </div>

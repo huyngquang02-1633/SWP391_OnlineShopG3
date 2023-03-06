@@ -32,7 +32,8 @@ public class AccountDAO extends DBContext {
                 int CustomerID = rs.getInt("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
                 int Role = rs.getInt("Role");
-                acc = new Account(AccountID, Email, Password, CustomerID, EmployeeID, Role);
+                String Image = rs.getString("Image");
+                acc = new Account(AccountID, Email, Password, CustomerID, EmployeeID, Role, Image);
             }
         } catch (Exception e) {
         }
@@ -99,7 +100,7 @@ public class AccountDAO extends DBContext {
     public boolean createAccount(Customer cus, Account acc) {
         int result=0;
             try {
-                String sql = "exec createAccount ?,?,?,?,?,?,?,?,?,?;";
+                String sql = "exec createAccount ?,?,?,?,?,?,?,?,?,?,?;";
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setInt(1,createNewCusID() );
                 ps.setString(2, cus.getFirstName());
@@ -111,6 +112,7 @@ public class AccountDAO extends DBContext {
                 ps.setInt(8, createNewAccID());
                 ps.setString(9, acc.getEmail());
                 ps.setString(10, acc.getPassword());
+                ps.setString(11, acc.getImage());
                 result = ps.executeUpdate();
             } catch (Exception e) {
             }

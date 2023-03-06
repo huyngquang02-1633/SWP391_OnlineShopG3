@@ -87,15 +87,16 @@
                             <th>LastName</th>
                             <th>FirstName</th>
                             <th>Gender</th>
-                            <th>DepartmentName</th>
+                            <th>Department Name</th>
+                            <!--<th>Title</th>-->
                             <th>Title</th>
-                            <th>TitleOfCourtesy</th>
                             <th>Birthday</th>
                             <th>HireDate</th>
                             <th>Address</th>
                             <th>Status</th>
                         </tr>
                         <c:forEach items = "${empList}" var="x" >
+
                             <tr>
                                 <td>${x.getEmployeeID()}</td>
                                 <td>${x.getLastName()}</td> 
@@ -119,6 +120,7 @@
                                 </c:choose>
                             </tr>
                         </c:forEach>
+
 
                     </table>
                 </div>

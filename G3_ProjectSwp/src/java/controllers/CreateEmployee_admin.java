@@ -62,6 +62,10 @@ public class CreateEmployee_admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        if(request.getSession().getAttribute("AccAdminSession")==null){
+            response.sendRedirect(request.getContextPath()+"/404error.jsp");
+            return;
+        }
         EmployeeDAO dao = new EmployeeDAO();
         //int semployeeID = Integer.parseInt(request.getParameter("employeeID"));  
         int EmployeeID = dao.getNewEmployeeID();

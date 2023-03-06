@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import DAL.CustomerDAO;
 import DAL.OrderDAO;
+import DAL.ProductDAO;
 import models.CartCookies;
 
 /**
@@ -54,11 +55,18 @@ public class OrderAction extends HttpServlet {
         if(accCustomer !=null){
             ArrayList<Cart> cart =  new CartDAO().getCartListByAccID(accCustomer.getAccountID());
             OrderDAO odDAO = new OrderDAO();
-
+            ProductDAO proDAO = new ProductDAO();
+            for (Cart cart1 : cart) {
+                if(cart1.getQuantity() > proDAO.getAvailableInStock(cart1.getProductID())){
+                    req.setAttribute("msgOutOfStock", "One of these products is not enough in the warehouse, please change the quantity!");
+                    req.getRequestDispatcher("/account/cart").forward(req, resp);
+                    return;
+                }
+            }
             try {
                 int newOrderID = odDAO.getNewOrderID();
                 Order od = new Order(newOrderID, accCustomer.getCustomerID(), 1, "shipperName", txtAddress, txtCity, "region", "2345", "Viet Nam");
-                odDAO.createOrderInDB(od,accCustomer.getAccountID());
+                odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
 //                for (Cart item : cart) {
 //                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, 100000, item.getQuantity(), "AHJGSU");
 //                    odDAO.createDetailOfOrder(odDetail);

@@ -1,5 +1,6 @@
 <%@include file="templates/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--************************************
                 Main Start
 *************************************-->
@@ -41,8 +42,8 @@
                                             <div class="tg-postbook">
                                                 <figure class="tg-featureimg">
                                                     <div class="tg-bookimg">
-                                                        <div class="tg-frontcover"><img src="<%=path%>/images/books/img-01.jpg" alt="image description"></div>
-                                                        <div class="tg-backcover"><img src="<%=path%>/images/books/img-01.jpg" alt="image description"></div>
+                                                        <div class="tg-frontcover"><img src="${product.getImage()}" alt="image description"></div>
+                                                        <div class="tg-backcover"><img src="${product.getImage()}" alt="image description"></div>
                                                     </div>
                                                     <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                         <i class="icon-heart"></i>
@@ -53,14 +54,14 @@
                                                     <ul class="tg-bookscategories">
                                                         <c:forEach items="${cateList}" var="cate">
                                                             <c:if test="${product.getCategoryID() == cate.getCategoryID()}">
-                                                                  <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}">${cate.getCategoryName()}</a></li>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                        <c:forEach items="${genreList}" var="genre">
-                                                            <c:if test="${product.getGenreID() == genre.getGenreID()}">
-                                                                  <li><a href="<%=path%>/productList?genreID=${genre.getGenreID()}">${genre.getGenreName()}</a></li>
-                                                            </c:if>
-                                                        </c:forEach>
+                                                                <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}">${cate.getCategoryName()}</a></li>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:forEach items="${genreList}" var="genre">
+                                                                <c:if test="${product.getGenreID() == genre.getGenreID()}">
+                                                                <li><a href="<%=path%>/productList?genreID=${genre.getGenreID()}">${genre.getGenreName()}</a></li>
+                                                                </c:if>
+                                                            </c:forEach>
                                                     </ul>
                                                     <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                                     <div class="tg-booktitle">
@@ -78,10 +79,10 @@
                                                         <ins>${product.getSalePrice()}</ins>
                                                         <del>${product.getCoverPrice()}</del>
                                                     </span>
-                                                        <c:url value="/account/cart" var="AddToCart">
-                                                            <c:param name="previousURL" value="../productList" />
-                                                            <c:param name="proID" value="${product.getProductID()}" />
-                                                        </c:url>
+                                                    <c:url value="/account/cart" var="AddToCart">
+                                                        <c:param name="previousURL" value="../productList" />
+                                                        <c:param name="proID" value="${product.getProductID()}" />
+                                                    </c:url>
                                                     <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                                         <i class="fa fa-shopping-basket"></i>
                                                         <em>Add To Basket</em>
@@ -90,8 +91,8 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -114,8 +115,76 @@
                                     <ul>
                                         <c:forEach items="${cateList}" var="cate">
                                             <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>></em></a></li>
-                                        </c:forEach>
+                                                    </c:forEach>
                                         <li><a href="javascript:void(0);"><span>View All</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>Price</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox1"> 0đ - 100,000đ
+                                        </li></ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox2"> 100,000đ - 300,000đ
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox3""> 300,000đ - Above
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>supplier</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <c:forEach items="${SupList}" var="supplier">
+                                            <li><a href="<%=path%>/productList?supplierID=${supplier.getSupplierID()}"><span>${supplier.getSupplierName()}</span><em>></em></a></li>
+                                                    </c:forEach>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>Language</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox" > Vietnamese
+                                        </li></ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox"> English
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>Format</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox1" > Hardcover
+                                        </li></ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox1"> Paperback
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
