@@ -116,7 +116,7 @@
                     </c:if>
                     </table>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 </div>
