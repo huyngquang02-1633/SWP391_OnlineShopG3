@@ -68,6 +68,32 @@ public class EmployeeDAO extends DBContext {
         return empList;
     }
     
+    public ArrayList<Employee> getAllEmloyeesByID() {
+        ArrayList<Employee> empList = new ArrayList<>();
+        try {
+            String sql = "select * from Employees";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int EmployeeID = rs.getInt("EmployeeID");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String Title = rs.getString("Title");
+                String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
+                Date BirthDate = rs.getDate("BirthDate");
+                Date HireDate = rs.getDate("HireDate");
+                String Address = rs.getString("Address");
+                boolean Status = rs.getBoolean("Status");
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, Status);
+                empList.add(emp);
+            }
+        } catch (Exception e) {
+        }
+        return empList;
+    }
+    
 
     public void insertEmployee(Employee employee) {
 //        enableInsertMode("Employees");
@@ -154,7 +180,17 @@ public class EmployeeDAO extends DBContext {
             e.printStackTrace();
         }
     }
-    
+    public void changeStatusEmployee(String EmployeeID) {
+        String sql = "update Employees\n"
+                + " set status = 1 where EmployeeID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, EmployeeID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         Date birthDate = Date.valueOf("2022-02-02");

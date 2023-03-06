@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.DepartmentsDAO;
 import DAL.EmployeeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import models.Department;
 import models.Employee;
 
 /**
@@ -30,9 +32,12 @@ public class EmployeeManage_admin extends HttpServlet{
 //            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
 //            return;
 //        }
+        ArrayList<Department> depart = new DepartmentsDAO().getAllDepartments();
         EmployeeDAO dao = new EmployeeDAO();
-        ArrayList<Employee> empList = dao.getAllEmloyees();
+        ArrayList<Employee> empList = dao.getAllEmloyeesByID();
+        
         req.setAttribute("empList", empList);
+        req.setAttribute("depart", depart);
         req.getRequestDispatcher("employees.jsp").forward(req, resp);
     }
     
