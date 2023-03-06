@@ -1,5 +1,6 @@
 <%@include file="templates/header.jsp" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <script src="https://kit.fontawesome.com/6d68bb11b2.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://kit.fontawesome.com/6d68bb11b2.css" crossorigin="anonymous">
@@ -371,9 +372,77 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <c:forEach items="${cateList}" var="cate">
-                                            <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>28245</em></a></li>
+                                            <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>></em></a></li>
                                                     </c:forEach>
+                                        <li><a href="javascript:void(0);"><span>View All</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>Price</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox1"> 0đ - 100,000đ
+                                        </li></ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox2"> 100,000đ - 300,000đ
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox3""> 300,000đ - Above
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
 
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>supplier</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <c:forEach items="${SupList}" var="supplier">
+                                            <li><a href="<%=path%>/productList?supplierID=${supplier.getSupplierID()}"><span>${supplier.getSupplierName()}</span><em>></em></a></li>
+                                                    </c:forEach>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>Language</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox" > Vietnamese
+                                        </li></ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox"> English
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tg-widget ">
+                                <div class="tg-widgettitle">
+                                    <h3>Format</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox1" > Hardcover
+                                        </li></ul>
+                                    <ul>
+                                        <li>
+                                            <input  type="checkbox" id="checkbox1"> Paperback
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
