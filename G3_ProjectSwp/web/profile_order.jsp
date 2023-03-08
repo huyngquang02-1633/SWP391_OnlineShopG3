@@ -9,8 +9,8 @@
                     <a href="#">
                         <img src="${AccCustomerSession.getImage().replace("=s96-c", "")}" alt="">
                     </a>
-                    <h1>Camila Smith</h1>
-                    <p>deydey@theEmail.com</p>
+                    <h1>${userGoogle.getName()}</h1>
+                    <p style="color: black;">${userGoogle.getEmail()}</p>
 
                 </div>
 

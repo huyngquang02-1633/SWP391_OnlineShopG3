@@ -17,6 +17,10 @@ public class Genre {
         this.GenreName = GenreName;
     }
 
+    public Genre() {
+    }
+    
+
     public int getGenreID() {
         return GenreID;
     }
