@@ -30,32 +30,7 @@
 
 
                     </tr>
-                    <%--<c:forEach items = "${listOrder}" var="x" >
-                        <tr>
-                            <td>${x.orderID}</td>
-                            <td>${x.orderDate}</td> 
-                            <td>${x.requiredDate}</td>
-                            <td>${x.shippedDate}</td> 
-                            <td>${x.employeeID}</td>
-                            <td>${x.customerID}</td> 
-                            <td>${x.freight}</td> 
-
-                            <td>
-                                <c:choose>
-                                    <c:when test="${x.shippedDate != null}">
-                                        <p style="color: green;">Completed</p>
-                                    </c:when>   
-                                    <c:when test="${x.requiredDate != null && shippedDate == null}">
-                                        <p style="color: blue;">Pending | <button onclick="myFunction()">Cancle</button></p>
-                                    </c:when> 
-                                    <c:when test="${x.requiredDate == null && shippedDate == null}">
-                                        <p style="color: red;">Order canceled</p>
-                                    </c:when> 
-                                </c:choose>
-
-                        </tr>
-                    </c:forEach>
-                    --%>
+                    
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>
                             <td><a href="<%=path%>/orderManage_admin?idOdDetail=${od.getOrderID()}">${od.getOrderID()}</a></td>

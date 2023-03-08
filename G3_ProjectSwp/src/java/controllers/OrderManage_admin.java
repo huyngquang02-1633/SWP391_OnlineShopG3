@@ -32,7 +32,7 @@ import DAL.ProductDAO;
  * @author user
  */
 @WebServlet(name = "OrderManage_admin", urlPatterns = {"/orderManage_admin"})
-public class OrderManage_admin extends HttpServlet {
+    public class OrderManage_admin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

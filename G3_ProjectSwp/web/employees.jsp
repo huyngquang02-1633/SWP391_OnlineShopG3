@@ -3,52 +3,52 @@
     <div class="modal-content">
         <span class="close">&times;</span> <br>
         <div class="path-admin">UPDATE EMPLOYEE INFORMATION</b></div>
-                        <div class="content-main">
-                    <form id="content-main-product">
-                        <div class="content-main-1">
-                            <label>Last Name (*):</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
-                            <label>First Name:</label><br/>
-                            <input type="text" name="txtUnitPrice" id=""><br/>
-                            <label>Title:</label><br/>
-                            <input type="text" name="txtUnitPrice" id=""><br/>
-                            <label>Status:</label><br/>
-                            <select name="ddlCategory">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                            </select>
-                        </div>
-                        <div class="content-main-1">
-                            <label>TitleOfCourtesy:</label><br/>
-                            <input type="text" name="txtUnitPrice" id=""><br/>
-                            <label>Address:</label><br/>
-                            <input type="text" name="txtUnitsInStock" id=""><br/>
-                            <label>Department (*):</label><br/>
-                            <select name="ddlCategory">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                                <option value="catid3">Television</option>
-                                <option value="catid4">Electronic</option>
-                            </select>
-                            <br/>
-                        </div>
-                        <div class="content-main-1">
-                            <label>Birth Date:</label><br/>
-                            <input type="date" name="txtUnitsInStock" id=""><br/>
-                            <label>Hire Date (*):</label><br/>
-                            <input type="date" name="txtUnitsInStock" id=""><br/>
-                            <label>Gender:</label><br/>
-                            <select name="ddlCategory">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                            </select>
-                            <br/> 
-                        </div>
-
-                            <input style="margin: auto;" type="submit" value="Save"/>
-                        
-                    </form>
+        <div class="content-main">
+            <form id="content-main-product">
+                <div class="content-main-1">
+                    <label>Last Name (*):</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>First Name:</label><br/>
+                    <input type="text" name="txtUnitPrice" id=""><br/>
+                    <label>Title:</label><br/>
+                    <input type="text" name="txtUnitPrice" id=""><br/>
+                    <label>Status:</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                    </select>
                 </div>
+                <div class="content-main-1">
+                    <label>TitleOfCourtesy:</label><br/>
+                    <input type="text" name="txtUnitPrice" id=""><br/>
+                    <label>Address:</label><br/>
+                    <input type="text" name="txtUnitsInStock" id=""><br/>
+                    <label>Department (*):</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <br/>
+                </div>
+                <div class="content-main-1">
+                    <label>Birth Date:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Hire Date (*):</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Gender:</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                    </select>
+                    <br/> 
+                </div>
+
+                <input style="margin: auto;" type="submit" value="Save"/>
+
+            </form>
+        </div>
     </div>
 
 </div>
@@ -96,37 +96,32 @@
                             <th>Status</th>
                         </tr>
                         <c:forEach items = "${empList}" var="x" >
-                        <tr>
-                            <td>${x.getEmployeeID()}</td>
-                            <td>${x.getLastName()}</td> 
-                            <td>${x.getFirstName()}</td>
-                            <td>
-                                <c:if test="${x.isGender() == true}">Male</c:if>
-                                <c:if test="${x.isGender() == false}">Female</c:if>
-                            </td> 
-                            <td>
-                                ${x.getDepartmentID()}
-                            <%--<c:forEach var="emp" items="${empList}">--%> 
-                                <%--<c:if test="${x.getDepartmentID() == emp.getDepartmentID()}"><td>${emp.getFirstName()}</td></c:if>--%>
-                            <%--</c:forEach>--%>
-                            </td>
-                            <!--<td>${x.getTitle()}</td>--> 
-                            <td>${x.getTitleOfCourtesy()}</td> 
-                            <td>${x.getBirthDate()}</td> 
-                            <td>${x.getHireDate()}</td> 
-                            <td>${x.getAddress()}</td> 
-                            <td>
-                                <c:if test="${x.isStatus() == true}">Active</c:if>  
-                                <a href="#" onclick="showMess(${x.getEmployeeID()})">Delete</a>
-                            </td> 
-                           
 
-                            
-                                
+                            <tr>
+                                <td>${x.getEmployeeID()}</td>
+                                <td>${x.getLastName()}</td> 
+                                <td>${x.getFirstName()}</td>
+                                <td>
+                                    <c:if test="${x.isGender() == true}">Male</c:if>
+                                    <c:if test="${x.isGender() == false}">Female</c:if>
+                                    </td> 
+                                    <td>
+                                    <c:forEach var="dep" items="${depart}"> 
+                                        <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
+                                    </c:forEach>   </td> 
+                                <td>${x.getTitle()}</td> 
+                                <td>${x.getTitleOfCourtesy()}</td> 
+                                <td>${x.getBirthDate()}</td> 
+                                <td>${x.getHireDate()}</td> 
+                                <td>${x.getAddress()}</td> 
+                                <c:choose>
+                                    <c:when test="${x.isStatus() == true}"><td style="color: green;">Active | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Change Status</a></td></c:when>
+                                    <c:when test="${x.isStatus() == false}"><td style="color: red;">Suspended | <a herf ="#" onclick="showMesss(${x.getEmployeeID()})">Change</a></td></c:when>
+                                </c:choose>
+                            </tr>
+                        </c:forEach>
 
-                        </tr>
-                    </c:forEach>
-                        
+
                     </table>
                 </div>
                 <div id="paging">
@@ -145,17 +140,26 @@
         </div>
     </div>
 </div>
-<div id="footer-admin">Mai la anh em</div>
+<div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
 </div>
 </body>
 <script>
     function showMess(getEmployeeID) {
-        var option = confirm('are you sure to delete?');
-        if(option === true){
-            window.location.href = 'deleteEmployee_admin?sEmployeeID='+getEmployeeID;
+        var option = confirm('are you sure to change?');
+        if (option === true) {
+            window.location.href = 'deleteEmployee_admin?sEmployeeID=' + getEmployeeID;
         }
-    
-}
+
+    }
+</script>
+<script>
+    function showMesss(getEmployeeID) {
+        var option = confirm('are you sure to change?');
+        if (option === true) {
+            window.location.href = 'changeStatusEmployee_admin?sEmployeeID=' + getEmployeeID;
+        }
+
+    }
 </script>
 <script>
     // Get the modal

@@ -197,7 +197,7 @@
                                             </ul>
                                         </div>
                                     </div>
-<!--                                    <div class="tg-productdescription">
+                                    <div class="tg-productdescription">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="tg-sectionhead">
                                                 <h2>Product Description</h2>
@@ -207,46 +207,24 @@
                                                 <li role="presentation"><a href="#review" data-toggle="tab">Reviews</a></li>
                                             </ul>
                                             <div class="tg-tab-content tab-content">
-                                                <div style="">
-                                                    <span><img src="<%=path%>/images/users/icon-user.png" alt="anh customer"></span>
-                                                    <span>ten customer</span>
-                                                    <div><span class="tg-stars"><span></span></span></div>
-                                                    <div>comment comment comment comment comment comment comment </div>
-                                                    <div>
-                                                        <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
-                                                        <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
-                                                        <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
+                                                <c:forEach items="${reviewList}" var="review">
+                                                    <div style="">
+                                                        <span><img src="<%=path%>/images/users/icon-user.png" alt="anh customer"></span>
+                                                        <span>${review.getCustomerID()}</span>
+                                                        <div><span class="tg-stars"><span></span></span></div>
+                                                        <div>${review.getComment()}</div>
+                                                        <div>
+                                                            <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
+                                                            <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
+                                                            <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
+                                                        </div>
+                                                        <div>${review.getReviewDate()}</div>
                                                     </div>
-                                                    <div>Ngay comment</div>
-                                                </div>
-                                                <hr/>
-
-                                                <div style="">
-                                                    <span><img src="<%=path%>/images/users/icon-user.png" alt="anh customer"></span>
-                                                    <span>ten customer</span>
-                                                    <div><span class="tg-stars"><span></span></span></div>
-                                                    <div>comment comment comment comment comment comment comment </div>
-                                                    <div>
-                                                        <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
-                                                        <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
-                                                    </div>
-                                                    <div>Ngay comment</div>
-                                                </div>
-                                                <hr/>
-
-                                                <div style="">
-                                                    <span><img src="<%=path%>/images/users/icon-user.png" alt="anh customer"></span>
-                                                    <span>ten customer</span>
-                                                    <div><span class="tg-stars"><span></span></span></div>
-                                                    <div>comment comment comment comment comment comment comment </div>
-                                                    <div><img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc"></div>
-                                                    <div>Ngay comment</div>
-                                                </div>
-                                                <hr/>
-
+                                                    <hr/>
+                                                </c:forEach>
                                             </div>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <div class="tg-aboutauthor">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="tg-sectionhead">
@@ -445,6 +423,21 @@
                                         </li>
                                     </ul>
                                 </div>
+                                
+                            </div>
+                            <div class="tg-widget tg-catagories">
+                                <div class="tg-widgettitle">
+                                    <h3>Categories</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <c:forEach items="${cateList}" var="cate">
+                                            <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>></em></a></li>
+                                                    </c:forEach>
+
+                                    </ul>
+                                </div>
+                                
                             </div>
 
                         </aside>
