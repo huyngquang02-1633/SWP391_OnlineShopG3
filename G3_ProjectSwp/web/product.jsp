@@ -95,6 +95,7 @@
                 <div class="path-admin">PRODUCTS LIST</b></div>
                 <div class="content-main">
                     <div id="content-main-dashboard">
+                        <hr>
                         <div id="product-title-header">
                             <div id="product-title-1" style="width: 25%;">
                                 <b>Filter by Catetory:</b>
