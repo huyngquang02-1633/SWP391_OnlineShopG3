@@ -1,5 +1,5 @@
 </div>
-        <div id="footer-admin">footer</div>
+        <div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
     </div>
 </body>
 </html>
