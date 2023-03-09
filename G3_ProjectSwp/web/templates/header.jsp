@@ -70,7 +70,7 @@
                                         <a href="<%=path%>/account/profile_myOrder">My Orders</a>
                                     </div>
                                     <div class="tg-description">
-                                        <a href="#" onclick="logout()">Log out</a>
+                                        <a href="<%=path%>/account/login" >Log out</a>
                                     </div>
                                 </div>
                             </div>
@@ -900,7 +900,7 @@
                                         </div>
                                     </li>
 
-                                    <li><a href="products.jsp">Best Selling</a></li>
+                                    <li><a href="<%=path%>/productList">Best Selling</a></li>
                                     <li><a href="products.jsp">Weekly Sale</a></li>
                                     <li><a href="authors.jsp">Authors</a></li>
 

@@ -10,8 +10,8 @@
                     <a href="#">
                         <img src="${AccCustomerSession.getImage().replace("=s96-c", "")}" alt="">
                     </a>
-                    <h1>${c.getLastName()}</h1>
-                    <p>${a.getEmail()}</p>
+                    <h1>${userGoogle.getName()}</h1>
+                    <p style="color: black;">${userGoogle.getEmail()}</p>
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">

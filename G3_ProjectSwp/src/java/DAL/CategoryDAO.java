@@ -41,4 +41,26 @@ public class CategoryDAO extends DBContext{
         }
         return categories;
     }
+    public Category getCategoryByID(int ID) {     
+        Category cate = new Category();
+        try {
+            //connection = DBContext.getInstance().getConnection();
+            
+            String sql = "SELECT * FROM Categories where CategoryID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int categoryID = rs.getInt("CategoryID");
+                String categoryName = rs.getString("CategoryName");        
+                
+                cate= new Category(categoryID, categoryName);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.WARNING,e.getMessage(),e);
+        } finally {
+            //DBContext.releaseJBDCObject(rs, ps, connection);
+        }
+        return cate;
+    }
 }
