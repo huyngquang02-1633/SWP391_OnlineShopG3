@@ -135,7 +135,7 @@
                                   <th>Cover Price</th>
                                   <th>Sale Price</th>
                                   <th>Author Name</th>
-                                  <th>Translator</th>
+                                  <!--<th>Translator</th>-->
                                   <th>Punlisher Name</th>
                                   <th>Supplier Name</th>
                                   <th>Language</th>
@@ -144,8 +144,8 @@
                                   <th>NumberOfPage</th>
                                   <th>Format</th>
                                   <th>Publish Date</th>
-                                  <th>Publishing License</th>
-                                  <th>Description</th>
+<!--                                  <th>Publishing License</th>
+                                  <th>Description</th>-->
                                   <th>Discontinued</th>
                                   <th></th>
                                 </tr>
@@ -158,7 +158,7 @@
                                     <td>${product.getCoverPrice()}</td>
                                     <td>${product.getSalePrice()}</td>
                                     <td>${product.getAuthorID()}</td>
-                                    <td>${product.getTranslator()}</td>
+<!--                                    <td>${product.getTranslator()}</td>-->
                                     <td>${product.getPublisherID()}</td>
                                     <td>${product.getSupplierID()}</td>
                                     <td>${product.getLanguage()}</td>
@@ -167,8 +167,8 @@
                                     <td>${product.getNumberOfPage()}</td>
                                     <td>${product.getFormat()}</td>
                                     <td>${product.getPublishDate()}</td>
-                                    <td>${product.getPublishingLicense()}</td>
-                                    <td>${product.getDescription()}</td>
+<!--                                    <td>${product.getPublishingLicense()}</td>
+                                    <td>${product.getDescription()}</td>-->
                                     <td>${product.isDiscontinued()}</td>
                                     <td>
                                         <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
@@ -218,7 +218,7 @@
                 </div>
             </div>
         </div>
-        <div id="footer-admin">Mai la anh em</div>
+        <div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
     </div>
 </body>
 <script>

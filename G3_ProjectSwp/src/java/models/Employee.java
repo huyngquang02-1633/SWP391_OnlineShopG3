@@ -21,13 +21,14 @@ public class Employee {
     private Date birthDate;
     private Date hireDate;
     private String address;
+    private String phoneNumber;
     private boolean status;
 
     public Employee() {
     }
     
 
-    public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, boolean status) {
+    public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, String phonenumber, boolean status) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,9 +39,19 @@ public class Employee {
         this.birthDate = birthDate;
         this.hireDate = hireDate;
         this.address = address;
+        this.phoneNumber = phonenumber;
         this.status = status;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phonenumber) {
+        this.phoneNumber = phonenumber;
+    }
+
+    
     public int getEmployeeID() {
         return employeeID;
     }
