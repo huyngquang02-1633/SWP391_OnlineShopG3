@@ -16,10 +16,10 @@ public class Review {
     private int ProductID;
     private int Rating;
     private String Comment;
-    private int Image;
+    private String Image;
     private Date ReviewDate;
 
-    public Review(int CustomerID, int OrderID, int ProductID, int Rating, String Comment, int Image, Date ReviewDate) {
+    public Review(int CustomerID, int OrderID, int ProductID, int Rating, String Comment, String Image, Date ReviewDate) {
         this.CustomerID = CustomerID;
         this.OrderID = OrderID;
         this.ProductID = ProductID;
@@ -69,11 +69,11 @@ public class Review {
         this.Comment = Comment;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int Image) {
+    public void setImage(String Image) {
         this.Image = Image;
     }
 

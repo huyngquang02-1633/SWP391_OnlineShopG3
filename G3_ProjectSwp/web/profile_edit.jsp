@@ -28,29 +28,29 @@
                     Update Profile
                 </div>
                 <div class="panel-body bio-graph-info">
-                    <form action="<%=path%>/account/profile1" method="post">  
+                    <form name="form-edit" action="<%=path%>/account/profile1" method="post">  
                         <div class="row">
                             <div style="display: none">
                                 <p><span></span>: <input type="text" name="txtCustomerID" value="${c.getCustomerID()}"></p>
-
                             </div>
                             <div class="bio-row">
-                                <p><span>First Name </span>: <input type="text" name="txtFirstName" value="${c.getFirstName()}"></p>
+                                <p><span>First Name </span>: <input type="text" name="txtFirstName" value="${c.getFirstName()}" pattern="[A-Za-z]{}" required minlength="2" maxlength="100" ></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Last Name </span>: <input type="text" name="txtLastName" value="${c.getLastName()}"></p>
+                                <p><span>Last Name </span>: <input type="text" name="txtLastName" value="${c.getLastName()}" pattern="[A-Za-z]{}" required minlength="2" maxlength="100"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Address </span>: <input type="text" name="txtAddress" value="${c.getAddress()}"></p>
+                                <p><span>Address </span>: <input type="text" name="txtAddress" value="${c.getAddress()}" pattern="[\w]{}" minlength="10" maxlength="100"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Contact Title </span>: <input type="text" name="txtContactTitle" value="${c.getContactTitle()}"></p>
+                                <p><span>Contact Title </span>: <input type="text" name="txtContactTitle" value="${c.getContactTitle()}" pattern="[\w]{}" minlength="10" maxlength="100"></p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Birthday</span>: <input type="date" name="txtBirthday" value="${c.getDateOfBirth()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Phone </span>: <input type="text" name="txtPhone" value="${c.getPhoneNumber()}"></p>
+                                <p><span>Phone </span>: <input type="text" name="txtPhone" value="${c.getPhoneNumber()}" required
+                                                               pattern="([0]{1})([0-9]{9})"></p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Create Date </span>: <input type="date" name="txtCreatDate" value="${c.getCreateDate()}"></p>
@@ -67,7 +67,7 @@
                                         </c:if>
                                     </select></p></p>
                             </div>
-                            <input type="submit" value="Save" />
+                            <input onclick="return validateName()" type="submit" value="Save" />
                     </form>
                 </div>
             </div>
@@ -77,3 +77,27 @@
     </div>
 </div>
 </div>    <%@include file="templates/footer.jsp" %>
+<!--<script>
+    function validateName() {
+        const letter = /^[a-zA-Z\s]*$/;
+        let x = document.forms["form-edit"]["txtFirstName"].value;
+        if (x != "" && x.match(letter)) {
+        } else if (x == "") {
+            alert("Name must be filled out");
+            return false;
+        } else {
+            alert("Name must be string");
+            return false;
+        }
+
+        let y = document.forms["form-edit"]["txtLastName"].value;
+        if (y != "" && y.match(letter)) {
+        } else if (y == "") {
+            alert("Name must be filled out");
+            return false;
+        } else {
+            alert("Name must be string");
+            return false;
+        }
+    }
+</script>-->
