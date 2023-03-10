@@ -305,7 +305,7 @@
     line-height: 40px;
     border-radius: 5px;
     border: none;
-    box-shadow: 1px 2px #77b748;
+    box-shadow: 1px 2px #a7a7a7;
     border-color: #666;
     border: #77b748;
     border-radius: 6px;
@@ -617,7 +617,7 @@
     cursor: pointer;
     margin-top: 70px;
     width: 40%;
-    box-shadow: 1px 2px #77b748;
+    box-shadow: 1px 2px #9e9e9e;
     border-color: #666;
     border: #77b748;
     border-radius: 6px;
@@ -696,8 +696,9 @@
 
 #hoverth{
     color: blue;
-    border-color: #f7fcb8;
-    background-color: #dfffcf;
+    border: none;
+    /* border-color: #f7fcb8; */
+    background-color: #e6e6e600;
     width: 100%;
     padding: 8px 8px 8px 5px;
 }
@@ -753,7 +754,7 @@
     height: 28px;
     margin-left: 10px;
     cursor: pointer;
-    box-shadow: 1px 2px #89ac70;
+    box-shadow: 1px 2px #9f9f9f;
     border-color: #666;
     border: #77b748;
     border-radius: 6px;
@@ -774,7 +775,7 @@
 #product-title-2 input[type="text"]{
     line-height: 30px;
     border-radius: 8px;
-    box-shadow: 1px 2px #819e6c;
+    box-shadow: 1px 2px #8d8d8d;
     border: none;
     width: 70%;
     padding-left: 10px;
@@ -784,7 +785,7 @@
 #product-title-1 input[type="submit"], #product-title-2 input[type="submit"], #order-title input[type="submit"]{
     width: 60px;
     height: 30px;
-    box-shadow: 1px 2px #89ac70;
+    box-shadow: 1px 2px #a4a4a4;
     border-color: #666;
     border: #77b748;
     border-radius: 6px;
@@ -804,7 +805,7 @@
 
 #product-title-1 select{
     height: 30px;
-    box-shadow: 1px 2px #89ac70;
+    box-shadow: 1px 2px #868686;
     border-color: #666;
     border: #77b748;
     border-radius: 6px;
@@ -822,7 +823,7 @@
     text-decoration: none;
     color: blue;
     padding: 6px;
-    box-shadow: 1px 2px #77b748;
+    box-shadow: 1px 2px #9b9b9b;
     background-color: #ffffff;
     border: #77b748;
     border-radius: 6px;
@@ -855,7 +856,7 @@
 
 .content-main-1{
     width: 30%;
-    padding: 20px 18px 16px 24px;
+    padding: 20px 20px 16px 20px;
     overflow: hidden;
 }
 
@@ -880,7 +881,7 @@
     outline: 1px solid lightgrey;
 }
 .content-main-1 input[type="text"]:focus {
-    border-bottom: 2px solid #67c75b;
+    border-bottom: 2px solid #9b9b9b;
     border-radius: 4px 4px 2px 2px;
 }
 
@@ -894,10 +895,8 @@
     font-size: 18px;
     border-radius: 0.5em;
     /* background: #E8E8BD; */
-    border: 1px solid #e8e8e8;
+    border: 1px solid #bdbdbd;
     transition: all .3s;
-    box-shadow: 6px 6px 12px #dfdfdf, -6px -6px 12px #ebebeb;
-    
     cursor: pointer;
 }
 
@@ -909,7 +908,7 @@
 }
 
 input[type="date"]{
-    box-shadow: 1px 2px #819e6c;
+    box-shadow: 1px 2px #9a9a9a;
     border: none;
     border-radius: 4px;
     padding: 4px;
@@ -933,7 +932,7 @@ input[type="date"]{
 
 .content-main-1 select{
     
-    width: 100%;
+    width: 102%;
     max-width: 374px;
     height: 38px;
     padding: 8px;
@@ -985,45 +984,42 @@ input[type="date"]{
     cursor: pointer;
   }
 
-  .fa-circle-o-notch:before {
-    content: "\f1ce";
-}
-.fa-circle-o-notch:before {
-    content: "\f1ce";
-}
-*:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.fa-5x {
-    font-size: 5em;
-}
-.fa-circle-o-notch:before {
-    content: "\f1ce";
-}
-*:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.fa-5x {
-    font-size: 5em;
-}
-.fa {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
 .div-square {
-    padding: 5px;
+    padding: 20px 50px;
     border: 3px double #e1e1e1;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
     border-radius: 8px;
     margin: 5px;
+    height: 50px;
+}
+
+.content-main-1 strong{
+    width: 160px;
+    display: inline-flex;
+    padding: 6px 3px;
+}
+
+.info-homeadmin{
+    display: flex;
+    background-color: white;
+}
+
+.info-homeadmin-left{
+    width: 50%;
+    border-right:solid 1px #cccccc;
+}
+
+.info-homeadmin-right{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.msg{
+    display: flex;
+    background: white;
+    padding: 20px;
+    background: #edf6ff;
+    border-radius: 8px;
+    margin: 0px 10px;
 }

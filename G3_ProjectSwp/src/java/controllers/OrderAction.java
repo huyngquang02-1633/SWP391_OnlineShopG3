@@ -28,6 +28,8 @@ import DAL.CustomerDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
 import models.CartCookies;
+import models.Discount;
+import models.Product;
 
 /**
  *
@@ -44,12 +46,12 @@ public class OrderAction extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String txtReceiver = req.getParameter("txtReceiver");
-        String txtEmail = req.getParameter("txtEmail");
-        String txtPhoneNumber = req.getParameter("txtPhoneNumber");
-        String txtAddress = req.getParameter("txtAddress");
-        String txtCity = req.getParameter("txtCity");
-        String txtDiscountID = req.getParameter("txtDiscountId");
+        String txtReceiver = req.getParameter("txtReceiver").trim();
+        String txtEmail = req.getParameter("txtEmail").trim();
+        String txtPhoneNumber = req.getParameter("txtPhoneNumber").trim();
+        String txtAddress = req.getParameter("txtAddress").trim();
+        String txtCity = req.getParameter("txtShipCity").trim();
+        String txtDiscountID = req.getParameter("txtDiscountID").trim();
         
         Account accCustomer = (Account)req.getSession().getAttribute("AccCustomerSession");
         if(accCustomer !=null){
@@ -63,29 +65,47 @@ public class OrderAction extends HttpServlet {
                     return;
                 }
             }
+            Discount discount = odDAO.getVoucher(txtDiscountID);
+            if(discount==null){
+                req.setAttribute("msgWrongDiscountID", "This voucher dooesn't exists in our system!");
+                req.getRequestDispatcher(req.getContextPath()+"/account/cart").forward(req, resp);
+                return;
+            }
             try {
                 int newOrderID = odDAO.getNewOrderID();
-                Order od = new Order(newOrderID, accCustomer.getCustomerID(), 1, "shipperName", txtAddress, txtCity, "region", "2345", "Viet Nam");
+                Order od = new Order(newOrderID, accCustomer.getCustomerID(), 1, "shipperName", txtAddress, txtCity, "region", "2345", "Viet Nam",1);
                 odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
+//                odDAO.createOrder(od);
+//                
+//                Discount discount = odDAO.getVoucher(txtDiscountID);
 //                for (Cart item : cart) {
-//                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, 100000, item.getQuantity(), "AHJGSU");
+//                    
+//                    Product proInfor;
+//                    String voucher="";
+//                    double discountAmount=0;
+//                    proInfor = proDAO.getProductInfor(item.getProductID());
+//                    if(discount!=null){
+//                        voucher = discount.getDiscountID();
+//                        discountAmount = item.getQuantity()*proInfor.getSalePrice() - proInfor.getSalePrice()*discount.getPercentage();
+//                    }
+//                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
 //                    odDAO.createDetailOfOrder(odDetail);
 //                }
-
-
                 SendMail sendMail = new SendMail();
                 String subjectContent = "Your order " + newOrderID + " has been confirmed!";
                 String emailContent = "Shopee is preparing your order!\nOrder detail: .......";
-                sendMail.sendAnnounce("vuvu15202@gmail.com", subjectContent, emailContent);
+                try {
+                    sendMail.sendAnnounce("vuvu15202@gmail.com", subjectContent, emailContent);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(OrderAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            catch (MessagingException ex) {
-                Logger.getLogger(OrderAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             resp.sendRedirect(req.getContextPath()+"/account/cart");
         }else{
+            
             Cookie arr[] = req.getCookies();
             ArrayList<String> cookiesText = new ArrayList<>();
             if (arr != null) {
@@ -104,7 +124,7 @@ public class OrderAction extends HttpServlet {
             AccountDAO accDAO = new AccountDAO();
             if(accDAO.getAccountByEmail(txtEmail)==null){
                 try {
-                    Account acc = new Account(0, txtEmail, "", 0, 0, 2);
+                    Account acc = new Account(0, txtEmail, "", 0, 0, 2, true);
                     Customer cus = new Customer(0, "", "",txtReceiver,txtAddress,txtPhoneNumber);
                     accDAO.createAccount(cus, acc);
 
@@ -115,14 +135,32 @@ public class OrderAction extends HttpServlet {
             
             Account AccCustomer = accDAO.getAccountByEmail(txtEmail);
             req.getSession().setAttribute("AccCustomerSession", AccCustomer);
-
+            
+            
             try {
                 OrderDAO odDAO = new OrderDAO();
+                ProductDAO proDAO = new ProductDAO();
+                Discount discount = odDAO.getVoucher(txtDiscountID);
                 int newOrderID = odDAO.getNewOrderID();
-                Order od = new Order(newOrderID, AccCustomer.getCustomerID(), 1, txtReceiver, txtAddress, txtCity, "", "", "Viet Nam");
+                
+                if(discount==null){
+                    req.setAttribute("msgWrongDiscountID", "This voucher dooesn't exists in our system!");
+                    req.getRequestDispatcher(req.getContextPath()+"/account/cart").forward(req, resp);
+                    return;
+                }
+            
+                Order od = new Order(newOrderID, AccCustomer.getCustomerID(), 1, txtReceiver, txtAddress, txtCity, "", "", "Viet Nam",1);
                 odDAO.createOrder(od);
                 for (Cart item : cartList) {
-                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(),1,100000, item.getQuantity(), "" );
+                    Product proInfor;
+                    String voucher="";
+                    double discountAmount=0;
+                    proInfor = proDAO.getProductInfor(item.getProductID());
+                    if(discount!=null){
+                        voucher = discount.getDiscountID();
+                        discountAmount = proInfor.getSalePrice() - proInfor.getSalePrice()*discount.getPercentage();
+                    }
+                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(),1,discountAmount, item.getQuantity(), voucher );
                     odDAO.createDetailOfOrder(odDetail);
                 }
 

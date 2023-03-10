@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Author;
 public class AuthorDAO extends DBContext{
     public ArrayList<Author> getObjectList(ResultSet rs){
@@ -38,8 +40,34 @@ public class AuthorDAO extends DBContext{
         }
         return authorList;
     }
+    
+    public Author getAuthorByID(int ID) {     
+        Author author = new Author();
+        try {
+            //connection = DBContext.getInstance().getConnection();
+            
+            String sql = "SELECT * FROM Authors where AuthorID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int AuthorID = rs.getInt("AuthorID");
+                String AuthorName = rs.getString("AuthorName");
+                String PhoneNumber = rs.getString("PhoneNumber");
+                String Address = rs.getString("Address");  
+                
+                author= new Author(AuthorID, AuthorName, PhoneNumber, Address);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.WARNING,e.getMessage(),e);
+        } finally {
+            //DBContext.releaseJBDCObject(rs, ps, connection);
+        }
+        return author;
+    }
+    
     public static void main(String[] args) {
-        ArrayList<Author> abc = new AuthorDAO().getAuthorList();
-        System.out.println(abc.get(0).getAuthorID());
+        Author abc = new AuthorDAO().getAuthorByID(1);
+        System.out.println(abc.getAuthorID());
     }
 }

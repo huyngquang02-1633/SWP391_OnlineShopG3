@@ -110,7 +110,7 @@
                                         <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
                                     </c:forEach>   </td> 
                                 <td>${x.getTitle()}</td> 
-                                <td>${x.getTitleOfCourtesy()}</td> 
+<!--                                <td>${x.getTitleOfCourtesy()}</td> -->
                                 <td>${x.getBirthDate()}</td> 
                                 <td>${x.getHireDate()}</td> 
                                 <td>${x.getAddress()}</td> 

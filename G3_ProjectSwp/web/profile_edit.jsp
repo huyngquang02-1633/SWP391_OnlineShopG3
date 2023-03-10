@@ -10,8 +10,8 @@
                     <a href="#">
                         <img src="${AccCustomerSession.getImage().replace("=s96-c", "")}" alt="">
                     </a>
-                    <h1>${c.getLastName()}</h1>
-                    <p>${a.getEmail()}</p>
+                    <h1>${userGoogle.getName()}</h1>
+                    <p style="color: black;">${userGoogle.getEmail()}</p>
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
@@ -34,26 +34,25 @@
                                 <p><span></span>: <input type="text" name="txtCustomerID" value="${c.getCustomerID()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>First Name </span>: <input type="text" name="txtFirstName" value="${c.getFirstName()}" pattern="[A-Za-z]{}" required minlength="2" maxlength="100" ></p>
+                                <p><span>First Name </span>: <input type="text" name="txtFirstName" value="${c.getFirstName()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Last Name </span>: <input type="text" name="txtLastName" value="${c.getLastName()}" pattern="[A-Za-z]{}" required minlength="2" maxlength="100"></p>
+                                <p><span>Last Name </span>: <input type="text" name="txtLastName" value="${c.getLastName()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Address </span>: <input type="text" name="txtAddress" value="${c.getAddress()}" pattern="[\w]{}" minlength="10" maxlength="100"></p>
+                                <p><span>Address </span>: <input type="text" name="txtAddress" value="${c.getAddress()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Contact Title </span>: <input type="text" name="txtContactTitle" value="${c.getContactTitle()}" pattern="[\w]{}" minlength="10" maxlength="100"></p>
+                                <p><span>Contact Title </span>: <input type="text" name="txtContactTitle" value="${c.getContactTitle()}"></p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Birthday</span>: <input type="date" name="txtBirthday" value="${c.getDateOfBirth()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Phone </span>: <input type="text" name="txtPhone" value="${c.getPhoneNumber()}" required
-                                                               pattern="([0]{1})([0-9]{9})"></p>
+                                <p><span>Phone </span>: <input type="text" name="txtPhone" value="${c.getPhoneNumber()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Create Date </span>: <input type="date" name="txtCreatDate" value="${c.getCreateDate()}"></p>
+                                <p><span>Create Date </span>: <input readonly type="date" name="txtCreatDate" value="${c.getCreateDate()}"></p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Gender </span>: <select name="txtGender" >
@@ -77,27 +76,30 @@
     </div>
 </div>
 </div>    <%@include file="templates/footer.jsp" %>
-<!--<script>
+<script>
     function validateName() {
-        const letter = /^[a-zA-Z\s]*$/;
         let x = document.forms["form-edit"]["txtFirstName"].value;
-        if (x != "" && x.match(letter)) {
-        } else if (x == "") {
-            alert("Name must be filled out");
-            return false;
+        const regex = /^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚ?????àáâãèéêìíòóôõùú??????????????????????????????????????????????????????????????????????????????????????????İ?????????\s]+)$/i;
+        if (x.trim() === '') {
+    // N?u tên r?ng
+        return false;
+        }
+        if (regex.test(x)) {
+          // N?u tên ch? ch?a các kı t? ch? và kho?ng tr?ng
+          return true;
         } else {
-            alert("Name must be string");
-            return false;
+          // N?u tên ch?a các kı t? ??c bi?t ho?c s?
+          return false;
         }
 
-        let y = document.forms["form-edit"]["txtLastName"].value;
-        if (y != "" && y.match(letter)) {
-        } else if (y == "") {
-            alert("Name must be filled out");
-            return false;
-        } else {
-            alert("Name must be string");
-            return false;
-        }
+//        let y = document.forms["form-edit"]["txtLastName"].value;
+//        if (y != "" && y.match(letter)) {
+//        } else if (y == "") {
+//            alert("Name must be filled out");
+//            return false;
+//        } else {
+//            alert("Name must be string");
+//            return false;
+//        }
     }
-</script>-->
+</script>
