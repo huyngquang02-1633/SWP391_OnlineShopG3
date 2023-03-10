@@ -44,6 +44,19 @@ public class Customer {
         this.Address = Address;
     }
 
+    public Customer(int CustomerID, String FirstName, String LastName, boolean Gender, String ContactTitle, String Address, String PhoneNumber, Date CreateDate) {
+        this.CustomerID = CustomerID;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.Gender = Gender;
+        this.ContactTitle = ContactTitle;
+        this.Address = Address;
+        this.PhoneNumber = PhoneNumber;
+        this.CreateDate = CreateDate;
+    }
+    
+    
+
     public Customer(int CustomerID, String FirstName, String LastName, boolean Gender, String ContactTitle, Date DateOfBirth, String Address, String PhoneNumber, Date CreateDate) {
         this.CustomerID = CustomerID;
         this.FirstName = FirstName;
