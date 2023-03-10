@@ -11,6 +11,7 @@ import java.sql.Date;
  * @author user
  */
 public class Employee {
+
     private int employeeID;
     private String firstName;
     private String lastName;
@@ -26,9 +27,8 @@ public class Employee {
 
     public Employee() {
     }
-    
 
-    public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, String phonenumber, boolean status) {
+    public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, String phoneNumber, boolean status) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,19 +39,10 @@ public class Employee {
         this.birthDate = birthDate;
         this.hireDate = hireDate;
         this.address = address;
-        this.phoneNumber = phonenumber;
+        this.phoneNumber = phoneNumber;
         this.status = status;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phonenumber) {
-        this.phoneNumber = phonenumber;
-    }
-
-    
     public int getEmployeeID() {
         return employeeID;
     }
@@ -132,6 +123,14 @@ public class Employee {
         this.address = address;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public boolean isStatus() {
         return status;
     }
@@ -142,17 +141,8 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "employeeID=" + employeeID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", departmentID=" + departmentID + ", title=" + title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate + ", address=" + address + ", status=" + status + '}';
+        return "Employee{" + "employeeID=" + employeeID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", departmentID=" + departmentID + ", title=" + title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate + ", address=" + address + ", phoneNumber=" + phoneNumber + ", status=" + status + '}';
     }
-
-    public void setDepartmentID(String sdepartmentID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
-    
 
     
 }
-
-

@@ -8,7 +8,9 @@ import models.Employee;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -43,7 +45,7 @@ public class EmployeeDAO extends DBContext {
         return emp;
     }
 
-    public ArrayList<Employee> getAllEmloyees() {
+    public ArrayList<Employee> getAllEmloyees() throws SQLException {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
             String sql = "select * from Employees where Status = 1";
@@ -66,10 +68,11 @@ public class EmployeeDAO extends DBContext {
                 empList.add(emp);
             }
         } catch (Exception e) {
+            connection.rollback();
         }
         return empList;
     }
-    
+
     public ArrayList<Employee> getAllEmloyeesByID() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
@@ -96,14 +99,11 @@ public class EmployeeDAO extends DBContext {
         }
         return empList;
     }
-    
 
-    public void insertEmployee(Employee employee) {
+    public void insertEmployee(Employee employee) throws SQLException {
 //        enableInsertMode("Employees");
         String sql = "SET IDENTITY_INSERT Employees ON;"
-
                 + " insert into [Employees] ([EmployeeID],[LastName]\n"
-
                 + "      ,[FirstName]\n"
                 + "      ,[Gender]\n"
                 + "      ,[DepartmentID]\n"
@@ -134,7 +134,7 @@ public class EmployeeDAO extends DBContext {
             ps.executeUpdate();
 //            disbleInsertMode("Employees");
         } catch (Exception e) {
-            e.printStackTrace();
+            connection.rollback();
         }
     }
 
@@ -185,6 +185,7 @@ public class EmployeeDAO extends DBContext {
             e.printStackTrace();
         }
     }
+
     public void changeStatusEmployee(String EmployeeID) {
         String sql = "update Employees\n"
                 + " set status = 1 where EmployeeID = ?";
@@ -197,12 +198,43 @@ public class EmployeeDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        Date birthDate = Date.valueOf("2022-02-02");
-        Date hireDate = Date.valueOf("2022-02-02");
-        EmployeeDAO abc = new EmployeeDAO();
-        abc.insertEmployee(new Employee(1223, "vvv", "vvv", true, 2, "vvv", "vvv", birthDate, hireDate, "vvv","0329053999", true));
+    public List<Employee> searchByName(String search) {
+        List<Employee> list = new ArrayList<>();
+        String sql = "select * from Employees where LastName like ? OR FirstName like ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + search + "%");
+            st.setString(2, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Employee e = new Employee();
+                e.setEmployeeID(rs.getInt("employeeID"));
+                e.setFirstName(rs.getString("firstName"));
+                e.setLastName(rs.getString("lastName"));
+                e.setGender(rs.getBoolean("gender"));
+                e.setDepartmentID(Integer.parseInt(rs.getString("departmentID")));
+                e.setTitle(rs.getString("title"));
+                e.setTitleOfCourtesy(rs.getString("titleOfCourtesy"));
+                e.setBirthDate(rs.getDate("birthDate"));
+                e.setHireDate(rs.getDate("hireDate"));
+                e.setStatus(rs.getBoolean("status"));
+                e.setAddress(rs.getString("address"));
+                list.add(e);
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
-    
-    
+
+//    public static void main(String[] args) {
+//        EmployeeDAO abc = new EmployeeDAO();
+//        ArrayList<Employee> emm = abc.getAllEmloyees();
+//        System.out.println(emm);
+//    }
+public static void main(String[] args) {
+    ArrayList<Employee> employees = new EmployeeDAO().getAllEmloyeesByID();
+    for (Employee emp : employees) {
+        System.out.println(emp);
+    }
+}
 }

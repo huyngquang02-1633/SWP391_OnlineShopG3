@@ -71,74 +71,102 @@
                     </form>
                 </div>
                 <div id="product-title-2" style="width: 55%;">
-                    <form style="padding-bottom: 40px;">
-                        <input type="text" name="txtSearch" placeholder="Enter employee name to search"/>
-                        <input type="submit" value="Search"
-                               </form>
-                        </div>
-                        <div id="product-title-3" style="width: 20%;">
-                            <a href="create-employee.jsp">Create a new Employee</a>
-                        </div>
+                    <!--<form style="padding-bottom: 40px;">-->
+                        <!--<input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter employee name to search"/>-->
+                    <!--<input type="submit" value="Search"-->
+                    <!--</form>-->  
+                    <form style="padding-bottom: 40px;" action="SearchEmployee_admin" method="get">
+                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter employee name to search"/>
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
-                <div id="order-table-admin">
-                    <table id="orders">
+                <div id="product-title-3" style="width: 20%;">
+                    <a href="create-employee.jsp">Create a new Employee</a>
+                </div>
+            </div>
+            <div id="order-table-admin">
+                <table id="orders">
+                    <tr>
+                        <th>EmployeeID</th>
+                        <th>LastName</th>
+                        <th>FirstName</th>
+                        <th>Gender</th>
+                        <th>Department Name</th>
+                        <!--<th>Title</th>-->
+                        <th>Title</th>
+                        <th>TitleOfCourtesy</th>
+                        <th>Birthday</th>
+                        <th>HireDate</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach items = "${empList}" var="x" >
+
                         <tr>
-                            <th>EmployeeID</th>
-                            <th>LastName</th>
-                            <th>FirstName</th>
-                            <th>Gender</th>
-                            <th>Department Name</th>
-                            <!--<th>Title</th>-->
-                            <th>Title</th>
-                            <th>Birthday</th>
-                            <th>HireDate</th>
-                            <th>Address</th>
-                            <th>Status</th>
-                        </tr>
-                        <c:forEach items = "${empList}" var="x" >
-
-                            <tr>
-                                <td>${x.getEmployeeID()}</td>
-                                <td>${x.getLastName()}</td> 
-                                <td>${x.getFirstName()}</td>
+                            <td>${x.getEmployeeID()}</td>
+                            <td>${x.getLastName()}</td> 
+                            <td>${x.getFirstName()}</td>
+                            <td>
+                                <c:if test="${x.isGender() == true}">Male</c:if>
+                                <c:if test="${x.isGender() == false}">Female</c:if>
+                                </td> 
                                 <td>
-                                    <c:if test="${x.isGender() == true}">Male</c:if>
-                                    <c:if test="${x.isGender() == false}">Female</c:if>
-                                    </td> 
-                                    <td>
-                                    <c:forEach var="dep" items="${depart}"> 
-                                        <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
-                                    </c:forEach>   </td> 
-                                <td>${x.getTitle()}</td> 
-<!--                                <td>${x.getTitleOfCourtesy()}</td> -->
-                                <td>${x.getBirthDate()}</td> 
-                                <td>${x.getHireDate()}</td> 
-                                <td>${x.getAddress()}</td> 
-                                <c:choose>
-                                    <c:when test="${x.isStatus() == true}"><td style="color: green;">Active | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Change Status</a></td></c:when>
-                                    <c:when test="${x.isStatus() == false}"><td style="color: red;">Suspended | <a herf ="#" onclick="showMesss(${x.getEmployeeID()})">Change</a></td></c:when>
-                                </c:choose>
-                            </tr>
-                        </c:forEach>
+                                <c:forEach var="dep" items="${depart}"> 
+                                    <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
+                                </c:forEach>   </td> 
+                            <td>${x.getTitle()}</td> 
+                                <td>${x.getTitleOfCourtesy()}</td> 
+                            <td>${x.getBirthDate()}</td> 
+                            <td>${x.getHireDate()}</td> 
+                            <td>${x.getAddress()}</td> 
+                            <c:choose>
+                                <c:when test="${x.getDepartmentID() == 1}"><td style="color: blue;">Admin</td></c:when>
+                                <c:when test="${x.isStatus() == true}"><td style="color: green;">Active | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Inactivate</a></td></c:when>
+                                <c:when test="${x.isStatus() == false}"><td style="color: red;">Inactivate | <a herf ="#" onclick="showMesss(${x.getEmployeeID()})">Active</a></td></c:when>
+                            </c:choose>
+                        </tr>
+                    </c:forEach>
 
 
-                    </table>
-                </div>
+                </table>
+            </div>
+            <c:if test="${sessionMsg!=null}"><div>${sessionMsg}</div> </c:if>
                 <div id="paging">
                     <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a href="#" class="active">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">&raquo;</a>
-                    </div>
+
+                    <c:if test="${currentPage>1}">
+                        <c:url value="/employeeManager_admin" var="paginationPrevous">
+                            <c:param name="currentPage" value="${currentPage-1}" />
+                        </c:url>
+                        <a href="${paginationPrevous}">&laquo;</a>
+                    </c:if>
+
+                    <c:forEach begin="1" end="${numberOfPage}" step="1" var="stepValue">
+                        <c:choose>
+                            <c:when test="${stepValue == currentPage}">
+                                <a href="#" class="active">${stepValue}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <c:url value="/employeeManager_admin" var="pagination">
+                                    <c:param name="currentPage" value="${stepValue}" />
+                                </c:url>
+                                <a href="${pagination}">${stepValue}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${currentPage<numberOfPage}">
+                        <c:url value="/employeeManager_admin" var="paginationNext">
+                            <c:param name="currentPage" value="${currentPage+1}" />
+                        </c:url>
+                        <a href="${paginationNext}">&raquo;</a>
+                    </c:if>
                 </div>
             </div>
         </div>
     </div>
+    <div id="footer-admin">Mai la anh em</div>
+</div>
 </div>
 <div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
 </div>

@@ -42,10 +42,10 @@ import DAL.ProductDAO;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(req.getSession().getAttribute("AccAdminSession")==null){
-            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-            return;
-        }
+//        if(req.getSession().getAttribute("AccAdminSession")==null){
+//            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+//            return;
+//        }
 
         PaginationObject paging = new PaginationObject();
         int currentPage = 1;
