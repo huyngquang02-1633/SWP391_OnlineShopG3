@@ -22,7 +22,8 @@
         <link rel="stylesheet" href="<%=path%>/css/main.css">
         <link rel="stylesheet" href="<%=path%>/css/color.css">
         <link rel="stylesheet" href="<%=path%>/css/responsive.css">
-
+        
+        <link rel="stylesheet" href="https://kit.fontawesome.com/6d68bb11b2.css" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>

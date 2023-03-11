@@ -3,12 +3,15 @@
     <div class="path-admin">ORDERS LIST</b></div>
     <div class="content-main">
         <div id="content-main-dashboard">
+            <hr>
             <div id="order-title">
                 <b>Filter by Order Date:</b>
                 <form style="padding-bottom: 10px;">
                     <b>From</b>: <input type="date" name="txtStartOrderDate"/>
                     <b>To</b>: <input type="date" name="txtEndOrderDate"/>
                     <input type="submit" value="Filter">
+                    <input type="checkbox" name="newOrder"> <label for="newOrder">New Order</label>
+                    <input type="checkbox" name="oldOrder"> <label for="oldOrder">Old Order</label>
                 </form>
             </div>
             <div id="order-table">
@@ -27,10 +30,7 @@
                         <!--<th>ShipRegion</th>-->
                         <th>ShipCountry</th>
                         <th>Status</th>
-
-
                     </tr>
-                    
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>
                             <td><a href="<%=path%>/orderManage_admin?idOdDetail=${od.getOrderID()}">${od.getOrderID()}</a></td>
@@ -45,7 +45,21 @@
                             <td>${od.getShipCity()}</td> 
                             <!--<td>${od.getShipRegion()}</td>--> 
                             <td>${od.getShipCountry()}</td> 
-                         
+                            <td style="padding: unset;"><select id="hoverth" name="ddlCategory">
+                                    <option value="catid1" style="color: blue;">Pending <i class="fa-solid fa-pen-to-square"></i></option>
+                                    <option value="catid1" style="color: red;">Canceled</option>
+                                    <option value="catid1" style="color: green;">Approved <i class="fa-solid fa-pen-to-square"></i></option>
+                                </select></td>
+                            <td style="padding: unset;"><select id="hoverth" name="ddlCategory">
+                                    <option value="catid1" style="color: green">Approved <i class="fa-solid fa-pen-to-square"></i></option>
+                                    <option value="catid1" style="color: blue;">Delivering <i class="fa-solid fa-pen-to-square"></i></option>
+                                    <option value="catid1" style="color: red;">Canceled</option>
+                                </select></td>
+                            <td style="padding: unset;"><select id="hoverth" name="ddlCategory">
+                                    <option value="catid1" style="color: blue;">Delivering <i class="fa-solid fa-pen-to-square"></i></option>
+                                    <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
+                                </select></td>
+
                             <c:choose>
                                 <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()!=null}"><td style="color: green;">Completed</td></c:when>
                                 <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()==null}"><td style="color: blue;">Pending|  <button onclick="cancle(${od.getOrderID()},${currentPage})">Cancel</button></td></c:when>
@@ -82,18 +96,22 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-
                     <c:if test="${currentPage<numberOfPage}">
                         <c:url value="/orderManage_admin" var="paginationNext">
                             <c:param name="currentPage" value="${currentPage+1}" />
                         </c:url>
                         <a href="${paginationNext}">&raquo;</a>
                     </c:if>
-                    </table>
+
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
+</div>
+</div>
+<div id="footer-admin">
+    <p>Group 3 SE1639 - Online Shop</p>
+</div>
 </div>
 <script>
     function cancle(id, curentPage) {
@@ -106,6 +124,6 @@
 
     }
 </script>
-</div>
+
 </body>
 </html>

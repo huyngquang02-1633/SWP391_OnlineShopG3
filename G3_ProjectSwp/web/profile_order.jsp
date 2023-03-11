@@ -41,8 +41,21 @@
                                                     <span>Order date: ${odList.getOrderDate()}</span>
                                                     <c:choose>
                                                         <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()!=null}"><span style="color: red;">Canceled</span></c:when>
-                                                        <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()==null}"><span style="color: blue;">Pending</span></c:when>
+                                                        <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()==null}"><select id="selectS" name="ddlCategory">
+                                                                <option value="catid1" style="color: blue;">Pending</option>
+                                                                <option value="catid1" style="color: red;">Canceled</option>
+                                                            </select></c:when>
                                                         <c:when test="${odList.getRequiredDate()==null && odList.getShippedDate()==null}"><span style="color: green;">Completed</span></c:when>
+                                                        <c:when test=""><select id="selectS" name="ddlCategory">
+                                                                <option value="catid1" style="color: blue;">Delivering</option>
+                                                                <option value="catid1" style="color: rgb(22, 22, 22);">Refunding</option>
+                                                                <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
+                                                            </select></c:when>
+                                                        <c:when test=""><select id="selectS" name="ddlCategory">
+                                                                <option value="catid1" style="color: green">Approved</option>
+                                                                <option value="catid1" style="color: red;">Canceled</option>
+                                                            </select></c:when>
+
                                                     </c:choose>
                                                 </div>
                                                 <c:forEach items="${orderDetailList}" var="odDetailList">
@@ -73,16 +86,27 @@
                                                         </div>
                                                     </c:if>
                                                 </c:forEach>
-                                                <div class="card-footer"
-                                                     style="background-color: #a8729a;">
-                                                    <h5>Total
-                                                        paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
+                                                <div class="card-footer" >
+                                                    <c:set var="myVar" value="${odList.getOrderID()}"/>
+                                                    <h5>Total paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
+                                                    <div class="card-footer"><div id="box">
+                                                            <span id="myVar">Review</span>
+                                                            <form action="" id="form">
+                                                                <p><input type="text" placeholder="username"/></p>
+                                                                <p><input type="password" placeholder="password" /></p>
+                                                                <p><input type="submit" value="Complete" /></p>
+                                                            </form>
+                                                        </div></div>
                                                 </div>
-                                            </div>
-
+                                                <hr>
+                                            </div>    
                                         </c:forEach>
-
-
+                                        <script>
+                                            $("#myVar").click(function () {
+                                                $("#box form").toggle("slow");
+                                                return false;
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </div>

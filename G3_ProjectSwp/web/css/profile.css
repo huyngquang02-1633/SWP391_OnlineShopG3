@@ -53,6 +53,7 @@ body {
 
 .profile-nav .user-heading p {
     font-size: 12px;
+    color: #777;
 }
 
 .profile-nav ul {
@@ -119,12 +120,12 @@ body {
 }
 
 .bio-graph-heading {
-    background: #fbc02d;
+    background: #797979;
     color: #fff;
     text-align: center;
-    font-style: italic;
-    padding: 10px;
-    border-radius: 4px 4px 0 0;
+    /* font-style: italic; */
+    padding: 20px;
+    /* border-radius: 4px 4px 0 0; */
     -webkit-border-radius: 4px 4px 0 0;
     font-size: 20px;
     margin-bottom: 14px;
@@ -141,7 +142,7 @@ body {
 }
 
 .panel{
-    background: #f1f2f7;
+   
 }
 
 .bio-row {
@@ -162,10 +163,10 @@ body {
     line-height: 40px;
     border-radius: 5px;
     /* border: none; */
-    box-shadow: 1px 2px #77b748;
+    box-shadow: 1px 2px #c1c1c1;
     border-color: #666;
     border: #77b748;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 .bio-row p span {
@@ -190,11 +191,10 @@ body {
     display: flex;
     margin: auto;
     width: 110px;
-    border: solid 1px #bcb3aa;
     border-radius: 8px;
     justify-content: center;
     color: white;
-    background-color: #77b748
+    background-color: #797979;
 }
 
 .file-pos {
@@ -264,157 +264,55 @@ img {
 .odt-title {
     display: flex;
     justify-content: space-between;
-    padding: 16px;
-    background: #a8729a;
+    padding: 12px;
+    background: #345082;
     color: aliceblue;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .card-footer{
+    display: flex;
+    justify-content: space-between;
+    background-color: #a3bceb;
     color: white;
-    padding: 8px 15px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-bottom: 20px;
+    padding: 4px 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 30px;
 
 }
 
-/*.activity {
-    width: 100%;
-    float: left;
-    margin-bottom: 10px;
+#box {
+  padding:5px;
+  z-index:10;
+  position:relative;  
+}
+#box form {
+ background:#006699;
+ padding:5px;
+ display:none;
+ position:absolute;
+ top:27px;
+}
+#button {
+  width:75px;
+  background:#006699;
+  color:#fff;
+  padding:3px 10px;
+  border:1px solid #006699;  
+  margin-bottom:15px;  
+  cursor:pointer;
+}
+input[type="submit"] {
+  background:none;
+  color:#fff;
+  border:none;
+  text-align:left;
+  cursor:pointer;
 }
 
-.activity.alt {
-    width: 100%;
-    float: right;
-    margin-bottom: 10px;
+.selectS{
+    background: white;
+    padding: 0px 6px;
+    width: 100px;
 }
-
-.activity span {
-    float: left;
-}
-
-.activity.alt span {
-    float: right;
-}
-.activity span, .activity.alt span {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    background: #eee;
-    text-align: center;
-    color: #fff;
-    font-size: 16px;
-}
-
-.activity.terques span {
-    background: #8dd7d6;
-}
-
-.activity.terques h4 {
-    color: #8dd7d6;
-}
-.activity.purple span {
-    background: #b984dc;
-}
-
-.activity.purple h4 {
-    color: #b984dc;
-}
-.activity.blue span {
-    background: #90b4e6;
-}
-
-.activity.blue h4 {
-    color: #90b4e6;
-}
-.activity.green span {
-    background: #aec785;
-}
-
-.activity.green h4 {
-    color: #aec785;
-}
-
-.activity h4 {
-    margin-top:0 ;
-    font-size: 16px;
-}
-
-.activity p {
-    margin-bottom: 0;
-    font-size: 13px;
-}
-
-.activity .activity-desk i, .activity.alt .activity-desk i {
-    float: left;
-    font-size: 18px;
-    margin-right: 10px;
-    color: #bebebe;
-}
-
-.activity .activity-desk {
-    margin-left: 70px;
-    position: relative;
-}
-
-.activity.alt .activity-desk {
-    margin-right: 70px;
-    position: relative;
-}
-
-.activity.alt .activity-desk .panel {
-    float: right;
-    position: relative;
-}
-
-.activity-desk .panel {
-    background: #F4F4F4 ;
-    display: inline-block;
-}
-
-
-.activity .activity-desk .arrow {
-    border-right: 8px solid #F4F4F4 !important;
-}
-.activity .activity-desk .arrow {
-    border-bottom: 8px solid transparent;
-    border-top: 8px solid transparent;
-    display: block;
-    height: 0;
-    left: -7px;
-    position: absolute;
-    top: 13px;
-    width: 0;
-}
-
-.activity-desk .arrow-alt {
-    border-left: 8px solid #F4F4F4 !important;
-}
-
-.activity-desk .arrow-alt {
-    border-bottom: 8px solid transparent;
-    border-top: 8px solid transparent;
-    display: block;
-    height: 0;
-    right: -7px;
-    position: absolute;
-    top: 13px;
-    width: 0;
-}
-
-.activity-desk .album {
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.activity-desk .album a{
-    margin-right: 10px;
-}
-
-.activity-desk .album a:last-child{
-    margin-right: 0px;
-}*/

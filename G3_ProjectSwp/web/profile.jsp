@@ -8,7 +8,7 @@
             <div class="panel">
                 <div class="user-heading round">
                     <a href="#">
-                        <img src="${AccCustomerSession.getImage().replace("=s96-c", "")}" alt="">
+                        <img src="${AccCustomerSession.getImage().replace("=s96-c", "")}" alt="">   
                     </a>
                     <h1>${userGoogle.getName()}</h1>
                     <p style="color: black;">${userGoogle.getEmail()}</p>
