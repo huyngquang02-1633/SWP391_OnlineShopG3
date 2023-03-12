@@ -22,9 +22,9 @@
         <link rel="stylesheet" href="<%=path%>/css/main.css">
         <link rel="stylesheet" href="<%=path%>/css/color.css">
         <link rel="stylesheet" href="<%=path%>/css/responsive.css">
-        
         <link rel="stylesheet" href="https://kit.fontawesome.com/6d68bb11b2.css" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
 
@@ -49,7 +49,7 @@
                                 <c:choose>
                                     <c:when test="${AccCustomerSession == null}">
                                         <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="25" height="25" style=" border-radius: 50%" alt="" >
-                                        <a class="login tg-btnthemedropdown" style="display: inline-block;" href="login.jsp"style="text-decoration:none; color: #454545"><span>Login</span></a>
+                                        <a class="login tg-btnthemedropdown" style="display: inline-block;" href="<%=path%>/account/login"style="text-decoration:none; color: #454545"><span>Login</span></a>
                                     </c:when>
                                     <c:otherwise>
                                         <img id="imgprofile" src="${AccCustomerSession.getImage()}" width="25   " height="25" style=" border-radius: 50%" alt="" >
@@ -71,7 +71,7 @@
                                         <a href="<%=path%>/account/profile_myOrder">My Orders</a>
                                     </div>
                                     <div class="tg-description">
-                                        <a href="<%=path%>/account/login" >Log out</a>
+                                        <a href="<%=path%>/account/login">Log out</a>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                                     <div class="tg-minicarproduct">
 
                                                         <figure>
-                                                            <img src="<%=path%>/images/products/img-01.jpg" alt="image description">
+                                                            <img src="${product.getImage()}" style="height: 70px;" alt="image description">
                                                         </figure>
                                                         <div class="tg-minicarproductdata">
                                                             <h5><a href="javascript:void(0);">${product.getProductName()}</a></h5>
@@ -162,7 +162,7 @@
                                     <span class="icon-bar"></span>
                                 </button>
                             </div>
-                            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation" style="font-size: 18px">
                                 <ul>
                                     <li><a href="<%=path%>/homepage">Home</a></li>
                                     <li class="menu-item-has-children menu-item-has-mega-menu">
