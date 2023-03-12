@@ -35,14 +35,13 @@ public class SearchProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search=request.getParameter("txtSearch");
-        ProductDAO dao=new ProductDAO();
-        List<Product> list=dao.SearchProductByName(search);
-                request.setAttribute("searchValue", search);
-
+        String search = request.getParameter("txtSearch");
+        ProductDAO dao = new ProductDAO();
+        List<Product> list = dao.SearchProductByName(search);
+        request.setAttribute("searchValue", search);
         request.setAttribute("productList", list);
         request.setAttribute("categoryList", new CategoryDAO().getCategory());
-                request.getRequestDispatcher("/product.jsp").forward(request, response);
+        request.getRequestDispatcher("/product.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,8 +70,7 @@ public class SearchProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              processRequest(request, response);
-
+        processRequest(request, response);
 
     }
 

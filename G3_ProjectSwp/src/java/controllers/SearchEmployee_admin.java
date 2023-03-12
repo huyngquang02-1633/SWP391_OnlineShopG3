@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.DepartmentsDAO;
 import DAL.EmployeeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,9 +37,10 @@ public class SearchEmployee_admin extends HttpServlet {
             throws ServletException, IOException {
         String search=request.getParameter("txtSearch");
         EmployeeDAO dao = new EmployeeDAO();
-        List<Employee> listInCurrentPage =dao.searchByName(search);
-        request.setAttribute("listInCurrentPage",listInCurrentPage);
+        List<Employee> list =dao.searchByName(search);
+        request.setAttribute("employeeList",list);
         request.setAttribute("searchValue", search);
+        request.setAttribute("departmentList", new DepartmentsDAO().getAllDepartments());
         request.getRequestDispatcher("employees.jsp").forward(request, response);
         }
     

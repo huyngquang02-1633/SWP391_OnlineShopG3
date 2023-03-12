@@ -55,7 +55,12 @@ import DAL.ProductDAO;
 
         ArrayList<Order> orderList = new OrderDAO().getAllOrders();
         ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
-        ArrayList<Employee> empList = new EmployeeDAO().getAllEmloyees();
+        ArrayList<Employee> empList = null;
+        try {
+            empList = new EmployeeDAO().getAllEmloyees();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderManage_admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         req.setAttribute("cusList", cusList);
         req.setAttribute("empList", empList);

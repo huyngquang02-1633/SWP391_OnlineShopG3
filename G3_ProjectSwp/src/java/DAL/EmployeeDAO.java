@@ -68,7 +68,6 @@ public class EmployeeDAO extends DBContext {
                 empList.add(emp);
             }
         } catch (Exception e) {
-            connection.rollback();
         }
         return empList;
     }
@@ -76,7 +75,7 @@ public class EmployeeDAO extends DBContext {
     public ArrayList<Employee> getAllEmloyeesByID() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
-            String sql = "select * from Employees";
+            String sql = "select * from Employees ";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -96,8 +95,22 @@ public class EmployeeDAO extends DBContext {
                 empList.add(emp);
             }
         } catch (Exception e) {
+
         }
         return empList;
+    }
+
+    public int getTotalEmployees() {
+        String sql = "select COUNT(*) from Employees";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
     }
 
     public void insertEmployee(Employee employee) throws SQLException {
@@ -231,10 +244,47 @@ public class EmployeeDAO extends DBContext {
 //        ArrayList<Employee> emm = abc.getAllEmloyees();
 //        System.out.println(emm);
 //    }
-public static void main(String[] args) {
-    ArrayList<Employee> employees = new EmployeeDAO().getAllEmloyeesByID();
-    for (Employee emp : employees) {
-        System.out.println(emp);
+//    public static void main(String[] args) {
+//        ArrayList<Employee> employees = new EmployeeDAO().getAllEmloyeesByID();
+//        for (Employee emp : employees) {
+//            System.out.println(emp);
+//        }
+//    }
+    public List<Employee> pagingEmployees(int index) {
+        List<Employee> empList = new ArrayList<>();
+        String sql = "select * from Employees\n"
+                + "order by EmployeeID \n"
+                + "OFFSET ? Rows fetch next 10 rows only;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (index-1)*10);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int EmployeeID = rs.getInt("EmployeeID");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String Title = rs.getString("Title");
+                String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
+                Date BirthDate = rs.getDate("BirthDate");
+                Date HireDate = rs.getDate("HireDate");
+                String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
+                boolean Status = rs.getBoolean("Status");               
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, PhoneNumber, Status);
+                empList.add(emp);
+            }
+        } catch (Exception e) {
+        }
+        return empList;
     }
-}
+
+    public static void main(String[] args) {
+        EmployeeDAO dao = new EmployeeDAO();
+        List<Employee> empList = dao.pagingEmployees(2);
+        for(Employee em : empList){
+            System.out.println(em);
+        }
+    }
 }
