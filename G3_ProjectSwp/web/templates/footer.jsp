@@ -153,19 +153,22 @@
 <!--************************************
                 Wrapper End
 *************************************-->
+    <%
+        String pathh = request.getContextPath();
+    %>
 
-<script src="js/vendor/jquery-library.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
+<script src="<%=pathh%>/js/vendor/jquery-library.js"></script>
+<script src="<%=pathh%>/js/vendor/bootstrap.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.vide.min.js"></script>
-<script src="js/countdown.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/parallax.js"></script>
-<script src="js/countTo.js"></script>
-<script src="js/appear.js"></script>
-<script src="js/gmap3.js"></script>
-<script src="js/main.js"></script>
+<script src="<%=pathh%>/js/owl.carousel.min.js"></script>
+<script src="<%=pathh%>/js/jquery.vide.min.js"></script>
+<script src="<%=pathh%>/js/countdown.js"></script>
+<script src="<%=pathh%>/js/jquery-ui.js"></script>
+<script src="<%=pathh%>/js/parallax.js"></script>
+<script src="<%=pathh%>/js/countTo.js"></script>
+<script src="<%=pathh%>/js/appear.js"></script>
+<script src="<%=pathh%>/js/gmap3.js"></script>
+<script src="<%=pathh%>/js/main.js"></script>
 <script>
                         
     function searchByName(param){
