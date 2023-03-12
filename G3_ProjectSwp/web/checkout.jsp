@@ -8,7 +8,10 @@
         padding: 30px;
     }
 </style>
-
+<p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="<%=path%>/js/countrystatecity.js?v2"></script>
+</p>
 <main id="tg-main page" class="tg-main tg-haslayout">
     <div class="tg-sectionspace tg-haslayout">
         <section class="shopping-cart dark">
@@ -45,16 +48,14 @@
                                 <div class="row">
                                     <div class="col-md-5 mb-3">
                                         <label for="country">Country</label>
-                                        <select class="custom-select d-block w-100" id="country" required>
-                                            <option value="">Choose...</option>
-                                            <option>Vietnam</option>
+                                        <select name="country" class="countries form-control" id="countryId">
+                                            <option value="">Select Country</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="state" name="txtShipCity">City</label>
-                                        <select class="custom-select d-block w-100" id="state" required>
-                                            <option value="">Choose...</option>
-                                            <option>Hanoi</option>
+                                        <select name="state" class="states form-control" id="stateId">
+                                            <option value="">Select City</option>
                                         </select>
 
                                     </div>
@@ -125,9 +126,9 @@
                             <form class="card p-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="txtDiscountID" placeholder="Promo code">
-<!--                                    <div class="input-group-append">-->
+                                    <div class="input-group-append">
                                         <button type="submit" class="tg-btn tg-btns " style="background-color: lightgray">Redeem</button>
-<!--                                    </div>-->
+                                    </div>
                                 </div>
                             </form>
                         </div>
