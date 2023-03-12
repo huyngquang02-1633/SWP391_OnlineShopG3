@@ -9,7 +9,7 @@
             <section class="shopping-cart dark">
                 <div class="container">
                     <div class="py-5 text-center">
-                        <h2 style="margin-top: -20px; margin-bottom: 20px;">My Cart</h2>
+                        <h2 style="margin-top: -20px; margin-bottom: 100px;">My Cart</h2>
                     </div>
                     <c:if test="${msgOutOfStock!=null}"><div style="color: red; font-size: 20px;margin: 10px 0px; text-align: center;">${msgOutOfStock}</div></c:if>
                                                             <c:if test="${msgWrongDiscountID!=null}">${msgWrongDiscountID}</c:if>
@@ -73,7 +73,7 @@
                                     <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
                                     <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
                                     <div class="summary-item"><span class="text">Total</span><span class="price">$360</span></div>
-                                    <a class="tg-btn tg-btns tg-active" href="<%=path%>/checkout.jsp">
+                                    <a class="tg-btn tg-btns tg-active" href="<%=path%>/checkout">
                                         <i class="fa fa-shopping-basket"></i>
                                         <em>Check out</em>
                                     </a>

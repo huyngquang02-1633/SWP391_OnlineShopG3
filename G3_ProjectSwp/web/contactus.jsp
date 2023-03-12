@@ -48,13 +48,13 @@
                             <ul class="tg-contactinfo">
                                 <li>
                                     <i class="icon-apartment"></i>
-                                    <address>Suit # 07, Rose world Building, Street # 02, AT246T Manchester</address>
+                                    <address>BE 416, Beta Building, FPT University, Hoa Lac High Tech Park - Km29 Thang Long Avenue, Thach That District, Hanoi City</address>
                                 </li>
                                 <li>
                                     <i class="icon-phone-handset"></i>
                                     <span>
                                         <em>0800 12345 - 678 - 89</em>
-                                        <em>+4 1234 - 4567 - 67</em>
+                                        <em>+84 1234 - 4567 - 67</em>
                                     </span>
                                 </li>
                                 <li>

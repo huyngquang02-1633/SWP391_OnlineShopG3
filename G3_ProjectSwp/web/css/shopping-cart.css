@@ -5,6 +5,7 @@
 .shopping-cart .content{
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 	background-color: white;
+        margin: -50px;
 }
 
 .shopping-cart .block-heading{
