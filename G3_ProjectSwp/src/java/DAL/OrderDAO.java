@@ -46,7 +46,7 @@ public class OrderDAO extends DBContext{
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
                 orderList.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName,
-                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, 1));
+                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status));
             }
         } catch (Exception e) {
         }
@@ -220,7 +220,7 @@ public class OrderDAO extends DBContext{
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
-                return new Order(OrderID, EmployeeID, EmployeeID, OrderDate, 
+                return new Order(OrderID, CustomerID, EmployeeID, OrderDate, 
                         RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, 
                         ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
             }
@@ -249,7 +249,7 @@ public class OrderDAO extends DBContext{
             ps1.setString(8, od.getShipRegion());
             ps1.setString(9, od.getShipPostalCode());
             ps1.setString(10, od.getShipCountry());
-            ps1.setInt(11, od.getStatus());
+            ps1.setInt(11, 1);
             ps1.executeUpdate();
             
 
