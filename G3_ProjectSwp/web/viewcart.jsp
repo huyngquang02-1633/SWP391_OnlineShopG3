@@ -73,7 +73,7 @@
                                     <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
                                     <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
                                     <div class="summary-item"><span class="text">Total</span><span class="price">$360</span></div>
-                                    <a class="tg-btn tg-btns tg-active" href="checkout.jsp">
+                                    <a class="tg-btn tg-btns tg-active" href="<%=path%>/checkout.jsp">
                                         <i class="fa fa-shopping-basket"></i>
                                         <em>Check out</em>
                                     </a>
