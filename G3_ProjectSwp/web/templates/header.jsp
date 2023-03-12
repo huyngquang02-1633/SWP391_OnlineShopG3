@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <strong class="tg-logo"><a href="<%=path%>/homepage"><img src="<%=path%>/images/logo.png"
-                                                                                  alt="company name here"></a></strong> 
+                                                                                  alt="company name herez"></a></strong> 
                         <div class="tg-wishlistandcart">
                             <div class="dropdown tg-themedropdown tg-wishlistdropdown">
 
@@ -125,7 +125,7 @@
                                         <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
                                         <div class="tg-btns">
 
-                                            <a class="tg-btn tg-active" href="<%=path%>/account/cart">View Cart</a>
+                                            <a class="tg-btn tg-active" href="<%=path%>/cart">View Cart</a>
 
                                             <a class="tg-btn" href="javascript:void(0);">Checkout</a>
                                         </div>
