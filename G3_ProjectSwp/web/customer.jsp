@@ -3,7 +3,7 @@
        <div id="myModal" class="modal">
         <div class="modal-content">
           <div class="close">&times;</div> <br>
-          <div class="path-admin">CREATE A NEW EMPLOYEE</b></div>
+          <div class="path-admin">EDIT A NEW CUSTOMER</b></div>
                   <div class="content-main">
                     <form id="content-main-product">
                         <div class="content-main-1">

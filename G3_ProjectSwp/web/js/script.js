@@ -51,7 +51,7 @@ function testAPI() {                      // Testing Graph API after login.  See
 
         let convertuserData = JSON.stringify(userData);
 
-        localStorage.setItem('userlogin', convertuserData);
+        sessionStorage.setItem('userlogin', convertuserData);
     window.location.href = "./homepage";
 
 //        document.getElementById('nameprofile').innerHTML = response.name;
@@ -86,7 +86,7 @@ function handleCredentialResponse(response) {
     };
 
     let convertuserData = JSON.stringify(userData);
-    localStorage.setItem('userlogin', convertuserData);
+    sessionStorage.setItem('userlogin', convertuserData);
     window.location.href = "./homepage";
 
 }

@@ -16,11 +16,11 @@
                         <div id="tg-content" class="tg-content">
                             <div class="tg-products">
                                 <div class="tg-sectionhead">
-                                    <h2><span>People's Choice</span>Bestselling Books</h2>
+                                    <h2>Bestselling Books</h2>
                                 </div>
                                 <div class="tg-productgrid">
                                     <div class="tg-refinesearch">
-                                        <span>showing 1 to 8 of 20 total</span>
+<!--                                        <span>showing 1 to 8 of 20 total</span>-->
                                         <form class="tg-formtheme tg-formsortshoitems">
                                             <fieldset>
                                                 <div class="form-group">
@@ -80,8 +80,8 @@
                                                         <ins>${product.getSalePrice()}</ins>
                                                         <del>${product.getCoverPrice()}</del>
                                                     </span>
-                                                    <c:url value="/account/cart" var="AddToCart">
-                                                        <c:param name="previousURL" value="../productList" />
+                                                    <c:url value="/cart" var="AddToCart">
+                                                        <c:param name="previousURL" value="productList" />
                                                         <c:param name="proID" value="${product.getProductID()}" />
                                                     </c:url>
                                                     <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
@@ -100,14 +100,6 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
                         <aside id="tg-sidebar" class="tg-sidebar">
-                            <div class="tg-widget tg-widgetsearch">
-                                <form class="tg-formtheme tg-formsearch">
-                                    <div class="form-group">
-                                        <button type="submit"><i class="icon-magnifier"></i></button>
-                                        <input oninput="searchByName(this)" type="search" name="search" class="form-group" placeholder="Search by title, author, key...">
-                                    </div>
-                                </form>
-                            </div>
                             <div class="tg-widget tg-catagories">
                                 <div class="tg-widgettitle">
                                     <h3>Categories</h3>

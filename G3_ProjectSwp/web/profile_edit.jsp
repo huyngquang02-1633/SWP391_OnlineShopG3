@@ -28,11 +28,10 @@
                     Update Profile
                 </div>
                 <div class="panel-body bio-graph-info">
-                    <form action="<%=path%>/account/profile1" method="post">  
+                    <form name="form-edit" action="<%=path%>/account/profile1" method="post">  
                         <div class="row">
                             <div style="display: none">
                                 <p><span></span>: <input type="text" name="txtCustomerID" value="${c.getCustomerID()}"></p>
-
                             </div>
                             <div class="bio-row">
                                 <p><span>First Name </span>: <input type="text" name="txtFirstName" value="${c.getFirstName()}"></p>
@@ -53,7 +52,7 @@
                                 <p><span>Phone </span>: <input type="text" name="txtPhone" value="${c.getPhoneNumber()}"></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Create Date </span>: <input type="date" name="txtCreatDate" value="${c.getCreateDate()}"></p>
+                                <p><span>Create Date </span>: <input readonly type="date" name="txtCreatDate" value="${c.getCreateDate()}"></p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Gender </span>: <select name="txtGender" >
@@ -67,7 +66,7 @@
                                         </c:if>
                                     </select></p></p>
                             </div>
-                            <input type="submit" value="Save" />
+                            <input onclick="return validateName()" type="submit" value="Save" />
                     </form>
                 </div>
             </div>
@@ -77,3 +76,30 @@
     </div>
 </div>
 </div>    <%@include file="templates/footer.jsp" %>
+<script>
+    function validateName() {
+        let x = document.forms["form-edit"]["txtFirstName"].value;
+        const regex = /^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚ?????àáâãèéêìíòóôõùú??????????????????????????????????????????????????????????????????????????????????????????İ?????????\s]+)$/i;
+        if (x.trim() === '') {
+    // N?u tên r?ng
+        return false;
+        }
+        if (regex.test(x)) {
+          // N?u tên ch? ch?a các kı t? ch? và kho?ng tr?ng
+          return true;
+        } else {
+          // N?u tên ch?a các kı t? ??c bi?t ho?c s?
+          return false;
+        }
+
+//        let y = document.forms["form-edit"]["txtLastName"].value;
+//        if (y != "" && y.match(letter)) {
+//        } else if (y == "") {
+//            alert("Name must be filled out");
+//            return false;
+//        } else {
+//            alert("Name must be string");
+//            return false;
+//        }
+    }
+</script>
