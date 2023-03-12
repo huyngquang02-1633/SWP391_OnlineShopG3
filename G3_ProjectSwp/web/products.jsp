@@ -16,11 +16,11 @@
                         <div id="tg-content" class="tg-content">
                             <div class="tg-products">
                                 <div class="tg-sectionhead">
-                                    <h2><span>People's Choice</span>Bestselling Books</h2>
+                                    <h2>Bestselling Books</h2>
                                 </div>
                                 <div class="tg-productgrid">
                                     <div class="tg-refinesearch">
-                                        <span>showing 1 to 8 of 20 total</span>
+<!--                                        <span>showing 1 to 8 of 20 total</span>-->
                                         <form class="tg-formtheme tg-formsortshoitems">
                                             <fieldset>
                                                 <div class="form-group">
@@ -80,8 +80,8 @@
                                                         <ins>${product.getSalePrice()}</ins>
                                                         <del>${product.getCoverPrice()}</del>
                                                     </span>
-                                                    <c:url value="/account/cart" var="AddToCart">
-                                                        <c:param name="previousURL" value="../productList" />
+                                                    <c:url value="/cart" var="AddToCart">
+                                                        <c:param name="previousURL" value="productList" />
                                                         <c:param name="proID" value="${product.getProductID()}" />
                                                     </c:url>
                                                     <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">

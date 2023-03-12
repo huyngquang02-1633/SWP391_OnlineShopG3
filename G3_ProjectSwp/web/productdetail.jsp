@@ -312,7 +312,7 @@
                                                                     <ins>${similarProduct.getSalePrice()}</ins>
                                                                     <del>${similarProduct.getCoverPrice()}</del>
                                                                 </span>
-                                                                    <c:url value="/account/cart" var="AddToCart">
+                                                                    <c:url value="/cart" var="AddToCart">
                                                                         <c:param name="previousURL" value="../productDetail"/>
                                                                         <c:param name="proID" value="${similarProduct.getProductID()}" />
                                                                     </c:url>

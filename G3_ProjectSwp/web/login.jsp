@@ -67,8 +67,11 @@
                     <button class="control-button up">Sign Up</button>
                 </form>
             </div>
+                
         </div>
+                
     </div>
+                <div><a href="<%=path%>/homepage">Home</a></div>
     <script src="<%=path%>/js/login.js"></script>
     <script src="<%=path%>/js/script.js" type="text/javascript"></script>
 </body>

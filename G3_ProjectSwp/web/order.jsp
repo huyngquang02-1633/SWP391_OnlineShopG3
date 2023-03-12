@@ -18,13 +18,13 @@
                 <table id="orders">
                     <tr>
                         <th>OrderID</th>
-                        <th>CustomerID</th>
-                        <th>EmployeeID</th>
+                        <th>CustomerName</th>
+                        <th>EmployeeName</th>
                         <th>OrderDate</th>
                         <th>RequiredDate</th>
                         <th>ShippedDate</th>
-                        <th>Freight($)</th>
-                        <th>ShipName</th>
+                        <!--<th>Freight($)</th>-->
+                        <!--<th>ShipName</th>-->
                         <th>ShipAddress</th>
                         <th>ShipCity</th>
                         <!--<th>ShipRegion</th>-->
@@ -39,32 +39,45 @@
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
                             <td>${od.getShippedDate()}</td>
-                            <td>${od.getFreight()}</td>                  
-                            <td>${od.getShipName()}</td>
+                            <!--<td>${od.getFreight()}</td>-->                  
+                            <!--<td>${od.getShipName()}</td>-->
                             <td>${od.getShipAddress()}</td>
                             <td>${od.getShipCity()}</td> 
                             <!--<td>${od.getShipRegion()}</td>--> 
                             <td>${od.getShipCountry()}</td> 
-                            <td style="padding: unset;"><select id="hoverth" name="ddlCategory">
+                            <c:choose>
+                                <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()!=null}"><td style="color: green;">Completed</td></c:when>
+                                <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()==null}"><td style="color: blue;">Pending</td></c:when>
+                                <c:when test="${od.getRequiredDate()==null && od.getShippedDate()==null}"><td style="color: red;">Canceled</td></c:when>
+                            </c:choose>
+                            <c:if test="${od.getStatus()==1}">
+                                <td style="padding: unset;"><select id="hoverth" name="">
+                                    <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: blue;">Pending <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: red;">Canceled</option>
                                     <option value="catid1" style="color: green;">Approved <i class="fa-solid fa-pen-to-square"></i></option>
                                 </select></td>
-                            <td style="padding: unset;"><select id="hoverth" name="ddlCategory">
+                            </c:if>
+                            <c:if test="${od.getStatus()==2}">
+                                <td style="padding: unset;"><select id="hoverth" name="">
+                                    <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: green">Approved <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: blue;">Delivering <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: red;">Canceled</option>
                                 </select></td>
-                            <td style="padding: unset;"><select id="hoverth" name="ddlCategory">
+                            </c:if>
+                            <c:if test="${od.getStatus()==3}">
+                                <td style="padding: unset;"><select id="hoverth" name="">
+                                        <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: blue;">Delivering <i class="fa-solid fa-pen-to-square"></i></option>
                                     <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
                                 </select></td>
+                            </c:if>
+                            
+                            
+                            
 
-                            <c:choose>
-                                <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()!=null}"><td style="color: green;">Completed</td></c:when>
-                                <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()==null}"><td style="color: blue;">Pending|  <button onclick="cancle(${od.getOrderID()},${currentPage})">Cancel</button></td></c:when>
-                                <c:when test="${od.getRequiredDate()==null && od.getShippedDate()==null}"><td style="color: red;">Canceled</td></c:when>
-                            </c:choose>
+                            
                         </tr>
                     </c:forEach>
                 </table>
