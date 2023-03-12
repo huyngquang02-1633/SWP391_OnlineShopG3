@@ -34,6 +34,10 @@ public class Product {
     private double AverageRating;
     private int AvailableInStock;
 
+    public Product() {
+    }
+
+    
     public Product(int ProductID, String ProductName, int CategoryID, int GenreID, double CoverPrice, double SalePrice, int AuthorID, String Translator, int PublisherID, int SupplierID, String Language, String Size, double Weight, int NumberOfPage, String Format, String Image, Date PublishDate, String PublishingLicense, String Description, boolean Discontinued) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;

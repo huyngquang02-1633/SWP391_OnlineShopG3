@@ -128,6 +128,8 @@
 
                                                 </tbody>
                                             </table>
+                                        <c:if test="${msgOutOfStock!=null}">${msgOutOfStock}</c:if>
+                                        <c:if test="${msgWrongDiscountID!=null}">${msgWrongDiscountID}</c:if>
                                             <div class="form-group">
                                                 <form method="post" action="<%=path%>/orderAction" style="background-color:#c4e3f3 ; text-align: center; width: 55%; padding: 20px 0px; margin: auto auto; box-shadow: 1px 1px 1px 1px; border-radius: 10px;">
                                                     <div id="customer-info">

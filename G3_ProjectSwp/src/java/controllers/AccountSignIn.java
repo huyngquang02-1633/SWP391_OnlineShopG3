@@ -55,11 +55,13 @@ public class AccountSignIn extends HttpServlet{
             req.getRequestDispatcher("../login.jsp").forward(req, resp);
         }else{
             Account acc = new AccountDAO().getAccount(txtEmail, txtPassword);
-            if (acc!=null) {
+            if (acc!=null && acc.getStatus()==true) {
                 if(acc.getRole()==1){
                     req.getSession().setAttribute("AccAdminSession", acc);
                     resp.sendRedirect(req.getContextPath()+"/dashboard_admin");
                 }else if(acc.getRole()==2){
+                    
+                }else if(acc.getRole()==3){
                     
                 }
             }else{

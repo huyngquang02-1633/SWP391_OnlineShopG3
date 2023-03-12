@@ -9,16 +9,18 @@ public class Account {
     private int EmployeeID;
     private int Role;
     private String Image;
+    private boolean Status;
 
-    public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role) {
+    public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role, boolean Status) {
         this.AccountID = AccountID;
         this.Email = Email;
         this.Password = Password;
         this.CustomerID = CustomerID;
         this.EmployeeID = EmployeeID;
         this.Role = Role;
+        this.Status = Status;
     }
-    public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role, String Image) {
+    public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role, String Image, boolean Status) {
         this.AccountID = AccountID;
         this.Email = Email;
         this.Password = Password;
@@ -26,7 +28,17 @@ public class Account {
         this.EmployeeID = EmployeeID;
         this.Role = Role;
         this.Image = Image;
+        this.Status = Status;
     }
+
+    public boolean getStatus() {
+        return Status;
+    }
+
+    public void setStatus(boolean Status) {
+        this.Status = Status;
+    }
+    
 
     public String getImage() {
         return Image;
