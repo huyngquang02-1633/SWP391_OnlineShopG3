@@ -1,6 +1,8 @@
 package controllers;
 
+import DAL.AccountDAO;
 import DAL.CartDAO;
+import DAL.OrderDAO;
 import models.Cart;
 import models.Product;
 import jakarta.servlet.ServletException;
@@ -13,10 +15,19 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import DAL.ProductDAO;
 import jakarta.servlet.annotation.WebServlet;
+import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import models.Account;
 import models.CartCookies;
+import models.Customer;
+import models.Discount;
+import models.Order;
+import models.OrderDetail;
+import models.SendMail;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,12 +37,92 @@ import models.CartCookies;
  *
  * @author user
  */
-@WebServlet(name = "CartController", urlPatterns = {"/account/cart"})
+@WebServlet(name = "CartController", urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String txtReceiver = req.getParameter("txtReceiver");
+        String txtEmail = req.getParameter("txtEmail").trim();
+        String txtPhoneNumber = req.getParameter("txtPhoneNumber");
+        String txtAddress = req.getParameter("txtAddress");
+        String txtCity = req.getParameter("txtShipCity");
+        String txtDiscountID = req.getParameter("txtDiscountID");
         
+         Cookie arr[] = req.getCookies();
+            ArrayList<String> cookiesText = new ArrayList<>();
+            if (arr != null) {
+                for (Cookie arrCookies : arr) {
+                    if (arrCookies.getName().contains("item")) {
+                        cookiesText.add(arrCookies.getValue());
+                    }
+                }
+            }
+            CartCookies cartCookies = new CartCookies();
+            ArrayList<Cart> cartList = cartCookies.decryptionCookiesText(cookiesText);
+            
+//            for (int i = 0; i < cookiesText.size(); i++) {
+//                resp.getWriter().print(cookiesText.get(i) + "\n");
+//                return;
+//            }
+            
+            AccountDAO accDAO = new AccountDAO();
+            if(accDAO.getAccountByEmail(txtEmail)==null){
+                try {
+                    Account acc = new Account(0, txtEmail, "", 0, 0, 2, true);
+                    Customer cus = new Customer(0, "", "",txtReceiver,txtAddress,txtPhoneNumber);
+                    accDAO.createAccount(cus, acc);
+
+                } catch (Exception e) {
+
+                }
+            }
+            
+            Account AccCustomer = accDAO.getAccountByEmail(txtEmail);
+            //req.getSession().setAttribute("AccCustomerSession", AccCustomer);
+            
+            
+            try {
+                OrderDAO odDAO = new OrderDAO();
+                ProductDAO proDAO = new ProductDAO();
+                Discount discount = odDAO.getVoucher(txtDiscountID);
+                int newOrderID = odDAO.getNewOrderID();
+                String voucher = discount.getDiscountID();
+                double percent = discount.getPercentage();
+                if(discount==null){
+                    req.setAttribute("msgWrongDiscountID", "This voucher dooesn't exists in our system!");
+                    req.getRequestDispatcher(req.getContextPath()+"/cart").forward(req, resp);
+                    return;
+                }
+            
+                Order od = new Order(newOrderID, AccCustomer.getCustomerID(), 1, txtReceiver, txtAddress, txtCity, "", "", "Viet Nam",1);
+                odDAO.createOrder(od);
+                for (Cart item : cartList) {
+                    
+                    double discountAmount=0;
+                    Product proInfor = proDAO.getProductInfor(item.getProductID());
+                    
+                    
+                    discountAmount = proInfor.getSalePrice() - proInfor.getSalePrice()*percent;
+                    
+                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(),1,discountAmount, item.getQuantity(), voucher );
+                    odDAO.createDetailOfOrder(odDetail);
+                }
+
+                SendMail sendMail = new SendMail();
+                String subjectContent = "Your order " + newOrderID + " has been confirmed!";
+                String emailContent = "Shopee is preparing your order!\nOrder detail: .......";
+                if(req.getSession().getAttribute("AccSession")!=null){
+                    sendMail.sendAnnounce(txtEmail, subjectContent, emailContent);
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MessagingException ex) {
+                Logger.getLogger(OrderAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            resp.sendRedirect(req.getContextPath()+"/cart");
+
     }
 
     @Override
@@ -112,6 +203,7 @@ public class CartController extends HttpServlet {
                     } else { //sp chua co trong cookie
                         Cookie c = new Cookie("item" + proID, proID + "-1");
                         c.setMaxAge(60 * 60 * 24 * 30);
+                        //c.setDomain(req.getContextPath());
                         resp.addCookie(c);
                         cartList.add(new Cart(proID, 1));
                     }

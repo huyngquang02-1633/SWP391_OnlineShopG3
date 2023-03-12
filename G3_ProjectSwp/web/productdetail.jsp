@@ -27,10 +27,10 @@
                                                     <ins>${productInfor.getSalePrice()}</ins>
                                                     <del>${productInfor.getCoverPrice()}</del>
                                                 </span>
-                                                <span class="tg-bookwriter">You save ${productInfor.getCoverPrice()-productInfor.getSalePrice()}</span>
+                                                <span class="tg-bookwriter">You save ${productInfor.getCoverPrice()-productInfor.getSalePrice()} đ̲</span>
                                                 <ul class="tg-delevrystock">
                                                     <li><i class="icon-rocket"></i><span>Free delivery worldwide</span></li>
-                                                    <li><i class="icon-checkmark-circle"></i><span>Dispatch from the USA in 2 working days </span></li>
+                                                    <li><i class="icon-checkmark-circle"></i><span>Dispatch from the Vietnam in 2 working days </span></li>
                                                             <c:choose>
                                                                 <c:when test="${availableInStock > 0}">
                                                             <li><i class="icon-store"></i><span>Status: <em>In Stock: ${availableInStock}</em></span></li>
@@ -312,7 +312,7 @@
                                                                     <ins>${similarProduct.getSalePrice()}</ins>
                                                                     <del>${similarProduct.getCoverPrice()}</del>
                                                                 </span>
-                                                                    <c:url value="/account/cart" var="AddToCart">
+                                                                    <c:url value="/cart" var="AddToCart">
                                                                         <c:param name="previousURL" value="../productDetail"/>
                                                                         <c:param name="proID" value="${similarProduct.getProductID()}" />
                                                                     </c:url>

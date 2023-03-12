@@ -7,14 +7,14 @@ $(document).ready(function () {
 
     $(".account").hide();
 
-    if (localStorage.getItem('userlogin') !== null) {
+    if (sessionStorage.getItem('userlogin') !== null) {
         $(".login").hide();
         $(".account").show();
     }
 });
 
 function getData() {
-    let userGetData = localStorage.getItem('userlogin');
+    let userGetData = sessionStorage.getItem('userlogin');
     let convertValue = JSON.parse(userGetData);
 
     document.getElementById('nameprofile').innerHTML = convertValue.name;
@@ -24,6 +24,6 @@ function getData() {
 getData();
 
 function logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "./homepage";
 }

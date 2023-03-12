@@ -46,7 +46,7 @@ public class OrderDAO extends DBContext{
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
                 orderList.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName,
-                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, 1));
+                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status));
             }
         } catch (Exception e) {
         }
@@ -220,9 +220,9 @@ public class OrderDAO extends DBContext{
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
-                return new Order(OrderID, EmployeeID, EmployeeID, OrderDate, 
+                return new Order(OrderID, CustomerID, EmployeeID, OrderDate, 
                         RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, 
-                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry, 1);
+                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
             }
         } catch (Exception e) {
             
@@ -236,38 +236,25 @@ public class OrderDAO extends DBContext{
             String sql = "SET IDENTITY_INSERT [dbo].[Orders] ON \n" +
 "INSERT INTO Orders([OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [Freight], [ShipName], [ShipAddress], [ShipCity], "
                     + "[ShipRegion], [ShipPostalCode], "
-                    + "[ShipCountry]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?)\n" +
+                    + "[ShipCountry], [Status]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?,?)\n" +
 "SET IDENTITY_INSERT [dbo].[Orders] OFF";
             PreparedStatement ps1 = connection.prepareStatement(sql);
             ps1.setInt(1, od.getOrderID());
             ps1.setInt(2, od.getCustomerID());
             ps1.setInt(3, od.getEmployeeID());
-            ps1.setDouble(4, od.getFreight());
+            ps1.setDouble(4, 0);
             ps1.setString(5, od.getShipName());
             ps1.setString(6, od.getShipAddress());
             ps1.setString(7, od.getShipCity());
             ps1.setString(8, od.getShipRegion());
             ps1.setString(9, od.getShipPostalCode());
             ps1.setString(10, od.getShipCountry());
+            ps1.setInt(11, 1);
             ps1.executeUpdate();
             
-//            ArrayList<Cart> cart = new CartDAO().getCartListByAccID(1);
-//            OrderDAO odDAO = new OrderDAO();
-//            Discount discount = odDAO.getVoucher(DiscountID);
-//            Product proInfor;
-//            String voucher="";
-//            double discountAmount=0;
-//            for (Cart item : cart) {
-//                proInfor = new ProductDAO().getProductInfor(item.getProductID());
-//                    if(discount!=null){
-//                        voucher = discount.getDiscountID();
-//                        discountAmount = proInfor.getSalePrice() - proInfor.getSalePrice()*discount.getPercentage();
-//                    }
-//                    OrderDetail odDetail = new OrderDetail(od.getOrderID(), item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
-//                    odDAO.createDetailOfOrder(odDetail);
-//                }
+
         } catch (Exception e) {
-            connection.rollback();
+            //connection.rollback();
         }//finally{ connection.close();}
         
     }
