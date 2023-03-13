@@ -1,6 +1,6 @@
 <%@include file="templates/header_admin.jsp" %>
     <div id="content-right">
-        <div class="path-admin">CREATE A NEW EMPLOYEE</b></div>
+        <div class="path-admin">CREATE A NEW EMPLOYEES</b></div>
         <div class="content-main">
             <c:set var="e" value="${employee}"></c:set>
             <form action="createEmployee_admin" method="get" id="content-main-product">

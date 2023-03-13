@@ -42,16 +42,19 @@ public class AccountProfile1 extends HttpServlet {
             String lastName = req.getParameter("txtLastName");
             String address = req.getParameter("txtAddress");
             String contactTitle = req.getParameter("txtContactTitle");
-            Date birthday = Date.valueOf(req.getParameter("txtBirthday"));
             String Phone = req.getParameter("txtPhone");
             Date creatDate = Date.valueOf(req.getParameter("txtCreatDate"));
             Boolean gender = Boolean.valueOf(req.getParameter("txtGender"));
             int customerID = req.getIntHeader("txtCustomerID");
-
-            Customer cus = new Customer(a.getCustomerID(), firstName, lastName, gender, contactTitle, birthday, address, Phone, creatDate);
-
-            new AccountDAO().editInfo(cus);
-
+            if(req.getParameter("txtBirthday")!=""){
+                Date birthday = Date.valueOf(req.getParameter("txtBirthday"));
+                Customer cus = new Customer(a.getCustomerID(), firstName, lastName, gender, contactTitle, birthday, address, Phone, creatDate);
+                new AccountDAO().editInfo(cus);
+            }
+            else{
+                Customer cus = new Customer(a.getCustomerID(), firstName, lastName, gender, contactTitle, address, Phone, creatDate);
+                new AccountDAO().editInfo(cus);
+            }
             resp.sendRedirect("../account/profile");
         } else {
             resp.sendRedirect(req.getContextPath() + "/404error.jsp");
