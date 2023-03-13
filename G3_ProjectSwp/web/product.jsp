@@ -4,87 +4,79 @@
         <span class="close">&times;</span> <br>
         <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
         <div class="content-main">
-                    <form id="content-main-product">
+                   <form id="content-main-product" action="createProduct_admin" method="post">
                         <div class="content-main-1">
                             <label>Product name (*):</label><br/>
                             <input type="text" name="txtProductName" id=""><br/>
                             <label>Category Name(*):</label><br/>
                             <select name="ddlCategory">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                                <option value="catid3">Television</option>
-                                <option value="catid4">Electronic</option>
+                                <c:forEach items="${listc}" var="c">
+                                <option value=${c.getCategoryID()}>${c.getCategoryName()}</option>
+                                </c:forEach>
                             </select>
                             <label>Genre Name:</label><br/>
                             <select name="ddlGenre">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                                <option value="catid3">Television</option>
-                                <option value="catid4">Electronic</option>
+                                <c:forEach items="${listg}" var="g">
+                                <option value=${g.getGenreID()}>${g.getGenreName()}</option>
+                                </c:forEach>
                             </select>
                             <label>Cover Price:</label><br/>
-                            <input type="text" name="txtUnitPrice" id=""><br/>
+                            <input type="text" name="txtCoverPrice" id=""><br/>
                             <label>Sale Price:</label><br/>
-                            <input type="text" name="txtQuantityPerUnit" id=""><br/>
+                            <input type="text" name="txtSalePrice" id=""><br/>
                             <label>Author Name:</label><br/>
                             <select name="ddlAuthor">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                                <option value="catid3">Television</option>
-                                <option value="catid4">Electronic</option>
+                                <c:forEach items="${lista}" var="a">
+                                <option value=${a.getAuthorID()}>${a.getAuthorName()}</option>
+                                </c:forEach>
                             </select>
                             <label>Discontinued (*): </label>
                             <input style="    width: 15px;
                             position: relative;
                             top: 5px;
-                            left: 5px;" type="checkbox" name="chkDiscontinued" id=""><br/>
+                            left: 5px;" type="checkbox" name="chkDiscontinued" value="1" id=""><br/>
                             
                         </div>
                         <div class="content-main-1">
                             <label>Translator:</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
+                            <input type="text" name="txtTranslator" id=""><br/>
                             <label>Publisher Name:</label><br/>
-                            <select name="ddlAuthor">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                                <option value="catid3">Television</option>
-                                <option value="catid4">Electronic</option>
+                            <select name="ddlPublisher">
+                                <c:forEach items="${lists}" var="s">
+                                <option value=${s.getSupplierID()}>${s.getSupplierName()}</option>
+                                </c:forEach>
                             </select>
-                            <label>Author Name:</label><br/>
-                            <select name="ddlAuthor">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                                <option value="catid3">Television</option>
-                                <option value="catid4">Electronic</option>
+                            <label>Supplier Name:</label><br/>
+                            <select name="ddlSupplier">
+                                <c:forEach items="${lists}" var="s">
+                                <option value=${s.getSupplierID()}>${s.getSupplierName()}</option>
+                                </c:forEach>
                             </select>
                             <label>Language:</label><br/>
-                            <select name="ddlCategory">
-                                <option value="catid1">Smart Phone</option>
-                                <option value="catid2">Computer</option>
-                            </select>
+                            <input type="text" name="txtLanguage" id=""><br/>
                             <label>Book Size:</label><br/>
-                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <input type="text" name="txtSize" id=""><br/>
                             <label>Book Weight:</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
+                            <input type="text" name="txtWeight" id=""><br/>
                             
                         </div>
                         <div class="content-main-1">
                             <label>Number Of Page:</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
+                            <input type="text" name="txtPage" id=""><br/>
                             <label>Format:</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
+                            <input type="text" name="txtFormat" id=""><br/>
                             <label>Image:</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
+                            <input type="text" name="txtImg" id=""><br/>
                             <label>Publish Date:</label><br/>
-                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <input type="date" name="txtPublishDate" id=""><br/>
                             <label>Publish License:</label><br/>
-                            <input type="date" name="txtUnitsInStock" id=""><br/>
+                            <input type="text" name="txtLicense" id=""><br/>
                             <label>Description:</label><br/>
-                            <input type="text" name="txtUnitsInStock" id=""><br/>
+                            <input type="text" name="txtDescription" id=""><br/>
                             <br/> 
                         </div>
 
-                            <input style="margin: auto;" type="submit" value="Save"/>
+                            <input style="margin: auto;" type="submit" value="Add"/>
                         
                     </form>
                 </div>
@@ -123,7 +115,7 @@
                      </form>
                             </div>
                             <div id="product-title-3" style="width: 20%;">
-                                <a href="create-product.jsp">Create a new Product</a>
+                                <a href="createProduct_admin">Create a new Product</a>
                             </div>
                         </div>
                         <div id="order-table-admin">
@@ -168,11 +160,13 @@
                                     <td>${product.getNumberOfPage()}</td>
                                     <td>${product.getFormat()}</td>
                                     <td>${product.getPublishDate()}</td>
-<!--                                    <td>${product.getPublishingLicense()}</td>
-                                    <td>${product.getDescription()}</td>-->
+
+                                    <td>${product.getPublishingLicense()}</td>
+                                    <!--<td>${product.getDescription()}</td>-->
+
                                     <td>${product.isDiscontinued()}</td>
                                     <td>
-                                        <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
+                                        <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
                                         <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
                                     </td>
                                 </tr>
