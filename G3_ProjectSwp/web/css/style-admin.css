@@ -847,6 +847,11 @@
     color: red;
 }
 
+.update {
+    color: green;
+    cursor: pointer;
+}
+
  #content-main-product{
     width: 100%;
     /* border: 1px solid sandybrown; */
