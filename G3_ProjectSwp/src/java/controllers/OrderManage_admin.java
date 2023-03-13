@@ -32,7 +32,7 @@ import DAL.ProductDAO;
  * @author user
  */
 @WebServlet(name = "OrderManage_admin", urlPatterns = {"/orderManage_admin"})
-    public class OrderManage_admin extends HttpServlet {
+public class OrderManage_admin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,14 +46,16 @@ import DAL.ProductDAO;
 //            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
 //            return;
 //        }
-
         PaginationObject paging = new PaginationObject();
         int currentPage = 1;
+//        if(req.getSession().getAttribute("currentPage")!= null){
+//            currentPage = Integer.parseInt((String) req.getSession().getAttribute("currentPage"));
+//        }
         if (req.getParameter("currentPage") != null) {
             currentPage = Integer.parseInt(req.getParameter("currentPage"));
         }
-
         ArrayList<Order> orderList = new OrderDAO().getAllOrders();
+        req.getSession().setAttribute("orderList", orderList);
         ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
         ArrayList<Employee> empList = null;
         try {
@@ -61,10 +63,8 @@ import DAL.ProductDAO;
         } catch (SQLException ex) {
             Logger.getLogger(OrderManage_admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         req.setAttribute("cusList", cusList);
         req.setAttribute("empList", empList);
-
         Enumeration<String> enumeration = req.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String parameterName = (String) enumeration.nextElement();
@@ -81,7 +81,6 @@ import DAL.ProductDAO;
                 req.getSession().setAttribute("mode", 3);
             }
         }
-
         if (req.getSession().getAttribute("mode") != null) {
             switch ((int) req.getSession().getAttribute("mode")) {
                 case 1:
@@ -106,12 +105,11 @@ import DAL.ProductDAO;
                     req.setAttribute("orderDetailList", odDetailList);
                     req.getRequestDispatcher("order-detail.jsp").forward(req, resp);
                     return;
-                    //break;
+                //break;
                 case 3:
                     int idCancel = Integer.parseInt(req.getParameter("idCancel"));
                     try {
                         new OrderDAO().cancelOrder(idCancel);
-
                         for (int i = 0; i < orderList.size(); i++) {
                             if (orderList.get(i).getOrderID() == idCancel) {
                                 orderList.get(i).setRequiredDate(null);
@@ -121,45 +119,30 @@ import DAL.ProductDAO;
                     } catch (SQLException ex) {
                         Logger.getLogger(EditProduct_admin.class.getName()).log(Level.SEVERE, null, ex);
                         req.setAttribute("CancelMsg", "Cancel order fail");
-
                         return;
                     }
                     break;
-
                 default:
                     break;
             }
-
         } else {
-            orderList = new OrderDAO().getAllOrders();
-            if (req.getSession().getAttribute("orderList") != null) {
-                orderList = (ArrayList<Order>) req.getSession().getAttribute("orderList");
-            }
+//            orderList = new OrderDAO().getAllOrders();
+//            if (req.getSession().getAttribute("orderList") != null) {
+//                orderList = (ArrayList<Order>) req.getSession().getAttribute("orderList");
+//            }
         }
         req.getSession().removeAttribute("mode");
-
         if (orderList.isEmpty()) {
             req.setAttribute("emptyListMsg", "There is nothing in Order List, Let's order some thing!");
         }
-        List<Order> listInCurrentPage = paging.getListInCurrentPage(orderList, currentPage);
+        req.getSession().setAttribute("currentPage", currentPage);
 
+        List<Order> listInCurrentPage = paging.getListInCurrentPage(orderList, currentPage);
         int numberOfPage = paging.getNumberOfPage(orderList);
         req.setAttribute("numberOfPage", numberOfPage);
-
-        req.getSession().setAttribute("currentPage", currentPage);
-        req.getSession().setAttribute("orderList", orderList);
         req.setAttribute("listInCurrentPage", listInCurrentPage);
-
-
-        //if(req.getSession().getAttribute("AccAdminSession")==null){
-            //resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-            //return;
-        //}
-        //OrderDAO dao = new OrderDAO();
-        //ArrayList<Order> ArrayList = dao.getAllOrders();
-        //req.setAttribute("listOrder", ArrayList);
-
         req.getRequestDispatcher("order.jsp").forward(req, resp);
+        System.out.println(orderList);
     }
 
 }
