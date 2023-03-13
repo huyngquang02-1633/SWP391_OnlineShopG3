@@ -94,8 +94,8 @@
                                             <ins>${product.getSalePrice()}</ins>
                                             <del>${product.getCoverPrice()}</del>
                                         </span>
-                                            <c:url value="/account/cart" var="AddToCart">
-                                                <c:param name="previousURL" value="../homepage" />
+                                            <c:url value="/cart" var="AddToCart">
+                                                <c:param name="previousURL" value="homepage" />
                                                 <c:param name="proID" value="${product.getProductID()}" />
                                             </c:url>
                                         <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">

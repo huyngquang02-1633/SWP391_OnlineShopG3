@@ -94,7 +94,9 @@ public class CartDAO extends DBContext{
 
     public static void main(String[] args) {
             ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(1);
-            System.out.println(cartList.get(0).getAccountID());
+            for (Cart cart : cartList) {
+                System.out.println(cart.getQuantity());
+        }
     }
 
 }

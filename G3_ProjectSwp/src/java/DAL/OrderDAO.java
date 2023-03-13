@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Cart;
 import models.Customer;
 import models.Discount;
 
@@ -43,8 +44,9 @@ public class OrderDAO extends DBContext{
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
+                int Status = rs.getInt("Status");
                 orderList.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName,
-                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry));
+                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status));
             }
         } catch (Exception e) {
         }
@@ -217,9 +219,10 @@ public class OrderDAO extends DBContext{
                 String ShipRegion = rs.getString("ShipRegion");
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
-                return new Order(OrderID, EmployeeID, EmployeeID, OrderDate, 
+                int Status = rs.getInt("Status");
+                return new Order(OrderID, CustomerID, EmployeeID, OrderDate, 
                         RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, 
-                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry);
+                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
             }
         } catch (Exception e) {
             
@@ -231,24 +234,27 @@ public class OrderDAO extends DBContext{
     public void createOrder(Order od) throws SQLException{
         try {
             String sql = "SET IDENTITY_INSERT [dbo].[Orders] ON \n" +
-"INSERT INTO Orders([OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [Freight], [ShipName], [ShipAddress], [ShipCity], [ShipRegion], [ShipPostalCode], [ShipCountry]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?)\n" +
+"INSERT INTO Orders([OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [Freight], [ShipName], [ShipAddress], [ShipCity], "
+                    + "[ShipRegion], [ShipPostalCode], "
+                    + "[ShipCountry], [Status]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?,?)\n" +
 "SET IDENTITY_INSERT [dbo].[Orders] OFF";
-            
             PreparedStatement ps1 = connection.prepareStatement(sql);
             ps1.setInt(1, od.getOrderID());
             ps1.setInt(2, od.getCustomerID());
             ps1.setInt(3, od.getEmployeeID());
-            ps1.setDouble(4, od.getFreight());
+            ps1.setDouble(4, 0);
             ps1.setString(5, od.getShipName());
             ps1.setString(6, od.getShipAddress());
             ps1.setString(7, od.getShipCity());
             ps1.setString(8, od.getShipRegion());
             ps1.setString(9, od.getShipPostalCode());
             ps1.setString(10, od.getShipCountry());
+            ps1.setInt(11, 1);
             ps1.executeUpdate();
             
+
         } catch (Exception e) {
-            connection.rollback();
+            //connection.rollback();
         }//finally{ connection.close();}
         
     }
@@ -273,7 +279,7 @@ public class OrderDAO extends DBContext{
     public void createDetailOfOrder(OrderDetail odDetail) throws SQLException{
         try {
            
-            String sql2 = "INSERT [dbo].[Order Details] ([OrderID], [ProductID], [WarehouseID], [SalePrice], [Quantity], [DiscountID])  VALUES(?,?,?,?,?,null)";
+            String sql2 = "INSERT [dbo].[Order Details] ([OrderID], [ProductID], [WarehouseID], [SalePrice], [Quantity], [DiscountID])  VALUES(?,?,?,?,?,?)";
             PreparedStatement ps2 = connection.prepareStatement(sql2);
             
             ps2.setInt(1,odDetail.getOrderID());
@@ -281,12 +287,12 @@ public class OrderDAO extends DBContext{
             ps2.setInt(3, odDetail.getWarehouseID());
             ps2.setDouble(4, odDetail.getSalePrice());
             ps2.setInt(5, odDetail.getQuantity());
-            //ps2.setString(6, odDetail.getDiscountID());
+            ps2.setString(6, odDetail.getDiscountID());
             ps2.executeUpdate();
             
         } catch (Exception e) {
-            //connection.rollback();
-        }//finally{ connection.close();}
+            connection.rollback();
+        }finally{ connection.close();}
         
     }
     
@@ -415,13 +421,32 @@ public class OrderDAO extends DBContext{
     
     
     public static void main(String[] args) {
-        OrderDAO odDAO = new OrderDAO();
-        int newOrderID = odDAO.getNewOrderID();
-                Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam");
+        ArrayList<Cart> cart =  new CartDAO().getCartListByAccID(1);
         try {
-            odDAO.createOrderInDB(od, 1, "SALELON10%");
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+            OrderDAO odDAO = new OrderDAO();
+            ProductDAO proDAO = new ProductDAO();
+            int newOrderID = odDAO.getNewOrderID();
+                Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
+                //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
+                odDAO.createOrder(od);
+                
+                Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
+                Product proInfor;
+                String voucher="";
+                double discountAmount=0;
+                for (Cart item : cart) {
+                    proInfor = new ProductDAO().getProductInfor(item.getProductID());
+                    if(discount!=null){
+                        voucher = discount.getDiscountID();
+                        discountAmount = (item.getQuantity()*proInfor.getSalePrice()) - (proInfor.getSalePrice()*discount.getPercentage());
+                    }
+                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
+                    odDAO.createDetailOfOrder(odDetail);
+                }
+        } catch (Exception e) {
+            
         }
+            
+        
     }
 }

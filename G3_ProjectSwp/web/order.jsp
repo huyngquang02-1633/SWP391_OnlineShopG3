@@ -3,34 +3,34 @@
     <div class="path-admin">ORDERS LIST</b></div>
     <div class="content-main">
         <div id="content-main-dashboard">
+            <hr>
             <div id="order-title">
                 <b>Filter by Order Date:</b>
                 <form style="padding-bottom: 10px;">
                     <b>From</b>: <input type="date" name="txtStartOrderDate"/>
                     <b>To</b>: <input type="date" name="txtEndOrderDate"/>
                     <input type="submit" value="Filter">
+                    <input type="checkbox" name="newOrder"> <label for="newOrder">New Order</label>
+                    <input type="checkbox" name="oldOrder"> <label for="oldOrder">Old Order</label>
                 </form>
             </div>
             <div id="order-table">
                 <table id="orders">
                     <tr>
                         <th>OrderID</th>
-                        <th>CustomerID</th>
-                        <th>EmployeeID</th>
+                        <th>CustomerName</th>
+                        <th>EmployeeName</th>
                         <th>OrderDate</th>
                         <th>RequiredDate</th>
                         <th>ShippedDate</th>
-                        <th>Freight($)</th>
-                        <th>ShipName</th>
+                        <!--<th>Freight($)</th>-->
+                        <!--<th>ShipName</th>-->
                         <th>ShipAddress</th>
                         <th>ShipCity</th>
                         <!--<th>ShipRegion</th>-->
-                        <th>ShipCountry</th>
+                        <!--<th>ShipCountry</th>-->
                         <th>Status</th>
-
-
                     </tr>
-                    
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>
                             <td><a href="<%=path%>/orderManage_admin?idOdDetail=${od.getOrderID()}">${od.getOrderID()}</a></td>
@@ -39,18 +39,57 @@
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
                             <td>${od.getShippedDate()}</td>
-                            <td>${od.getFreight()}</td>                  
-                            <td>${od.getShipName()}</td>
+                            <!--<td>${od.getFreight()}</td>-->                  
+                            <!--<td>${od.getShipName()}</td>-->
                             <td>${od.getShipAddress()}</td>
                             <td>${od.getShipCity()}</td> 
                             <!--<td>${od.getShipRegion()}</td>--> 
-                            <td>${od.getShipCountry()}</td> 
-                         
+                            <!--<td>${od.getShipCountry()}</td>--> 
                             <c:choose>
-                                <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()!=null}"><td style="color: green;">Completed</td></c:when>
-                                <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()==null}"><td style="color: blue;">Pending|  <button onclick="cancle(${od.getOrderID()},${currentPage})">Cancel</button></td></c:when>
-                                <c:when test="${od.getRequiredDate()==null && od.getShippedDate()==null}"><td style="color: red;">Canceled</td></c:when>
+                                <c:when test="${od.getStatus()==1}"><td style="color: blue;">Pending</td></c:when>
+                                <c:when test="${od.getStatus()==2}"><td style="color: greenyellow;">Approved</td></c:when>
+                                <c:when test="${od.getStatus()==3}"><td style="color: yellow;">Delivering</td></c:when>
+                                <c:when test="${od.getStatus()==4}"><td style="color: green;">Delivered</td></c:when>
+                                <c:when test="${od.getStatus()==5}"><td style="color: orange;">Refunding</td></c:when>
+                                <c:when test="${od.getStatus()==6}"><td style="color: red;">Canceled</td></c:when>
+                                <c:otherwise><td></td></c:otherwise>
                             </c:choose>
+                            <c:choose>
+                                <c:when test="${od.getStatus()==1}">
+                                    <td style="padding: unset;"><select id="hoverth" name="">
+                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
+                                            <option value="catid1" style="color: greenyellow;">Approved <i class="fa-solid fa-pen-to-square"></i></option>
+                                            <option value="catid1" style="color: red;">Canceled</option>
+
+                                        </select></td>
+                                    </c:when>
+
+                                <c:when test="${od.getStatus()==2}">
+                                    <td style="padding: unset;"><select id="hoverth" name="">
+                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
+                                            <option value="catid1" style="color: yellow;">Delivering <i class="fa-solid fa-pen-to-square"></i></option>
+                                            <option value="catid1" style="color: red;">Canceled</option>
+                                        </select></td>
+                                    </c:when>
+
+                                <c:when test="${od.getStatus()==3}">
+                                    <td style="padding: unset;"><select id="hoverth" name="">
+                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
+                                            <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
+                                        </select></td>
+                                    </c:when>
+
+
+                                <c:when test="${od.getStatus()==5}">
+                                    <td style="padding: unset;"><select id="hoverth" name="">
+                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
+                                            <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
+                                            <option value="catid1" style="color: red;">Canceled</option>
+                                        </select></td>
+                                </c:when>
+                                <c:otherwise><td></td></c:otherwise>
+                            </c:choose>
+                               
                         </tr>
                     </c:forEach>
                 </table>
@@ -82,18 +121,22 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-
                     <c:if test="${currentPage<numberOfPage}">
                         <c:url value="/orderManage_admin" var="paginationNext">
                             <c:param name="currentPage" value="${currentPage+1}" />
                         </c:url>
                         <a href="${paginationNext}">&raquo;</a>
                     </c:if>
-                    </table>
+
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
+</div>
+</div>
+<div id="footer-admin">
+    <p>Group 3 SE1639 - Online Shop</p>
+</div>
 </div>
 <script>
     function cancle(id, curentPage) {
@@ -106,6 +149,6 @@
 
     }
 </script>
-</div>
+
 </body>
 </html>

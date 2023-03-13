@@ -292,6 +292,20 @@ public class ProductDAO extends DBContext {
         }// finally{connection.close();}
         return productList;
     }
+    public ArrayList<Product> searchProductListByPriceDomain(double from,  double to) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where SalePrice between ? AND ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDouble(1, from);
+            ps.setDouble(2, to);
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
+        return productList;
+    }
 
     public ArrayList<Product> getNewReleaseList(int mode) {
         ArrayList<Product> productList = new ArrayList<>();
@@ -484,10 +498,36 @@ public class ProductDAO extends DBContext {
         }// finally{connection.close();}
         return productList;
     }
+    public ArrayList<Product> SearchProductByLanguage(String language) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where Language like ?";
+             PreparedStatement st=connection.prepareStatement(sql);
+            st.setString(1, "%"+language+"%");
+            ResultSet rs=st.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
+        return productList;
+    }
+    public ArrayList<Product> SearchProductByFormat(String format) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products where Format like ?";
+             PreparedStatement st=connection.prepareStatement(sql);
+            st.setString(1, "%"+format+"%");
+            ResultSet rs=st.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
+        return productList;
+    }
 
     public static void main(String[] args) {
         ProductDAO abc = new ProductDAO();
-        System.out.println(abc.getAvailableInStock(1));
+        System.out.println(abc.getProductListBySupplierID(1).get(0).getSupplierID());
     }
 
 }
