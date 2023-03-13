@@ -35,10 +35,13 @@ public class SearchProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("txtSearch");
+
+        String search = request.getParameter("txtSearch").trim().replaceAll(" +", " ");
+
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.SearchProductByName(search);
         request.setAttribute("searchValue", search);
+
         request.setAttribute("productList", list);
         request.setAttribute("categoryList", new CategoryDAO().getCategory());
         request.getRequestDispatcher("/product.jsp").forward(request, response);

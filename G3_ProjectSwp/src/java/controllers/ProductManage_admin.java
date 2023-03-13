@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AuthorDAO;
 import models.Category;
 import models.PaginationObject;
 import models.Product;
@@ -16,8 +17,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import DAL.CategoryDAO;
+import DAL.GenreDAO;
 import DAL.ProductDAO;
+import DAL.SupplierDAO;
 import jakarta.servlet.annotation.WebServlet;
+import models.Author;
+import models.Genre;
+import models.Supplier;
 
 /**
  *
@@ -120,7 +126,21 @@ public class ProductManage_admin extends HttpServlet {
         if(proList.isEmpty()){
             req.setAttribute("emptyListMsg", "There is nothing in Product List!");
         }
+        
+        CategoryDAO cdao = new CategoryDAO();
+        AuthorDAO adao = new AuthorDAO();
+        SupplierDAO sdao = new SupplierDAO();
+        GenreDAO gdao = new GenreDAO();
 
+        List<Genre> listg = gdao.getGenreList();
+        List<Author> lista = adao.getAuthorList();
+        List<Category> listc = cdao.getCategory();
+        List<Supplier> lists = sdao.getSupplierList();
+
+        req.setAttribute("listg", listg);
+        req.setAttribute("lista", lista);
+        req.setAttribute("listc", listc);
+        req.setAttribute("lists", lists);
         req.getSession().removeAttribute("mode");
         req.setAttribute("categoryList", new CategoryDAO().getCategory());
         listInCurrentPage = paging.getListInCurrentPage(proList, currentPage);

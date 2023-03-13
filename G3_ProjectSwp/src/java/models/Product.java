@@ -87,6 +87,8 @@ public class Product {
         this.AvailableInStock = AvailableInStock;
     }
 
+    
+
     public int getAvailableInStock() {
         return AvailableInStock;
     }
