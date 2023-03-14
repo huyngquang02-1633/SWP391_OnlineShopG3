@@ -119,15 +119,15 @@
 
                                     <div class="tg-minicartfoot">
                                         <a class="tg-btnemptycart" href="javascript:void(0);">
-                                            <i class="fa fa-trash-o"></i>
-                                            <span>Clear Your Cart</span>
+                                            <!--<i class="fa fa-trash-o"></i>-->
+                                            <!--<span>Clear Your Cart</span>-->
                                         </a>
-                                        <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
+                                        <span class="tg-subtotal">Subtotal: <strong>${subTotal}đ</strong></span>
                                         <div class="tg-btns">
 
                                             <a class="tg-btn tg-active" href="<%=path%>/cart">View Cart</a>
 
-                                            <a class="tg-btn" href="javascript:void(0);">Checkout</a>
+                                            <a class="tg-btn" href="<%=path%>/checkout">Checkout</a>
                                         </div>
                                     </div>
                                 </div>

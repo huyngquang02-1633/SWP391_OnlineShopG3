@@ -27,34 +27,52 @@
             <div id="dashboard-2">
                 <div id="chart" style="text-align: center;">
                     <div id="chart1">
-                        <h3>Statistic Revenue (Month)</h3>
+                        <span>Statistic Revenue </span>
+                        <select id="staticYear" name="staticYear"  onchange="statisticYear()">
+                            <option value="Year">Year</option>
+                            <c:forEach items="${years}" var="i">
+                                <c:choose>
+                                    <c:when test="${i==yearSession}">
+                                        <option selected="true" value="${yearSession}">${yearSession}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${i}">${i}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
                         <canvas id="myChart1" style="width: 100%;"></canvas>
-                    </div>
-                    <div id="chart2">
+                    </div> 
+                    <div id="chart2"> <br> 
                         <canvas id="myChart2" style="width: 80%;"></canvas>
+                        <input name="radioDiagram" id="radioDiagram" type="radio" value="" >6 months earlier
+                        <input name="radioDiagram" id="radioDiagram" type="radio" value="" >This month
 
-
-                        <b>Filter:</b>
-                        <select name="ddlCategory">
-                            <option value="catid1">--- Select ---</option>
-                            <option value="catid1">Smart Phone</option>
-                            <option value="catid2">Computer</option>
-                            <option value="catid3">Television</option>
-                            <option value="catid4">Electronic</option>
-                        </select> <br>
+<!--                        <b>Filter:</b>
+                         <br>
 
                         <b>Filter by Date:</b>
                         <form style="padding-bottom: 10px;">
                             <b>From</b>: <input type="date" name="txtStartOrderDate"/> <br>
                             <b>To</b>: <input type="date" name="txtEndOrderDate"/>
                             <input type="submit" value="Filter">
-                            </form> 
+                            </form> -->
 
-                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+function statisticYear() {
+    var year = document.getElementById("staticYear").value;
+    window.location.href = '<%=request.getContextPath()%>/dashboard_admin?year=' + year ;
+}
+
+function thisMonth() {
+    window.location.href = '<%=request.getContextPath()%>/dashboard_admin?thisMonth=true' ;
+}
+</script>
 <%@include file="templates/footer_admin.jsp" %>

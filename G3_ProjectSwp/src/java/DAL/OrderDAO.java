@@ -380,6 +380,36 @@ public class OrderDAO extends DBContext {
         return orderList;
     }
 
+
+    
+    public ArrayList<OrderDetail> getOrderDetailByMonth(int month,int year){
+        ArrayList<OrderDetail> odDetailList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=? AND MONTH(OrderDate)=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, year);
+            ps.setInt(2, month);
+            ResultSet rs = ps.executeQuery();
+            odDetailList = getObjectOrderDetailList(rs);
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return odDetailList;
+    }
+    
+
+    // ArrayList<Order> orderList = new ArrayList<>();
+    //     try {
+    //         String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND DAY(OrderDate)=DAY(GETDATE())";
+    //         PreparedStatement ps = connection.prepareStatement(sql);
+    //         ResultSet rs = ps.executeQuery();
+    //         orderList = getObjectOrderList(rs);
+    //     } catch (Exception e) {
+
+    //     }//finally{ connection.close();}
+    //     return orderList;
+    // }
+
     public ArrayList<Order> getOrderToday() {
         ArrayList<Order> orderList = new ArrayList<>();
         try {

@@ -1,6 +1,8 @@
 <%@include file="templates/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="https://kit.fontawesome.com/6d68bb11b2.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://kit.fontawesome.com/6d68bb11b2.css" crossorigin="anonymous">
 <!--************************************
                 Main Start
 *************************************-->
@@ -21,22 +23,33 @@
                                 <div class="tg-productgrid">
                                     <div class="tg-refinesearch">
 <!--                                        <span>showing 1 to 8 of 20 total</span>-->
+                                            
                                         <form class="tg-formtheme tg-formsortshoitems">
-                                            <fieldset>
+                                            <span style="margin-right: 15px;">Sort by:</span>
+                                            <button style="margin-right: 30px; padding: 5px;" type="button" onclick="sortByIncreasePrice()">     Price <i class="fa-solid fa-arrow-up"> </i>
+                                            <button style="margin-right: 30px; padding: 5px;" type="button" onclick="sortByDecreasePrice()">     Price <i class="fa-solid fa-arrow-down"></i> 
+                                            <button style="margin-right: 30px; padding: 5px;" type="button" onclick="sortByNewest()">     Newest
+                                            <button style="margin-right: 30px; padding: 5px;" type="button" onclick="sortByOldest()">     Oldest
+<!--                                                    <span onclick="sortByName()"><span></span>Name</i></span>
+                                                    <span onclick="sortByIncreasePrice()()"><span></span>     Price <i class="fa-solid fa-arrow-up"> </i></span>
+                                                    <span onclick="sortByIncreasePrice()()"><span></span>     Price <i class="fa-solid fa-arrow-down"></i> </i></span>-->
+<!--                                            <fieldset>
                                                 <div class="form-group">
-                                                    <label>Sort by:</label>
+                                                    
                                                     <span class="tg-select">
                                                         <select>
-                                                            <option>Name</option>
-                                                            <option>Price</option>
-                                                            <option>Newest</option>
-                                                            <option>Oldest</option>
+                                                            <option onchange="sortByName()">Name</option>
+                                                            <option onchange="sortByIncreasePrice()">Low to High Price</option>
+                                                            <option onchange="sortByDecreasePrice()">High to Low Price</option>
+                                                            <option onchange="sortByNewest()">Newest</option>
+                                                            <option onchange="sortByOldest()">Oldest</option>
                                                         </select>
                                                     </span>
                                                 </div>
-                                            </fieldset>
+                                            </fieldset>-->
                                         </form>
                                     </div>
+                                    
                                 <div  id="ajax">
                                     <c:forEach items="${productList}" var="product">
                                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" style="margin: 20px 0px 0px 0px;">
@@ -75,7 +88,50 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </span>
-                                                    <span class="tg-stars"><span></span></span>
+                                                    <c:choose>
+                                                    <c:when test="${product.getAverageRating()>0 && product.getAverageRating()<0.5}">
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=0.5 && product.getAverageRating()<1.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=1.5 && product.getAverageRating()<2.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=2.5 && product.getAverageRating()<3.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=3.5 && product.getAverageRating()<4.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                     <span class="tg-bookprice">
                                                         <ins>${product.getSalePrice()}</ins>
                                                         <del>${product.getCoverPrice()}</del>
@@ -114,7 +170,7 @@
                                             <%--<c:forEach items="${cateList}" var="cate">--%>
                                             <!--<li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>></em></a></li>-->
                                                     <%--</c:forEach>--%>
-                                        <li><a href="javascript:void(0);"><span>View All</span></a></li>
+                                        <!--<li><a href="javascript:void(0);"><span>View All</span></a></li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -339,6 +395,91 @@
                                 type: "get", //send it through get method
                                 data: {
                                     txtPrice: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByName(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByName: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByIncreasePrice(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByIncreasePrice: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByDecreasePrice(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByDecreasePrice: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByNewest(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByNewest: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByOldest(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByOldest: value
                                 },
                                 success: function (data) {
                                     var row = document.getElementById("ajax");

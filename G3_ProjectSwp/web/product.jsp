@@ -161,7 +161,7 @@
                                     <td>${product.getFormat()}</td>
                                     <td>${product.getPublishDate()}</td>
 
-                                    <td>${product.getPublishingLicense()}</td>
+                                    <!--<td>${product.getPublishingLicense()}</td>-->
                                     <!--<td>${product.getDescription()}</td>-->
 
                                     <td>${product.isDiscontinued()}</td>
