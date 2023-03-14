@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Employee;
 
 
@@ -62,10 +65,10 @@ public class CreateEmployee_admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        if(request.getSession().getAttribute("AccAdminSession")==null){
-            response.sendRedirect(request.getContextPath()+"/404error.jsp");
-            return;
-        }
+//        if(request.getSession().getAttribute("AccAdminSession")==null){
+//            response.sendRedirect(request.getContextPath()+"/404error.jsp");
+//            return;
+//        }
         EmployeeDAO dao = new EmployeeDAO();
         //int semployeeID = Integer.parseInt(request.getParameter("employeeID"));  
         int EmployeeID = dao.getNewEmployeeID();
@@ -79,8 +82,30 @@ public class CreateEmployee_admin extends HttpServlet {
         String shireDate = request.getParameter("hireDate");
         String sdepartmentID = request.getParameter("departmentID");
         String sstatus = request.getParameter("status"); 
+        
         Employee employee = new Employee();
-        employee.setEmployeeID(EmployeeID);    
+        employee.setEmployeeID(EmployeeID);   
+        int check = 0;
+        if (slastName != null && slastName.isEmpty()){
+            request.setAttribute("lastNameMsg", "lastName not allow null");
+            check++;
+        }
+        if (sfirstName != null && sfirstName.isEmpty()) {
+            request.setAttribute("firstNameMsg", "firstName not allow null");
+            check++;
+        }
+        if (stitle != null && stitle.isEmpty()) {
+            request.setAttribute("titleMsg", "title not allow null");
+            check++;
+        }
+        if (stitleOfCourtesy != null && stitleOfCourtesy.isEmpty()) {
+            request.setAttribute("titleOfCourtesyMsg", "titleOfCourtesy not allow null");
+            check++;
+        }
+        if (saddress != null && saddress.isEmpty()) {
+            request.setAttribute("addressMsg", "address not allow null");
+            check++;
+        }
         employee.setAddress(saddress);
         employee.setFirstName(sfirstName);
         employee.setLastName(slastName);
@@ -88,13 +113,19 @@ public class CreateEmployee_admin extends HttpServlet {
         employee.setTitleOfCourtesy(stitleOfCourtesy);
         employee.setGender(true);
         employee.setStatus(true);
-        Date birthDate = Date.valueOf("2022-02-02");
-        Date hireDate = Date.valueOf("2022-02-02");
-        employee.setDepartmentID(2);
-        employee.setBirthDate(birthDate);
-        employee.setHireDate(hireDate);
-        
-        dao.insertEmployee(employee);
+//        Date birthDate = Date.valueOf("2022-02-02");
+//        Date hireDate = Date.valueOf("2022-02-02");
+//        employee.setDepartmentID(2);
+//        employee.setBirthDate(birthDate);
+//        employee.setHireDate(hireDate);
+        try {
+            dao.insertEmployee(employee);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateEmployee_admin.class.getName()).log(Level.SEVERE, null, ex);
+            request.getSession().setAttribute("sessionMsg", "Create employee fail");
+            response.sendRedirect("createEmployee_admin");
+            return;
+        }
 
         response.sendRedirect("employeeManager_admin");
     }

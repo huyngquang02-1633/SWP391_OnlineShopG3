@@ -333,52 +333,51 @@ public class ProductDAO extends DBContext {
             //connection = DBContext.getInstance().getConnection();
 
             String sql = "update Products SET "
-                    + "ProductName = ?, "
-                    + "CategoryID = ?, "
-                    + "GenreID = ?, "
-                    + "CoverPrice = ?, "
-                    + "SalePrice = ?, "
-                    + "AuthorID = ?, "
-                    + "Translator = ?, "
-                    + "PublisherID = ?, "
-                    + "SupplierID = ?, "
-                    + "Language = ?, "
-                    + "Size = ?, "
-                    + "Weight = ?, "
-                    + "NumberOfPage = ?, "
-                    + "Format = ?, "
-                    + "Image = ?, "
-                    + "PublishDate = ?, "
-                    + "PublishingLicense = ?, "
-                    + "Description = ?, "
-                    + "Discontinued = ? "
-                    + "where ProductID = ?";
+                    + "ProductName = ?, "  //1
+                    + "CategoryID = ?, "  //2
+                    + "GenreID = ?, "  //3
+                    + "CoverPrice = ?, "  //4
+                    + "SalePrice = ?, "  //5
+                    + "AuthorID = ?, "  //6
+                    + "Translator = ?, "  //7
+                    + "PublisherID = ?, "  //8
+                    + "SupplierID = ?, "  //9
+                    + "Language = ?, "  //10
+                    + "Size = ?, "  //11
+                    + "Weight = ?, "  //12
+                    + "NumberOfPage = ?, "  //13
+                    + "Format = ?, "  //14
+                    + "Image = ?, "  //15
+                    + "PublishDate = ?, "  //16
+                    + "PublishingLicense = ?, "  //17
+                    + "Description = ?, "  //18
+                    + "Discontinued = ? "  //19
+                    + "where ProductID = ?";  //20
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, p.getProductName());
             ps.setInt(2, p.getCategoryID());
             ps.setInt(3, p.getGenreID());
-            ps.setDouble(5, p.getCoverPrice());
-            ps.setDouble(6, p.getSalePrice());
-            ps.setInt(7, p.getAuthorID());
-            ps.setString(8, p.getTranslator());
-            ps.setInt(9, p.getPublisherID());
-            ps.setInt(10, p.getSupplierID());
-            ps.setString(11, p.getLanguage());
-            ps.setString(12, p.getSize());
-            ps.setDouble(13, p.getWeight());
-            ps.setInt(14, p.getNumberOfPage());
-            ps.setString(15, p.getFormat());
-            ps.setString(16, p.getImage());
-            ps.setDate(17, p.getPublishDate());
-            ps.setString(18, p.getPublishingLicense());
-            ps.setString(19, p.getDescription());
-            ps.setBoolean(20, p.isDiscontinued());
+            ps.setDouble(4, p.getCoverPrice());
+            ps.setDouble(5, p.getSalePrice());
+            ps.setInt(6, p.getAuthorID());
+            ps.setString(7, p.getTranslator());
+            ps.setInt(8, p.getPublisherID());
+            ps.setInt(9, p.getSupplierID());
+            ps.setString(10, p.getLanguage());
+            ps.setString(11, p.getSize());
+            ps.setDouble(12, p.getWeight());
+            ps.setInt(13, p.getNumberOfPage());
+            ps.setString(14, p.getFormat());
+            ps.setString(15, p.getImage());
+            ps.setDate(16, p.getPublishDate());
+            ps.setString(17, p.getPublishingLicense());
+            ps.setString(18, p.getDescription());
+            ps.setBoolean(19, p.isDiscontinued());
+            ps.setInt(20, p.getProductID());
             ps.executeUpdate();
         } catch (SQLException e) {
-            connection.rollback();
-        } finally {
-            //DBContext.releaseJBDCObject(rs, ps, connection);
+            System.out.println(e);
         }
     }
 
@@ -402,53 +401,33 @@ public class ProductDAO extends DBContext {
         return result > 0 ? 1 : 0;
     }
 
-    public void CreateProduct(Product p) throws SQLException {
-        String sql = "insert into Products("
-                + "ProductName,"
-                + "CategoryID,"
-                + "GenreID,"
-                + "CoverPrice,"
-                + "SalePrice,"
-                + "AuthorID,"
-                + "Translator,"
-                + "PublisherID,"
-                + "SupplierID,"
-                + "Language,"
-                + "Size,"
-                + "Weight,"
-                + "NumberOfPage,"
-                + "Format,"
-                + "Image,"
-                + "PublishDate,"
-                + "PublishingLicense,"
-                + "Description,"
-                + "Discontinued,"
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public void CreateProduct(Product p) {
+        String sql = "insert into Products values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             //connection = DBContext.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, p.getProductName());
             ps.setInt(2, p.getCategoryID());
             ps.setInt(3, p.getGenreID());
-            ps.setDouble(5, p.getCoverPrice());
-            ps.setDouble(6, p.getSalePrice());
-            ps.setInt(7, p.getAuthorID());
-            ps.setString(8, p.getTranslator());
-            ps.setInt(9, p.getPublisherID());
-            ps.setInt(10, p.getSupplierID());
-            ps.setString(11, p.getLanguage());
-            ps.setString(12, p.getSize());
-            ps.setDouble(13, p.getWeight());
-            ps.setInt(14, p.getNumberOfPage());
-            ps.setString(15, p.getFormat());
-            ps.setString(16, p.getImage());
-            ps.setDate(17, p.getPublishDate());
-            ps.setString(18, p.getPublishingLicense());
-            ps.setString(19, p.getDescription());
-            ps.setBoolean(20, p.isDiscontinued());
+            ps.setDouble(4, p.getCoverPrice());
+            ps.setDouble(5, p.getSalePrice());
+            ps.setInt(6, p.getAuthorID());
+            ps.setString(7, p.getTranslator());
+            ps.setInt(8, p.getPublisherID());
+            ps.setInt(9, p.getSupplierID());
+            ps.setString(10, p.getLanguage());
+            ps.setString(11, p.getSize());
+            ps.setDouble(12, p.getWeight());
+            ps.setInt(13, p.getNumberOfPage());
+            ps.setString(14, p.getFormat());
+            ps.setString(15, p.getImage());
+            ps.setDate(16, p.getPublishDate());
+            ps.setString(17, p.getPublishingLicense());
+            ps.setString(18, p.getDescription());
+            ps.setBoolean(19, p.isDiscontinued());
             ps.executeUpdate();
         } catch (SQLException e) {
-            connection.rollback();
+            
         } finally {
             //DBContext.releaseJBDCObject(rs, ps, connection);
         }
@@ -472,6 +451,10 @@ public class ProductDAO extends DBContext {
             st.setInt(1, id);
             st.executeUpdate();
             sql = "delete from [Order Details] where ProductID=?";
+            st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            sql = "delete from Cart where ProductID=?";
             st = connection.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
