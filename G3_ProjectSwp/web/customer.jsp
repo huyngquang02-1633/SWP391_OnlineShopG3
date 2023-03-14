@@ -49,7 +49,7 @@
         <div id="content-main-dashboard">
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 25%;">
-                    <b>Filter by Employees:</b>
+<!--                    <b>Filter by Employees:</b>
                     <form>
                         <select name="ddlCategory">
                             <option value="catid1">--- Select ---</option>
@@ -59,7 +59,7 @@
                             <option value="catid4">Electronic</option>
                         </select>
                         <input type="submit" value="Filter">
-                    </form>
+                    </form>-->
                 </div>
                 <div id="product-title-2" style="width: 55%;">
                     <form style="padding-bottom: 40px;" action="search_cus" method="post">

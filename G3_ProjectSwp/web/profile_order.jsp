@@ -86,7 +86,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-2">
                                                                     <img src="<%=path%>/images/books/img-04.jpg"
-                                                                         class="img-fluid" alt="Phone">
+                                                                         class="img-fluid" alt="Phone" style="width:70px;">
                                                                 </div>
                                                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                     <p class="text-muted mb-0">ID: ${odDetailList.getProductID()}</p>
