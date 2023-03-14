@@ -155,7 +155,19 @@ public class CartController extends HttpServlet {
 
             }else{
                 ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(accCustomer.getAccountID());
-                ArrayList<Product> productList = new ProductDAO().getProducts(false);
+                ArrayList<Product> productList = new ProductDAO().getProducts(false);double subTotal = 0;
+                
+                double shipping = 30000;
+                ProductDAO prodao = new ProductDAO();
+                Product pro;
+                for (Cart cart : cartList) {
+                    pro = prodao.getProductInfor(cart.getProductID());
+                    subTotal += pro.getSalePrice()*cart.getQuantity();
+                }
+                
+                req.setAttribute("subTotal", subTotal);
+                req.setAttribute("shipping", shipping);
+                
 
                 req.setAttribute("cartList", cartList);
                 req.setAttribute("productList", productList);
@@ -179,26 +191,25 @@ public class CartController extends HttpServlet {
                 if((int) req.getSession().getAttribute("mode") == 1){
                     req.getSession().removeAttribute("mode");
                     int proID = Integer.parseInt(req.getParameter("proID"));
-//                    int quantity = cartCookies.getQuantityByID(Integer.parseInt(req.getParameter("proID")));
-//                    int index = -1;
+                    
+                    int quantity = cartCookies.getQuantityByID(Integer.parseInt(req.getParameter("proID")));
+                    int index = -1;
                     if (cartCookies.isProductInCartCookies(proID)) { //sp da co trong cookie
-        //                if (arr != null) {
-        //                    for (Cookie arrCookie : arr) {
-        //                        if (arrCookie.getName().equals("item" + proID)) {
-        //                            index++;
-        //                            arrCookie.setValue(proID + "-" + quantity);
-        //                            resp.addCookie(arrCookie);
-        //                            for (int i = 0; i < items.size(); i++) {
-        //                                if (items.get(i).getProduct().getProductID() == proID) {
-        //                                    items.remove(items.get(i));
-        //                                    items.add(i, new Item(new ProductDAO().getProductInfor(proID), quantity));
-        //                                }
-        //                            }
-        //                            
-        //
-        //                        }
-        //                    }
-        //                }
+                        if (arr != null) {
+                            for (Cookie arrCookie : arr) {
+                                if (arrCookie.getName().equals("item" + proID)) {
+                                    index++;
+                                    arrCookie.setValue(proID + "-" + (quantity+1));
+                                    resp.addCookie(arrCookie);
+                                    for (int i = 0; i < cartList.size(); i++) {
+                                        if (cartList.get(i).getProductID() == proID) {
+                                            cartList.remove(cartList.get(i));
+                                            cartList.add(i, new Cart(0,proID, quantity+1));
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
                     } else { //sp chua co trong cookie
                         Cookie c = new Cookie("item" + proID, proID + "-1");
@@ -212,9 +223,11 @@ public class CartController extends HttpServlet {
                 }
             //Chua dang nhap, view cart
             }else{ 
+                
                 ArrayList<Product> productList = new ProductDAO().getProducts(false);
                 req.setAttribute("cartList", cartList);
                 req.setAttribute("productList", productList);
+                
                 
                 req.getRequestDispatcher("/viewcart.jsp").forward(req, resp);
             }

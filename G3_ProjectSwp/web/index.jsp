@@ -1,5 +1,7 @@
 <%@include file="templates/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://kit.fontawesome.com/6d68bb11b2.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://kit.fontawesome.com/6d68bb11b2.css" crossorigin="anonymous">
 <!--************************************
                 Header End
 *************************************-->
@@ -89,7 +91,51 @@
                                                 </c:if>
                                             </c:forEach>
                                         </span>
-                                        <span class="tg-stars"><span></span></span>
+                                        <!--<span class="tg-stars"><span></span></span>-->
+                                        <c:choose>
+                                                    <c:when test="${product.getAverageRating()>0 && product.getAverageRating()<0.5}">
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=0.5 && product.getAverageRating()<1.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=1.5 && product.getAverageRating()<2.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=2.5 && product.getAverageRating()<3.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${product.getAverageRating()>=3.5 && product.getAverageRating()<4.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
                                         <span class="tg-bookprice">
                                             <ins>${product.getSalePrice()}</ins>
                                             <del>${product.getCoverPrice()}</del>
@@ -223,7 +269,50 @@
                                                     </c:forEach>
                                                     
                                                 </span>
-                                                <span class="tg-stars"><span></span></span>
+                                                <c:choose>
+                                                    <c:when test="${newRelease.getAverageRating()>0 && newRelease.getAverageRating()<0.5}">
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${newRelease.getAverageRating()>=0.5 && newRelease.getAverageRating()<1.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${newRelease.getAverageRating()>=1.5 && newRelease.getAverageRating()<2.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${newRelease.getAverageRating()>=2.5 && newRelease.getAverageRating()<3.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:when test="${newRelease.getAverageRating()>=3.5 && newRelease.getAverageRating()<4.5}">
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #f7e400;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                        <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </div>
                                     </div>
