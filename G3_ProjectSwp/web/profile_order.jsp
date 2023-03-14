@@ -60,19 +60,19 @@
                                                     <span>Status:</span>
                                                     <c:choose>
                                                         <c:when test="${odList.getStatus()==1}">
-                                                            <td style="padding: unset;">
+                                                            <span style="padding: unset;">
                                                                 <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
-                                                            </td></c:when>
+                                                            </span></c:when>
                                                         <c:when test="${odList.getStatus()==2}">
-                                                            <td style="padding: unset;">
+                                                            <span style="padding: unset;">
                                                                 <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
-                                                            </td>
+                                                            </span>
                                                         </c:when>
                                                         <c:when test="${odList.getStatus()==3}">
-                                                            <td style="padding: unset;">
-                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
-                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: greenyellow;">Delivered</button>
-                                                            </td>
+                                                            <span style="padding: unset;">
+                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: green;">Delivered</button>
+                                                                <button onclick="window.location.href = 'changeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: orange;">Refunding</button>
+                                                            </span>
                                                         </c:when>
                                                         <c:when test="${odList.getStatus()==4}"><span style="color: green;">Delivered</span></c:when>
                                                         <c:when test="${odList.getStatus()==5}"><span style="color: green;">Refunding</span></c:when>

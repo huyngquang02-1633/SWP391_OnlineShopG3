@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Thanh Dao
  */
-@WebServlet(name = "ChangeorderStatus_customer", urlPatterns = {"/ChangeorderStatus_customer"})
+@WebServlet(name = "ChangeorderStatus_customer", urlPatterns = {"../changeorderStatus_customer"})
 public class ChangeorderStatus_customer extends HttpServlet {
 
     /**
@@ -66,14 +66,16 @@ public class ChangeorderStatus_customer extends HttpServlet {
         System.out.println("orderId: " + orderId);
         System.out.println("status: " + status);
         OrderDAO dao = new OrderDAO();
+        
         try {
             dao.updateOrderStatus(orderId, status);
         } catch (SQLException ex) {
-            Logger.getLogger(ChangorderStatus_admin1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeorderStatus_customer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //OrderManage_admin change = new OrderManage_admin();
-        //change.doGet(request, response);
-        response.sendRedirect("account/profile_myOrder");
+        
+        AccountProfile2 change = new AccountProfile2();
+        change.doGet(request, response);
+//        response.sendRedirect("account/profile_myOrder");
     }
 
     /**
