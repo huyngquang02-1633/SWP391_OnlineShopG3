@@ -38,13 +38,10 @@
                             <td>${od.getEmployeeID()}</td>
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
-                            <td>${od.getShippedDate()}</td>
-                            <!--<td>${od.getFreight()}</td>-->                  
-                            <!--<td>${od.getShipName()}</td>-->
                             <td>${od.getShipAddress()}</td>
                             <td>${od.getShipCity()}</td> 
-                            <!--<td>${od.getShipRegion()}</td>--> 
-                            <!--<td>${od.getShipCountry()}</td>--> 
+                            <td>${od.getShipCountry()}</td> 
+
                             <c:choose>
                                 <c:when test="${od.getStatus()==1}"><td style="color: blue;">Pending</td></c:when>
                                 <c:when test="${od.getStatus()==2}"><td style="color: greenyellow;">Approved</td></c:when>
@@ -56,40 +53,36 @@
                             </c:choose>
                             <c:choose>
                                 <c:when test="${od.getStatus()==1}">
-                                    <td style="padding: unset;"><select id="hoverth" name="">
-                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
-                                            <option value="catid1" style="color: greenyellow;">Approved <i class="fa-solid fa-pen-to-square"></i></option>
-                                            <option value="catid1" style="color: red;">Canceled</option>
-
-                                        </select></td>
-                                    </c:when>
+                                    <td style="padding: unset;">
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=2'" value="${od.getOrderID()}" style="color: greenyellow;">Approve</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
+                                    </td>
+                                </c:when>
 
                                 <c:when test="${od.getStatus()==2}">
-                                    <td style="padding: unset;"><select id="hoverth" name="">
-                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
-                                            <option value="catid1" style="color: yellow;">Delivering <i class="fa-solid fa-pen-to-square"></i></option>
-                                            <option value="catid1" style="color: red;">Canceled</option>
-                                        </select></td>
-                                    </c:when>
+                                    <td style="padding: unset;">
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=3'" value="${od.getOrderID()}" style="color: greenyellow;">Delivering</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
+                                    </td>
+                                </c:when>
 
                                 <c:when test="${od.getStatus()==3}">
-                                    <td style="padding: unset;"><select id="hoverth" name="">
-                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
-                                            <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
-                                        </select></td>
-                                    </c:when>
+                                    <td style="padding: unset;">
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: greenyellow;">Delivered</button>
+                                    </td>
+                                </c:when>
 
 
                                 <c:when test="${od.getStatus()==5}">
-                                    <td style="padding: unset;"><select id="hoverth" name="">
-                                            <option value="catid1" style="color: black;">Update <i class="fa-solid fa-pen-to-square"></i></option>
-                                            <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
-                                            <option value="catid1" style="color: red;">Canceled</option>
-                                        </select></td>
+                                    <td style="padding: unset;">
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: greenyellow;">Delivered</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
+
+                                    </td>
                                 </c:when>
                                 <c:otherwise><td></td></c:otherwise>
                             </c:choose>
-                               
+
                         </tr>
                     </c:forEach>
                 </table>
