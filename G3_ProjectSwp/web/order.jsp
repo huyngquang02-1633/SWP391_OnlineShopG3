@@ -34,8 +34,16 @@
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>
                             <td><a href="<%=path%>/orderManage_admin?idOdDetail=${od.getOrderID()}">${od.getOrderID()}</a></td>
-                            <td>${od.getCustomerID()}</td>
-                            <td>${od.getEmployeeID()}</td>
+                            <td>
+                                <c:forEach var="cus" items="${cusList}"> 
+                                    <c:if test="${od.getCustomerID() == cus.getCustomerID()}">${cus.getFirstName()}</c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <c:forEach var="emp" items="${empList}">
+                                    <c:if test="${od.getEmployeeID() == emp.getEmployeeID()}">${emp.getFirstName()}</c:if>
+                                </c:forEach>
+                            </td>
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
                             <td>${od.getShipAddress()}</td>
@@ -77,7 +85,6 @@
                                     <td style="padding: unset;">
                                         <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: greenyellow;">Delivered</button>
                                         <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
-
                                     </td>
                                 </c:when>
                                 <c:otherwise><td></td></c:otherwise>
