@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Account;
 import models.Cart;
 import models.Customer;
 import models.Discount;
@@ -77,14 +78,25 @@ public class OrderDAO extends DBContext {
     public ArrayList<Order> getAllOrdersByCusID(int cusID) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
+            if (connection == null) {
+                System.out.println("Connection fail!");
+            }
             String sql = "select * from Orders o where o.CustomerID = ? Order by o.OrderDate ASC";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cusID);
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
-        } catch (Exception e) {
-
-        }//finally{ connection.close();}
+        } catch (SQLException e) {
+            
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                
+            }
+        }
         return orderList;
     }
 
@@ -464,32 +476,35 @@ public class OrderDAO extends DBContext {
         }
     }
 
+//    public static void main(String[] args) {
+//        ArrayList<Cart> cart = new CartDAO().getCartListByAccID(1);
+//        try {
+//            OrderDAO odDAO = new OrderDAO();
+//            ProductDAO proDAO = new ProductDAO();
+//            int newOrderID = odDAO.getNewOrderID();
+//            Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
+//            //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
+//            odDAO.createOrder(od);
+//
+//            Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
+//            Product proInfor;
+//            String voucher = "";
+//            double discountAmount = 0;
+//            for (Cart item : cart) {
+//                proInfor = new ProductDAO().getProductInfor(item.getProductID());
+//                if (discount != null) {
+//                    voucher = discount.getDiscountID();
+//                    discountAmount = (item.getQuantity() * proInfor.getSalePrice()) - (proInfor.getSalePrice() * discount.getPercentage());
+//                }
+//                OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
+//                odDAO.createDetailOfOrder(odDetail);
+//            }
+//        } catch (Exception e) {
+//
+//        }
+//    }
     public static void main(String[] args) {
-        ArrayList<Cart> cart = new CartDAO().getCartListByAccID(1);
-        try {
-            OrderDAO odDAO = new OrderDAO();
-            ProductDAO proDAO = new ProductDAO();
-            int newOrderID = odDAO.getNewOrderID();
-            Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
-            //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
-            odDAO.createOrder(od);
-
-            Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
-            Product proInfor;
-            String voucher = "";
-            double discountAmount = 0;
-            for (Cart item : cart) {
-                proInfor = new ProductDAO().getProductInfor(item.getProductID());
-                if (discount != null) {
-                    voucher = discount.getDiscountID();
-                    discountAmount = (item.getQuantity() * proInfor.getSalePrice()) - (proInfor.getSalePrice() * discount.getPercentage());
-                }
-                OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
-                odDAO.createDetailOfOrder(odDetail);
-            }
-        } catch (Exception e) {
-
-        }
-
+        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(2);
+        System.out.println(orderList);
     }
 }
