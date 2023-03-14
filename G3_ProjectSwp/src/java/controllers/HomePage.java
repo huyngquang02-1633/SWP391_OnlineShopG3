@@ -30,6 +30,7 @@ import DAL.GenreDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
 import models.Author;
+import models.CartCookies;
 import models.Category;
 import models.Genre;
 import models.Product;
@@ -44,14 +45,48 @@ public class HomePage extends HttpServlet {
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Product> newReleaseList = new ProductDAO().getNewReleaseList(3);
         Product comingSoon = new ProductDAO().getComingSoon();
+        
+        //Cart icon
         if(req.getSession().getAttribute("AccCustomerSession")!= null){
             Account googleAcc = (Account)req.getSession().getAttribute("AccCustomerSession");
             ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(googleAcc.getAccountID());
+            
+            //get subTotal
+            double subTotal = 0;
+            ProductDAO proDao = new ProductDAO();
+            Product pro;
+            for (Cart cart : cartList) {
+                pro = proDao.getProductInfor(cart.getProductID());
+                subTotal+=cart.getQuantity() * pro.getSalePrice();
+            }
             req.setAttribute("cartList", cartList);
             req.setAttribute("cartSize", cartList.size());
+            req.setAttribute("subTotal", subTotal);
         }else{
-            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(1);
+            Cookie arr[] = req.getCookies();
+            ArrayList<String> cookiesText = new ArrayList<>();
+            if (arr != null) {
+                for (Cookie arrCookies : arr) {
+                    if (arrCookies.getName().contains("item")) {
+                        cookiesText.add(arrCookies.getValue());
+                    }
+                }
+            }
+            CartCookies cartCookies = new CartCookies();
+            ArrayList<Cart> cartList = cartCookies.decryptionCookiesText(cookiesText);
+            
+            //get subTotal
+            double subTotal = 0;
+            ProductDAO proDao = new ProductDAO();
+            Product pro;
+            for (Cart cart : cartList) {
+                pro = proDao.getProductInfor(cart.getProductID());
+                subTotal+=cart.getQuantity() * pro.getSalePrice();
+            }
+            
             req.setAttribute("cartList", cartList);
+            req.setAttribute("cartSize", cartList.size());
+            req.setAttribute("subTotal", subTotal);
         }
         
         

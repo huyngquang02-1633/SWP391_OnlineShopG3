@@ -91,6 +91,38 @@ public class CartDAO extends DBContext{
         }
         return result>0;
     }
+    
+    public boolean updateCart(Cart cart){
+        int result=0;
+        try {
+            Cart checkCartExist = getCartByAccID_ProID(cart.getAccountID(), cart.getProductID());
+            if(checkCartExist != null){
+                String sql = "UPDATE Cart SET Quantity = ? WHERE AccountID = ? AND ProductID = ?";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, cart.getQuantity() );
+                ps.setInt(2, cart.getAccountID());
+                ps.setInt(3, cart.getProductID());
+                result = ps.executeUpdate();
+            }
+        } catch (Exception e) {
+        }
+        return result>0;
+    }
+    public boolean deleteCartItem(Cart cart){
+        int result=0;
+        try {
+            Cart checkCartExist = getCartByAccID_ProID(cart.getAccountID(), cart.getProductID());
+            if(checkCartExist != null){
+                String sql = "DELETE Cart where AccountID = ? AND ProductID = ?";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, cart.getAccountID());
+                ps.setInt(2, cart.getProductID());
+                result = ps.executeUpdate();
+            }
+        } catch (Exception e) {
+        }
+        return result>0;
+    }
 
     public static void main(String[] args) {
             ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(1);

@@ -53,7 +53,7 @@ public class ProductManage_admin extends HttpServlet {
             currentPage = Integer.parseInt(req.getParameter("currentPage"));
         }
 
-        ArrayList<Product> proList = null;
+        ArrayList<Product> proList = new ArrayList<>();
         List<Product> listInCurrentPage = null;
         
         
@@ -121,7 +121,6 @@ public class ProductManage_admin extends HttpServlet {
             }else {
                 proList = new ProductDAO().getProducts(true);
             }
-
         }
         if(proList.isEmpty()){
             req.setAttribute("emptyListMsg", "There is nothing in Product List!");
