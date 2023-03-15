@@ -120,8 +120,10 @@ body {
 }
 
 .bio-graph-heading {
-    background: #797979;
-    color: #fff;
+    border: solid 1px #cecece;
+    background: #f0f0f0;
+    /* background: #394966; */
+    /* color: #fff; */
     text-align: center;
     /* font-style: italic; */
     padding: 20px;
@@ -142,7 +144,7 @@ body {
 }
 
 .panel{
-   
+
 }
 
 .bio-row {
@@ -258,61 +260,220 @@ ul.summary-list > li:last-child  {
 }
 
 img {
-    margin: 6px;
+    margin: 1px;
 }
 
 .odt-title {
     display: flex;
     justify-content: space-between;
     padding: 12px;
-    background: #345082;
+    background: #4ea961;
     color: aliceblue;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 .card-footer{
+    position: relative;
     display: flex;
     justify-content: space-between;
-    background-color: #a3bceb;
+    background-color: #f6f6f6;
     color: white;
-    padding: 4px 10px;
+    padding: 5px 10px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-bottom: 30px;
 
 }
-
-#box {
-  padding:5px;
-  z-index:10;
-  position:relative;  
-}
-#box form {
- background:#006699;
- padding:5px;
- display:none;
- position:absolute;
- top:27px;
-}
 #button {
-  width:75px;
-  background:#006699;
-  color:#fff;
-  padding:3px 10px;
-  border:1px solid #006699;  
-  margin-bottom:15px;  
-  cursor:pointer;
+    width:75px;
+    background:#006699;
+    color:#fff;
+    padding:3px 10px;
+    border:1px solid #006699;
+    margin-bottom:15px;
+    cursor:pointer;
 }
 input[type="submit"] {
-  background:none;
-  color:#fff;
-  border:none;
-  text-align:left;
-  cursor:pointer;
+    background:none;
+    color:#fff;
+    border:none;
+    text-align:left;
+    cursor:pointer;
 }
 
 .selectS{
     background: white;
     padding: 0px 6px;
     width: 100px;
+}
+
+#Review{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: #4b4848;
+    padding: 2px 4px;
+    border: none;
+    border-radius: 3px;
+    width: 70px;
+    background-color: #ffa000;
+}
+
+.rating {
+    height: 35px;
+    background: #FFF;
+    display: block;
+    overflow: hidden;
+
+
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+.rating:not(:checked) > input {
+    display: none;
+}
+
+/* - - - - - RATE */
+
+#rate:not(:checked) > label {
+    cursor:pointer;
+    float: right;
+    width: 30px;
+    height: 30px;
+    display: block;
+
+    color: gray;
+    line-height: 33px;
+    text-align: center;
+}
+#rate:not(:checked) > label:hover,
+#rate:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+#rate > input:checked + label:hover,
+#rate > input:checked + label:hover ~ label,
+#rate > input:checked ~ label:hover,
+#rate > input:checked ~ label:hover ~ label,
+#rate > label:hover ~ input:checked ~ label {
+    color: gold;
+}
+#rate > input:checked ~ label {
+    color: gold
+}
+
+.copyright {
+    display:block;
+    margin-top: 100px;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.copyright a{
+    text-decoration: none;
+    color: #EE4E44;
+}
+
+.file-upload{
+    display:block;
+    text-align:center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    padding: 1px;
+}
+.file-upload .file-select{
+    display:block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor:pointer;
+    height:40px;
+    line-height:40px;
+    text-align:left;
+    background:#FFFFFF;
+    overflow:hidden;
+    position:relative;
+}
+.file-upload .file-select .file-select-button{
+    background:#dce4ec;
+    padding:0 10px;
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+}
+.file-upload .file-select .file-select-name{
+    line-height:40px;
+    display:inline-block;
+    padding:0 10px;
+}
+.file-upload .file-select:hover{
+    border-color:#34495e;
+    transition:all .2s ease-in-out;
+    -moz-transition:all .2s ease-in-out;
+    -webkit-transition:all .2s ease-in-out;
+    -o-transition:all .2s ease-in-out;
+}
+.file-upload .file-select:hover .file-select-button{
+    background:#34495e;
+    color:#FFFFFF;
+    transition:all .2s ease-in-out;
+    -moz-transition:all .2s ease-in-out;
+    -webkit-transition:all .2s ease-in-out;
+    -o-transition:all .2s ease-in-out;
+}
+.file-upload.active .file-select{
+    border-color:#3fa46a;
+    transition:all .2s ease-in-out;
+    -moz-transition:all .2s ease-in-out;
+    -webkit-transition:all .2s ease-in-out;
+    -o-transition:all .2s ease-in-out;
+}
+.file-upload.active .file-select .file-select-button{
+    background:#3fa46a;
+    color:#FFFFFF;
+    transition:all .2s ease-in-out;
+    -moz-transition:all .2s ease-in-out;
+    -webkit-transition:all .2s ease-in-out;
+    -o-transition:all .2s ease-in-out;
+}
+.file-upload .file-select input[type=file]{
+    z-index:100;
+    cursor:pointer;
+    position:absolute;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    opacity:0;
+    filter:alpha(opacity=0);
+}
+.file-upload .file-select.file-select-disabled{
+    opacity:0.65;
+}
+.file-upload .file-select.file-select-disabled:hover{
+    cursor:default;
+    display:block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor:pointer;
+    height:40px;
+    line-height:40px;
+    margin-top:5px;
+    text-align:left;
+    background:#FFFFFF;
+    overflow:hidden;
+    position:relative;
+}
+.file-upload .file-select.file-select-disabled:hover .file-select-button{
+    background:#dce4ec;
+    color:#666666;
+    padding:0 10px;
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+}
+.file-upload .file-select.file-select-disabled:hover .file-select-name{
+    line-height:40px;
+    display:inline-block;
+    padding:0 10px;
 }

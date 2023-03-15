@@ -61,17 +61,17 @@
                                                     <c:choose>
                                                         <c:when test="${odList.getStatus()==1}">
                                                             <span style="padding: unset;">
-                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
+                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
                                                             </span></c:when>
                                                         <c:when test="${odList.getStatus()==2}">
                                                             <span style="padding: unset;">
-                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
+                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
                                                             </span>
                                                         </c:when>
                                                         <c:when test="${odList.getStatus()==3}">
                                                             <span style="padding: unset;">
-                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: green;">Delivered</button>
-                                                                <button onclick="window.location.href = 'changeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: orange;">Refunding</button>
+                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: green;">Delivered</button>
+                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: orange;">Refunding</button>
                                                             </span>
                                                         </c:when>
                                                         <c:when test="${odList.getStatus()==4}"><span style="color: green;">Delivered</span></c:when>
@@ -85,8 +85,10 @@
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-md-2">
+
                                                                     <img src="<%=path%>/images/books/img-04.jpg"
                                                                          class="img-fluid" alt="Phone" style="width:70px;">
+
                                                                 </div>
                                                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                     <p class="text-muted mb-0">ID: ${odDetailList.getProductID()}</p>
@@ -109,26 +111,17 @@
                                                     </c:if>
                                                 </c:forEach>
                                                 <div class="card-footer" >
-                                                    <c:set var="myVar" value="${odList.getOrderID()}"/>
+                                                    <c:url value="/AccountProfile2_review" var="review">
+                                                        <c:param name="id" value="${odList.getOrderID()}" />
+                                                    </c:url>
                                                     <h5>Total paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
                                                     <div class="card-footer"><div id="box">
-                                                            <span id="myVar">Review</span>
-                                                            <form action="" id="form">
-                                                                <p><input type="text" placeholder="username"/></p>
-                                                                <p><input type="password" placeholder="password" /></p>
-                                                                <p><input type="submit" value="Complete" /></p>
-                                                            </form>
+                                                            <a href="${review}" id="Review">Review</a>
                                                         </div></div>
                                                 </div>
                                                 <hr>
                                             </div>    
                                         </c:forEach>
-                                        <script>
-                                            $("#myVar").click(function () {
-                                                $("#box form").toggle("slow");
-                                                return false;
-                                            });
-                                        </script>
                                     </div>
                                 </div>
                             </div>
