@@ -8,7 +8,9 @@ import models.Employee;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -43,7 +45,7 @@ public class EmployeeDAO extends DBContext {
         return emp;
     }
 
-    public ArrayList<Employee> getAllEmloyees() {
+    public ArrayList<Employee> getAllEmloyees() throws SQLException {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
             String sql = "select * from Employees where Status = 1";
@@ -73,7 +75,7 @@ public class EmployeeDAO extends DBContext {
     public ArrayList<Employee> getAllEmloyeesByID() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
-            String sql = "select * from Employees";
+            String sql = "select * from Employees ";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -93,11 +95,25 @@ public class EmployeeDAO extends DBContext {
                 empList.add(emp);
             }
         } catch (Exception e) {
+
         }
         return empList;
     }
 
-    public void insertEmployee(Employee employee) {
+    public int getTotalEmployees() {
+        String sql = "select COUNT(*) from Employees";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public void insertEmployee(Employee employee) throws SQLException {
 //        enableInsertMode("Employees");
         String sql = "SET IDENTITY_INSERT Employees ON;"
                 + " insert into [Employees] ([EmployeeID],[LastName]\n"
@@ -131,7 +147,7 @@ public class EmployeeDAO extends DBContext {
             ps.executeUpdate();
 //            disbleInsertMode("Employees");
         } catch (Exception e) {
-            e.printStackTrace();
+            connection.rollback();
         }
     }
 
@@ -195,6 +211,7 @@ public class EmployeeDAO extends DBContext {
         }
     }
 
+
     public boolean EditInfoEmployees(Employee em) {
         int result = 0;
         try {
@@ -222,10 +239,86 @@ public class EmployeeDAO extends DBContext {
         return result > 0;
     }
     
-    public static void main(String[] args) {
-        Employee em = new Employee(1, "123123", "123", true, "123123", "123",Date.valueOf("2002-12-12"), "123123123", "1231233");
-        boolean a = new EmployeeDAO().EditInfoEmployees(em);
-        System.out.println(a);
+//    public static void main(String[] args) {
+//        Employee em = new Employee(1, "123123", "123", true, "123123", "123",Date.valueOf("2002-12-12"), "123123123", "1231233");
+//        boolean a = new EmployeeDAO().EditInfoEmployees(em);
+//        System.out.println(a);
+//    }
+
+    public List<Employee> searchByName(String search) {
+        List<Employee> list = new ArrayList<>();
+        String sql = "select * from Employees where LastName like ? OR FirstName like ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + search + "%");
+            st.setString(2, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Employee e = new Employee();
+                e.setEmployeeID(rs.getInt("employeeID"));
+                e.setFirstName(rs.getString("firstName"));
+                e.setLastName(rs.getString("lastName"));
+                e.setGender(rs.getBoolean("gender"));
+                e.setDepartmentID(Integer.parseInt(rs.getString("departmentID")));
+                e.setTitle(rs.getString("title"));
+                e.setTitleOfCourtesy(rs.getString("titleOfCourtesy"));
+                e.setBirthDate(rs.getDate("birthDate"));
+                e.setHireDate(rs.getDate("hireDate"));
+                e.setStatus(rs.getBoolean("status"));
+                e.setAddress(rs.getString("address"));
+                list.add(e);
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
+//    public static void main(String[] args) {
+//        EmployeeDAO abc = new EmployeeDAO();
+//        ArrayList<Employee> emm = abc.getAllEmloyees();
+//        System.out.println(emm);
+//    }
+//    public static void main(String[] args) {
+//        ArrayList<Employee> employees = new EmployeeDAO().getAllEmloyeesByID();
+//        for (Employee emp : employees) {
+//            System.out.println(emp);
+//        }
+//    }
+    public List<Employee> pagingEmployees(int index) {
+        List<Employee> empList = new ArrayList<>();
+        String sql = "select * from Employees\n"
+                + "order by EmployeeID \n"
+                + "OFFSET ? Rows fetch next 10 rows only;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (index-1)*10);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int EmployeeID = rs.getInt("EmployeeID");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String Title = rs.getString("Title");
+                String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
+                Date BirthDate = rs.getDate("BirthDate");
+                Date HireDate = rs.getDate("HireDate");
+                String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
+                boolean Status = rs.getBoolean("Status");               
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, PhoneNumber, Status);
+                empList.add(emp);
+            }
+        } catch (Exception e) {
+        }
+        return empList;
+    }
+
+    public static void main(String[] args) {
+        EmployeeDAO dao = new EmployeeDAO();
+        List<Employee> empList = dao.pagingEmployees(2);
+        for(Employee em : empList){
+            System.out.println(em);
+        }
+    }
 }

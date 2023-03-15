@@ -1,4 +1,5 @@
 <%@include file="templates/header_admin.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span> <br>
@@ -60,86 +61,148 @@
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 25%;">
                     <b>Filter by Departments:</b>
-                    <form>
-                        <select name="ddlCategory">
-                            <option value="catid1">--- Select ---</option>
-                            <option value="catid1">Smart Phone</option>
-                            <option value="catid2">Computer</option>
-                            <option value="catid3">Television</option>
-                            <option value="catid4">Electronic</option>
+                    <form action="employeeManager_admin">
+                        <select name="employeeFilter">
+                            <option value="0">No Filter</option>
+                                        <c:forEach items="${depart}" var="dep">
+                                           
+                                            <c:choose>
+                                                <c:when test="${dep.getDepartmentID() == employeeIDSession}">
+                                                    <option value="${dep.getDepartmentID()}" selected="selected"><c:out value="${dep.getDepartmentName()}"/></option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${dep.getDepartmentID()}"><c:out value="${dep.getDepartmentName()}"/></option>
+                                                </c:otherwise>
+                                            </c:choose>                               
+                                        </c:forEach>
                         </select>
                         <input type="submit" value="Filter">
                     </form>
                 </div>
+                
                 <div id="product-title-2" style="width: 55%;">
-                    <form style="padding-bottom: 40px;">
-                        <input type="text" name="txtSearch" placeholder="Enter employee name to search"/>
-                        <input type="submit" value="Search"
-                               </form>
-                        </div>
-                        <div id="product-title-3" style="width: 20%;">
-                            <a href="create-employee.jsp">Create a new Employee</a>
-                        </div>
+                    <form style="padding-bottom: 40px;" action="SearchEmployee_admin" method="post">
+                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter employee name to search"/>
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
-                <div id="order-table-admin">
-                    <table id="orders">
+                <div id="product-title-3" style="width: 20%;">
+                    <a href="create-employee.jsp">Create a new Employee</a>
+                </div>
+            </div>
+            <div id="order-table-admin">
+                <table id="orders">
+                    <tr>
+                        <th>EmployeeID</th>
+                        <th>LastName</th>
+                        <th>FirstName</th>
+                        <th>Gender</th>
+                        <th>Department Name</th>
+                        
+                        <!--<th>Title</th>-->
+                        <th>Title</th>
+                        <th>TitleOfCourtesy</th>
+                        <th>Birthday</th>
+                        <th>HireDate</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach items = "${listEmp}" var="x" >
+
                         <tr>
-                            <th>EmployeeID</th>
-                            <th>LastName</th>
-                            <th>FirstName</th>
-                            <th>Gender</th>
-                            <th>Department Name</th>
-                            <!--<th>Title</th>-->
-                            <th>Title</th>
-                            <th>Birthday</th>
-                            <th>HireDate</th>
-                            <th>Address</th>
-                            <th>Status</th>
-                        </tr>
-                        <c:forEach items = "${empList}" var="x" >
-
-                            <tr>
-                                <td>${x.getEmployeeID()}</td>
-                                <td>${x.getLastName()}</td> 
-                                <td>${x.getFirstName()}</td>
+                            <td>${x.getEmployeeID()}</td>
+                            <td>${x.getLastName()}</td> 
+                            <td>${x.getFirstName()}</td>
+                            <td>
+                                <c:if test="${x.isGender() == true}">Male</c:if>
+                                <c:if test="${x.isGender() == false}">Female</c:if>
+                                </td> 
                                 <td>
-                                    <c:if test="${x.isGender() == true}">Male</c:if>
-                                    <c:if test="${x.isGender() == false}">Female</c:if>
-                                    </td> 
-                                    <td>
-                                    <c:forEach var="dep" items="${depart}"> 
-                                        <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
-                                    </c:forEach>   </td> 
-                                <td>${x.getTitle()}</td> 
-<!--                                <td>${x.getTitleOfCourtesy()}</td> -->
-                                <td>${x.getBirthDate()}</td> 
-                                <td>${x.getHireDate()}</td> 
-                                <td>${x.getAddress()}</td> 
-                                <c:choose>
-                                    <c:when test="${x.isStatus() == true}"><td style="color: green;">Active | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Change Status</a></td></c:when>
-                                    <c:when test="${x.isStatus() == false}"><td style="color: red;">Suspended | <a herf ="#" onclick="showMesss(${x.getEmployeeID()})">Change</a></td></c:when>
-                                </c:choose>
-                            </tr>
-                        </c:forEach>
+                                <c:forEach var="dep" items="${depart}"> 
+                                    <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
+                                </c:forEach>   </td> 
+                            <td>${x.getTitle()}</td> 
+                            <td>${x.getTitleOfCourtesy()}</td> 
+                            <td>${x.getBirthDate()}</td> 
+                            <td>${x.getHireDate()}</td> 
+                            <td>${x.getAddress()}</td> 
+                            <td>${x.getPhoneNumber()}</td> 
+                            <c:choose>
+                                <c:when test="${x.getDepartmentID() == 1}"><td style="color: blue;">Admin</td></c:when>
+                                <c:when test="${x.isStatus() == true}"><td style="color: green;">Active | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Inactivate</a></td></c:when>
+                                <c:when test="${x.isStatus() == false}"><td style="color: red;">Inactivate | <a herf ="#" onclick="showMesss(${x.getEmployeeID()})">Active</a></td></c:when>
+                            </c:choose>
+                        </tr>
+                    </c:forEach>
 
 
-                    </table>
+                </table>
+                <div class="pagination" style="">
+                    <%-- Hi?n th? nút Prev --%>
+                    <%--<c:if test="${index > 1}">--%>
+                        <!--<a href="employeeManager_admin?index=${index-1}">&laquo; Prev</a>-->
+                    <%--</c:if>--%>
+
+                    <%-- Hi?n th? các nút trang --%>
+                    <c:forEach begin="1" end="${endP}" var="i">
+                        <c:choose>
+                            <%-- Hi?n th? nút trang hi?n t?i --%>
+                            <c:when test="${i == index}">
+                                <span class="current">${i}</span>
+                            </c:when>
+
+                            <%-- Hi?n th? các nút trang khác --%>
+                            <c:otherwise>
+                                <a href="employeeManager_admin?index=${i}">${i}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <%-- Hi?n th? nút Next --%>
+                    <%--<c:if test="${index < endP}">--%>
+                        <!--<a href="employeeManager_admin?index=${index+1}">Next &raquo;</a>-->
+                    <%--</c:if>--%>
                 </div>
+                <%--Current page: ${currentPage} <br>
+                Number of pages: ${numberOfPage} <br>
+                <c:if test="${sessionMsg != null}">
+                    <div>${sessionMsg}</div>
+                </c:if>
                 <div id="paging">
                     <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a href="#" class="active">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">&raquo;</a>
-                    </div>
-                </div>
+                        <c:if test="${currentPage > 1}">
+                            <c:url value="/employeeManager_admin" var="paginationPrevous">
+                                <c:param name="currentPage" value="${currentPage - 1}" />
+                            </c:url>
+                            <a href="${paginationPrevous}">&laquo;</a>
+                        </c:if>
+                        <c:forEach begin="1" end="${numberOfPage}" step="1" var="stepValue">
+                            <c:choose>
+                                <c:when test="${stepValue == currentPage}">
+                                    <a href="#" class="active">${stepValue}</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url value="/employeeManager_admin" var="pagination">
+                                        <c:param name="currentPage" value="${stepValue}" />
+                                    </c:url>
+                                    <a href="${pagination}">${stepValue}</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
+                    <c:if test="${currentPage<numberOfPage}">
+                        <c:url value="/employeeManager_admin" var="paginationNext">
+                            <c:param name="currentPage" value="${currentPage+1}" />
+                        </c:url>
+                        <a href="${paginationNext}">&raquo;</a>
+                    </c:if>--%>
             </div>
         </div>
     </div>
+</div>
+
+</div>
 </div>
 <div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
 </div>

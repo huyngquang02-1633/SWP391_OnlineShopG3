@@ -1,26 +1,26 @@
 <%@include file="templates/header_admin.jsp" %>
-<!--<form action="createEmployee_admin" method="get">-->
     <div id="content-right">
         <div class="path-admin">CREATE A NEW EMPLOYEES</b></div>
         <div class="content-main">
+            <c:set var="e" value="${employee}"></c:set>
             <form action="createEmployee_admin" method="get" id="content-main-product">
                 <div class="content-main-1">
                     <label>Last Name (*):</label><br/>
-                    <input type="text" name="lastName" id=""><br/>
+                    <input type="text" name="lastName" id="" value="${e.getLastName()}"><br/>
                     <label>First Name:</label><br/>
-                    <input type="text" name="firstName" id=""><br/>
+                    <input type="text" name="firstName" id="" value="${e.getFirstName()}"><br/>
                     <label>Title:</label><br/>
-                    <input type="text" name="title" id=""><br/>
+                    <input type="text" name="title" id="" value="${e.getTitle()}"><br/>
                     <label>Status:</label><br/>
-                    <select name="status">
+                    <select name="status" value="${e.isStatus()}">
                         <option value="catid1">1</option>                                
                     </select>
                 </div>
                 <div class="content-main-1">
                     <label>TitleOfCourtesy:</label><br/>
-                    <input type="text" name="titleOfCourtesy" id=""><br/>
+                    <input type="text" name="titleOfCourtesy" id="" value="${e.getTitleOfCourtesy()}"><br/>
                     <label>Address:</label><br/>
-                    <input type="text" name="address" id=""><br/>
+                    <input type="text" name="address" id="" value="${e.getAddress()}"><br/>
                     <label>Department (*):</label><br/>
                     <select name="departmentID">
                         <option value="empid1">1</option>
@@ -34,8 +34,8 @@
                 <div class="content-main-1">
                     <label>Birth Date:</label><br/>
                     <input type="date" name="birthDate" id=""><br/>
-                    <label>Hire Date (*):</label><br/>
-                    <input type="date" name="hireDate" id=""><br/>
+                    <label>Phone number:</label><br/>
+                    <input type="text" name="hireDate" id=""><br/>
                     <label>Gender:</label><br/>
                     <select name="gender">
                         <option value="empid1">Male</option>

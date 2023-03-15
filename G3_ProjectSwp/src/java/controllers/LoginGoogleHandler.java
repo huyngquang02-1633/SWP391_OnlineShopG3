@@ -49,7 +49,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 try {
                     if(AccCustomer==null){
                         Account acc = new Account(0, userGoogle.getEmail(), "", 0, 0, 3,userGoogle.getPicture(), true );
-                        Customer cus = new Customer(0, userGoogle.getGiven_name(), userGoogle.getFamily_name(),userGoogle.getName(),"");
+                        Customer cus = new Customer(0, userGoogle.getGiven_name(), userGoogle.getFamily_name(),userGoogle.getName(),"","");
                         accDAO.createAccount(cus, acc);
                         AccCustomer = accDAO.getAccountByEmail(userGoogle.getEmail());
                     }

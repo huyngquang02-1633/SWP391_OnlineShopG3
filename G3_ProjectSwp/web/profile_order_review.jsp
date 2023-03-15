@@ -98,14 +98,14 @@
                                                                         <div class="file-select">
                                                                             <div class="file-select-button" id="fileName">Add image Review</div>
                                                                             <div class="file-select-name" id="noFile">No image chosen...</div> 
-                                                                            <input type="file" name="chooseFile" id="chooseFile">
+                                                                            <input type="file" name="chooseFile" accept="image/*,.jpg,.jepg,.png" id="chooseFile">
                                                                         </div>
                                                                     </div>
 
-                                                                    <input style="    background: #eeeeee;
-                                                                           width: 408px;
-                                                                           height: 73px;
-                                                                           position: relative;" type="text" placeholder="Enter your review"/>
+                                                                    <textarea rows="4" cols="50" style="    background: #eeeeee;
+                                                                              width: 408px;
+                                                                              height: 73px;
+                                                                              position: relative;" type="text" placeholder="Enter your review"/></textarea>
                                                                     <input style="position: absolute;
                                                                            padding: 3px;
                                                                            bottom: 4px;
@@ -114,7 +114,8 @@
                                                                            border-radius: inherit;
                                                                            background: #ffa000;
                                                                            color: #393939;
-                                                                           border-radius: 5px;" type="submit" value="Review" />
+                                                                           border-radius: 5px;" 
+                                                                           type="submit" value="Review" />
                                                                 </div>
                                                             </form>
 

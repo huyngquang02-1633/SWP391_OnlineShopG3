@@ -4,9 +4,8 @@
  */
 package controllers;
 
-import DAL.CategoryDAO;
-import DAL.CustomerDAO;
-import DAL.ProductDAO;
+import DAL.DepartmentsDAO;
+import DAL.EmployeeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,14 +14,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import models.Product;
+import models.Employee;
+
 
 /**
  *
- * @author kthq2
+ * @author Thanh Dao
  */
-@WebServlet(name = "SearchProductServlet", urlPatterns = {"/search_product"})
-public class SearchProductServlet extends HttpServlet {
+@WebServlet(name = "SearchEmployee_admin", urlPatterns = {"/SearchEmployee_admin"})
+public class SearchEmployee_admin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,18 +35,16 @@ public class SearchProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String search = request.getParameter("txtSearch").trim().replaceAll(" +", " ");
-
-        ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.SearchProductByName(search);
+        String search=request.getParameter("txtSearch");
+        EmployeeDAO dao = new EmployeeDAO();
+        List<Employee> list =dao.searchByName(search);
+        request.setAttribute("employeeList",list);
         request.setAttribute("searchValue", search);
-
-        request.setAttribute("productList", list);
-        request.setAttribute("categoryList", new CategoryDAO().getCategory());
-        request.getRequestDispatcher("/product.jsp").forward(request, response);
-    }
-
+        request.setAttribute("departmentList", new DepartmentsDAO().getAllDepartments());
+        request.getRequestDispatcher("employees.jsp").forward(request, response);
+        }
+    
+        
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -74,7 +72,6 @@ public class SearchProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
