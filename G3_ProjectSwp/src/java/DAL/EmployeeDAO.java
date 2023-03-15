@@ -69,7 +69,7 @@ public class EmployeeDAO extends DBContext {
         }
         return empList;
     }
-    
+
     public ArrayList<Employee> getAllEmloyeesByID() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
@@ -96,14 +96,11 @@ public class EmployeeDAO extends DBContext {
         }
         return empList;
     }
-    
 
     public void insertEmployee(Employee employee) {
 //        enableInsertMode("Employees");
         String sql = "SET IDENTITY_INSERT Employees ON;"
-
                 + " insert into [Employees] ([EmployeeID],[LastName]\n"
-
                 + "      ,[FirstName]\n"
                 + "      ,[Gender]\n"
                 + "      ,[DepartmentID]\n"
@@ -185,6 +182,7 @@ public class EmployeeDAO extends DBContext {
             e.printStackTrace();
         }
     }
+
     public void changeStatusEmployee(String EmployeeID) {
         String sql = "update Employees\n"
                 + " set status = 1 where EmployeeID = ?";
@@ -197,12 +195,37 @@ public class EmployeeDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        Date birthDate = Date.valueOf("2022-02-02");
-        Date hireDate = Date.valueOf("2022-02-02");
-        EmployeeDAO abc = new EmployeeDAO();
-        abc.insertEmployee(new Employee(1223, "vvv", "vvv", true, 2, "vvv", "vvv", birthDate, hireDate, "vvv","0329053999", true));
+    public boolean EditInfoEmployees(Employee em) {
+        int result = 0;
+        try {
+            String sql = "UPDATE Employees \n"
+                    + "SET PhoneNumber = ?, Address = ?, BirthDate = ?, \n"
+                    + "TitleOfCourtesy = ?, Title = ?, Gender = ?, \n"
+                    + "FirstName = ?, LastName = ? \n"
+                    + "WHERE EmployeeID = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, em.getPhoneNumber());
+            ps.setString(2, em.getAddress());
+            ps.setDate(3, em.getBirthDate());
+            ps.setString(4, em.getTitleOfCourtesy());
+            ps.setString(5, em.getTitle());
+            ps.setBoolean(6, em.isGender());
+            ps.setString(7, em.getFirstName());
+            ps.setString(8, em.getLastName());
+            ps.setInt(9, em.getEmployeeID());
+            
+            result = ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+        return result > 0;
     }
     
-    
+    public static void main(String[] args) {
+        Employee em = new Employee(1, "123123", "123", true, "123123", "123",Date.valueOf("2002-12-12"), "123123123", "1231233");
+        boolean a = new EmployeeDAO().EditInfoEmployees(em);
+        System.out.println(a);
+    }
+
 }

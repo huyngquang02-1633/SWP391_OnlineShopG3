@@ -3,6 +3,7 @@
 <div id="content-right">
     <div class="path-admin">DASHBOARD</b></div>
     <div class="content-main">
+        <hr/>
         <div id="content-main-dashboard">
             <div id="dashboard-1">
                 <div id="dashboard-1-container">

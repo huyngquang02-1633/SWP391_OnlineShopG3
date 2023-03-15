@@ -77,7 +77,8 @@ public class AccountDAO extends DBContext {
         return result > 0;
     }
 
-    public void editInfo(Customer c) {
+    public boolean editInfo(Customer c) {
+        int result = 0;
         try {
             String sql = "update Customers set FirstName = ? , LastName = ?, Gender = ?, ContactTitle = ?,DateOfBirth = ?, Address = ?, PhoneNumber = ?, CreateDate = ? where CustomerID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -92,10 +93,11 @@ public class AccountDAO extends DBContext {
             ps.setDate(8, c.getCreateDate());
             ps.setInt(9, c.getCustomerID());
 
-            ps.executeUpdate();
+            result = ps.executeUpdate();
 
         } catch (Exception e) {
         }
+        return result > 0;
     }
     
     public boolean createAccount(Customer cus, Account acc) {
