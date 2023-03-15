@@ -4,6 +4,7 @@
  */
 package DAL;
 
+import java.sql.Connection;
 import models.Order;
 import models.OrderDetail;
 import models.Product;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Account;
 import models.Cart;
 import models.Customer;
 import models.Discount;
@@ -25,9 +27,9 @@ import models.Discount;
  *
  * @author user
  */
-public class OrderDAO extends DBContext{
-    
-    public ArrayList<Order> getObjectOrderList(ResultSet rs){
+public class OrderDAO extends DBContext {
+
+    public ArrayList<Order> getObjectOrderList(ResultSet rs) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
             while (rs.next()) {
@@ -53,7 +55,8 @@ public class OrderDAO extends DBContext{
         Collections.reverse(orderList);
         return orderList;
     }
-    public ArrayList<OrderDetail> getObjectOrderDetailList(ResultSet rs){
+
+    public ArrayList<OrderDetail> getObjectOrderDetailList(ResultSet rs) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
             while (rs.next()) {
@@ -71,21 +74,32 @@ public class OrderDAO extends DBContext{
         }
         return orderDetails;
     }
-    
+
     public ArrayList<Order> getAllOrdersByCusID(int cusID) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
+            if (connection == null) {
+                System.out.println("Connection fail!");
+            }
             String sql = "select * from Orders o where o.CustomerID = ? Order by o.OrderDate ASC";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cusID);
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             
-        }//finally{ connection.close();}
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                
+            }
+        }
         return orderList;
     }
-    
+
     public ArrayList<Order> getAllCanceledOrdersOfCus(int cusID) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
@@ -95,11 +109,11 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderList;
     }
-    
+
     public ArrayList<Order> getAllOrders() {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
@@ -108,11 +122,11 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderList;
     }
-    
+
     public ArrayList<OrderDetail> getDetailOfOrderByOdID(int OdID) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
@@ -122,7 +136,7 @@ public class OrderDAO extends DBContext{
             ps.setInt(1, OdID);
             //b3thuc thi truy van
             ResultSet rs = ps.executeQuery();
-            
+
             //b4 xu ly kqua tra ve
             while (rs.next()) {
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
@@ -136,27 +150,26 @@ public class OrderDAO extends DBContext{
                 orderDetails.add(od);
             }
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderDetails;
     }
-    
-    
+
     public ArrayList<Order> getOrderInRange(String fromDate, String toDate) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "";
-            PreparedStatement ps=null;
-            if(!fromDate.isEmpty() && toDate.isEmpty()){
-                sql="select * from Orders o where o.OrderDate >= ? ";
+            PreparedStatement ps = null;
+            if (!fromDate.isEmpty() && toDate.isEmpty()) {
+                sql = "select * from Orders o where o.OrderDate >= ? ";
                 ps = connection.prepareStatement(sql);
-                ps.setDate(1,Date.valueOf(fromDate) );
-            }else if(fromDate.isEmpty() && !toDate.isEmpty()){
-                sql="select * from Orders o where o.OrderDate <= ? ";
+                ps.setDate(1, Date.valueOf(fromDate));
+            } else if (fromDate.isEmpty() && !toDate.isEmpty()) {
+                sql = "select * from Orders o where o.OrderDate <= ? ";
                 ps = connection.prepareStatement(sql);
                 ps.setDate(1, Date.valueOf(toDate));
-            }else if(!fromDate.isEmpty() && !toDate.isEmpty()){
-                sql="select * from Orders o where o.OrderDate BETWEEN ? AND ? ";
+            } else if (!fromDate.isEmpty() && !toDate.isEmpty()) {
+                sql = "select * from Orders o where o.OrderDate BETWEEN ? AND ? ";
                 ps = connection.prepareStatement(sql);
                 ps.setDate(1, Date.valueOf(fromDate));
                 ps.setDate(2, Date.valueOf(toDate));
@@ -164,11 +177,11 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderList;
     }
-    
+
     public ArrayList<OrderDetail> getDetailOfOrderByCusID(int cusID) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
@@ -178,11 +191,11 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderDetails;
     }
-    
+
     public ArrayList<OrderDetail> getDetailsListOfOrderByOdID(int OdID) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
@@ -192,17 +205,17 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderDetails;
     }
-    
+
     public Order getOrderByID(int odID) {
         try {
-            String sql="select * from Orders WHERE OrderID=?";
+            String sql = "select * from Orders WHERE OrderID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, odID);
-           
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 //doc du lieu tu 'rs' gan cho cac bien cuc bo
@@ -220,24 +233,24 @@ public class OrderDAO extends DBContext{
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
-                return new Order(OrderID, CustomerID, EmployeeID, OrderDate, 
-                        RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, 
+                return new Order(OrderID, CustomerID, EmployeeID, OrderDate,
+                        RequiredDate, ShippedDate, Freight, ShipName, ShipAddress,
                         ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
             }
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return null;
-        
+
     }
-    
-    public void createOrder(Order od) throws SQLException{
+
+    public void createOrder(Order od) throws SQLException {
         try {
-            String sql = "SET IDENTITY_INSERT [dbo].[Orders] ON \n" +
-"INSERT INTO Orders([OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [Freight], [ShipName], [ShipAddress], [ShipCity], "
+            String sql = "SET IDENTITY_INSERT [dbo].[Orders] ON \n"
+                    + "INSERT INTO Orders([OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [Freight], [ShipName], [ShipAddress], [ShipCity], "
                     + "[ShipRegion], [ShipPostalCode], "
-                    + "[ShipCountry], [Status]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?,?)\n" +
-"SET IDENTITY_INSERT [dbo].[Orders] OFF";
+                    + "[ShipCountry], [Status]) VALUES(?,?,?,GETDATE(),DATEADD(day, 7,GETDATE()),NULL,?,?,?,?,?,?,?,?)\n"
+                    + "SET IDENTITY_INSERT [dbo].[Orders] OFF";
             PreparedStatement ps1 = connection.prepareStatement(sql);
             ps1.setInt(1, od.getOrderID());
             ps1.setInt(2, od.getCustomerID());
@@ -251,17 +264,17 @@ public class OrderDAO extends DBContext{
             ps1.setString(10, od.getShipCountry());
             ps1.setInt(11, 1);
             ps1.executeUpdate();
-            
 
         } catch (Exception e) {
             //connection.rollback();
         }//finally{ connection.close();}
-        
+
     }
-    public void createOrderInDB(Order od,int accountID, String DiscountID) throws SQLException{
+
+    public void createOrderInDB(Order od, int accountID, String DiscountID) throws SQLException {
         try {
             String sql = "exec OrderAction ?,?,?,?,?,?,?";
-            
+
             PreparedStatement ps1 = connection.prepareStatement(sql);
             ps1.setInt(1, accountID);
             ps1.setInt(2, od.getOrderID());
@@ -274,31 +287,33 @@ public class OrderDAO extends DBContext{
         } catch (Exception e) {
             connection.rollback();
         }//finally{ connection.close();}
-        
+
     }
-    public void createDetailOfOrder(OrderDetail odDetail) throws SQLException{
+
+    public void createDetailOfOrder(OrderDetail odDetail) throws SQLException {
         try {
-           
+
             String sql2 = "INSERT [dbo].[Order Details] ([OrderID], [ProductID], [WarehouseID], [SalePrice], [Quantity], [DiscountID])  VALUES(?,?,?,?,?,?)";
             PreparedStatement ps2 = connection.prepareStatement(sql2);
-            
-            ps2.setInt(1,odDetail.getOrderID());
+
+            ps2.setInt(1, odDetail.getOrderID());
             ps2.setInt(2, odDetail.getProductID());
             ps2.setInt(3, odDetail.getWarehouseID());
             ps2.setDouble(4, odDetail.getSalePrice());
             ps2.setInt(5, odDetail.getQuantity());
             ps2.setString(6, odDetail.getDiscountID());
             ps2.executeUpdate();
-            
+
         } catch (Exception e) {
             connection.rollback();
-        }finally{ connection.close();}
-        
+        } finally {
+            connection.close();
+        }
+
     }
-    
-   
-    public int getNewOrderID(){
-        int maxOrderID =0;
+
+    public int getNewOrderID() {
+        int maxOrderID = 0;
         try {
             String sql = "select Max(OrderID) as Maximum from Orders";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -308,11 +323,11 @@ public class OrderDAO extends DBContext{
             }
         } catch (Exception e) {
         }//finally{ connection.close();}
-        return maxOrderID +1;
+        return maxOrderID + 1;
     }
-    
-    public Discount getVoucher(String voucher){
-        Discount discount =null;
+
+    public Discount getVoucher(String voucher) {
+        Discount discount = null;
         try {
             String sql = "select * from Discount where DiscountID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -333,10 +348,9 @@ public class OrderDAO extends DBContext{
         }//finally{ connection.close();}
         return discount;
     }
-    
-    
-    public boolean cancelOrder(int orderID) throws SQLException{
-        int result=0;
+
+    public boolean cancelOrder(int orderID) throws SQLException {
+        int result = 0;
         try {
             String sql = "update Orders SET RequiredDate=null WHERE OrderID=? AND ShippedDate IS NULL";
             //b2 tao doi tuong nhe
@@ -346,10 +360,10 @@ public class OrderDAO extends DBContext{
         } catch (Exception e) {
             connection.rollback();
         }//finally{ connection.close();}
-        return result>0;
+        return result > 0;
     }
-    
-    public ArrayList<Order> getOrderByCurrentMonth(int month){
+
+    public ArrayList<Order> getOrderByCurrentMonth(int month) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND MONTH(OrderDate)=?";
@@ -358,11 +372,12 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderList;
     }
-    public ArrayList<Order> getOrderNearest5Month(int diffMonth){
+
+    public ArrayList<Order> getOrderNearest5Month(int diffMonth) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "select * from Orders where Month(OrderDate) = Month(DATEADD(month, ?, getDate())) AND YEAR(OrderDate) = Year(DATEADD(month, ?, getDate()))";
@@ -372,12 +387,42 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderList;
     }
+
+
     
-    public ArrayList<Order> getOrderToday(){
+    public ArrayList<OrderDetail> getOrderDetailByMonth(int month,int year){
+        ArrayList<OrderDetail> odDetailList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=? AND MONTH(OrderDate)=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, year);
+            ps.setInt(2, month);
+            ResultSet rs = ps.executeQuery();
+            odDetailList = getObjectOrderDetailList(rs);
+        } catch (Exception e) {
+            
+        }//finally{ connection.close();}
+        return odDetailList;
+    }
+    
+
+    // ArrayList<Order> orderList = new ArrayList<>();
+    //     try {
+    //         String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND DAY(OrderDate)=DAY(GETDATE())";
+    //         PreparedStatement ps = connection.prepareStatement(sql);
+    //         ResultSet rs = ps.executeQuery();
+    //         orderList = getObjectOrderList(rs);
+    //     } catch (Exception e) {
+
+    //     }//finally{ connection.close();}
+    //     return orderList;
+    // }
+
+    public ArrayList<Order> getOrderToday() {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
             String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND DAY(OrderDate)=DAY(GETDATE())";
@@ -385,12 +430,12 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderList = getObjectOrderList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderList;
     }
-    
-    public ArrayList<OrderDetail> getOrderDetailByMonth(int month){
+
+    public ArrayList<OrderDetail> getOrderDetailByMonth(int month) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
             String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=YEAR(GETDATE()) AND MONTH(OrderDate)=?";
@@ -399,12 +444,12 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderDetails;
     }
-    
-    public ArrayList<OrderDetail> getALLOrderDetailInCurrentMonth(int month,int year){
+
+    public ArrayList<OrderDetail> getALLOrderDetailInCurrentMonth(int month, int year) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         try {
             String sql = "select * from Orders o,[Order Details] od where o.OrderID=od.OrderID AND  Year(OrderDate)=? AND MONTH(OrderDate)=?";
@@ -414,39 +459,52 @@ public class OrderDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             orderDetails = getObjectOrderDetailList(rs);
         } catch (Exception e) {
-            
+
         }//finally{ connection.close();}
         return orderDetails;
     }
-    
-    
-    public static void main(String[] args) {
-        ArrayList<Cart> cart =  new CartDAO().getCartListByAccID(1);
+
+    public void updateOrderStatus(String orderId, String status) throws SQLException {
+        String sql = "UPDATE Orders SET status = ? WHERE OrderID = ?";
         try {
-            OrderDAO odDAO = new OrderDAO();
-            ProductDAO proDAO = new ProductDAO();
-            int newOrderID = odDAO.getNewOrderID();
-                Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
-                //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
-                odDAO.createOrder(od);
-                
-                Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
-                Product proInfor;
-                String voucher="";
-                double discountAmount=0;
-                for (Cart item : cart) {
-                    proInfor = new ProductDAO().getProductInfor(item.getProductID());
-                    if(discount!=null){
-                        voucher = discount.getDiscountID();
-                        discountAmount = (item.getQuantity()*proInfor.getSalePrice()) - (proInfor.getSalePrice()*discount.getPercentage());
-                    }
-                    OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
-                    odDAO.createDetailOfOrder(odDetail);
-                }
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setString(2, orderId);
+            ps.executeUpdate();
         } catch (Exception e) {
-            
+            e.printStackTrace();
         }
-            
-        
+    }
+
+//    public static void main(String[] args) {
+//        ArrayList<Cart> cart = new CartDAO().getCartListByAccID(1);
+//        try {
+//            OrderDAO odDAO = new OrderDAO();
+//            ProductDAO proDAO = new ProductDAO();
+//            int newOrderID = odDAO.getNewOrderID();
+//            Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
+//            //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
+//            odDAO.createOrder(od);
+//
+//            Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
+//            Product proInfor;
+//            String voucher = "";
+//            double discountAmount = 0;
+//            for (Cart item : cart) {
+//                proInfor = new ProductDAO().getProductInfor(item.getProductID());
+//                if (discount != null) {
+//                    voucher = discount.getDiscountID();
+//                    discountAmount = (item.getQuantity() * proInfor.getSalePrice()) - (proInfor.getSalePrice() * discount.getPercentage());
+//                }
+//                OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
+//                odDAO.createDetailOfOrder(odDetail);
+//            }
+//        } catch (Exception e) {
+//
+//        }
+//    }
+    public static void main(String[] args) {
+        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(2);
+        System.out.println(orderList);
     }
 }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import DAL.CategoryDAO;
+import DAL.CustomerDAO;
 import DAL.GenreDAO;
 import DAL.ProductDAO;
 import DAL.ReviewDAO;
@@ -27,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import models.Author;
+import models.Customer;
 import models.Genre;
 import models.Review;
 import models.Supplier;
@@ -58,6 +60,7 @@ public class ProductDetailController extends HttpServlet{
         Product comingSoon = new ProductDAO().getComingSoon();
         int availableInStock = proDAO.getAvailableInStock(proID);
         ArrayList<Review> reviewList = new ReviewDAO().getReviewListByProductID(proID);
+        ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
         
         req.setAttribute("productInfor", product);
         req.setAttribute("cateList", cateList);
@@ -68,6 +71,7 @@ public class ProductDetailController extends HttpServlet{
         req.setAttribute("availableInStock", availableInStock);
         req.setAttribute("similarProductList", similarProductList);
         req.setAttribute("reviewList", reviewList);
+        req.setAttribute("cusList", cusList);
         
         req.getRequestDispatcher("/productdetail.jsp").forward(req, resp);
     }

@@ -57,6 +57,28 @@
                                                             </select></c:when>
 
                                                     </c:choose>
+                                                    <span>Status:</span>
+                                                    <c:choose>
+                                                        <c:when test="${odList.getStatus()==1}">
+                                                            <span style="padding: unset;">
+                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
+                                                            </span></c:when>
+                                                        <c:when test="${odList.getStatus()==2}">
+                                                            <span style="padding: unset;">
+                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
+                                                            </span>
+                                                        </c:when>
+                                                        <c:when test="${odList.getStatus()==3}">
+                                                            <span style="padding: unset;">
+                                                                <button onclick="window.location.href = 'ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: green;">Delivered</button>
+                                                                <button onclick="window.location.href = 'changeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: orange;">Refunding</button>
+                                                            </span>
+                                                        </c:when>
+                                                        <c:when test="${odList.getStatus()==4}"><span style="color: green;">Delivered</span></c:when>
+                                                        <c:when test="${odList.getStatus()==5}"><span style="color: green;">Refunding</span></c:when>
+                                                        <c:when test="${odList.getStatus()==6}"><span style="color: red;">Canceled</span></c:when>
+                                                        <c:otherwise><td></td></c:otherwise>
+                                                    </c:choose>
                                                 </div>
                                                 <c:forEach items="${orderDetailList}" var="odDetailList">
                                                     <c:if test="${odList.getOrderID() == odDetailList.getOrderID()}">
@@ -64,7 +86,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-2">
                                                                     <img src="<%=path%>/images/books/img-04.jpg"
-                                                                         class="img-fluid" alt="Phone">
+                                                                         class="img-fluid" alt="Phone" style="width:70px;">
                                                                 </div>
                                                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                     <p class="text-muted mb-0">ID: ${odDetailList.getProductID()}</p>

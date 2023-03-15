@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AuthorDAO;
 import models.Category;
 import models.PaginationObject;
 import models.Product;
@@ -16,8 +17,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import DAL.CategoryDAO;
+import DAL.GenreDAO;
 import DAL.ProductDAO;
+import DAL.SupplierDAO;
 import jakarta.servlet.annotation.WebServlet;
+import models.Author;
+import models.Genre;
+import models.Supplier;
 
 /**
  *
@@ -36,10 +42,10 @@ public class ProductManage_admin extends HttpServlet {
         
         
         
-        if (req.getSession().getAttribute("AccAdminSession") == null) {
-            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-            return;
-        }
+//        if (req.getSession().getAttribute("AccAdminSession") == null) {
+//            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+//            return;
+//        }
         PaginationObject paging = new PaginationObject();
 
         int currentPage = 1;
@@ -47,7 +53,7 @@ public class ProductManage_admin extends HttpServlet {
             currentPage = Integer.parseInt(req.getParameter("currentPage"));
         }
 
-        ArrayList<Product> proList = null;
+        ArrayList<Product> proList = new ArrayList<>();
         List<Product> listInCurrentPage = null;
         
         
@@ -115,12 +121,25 @@ public class ProductManage_admin extends HttpServlet {
             }else {
                 proList = new ProductDAO().getProducts(true);
             }
-
         }
         if(proList.isEmpty()){
             req.setAttribute("emptyListMsg", "There is nothing in Product List!");
         }
+        
+        CategoryDAO cdao = new CategoryDAO();
+        AuthorDAO adao = new AuthorDAO();
+        SupplierDAO sdao = new SupplierDAO();
+        GenreDAO gdao = new GenreDAO();
 
+        List<Genre> listg = gdao.getGenreList();
+        List<Author> lista = adao.getAuthorList();
+        List<Category> listc = cdao.getCategory();
+        List<Supplier> lists = sdao.getSupplierList();
+
+        req.setAttribute("listg", listg);
+        req.setAttribute("lista", lista);
+        req.setAttribute("listc", listc);
+        req.setAttribute("lists", lists);
         req.getSession().removeAttribute("mode");
         req.setAttribute("categoryList", new CategoryDAO().getCategory());
         listInCurrentPage = paging.getListInCurrentPage(proList, currentPage);

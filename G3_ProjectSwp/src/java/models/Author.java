@@ -22,7 +22,7 @@ public class Author {
     }
 
     public Author() {
-        
+
     }
 
     public int getAuthorID() {

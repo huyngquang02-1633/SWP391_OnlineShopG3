@@ -4,9 +4,7 @@
  */
 package controllers;
 
-import DAL.CategoryDAO;
-import DAL.CustomerDAO;
-import DAL.ProductDAO;
+import DAL.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,15 +12,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import models.Product;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author kthq2
+ * @author Thanh Dao
  */
-@WebServlet(name = "SearchProductServlet", urlPatterns = {"/search_product"})
-public class SearchProductServlet extends HttpServlet {
+@WebServlet(name = "ChangeorderStatus_customer", urlPatterns = {"../changeorderStatus_customer"})
+public class ChangeorderStatus_customer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +34,19 @@ public class SearchProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String search = request.getParameter("txtSearch").trim().replaceAll(" +", " ");
-
-        ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.SearchProductByName(search);
-        request.setAttribute("searchValue", search);
-
-        request.setAttribute("productList", list);
-        request.setAttribute("categoryList", new CategoryDAO().getCategory());
-        request.getRequestDispatcher("/product.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ChangeorderStatus_customer</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ChangeorderStatus_customer at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +61,21 @@ public class SearchProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       String orderId = request.getParameter("orderId");
+        String status = request.getParameter("status");
+        System.out.println("orderId: " + orderId);
+        System.out.println("status: " + status);
+        OrderDAO dao = new OrderDAO();
+        
+        try {
+            dao.updateOrderStatus(orderId, status);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeorderStatus_customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        AccountProfile2 change = new AccountProfile2();
+        change.doGet(request, response);
+//        response.sendRedirect("account/profile_myOrder");
     }
 
     /**
@@ -74,7 +90,6 @@ public class SearchProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
