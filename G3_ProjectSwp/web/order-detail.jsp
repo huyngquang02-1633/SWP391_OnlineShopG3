@@ -1,45 +1,50 @@
 <%@include file="templates/header_admin.jsp" %>
-            <div id="content-right">
-                <div class="path-admin">ORDER DETAIL</b></div>
-                <div class="content-main">
-                    <div id="content-main-dashboard">
-                        <div>
-                            <div class="profile-order-title">
-                                <div class="profile-order-title-left">
-                                    <div>OrderID: #5</div>
-                                    <div>Order creation date: 12-10-2022</div>
-                                </div>
-                                <div class="profile-order-title-right">
-                                    <span style="color: green;">Completed</span>
-                                </div>
-                            </div>
-                            <div class="profile-order-content" style="background-color: white;">
-                                 <div class="profile-order-content-col1">
-                                    <a href="detail.html"><img src="img/2.jpg" width="100%"/></a>
-                                 </div>
-                                 <div class="profile-order-content-col2">Product 12</div>
-                                 <div class="profile-order-content-col3">warehouse 12</div>
-                                 <div class="profile-order-content-col4">Quantity: 1</div>
-                                 <div class="profile-order-content-col5">1000 $</div>
-                            </div>
-                            <div class="profile-order-content" style="background-color: white;">
-                                <div class="profile-order-content-col1">
-                                   <a href="detail.html"><img src="img/1.jpg" width="100%"/></a>
-                                </div>
-                                <div class="profile-order-content-col2">Product 1</div>
-                                <div class="profile-order-content-col3">Quantity: 2</div>
-                                <div class="profile-order-content-col4">2000 $</div>
-                           </div>
-                           <div style="    display: flex;
-                           justify-content: end;
-                           padding: 15px;"><a href=""><i style="font-size: 22px; cursor: pointer;" class="fa-regular fa-pen-to-square"></i></a></div>
-                            
-                        </div>
+<div id="content-right">
+    <div class="path-admin">ORDER DETAIL</b></div>
+    <div class="content-main">
+        <div id="content-main-dashboard">
+            <div>
+                <div class="profile-order-title">
+                    <c:set var="od" value="${order}"></c:set>
+                        <div class="profile-order-title-left">
+                            <div>OrderID: ${od.getOrderID()}</div>
+                        <div>Order creation date: ${od.getOrderDate()}</div>
+                    </div>
+                    <div class="profile-order-title-right">
+                        <c:choose>
+                            <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()!=null}"><span style="color: green;">Completed</span></c:when>
+                            <c:when test="${od.getRequiredDate()!=null && od.getShippedDate()==null}"><td style="color: blue;">Pending|<a style="color: orchid" onclick="return cancelOrder()" href="<%=path%>/account/profile1?idCancel=${od.getOrderID()}">Cancel</a></span></c:when>
+                            <c:when test="${od.getRequiredDate()==null && od.getShippedDate()==null}"><td style="color: red;">Canceled</td></c:when>
+                        </c:choose>
+
                     </div>
                 </div>
+                <table id="orders">
+                    <tr>
+                        <th>OrderID</th>
+                        <th>ProductID</th>
+                        <th>WarehouseID</th>
+                        <th>SalePrice</th>
+                        <th>DiscountID</th>
+                    </tr>
+                    <c:forEach var="odDetails" items="${orderDetailList}">
+                        <td>${odDetails.getOrderID}</td>
+                        <td> <c:forEach var="p" items="${productList}">
+                                <c:if 
+                                    test="${p.getProductID()==odDetails.getProductID()}">${p.getProductName()}</div>
+                                </c:if>
+                            </c:forEach></td>
+                        <td>${odDetails.getWarehouseID()}(</td>
+                        <td>${odDetails.getQuantity()}</td>
+                        <td>${odDetails.getUnitPrice()} $</td>
+                    </c:forEach>
+                </table>
             </div>
         </div>
-        <div id="footer-admin">Mai la anh em</div>
+
     </div>
-</body>
-</html>
+    <div id="footer-admin">
+        <p>Group 3 SE1639 - Online Shop</p>
+        </body>
+        </html>
+

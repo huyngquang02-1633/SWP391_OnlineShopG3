@@ -23,11 +23,11 @@
                     <input type="text" name="address" id="" value="${e.getAddress()}"><br/>
                     <label>Department (*):</label><br/>
                     <select name="departmentID">
-                        <option value="empid1">1</option>
-                        <option value="empid2">2</option>
-                        <option value="empid3">3</option>
-                        <option value="empid4">4</option>
-                        <option value="empid5">5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                     <br/>
                 </div>
@@ -35,7 +35,7 @@
                     <label>Birth Date:</label><br/>
                     <input type="date" name="birthDate" id=""><br/>
                     <label>Phone number:</label><br/>
-                    <input type="text" name="hireDate" id=""><br/>
+                    <input type="text" name="phoneNumber" id=""><br/>
                     <label>Gender:</label><br/>
                     <select name="gender">
                         <option value="empid1">Male</option>
