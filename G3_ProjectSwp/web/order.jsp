@@ -17,18 +17,14 @@
             <div id="order-table">
                 <table id="orders">
                     <tr>
-                        <th>OrderID</th>
-                        <th>CustomerName</th>
-                        <th>EmployeeName</th>
-                        <th>OrderDate</th>
-                        <th>RequiredDate</th>
-                        <th>ShippedDate</th>
-                        <!--<th>Freight($)</th>-->
-                        <!--<th>ShipName</th>-->
-                        <th>ShipAddress</th>
-                        <th>ShipCity</th>
-                        <!--<th>ShipRegion</th>-->
-                        <!--<th>ShipCountry</th>-->
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Employee Name</th>
+                        <th>Order Date</th>
+                        <th>Required Date</th>
+                        <th>Shipped Date</th>
+                        <th>Ship Address</th>
+                        <th>Ship City</th>
                         <th>Status</th>
                     </tr>
                     <c:forEach var="od" items="${listInCurrentPage}">
@@ -142,7 +138,7 @@
     function cancle(id, curentPage) {
 
         var result = confirm("Do you want to cancel this order?!");
-        if (result == true) {
+        if (result === true) {
             var url = "/G3_ProjectSwp/orderManage_admin?idCancel=" + id + "&currentPage=" + curentPage;
             document.location.href = url;
         }
