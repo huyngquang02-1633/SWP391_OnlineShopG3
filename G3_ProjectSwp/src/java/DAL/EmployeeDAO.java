@@ -265,6 +265,40 @@ public class EmployeeDAO extends DBContext {
         return orderList;
     }
 
+
+    public boolean EditInfoEmployees(Employee em) {
+        int result = 0;
+        try {
+            String sql = "UPDATE Employees \n"
+                    + "SET PhoneNumber = ?, Address = ?, BirthDate = ?, \n"
+                    + "TitleOfCourtesy = ?, Title = ?, Gender = ?, \n"
+                    + "FirstName = ?, LastName = ? \n"
+                    + "WHERE EmployeeID = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, em.getPhoneNumber());
+            ps.setString(2, em.getAddress());
+            ps.setDate(3, em.getBirthDate());
+            ps.setString(4, em.getTitleOfCourtesy());
+            ps.setString(5, em.getTitle());
+            ps.setBoolean(6, em.isGender());
+            ps.setString(7, em.getFirstName());
+            ps.setString(8, em.getLastName());
+            ps.setInt(9, em.getEmployeeID());
+            
+            result = ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+        return result > 0;
+    }
+    
+//    public static void main(String[] args) {
+//        Employee em = new Employee(1, "123123", "123", true, "123123", "123",Date.valueOf("2002-12-12"), "123123123", "1231233");
+//        boolean a = new EmployeeDAO().EditInfoEmployees(em);
+//        System.out.println(a);
+//    }
+
     public List<Employee> searchByName(String search) {
         List<Employee> list = new ArrayList<>();
         String sql = "select * from Employees where LastName like ? OR FirstName like ?";

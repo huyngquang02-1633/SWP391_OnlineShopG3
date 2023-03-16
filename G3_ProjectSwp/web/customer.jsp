@@ -46,6 +46,7 @@
 <div id="content-right">
     <div class="path-admin">CUSTOMERS LIST</b></div>
     <div class="content-main">
+        <hr/>
         <div id="content-main-dashboard">
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 25%;">
