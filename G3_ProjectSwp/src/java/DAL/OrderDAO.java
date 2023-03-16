@@ -4,7 +4,6 @@
  */
 package DAL;
 
-import java.sql.Connection;
 import models.Order;
 import models.OrderDetail;
 import models.Product;
@@ -12,16 +11,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import models.Account;
 import models.Cart;
-import models.Customer;
 import models.Discount;
 
 /**
@@ -124,19 +117,6 @@ public class OrderDAO extends DBContext {
         return order;
     }
 
-//        } catch (SQLException e) {
-//            
-//        } finally {
-//            try {
-//                if (connection != null) {
-//                    connection.close();
-//                }
-//            } catch (SQLException e) {
-//                
-//            }
-//        }
-//        return orderList;
-//    }
     public ArrayList<Order> getAllCanceledOrdersOfCus(int cusID) {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
@@ -278,7 +258,21 @@ public class OrderDAO extends DBContext {
 
         }//finally{ connection.close();}
         return null;
+    }
 
+    public ArrayList<Order> getOrderByStatus (int status) {
+                ArrayList<Order> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Orders WHERE [Status] = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, status);
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectOrderList(rs);
+        } catch (Exception e) {
+
+        }//finally{ connection.close();}
+        return orderList;
+        
     }
 
     public void createOrder(Order od) throws SQLException {
@@ -445,16 +439,6 @@ public class OrderDAO extends DBContext {
         return odDetailList;
     }
 
-    // ArrayList<Order> orderList = new ArrayList<>();
-    //     try {
-    //         String sql = "select * from Orders where  Year(OrderDate)=YEAR(GETDATE()) AND DAY(OrderDate)=DAY(GETDATE())";
-    //         PreparedStatement ps = connection.prepareStatement(sql);
-    //         ResultSet rs = ps.executeQuery();
-    //         orderList = getObjectOrderList(rs);
-    //     } catch (Exception e) {
-    //     }//finally{ connection.close();}
-    //     return orderList;
-    // }
     public ArrayList<Order> getOrderToday() {
         ArrayList<Order> orderList = new ArrayList<>();
         try {
@@ -497,32 +481,7 @@ public class OrderDAO extends DBContext {
         return orderDetails;
     }
 
-//    public static void main(String[] args) {
-//        ArrayList<Cart> cart = new CartDAO().getCartListByAccID(1);
-//        try {
-//            OrderDAO odDAO = new OrderDAO();
-//            ProductDAO proDAO = new ProductDAO();
-//            int newOrderID = odDAO.getNewOrderID();
-//            Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
-//            //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
-//            odDAO.createOrder(od);
-//
-//            Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
-//            Product proInfor;
-//            String voucher = "";
-//            double discountAmount = 0;
-//            for (Cart item : cart) {
-//                proInfor = new ProductDAO().getProductInfor(item.getProductID());
-//                if (discount != null) {
-//                    voucher = discount.getDiscountID();
-//                    discountAmount = (item.getQuantity() * proInfor.getSalePrice()) - (proInfor.getSalePrice() * discount.getPercentage());
-//                }
-//                OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
-//                odDAO.createDetailOfOrder(odDetail);
-//            }
-//        } catch (Exception e) {
-//
-//        }
+
     public void updateOrderStatus(String orderId, String status) throws SQLException {
         String sql = "UPDATE Orders SET status = ? WHERE OrderID = ?";
         try {
@@ -534,36 +493,4 @@ public class OrderDAO extends DBContext {
             e.printStackTrace();
         }
     }
-
-//    public static void main(String[] args) {
-//        ArrayList<Cart> cart = new CartDAO().getCartListByAccID(1);
-//        try {
-//            OrderDAO odDAO = new OrderDAO();
-//            ProductDAO proDAO = new ProductDAO();
-//            int newOrderID = odDAO.getNewOrderID();
-//            Order od = new Order(newOrderID, 1, 1, "shipperName", "", "", "region", "2345", "Viet Nam", 1);
-//            //odDAO.createOrderInDB(od, accCustomer.getAccountID(), txtDiscountID);
-//            odDAO.createOrder(od);
-//
-//            Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
-//            Product proInfor;
-//            String voucher = "";
-//            double discountAmount = 0;
-//            for (Cart item : cart) {
-//                proInfor = new ProductDAO().getProductInfor(item.getProductID());
-//                if (discount != null) {
-//                    voucher = discount.getDiscountID();
-//                    discountAmount = (item.getQuantity() * proInfor.getSalePrice()) - (proInfor.getSalePrice() * discount.getPercentage());
-//                }
-//                OrderDetail odDetail = new OrderDetail(newOrderID, item.getProductID(), 1, discountAmount, item.getQuantity(), voucher);
-//                odDAO.createDetailOfOrder(odDetail);
-//            }
-//        } catch (Exception e) {
-//
-//        }
-//    }
-//    public static void main(String[] args) {
-//        ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(2);
-//        System.out.println(orderList);
-//>>>>>>> 997ac2cb517b96debee541ff06cda96b287e4167
 }

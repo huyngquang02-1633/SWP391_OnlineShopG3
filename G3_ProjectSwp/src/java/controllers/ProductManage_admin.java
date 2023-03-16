@@ -34,29 +34,22 @@ public class ProductManage_admin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
- 
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        
-        
-//        if (req.getSession().getAttribute("AccAdminSession") == null) {
-//            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-//            return;
-//        }
+
         PaginationObject paging = new PaginationObject();
 
         int currentPage = 1;
-        if ( req.getParameter("currentPage")!=null) {
+        if (req.getParameter("currentPage") != null) {
             currentPage = Integer.parseInt(req.getParameter("currentPage"));
         }
 
         ArrayList<Product> proList = new ArrayList<>();
         List<Product> listInCurrentPage = null;
-        
-        
+
         Enumeration<String> enumeration = req.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String parameterName = (String) enumeration.nextElement();
@@ -66,6 +59,12 @@ public class ProductManage_admin extends HttpServlet {
             if (parameterName.equals("categoryFilter")) {
                 req.getSession().setAttribute("mode", 2);
             }
+            if (parameterName.equals("discontinued")) {
+                req.getSession().setAttribute("mode", 3);
+            }
+            if (parameterName.equals("outofstock")) {
+                req.getSession().setAttribute("mode", 4);
+            }
         }
         String sample = req.getParameter("txtSearch2");
         if (req.getSession().getAttribute("mode") != null) {
@@ -74,7 +73,7 @@ public class ProductManage_admin extends HttpServlet {
                     proList = new ProductDAO().getProductbySearch(sample);
                     req.getSession().setAttribute("searchSession", proList);
                     req.getSession().setAttribute("sampleSession", sample);
-                } else{
+                } else {
                     proList = new ProductDAO().getProducts(true);
                     req.getSession().removeAttribute("searchSession");
                     req.getSession().removeAttribute("categorySession");
@@ -85,30 +84,35 @@ public class ProductManage_admin extends HttpServlet {
             }
 
             if ((int) req.getSession().getAttribute("mode") == 2) {
-                if (req.getParameter("categoryFilter") != null ) {
-                    int catID=Integer.parseInt(req.getParameter("categoryFilter"));
-                    String sampleSession = (String)req.getSession().getAttribute("sampleSession");
-                    if(catID==0 && req.getSession().getAttribute("searchSession")!=null){
+                if (req.getParameter("categoryFilter") != null) {
+                    int catID = Integer.parseInt(req.getParameter("categoryFilter"));
+                    String sampleSession = (String) req.getSession().getAttribute("sampleSession");
+                    if (catID == 0 && req.getSession().getAttribute("searchSession") != null) {
                         proList = new ProductDAO().getProductbySearch(sampleSession);
                         req.getSession().removeAttribute("categorySession");
                         req.getSession().removeAttribute("categoryIDSession");
-                    }else if(catID==0 && req.getSession().getAttribute("searchSession")==null){
+                    } else if (catID == 0 && req.getSession().getAttribute("searchSession") == null) {
                         proList = new ProductDAO().getProducts(true);
                         req.getSession().removeAttribute("categorySession");
                         req.getSession().removeAttribute("categoryIDSession");
-                    }else{
+                    } else {
                         proList = new ProductDAO().getProductListByCategoryID(catID);
                         req.getSession().setAttribute("categoryIDSession", catID);
                         req.getSession().setAttribute("categorySession", proList);
                     }
-                    
-
                 }
             }
-            if(req.getSession().getAttribute("searchSession")!=null && req.getSession().getAttribute("categorySession")!=null){
-                String sampleSession = (String)req.getSession().getAttribute("sampleSession");
+            if ((int) req.getSession().getAttribute("mode") == 3) {
+                int discontinued = Integer.parseInt(req.getParameter("discontinued"));
+                proList = new ProductDAO().getProductListDiscontinued(discontinued);
+            }
+            if ((int) req.getSession().getAttribute("mode") == 4) {
+                proList = new ProductDAO().getProductListOutOfStock();
+            }
+            if (req.getSession().getAttribute("searchSession") != null && req.getSession().getAttribute("categorySession") != null) {
+                String sampleSession = (String) req.getSession().getAttribute("sampleSession");
                 int categoryIDSession = (int) req.getSession().getAttribute("categoryIDSession");
-                proList= new ProductDAO().getProductsByCatNSearch(sampleSession,categoryIDSession , true);
+                proList = new ProductDAO().getProductsByCatNSearch(sampleSession, categoryIDSession, true);
                 req.getSession().setAttribute("ProductsByCatNSearch", proList);
             }
         } else {
@@ -116,13 +120,13 @@ public class ProductManage_admin extends HttpServlet {
                 proList = (ArrayList<Product>) req.getSession().getAttribute("searchSession");
             } else if (req.getSession().getAttribute("categorySession") != null && req.getSession().getAttribute("searchSession") == null) {
                 proList = (ArrayList<Product>) req.getSession().getAttribute("categorySession");
-            }else if(req.getSession().getAttribute("modeProductsByCatNSearch")!=null){
+            } else if (req.getSession().getAttribute("modeProductsByCatNSearch") != null) {
                 proList = (ArrayList<Product>) req.getSession().getAttribute("ProductsByCatNSearch");
-            }else {
+            } else {
                 proList = new ProductDAO().getProducts(true);
             }
         }
-        if(proList.isEmpty()){
+        if (proList.isEmpty()) {
             req.setAttribute("emptyListMsg", "There is nothing in Product List!");
         }
         
