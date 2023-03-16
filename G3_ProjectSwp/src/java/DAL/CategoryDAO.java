@@ -61,4 +61,9 @@ public class CategoryDAO extends DBContext{
         }
         return cate;
     }
+    
+    public static void main(String[] args) {
+        CategoryDAO abc = new CategoryDAO();
+        System.out.println(abc.getCategoryByID(1).getCategoryName());
+    }
 }
