@@ -1,88 +1,4 @@
-<%@include file="templates/header_admin.jsp" %>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span> <br>
-        <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
-        <div class="content-main">
-            <form id="content-main-product" action="createProduct_admin" method="post">
-                <div class="content-main-1">
-                    <label>Product name (*):</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-                    <label>Category Name(*):</label><br/>
-                    <select name="ddlCategory">
-                        <c:forEach items="${listc}" var="c">
-                            <option value=${c.getCategoryID()}>${c.getCategoryName()}</option>
-                        </c:forEach>
-                    </select>
-                    <label>Genre Name:</label><br/>
-                    <select name="ddlGenre">
-                        <c:forEach items="${listg}" var="g">
-                            <option value=${g.getGenreID()}>${g.getGenreName()}</option>
-                        </c:forEach>
-                    </select>
-                    <label>Cover Price:</label><br/>
-                    <input type="text" name="txtCoverPrice" id=""><br/>
-                    <label>Sale Price:</label><br/>
-                    <input type="text" name="txtSalePrice" id=""><br/>
-                    <label>Author Name:</label><br/>
-                    <select name="ddlAuthor">
-                        <c:forEach items="${lista}" var="a">
-                            <option value=${a.getAuthorID()}>${a.getAuthorName()}</option>
-                        </c:forEach>
-                    </select>
-                    <label>Discontinued (*): </label>
-                    <input style="    width: 15px;
-                           position: relative;
-                           top: 5px;
-                           left: 5px;" type="checkbox" name="chkDiscontinued" value="1" id=""><br/>
-
-                </div>
-                <div class="content-main-1">
-                    <label>Translator:</label><br/>
-                    <input type="text" name="txtTranslator" id=""><br/>
-                    <label>Publisher Name:</label><br/>
-                    <select name="ddlPublisher">
-                        <c:forEach items="${lists}" var="s">
-                            <option value=${s.getSupplierID()}>${s.getSupplierName()}</option>
-                        </c:forEach>
-                    </select>
-                    <label>Supplier Name:</label><br/>
-                    <select name="ddlSupplier">
-                        <c:forEach items="${lists}" var="s">
-                            <option value=${s.getSupplierID()}>${s.getSupplierName()}</option>
-                        </c:forEach>
-                    </select>
-                    <label>Language:</label><br/>
-                    <input type="text" name="txtLanguage" id=""><br/>
-                    <label>Book Size:</label><br/>
-                    <input type="text" name="txtSize" id=""><br/>
-                    <label>Book Weight:</label><br/>
-                    <input type="text" name="txtWeight" id=""><br/>
-
-                </div>
-                <div class="content-main-1">
-                    <label>Number Of Page:</label><br/>
-                    <input type="text" name="txtPage" id=""><br/>
-                    <label>Format:</label><br/>
-                    <input type="text" name="txtFormat" id=""><br/>
-                    <label>Image:</label><br/>
-                    <input type="text" name="txtImg" id=""><br/>
-                    <label>Publish Date:</label><br/>
-                    <input type="date" name="txtPublishDate" id=""><br/>
-                    <label>Publish License:</label><br/>
-                    <input type="text" name="txtLicense" id=""><br/>
-                    <label>Description:</label><br/>
-                    <input type="text" name="txtDescription" id=""><br/>
-                    <br/> 
-                </div>
-
-                <input style="margin: auto;" type="submit" value="Add"/>
-
-            </form>
-        </div>
-    </div>
-
-</div>            
+<%@include file="templates/header_admin.jsp" %>            
 <div id="content-right">
     <div class="path-admin">PRODUCTS LIST</b></div>
     <div class="content-main">
@@ -90,8 +6,9 @@
             <hr>
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 30%;">
-                    <b>Filter by Catetory:</b>
+                    
                     <form action="productManage_admin" method="">
+                        <b>Filter by Catetory:</b>
                         <select name="categoryFilter">
                             <option value="0">No Filter</option>
                             <c:forEach items="${categoryList}" var="cate">
@@ -221,31 +138,4 @@
 <div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
 </div>
 </body>
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
-</script>
 </html>

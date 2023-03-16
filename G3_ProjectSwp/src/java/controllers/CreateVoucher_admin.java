@@ -63,7 +63,7 @@ public class CreateVoucher_admin extends HttpServlet {
             double Percentage = Double.parseDouble(req.getParameter("txtPercentage"));
             int Quantity = Integer.parseInt(req.getParameter("txtQuantity"));
 
-            Discount voucherCreate = new Discount(DiscountID, Title, Description, StartDate, EndDate, Percentage, Percentage, Quantity, Quantity);
+            Discount voucherCreate = new Discount(DiscountID, Title, Description, StartDate, EndDate, Percentage, Quantity);
             boolean results = new CrudDAO().CreateVoucher(voucherCreate);
             if(results==true) {
                 req.setAttribute("msg", "Create voucher infomation successful!!!");

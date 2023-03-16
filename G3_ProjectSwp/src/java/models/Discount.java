@@ -34,6 +34,18 @@ public class Discount {
         this.Quantity = Quantity;
     }
 
+    public Discount(String DiscountID, String Title, String Description, LocalDateTime StartDate, LocalDateTime EndDate, double Percentage, int Quantity) {
+        this.DiscountID = DiscountID;
+        this.Title = Title;
+        this.Description = Description;
+        this.StartDate = StartDate;
+        this.EndDate = EndDate;
+        this.Percentage = Percentage;
+        this.Quantity = Quantity;
+    }
+    
+    
+
     public Discount() {
     }
 
