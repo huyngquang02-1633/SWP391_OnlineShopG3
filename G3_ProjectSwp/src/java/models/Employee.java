@@ -28,6 +28,32 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(int employeeID, String firstName, String lastName, boolean gender, String title, String titleOfCourtesy, String address, String phoneNumber) {
+        this.employeeID = employeeID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.title = title;
+        this.titleOfCourtesy = titleOfCourtesy;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+    
+    
+
+    public Employee(int employeeID, String firstName, String lastName, boolean gender, String title, String titleOfCourtesy, Date birthDate, String address, String phoneNumber) {
+        this.employeeID = employeeID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.title = title;
+        this.titleOfCourtesy = titleOfCourtesy;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+    
+
     public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, String phoneNumber, boolean status) {
         this.employeeID = employeeID;
         this.firstName = firstName;

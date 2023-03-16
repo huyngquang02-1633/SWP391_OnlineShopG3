@@ -56,29 +56,30 @@
 <div id="content-right">
     <div class="path-admin">EMPLOYEES LIST</b></div>
     <div class="content-main">
+        <hr/>
         <div id="content-main-dashboard">
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 25%;">
                     <b>Filter by Departments:</b>
-                    <form action="employeeManager_admin">
+                    <form action="employeeManager_admin" method="">
                         <select name="employeeFilter">
                             <option value="0">No Filter</option>
-                                        <c:forEach items="${depart}" var="dep">
-                                           
-                                            <c:choose>
-                                                <c:when test="${dep.getDepartmentID() == employeeIDSession}">
-                                                    <option value="${dep.getDepartmentID()}" selected="selected"><c:out value="${dep.getDepartmentName()}"/></option>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <option value="${dep.getDepartmentID()}"><c:out value="${dep.getDepartmentName()}"/></option>
-                                                </c:otherwise>
-                                            </c:choose>                               
-                                        </c:forEach>
+                            <c:forEach items="${depart}" var="dep">
+
+                                <c:choose>
+                                    <c:when test="${dep.getDepartmentID() == sessionScope.employeeIDSession}">
+                                        <option value="${dep.getDepartmentID()}" selected="selected"><c:out value="${dep.getDepartmentName()}"/></option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${dep.getDepartmentID()}"><c:out value="${dep.getDepartmentName()}"/></option>
+                                    </c:otherwise>
+                                </c:choose>                               
+                            </c:forEach>
                         </select>
                         <input type="submit" value="Filter">
                     </form>
                 </div>
-                
+
                 <div id="product-title-2" style="width: 55%;">
                     <form style="padding-bottom: 40px;" action="SearchEmployee_admin" method="post">
                         <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter employee name to search"/>
@@ -97,7 +98,7 @@
                         <th>FirstName</th>
                         <th>Gender</th>
                         <th>Department Name</th>
-                        
+
                         <!--<th>Title</th>-->
                         <th>Title</th>
                         <th>TitleOfCourtesy</th>
@@ -138,68 +139,24 @@
 
                 </table>
                 <div class="pagination" style="">
-                    <%-- Hi?n th? nút Prev --%>
-                    <%--<c:if test="${index > 1}">--%>
-                        <!--<a href="employeeManager_admin?index=${index-1}">&laquo; Prev</a>-->
-                    <%--</c:if>--%>
 
-                    <%-- Hi?n th? các nút trang --%>
                     <c:forEach begin="1" end="${endP}" var="i">
                         <c:choose>
-                            <%-- Hi?n th? nút trang hi?n t?i --%>
                             <c:when test="${i == index}">
                                 <span class="current">${i}</span>
                             </c:when>
 
-                            <%-- Hi?n th? các nút trang khác --%>
                             <c:otherwise>
                                 <a href="employeeManager_admin?index=${i}">${i}</a>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
 
-                    <%-- Hi?n th? nút Next --%>
-                    <%--<c:if test="${index < endP}">--%>
-                        <!--<a href="employeeManager_admin?index=${index+1}">Next &raquo;</a>-->
-                    <%--</c:if>--%>
-                </div>
-                <%--Current page: ${currentPage} <br>
-                Number of pages: ${numberOfPage} <br>
-                <c:if test="${sessionMsg != null}">
-                    <div>${sessionMsg}</div>
-                </c:if>
-                <div id="paging">
-                    <div class="pagination">
-                        <c:if test="${currentPage > 1}">
-                            <c:url value="/employeeManager_admin" var="paginationPrevous">
-                                <c:param name="currentPage" value="${currentPage - 1}" />
-                            </c:url>
-                            <a href="${paginationPrevous}">&laquo;</a>
-                        </c:if>
-                        <c:forEach begin="1" end="${numberOfPage}" step="1" var="stepValue">
-                            <c:choose>
-                                <c:when test="${stepValue == currentPage}">
-                                    <a href="#" class="active">${stepValue}</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:url value="/employeeManager_admin" var="pagination">
-                                        <c:param name="currentPage" value="${stepValue}" />
-                                    </c:url>
-                                    <a href="${pagination}">${stepValue}</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
 
-                    <c:if test="${currentPage<numberOfPage}">
-                        <c:url value="/employeeManager_admin" var="paginationNext">
-                            <c:param name="currentPage" value="${currentPage+1}" />
-                        </c:url>
-                        <a href="${paginationNext}">&raquo;</a>
-                    </c:if>--%>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 </div>

@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Employee;
 
-
 /**
  *
  * @author Thanh Dao
@@ -78,6 +77,7 @@ public class CreateEmployee_admin extends HttpServlet {
         String stitleOfCourtesy = request.getParameter("titleOfCourtesy");
         String saddress = request.getParameter("address");
         String sgender = request.getParameter("gender");
+        String sphonenumber = request.getParameter("phoneNumber");
         String sbirthDate = request.getParameter("birthDate");
         String shireDate = request.getParameter("hireDate");
         String sdepartmentID = request.getParameter("departmentID");
@@ -85,39 +85,40 @@ public class CreateEmployee_admin extends HttpServlet {
         
         Employee employee = new Employee();
         employee.setEmployeeID(EmployeeID);   
-        int check = 0;
-        if (slastName != null && slastName.isEmpty()){
-            request.setAttribute("lastNameMsg", "lastName not allow null");
-            check++;
-        }
-        if (sfirstName != null && sfirstName.isEmpty()) {
-            request.setAttribute("firstNameMsg", "firstName not allow null");
-            check++;
-        }
-        if (stitle != null && stitle.isEmpty()) {
-            request.setAttribute("titleMsg", "title not allow null");
-            check++;
-        }
-        if (stitleOfCourtesy != null && stitleOfCourtesy.isEmpty()) {
-            request.setAttribute("titleOfCourtesyMsg", "titleOfCourtesy not allow null");
-            check++;
-        }
-        if (saddress != null && saddress.isEmpty()) {
-            request.setAttribute("addressMsg", "address not allow null");
-            check++;
-        }
+//        int check = 0;
+//        if (slastName != null && slastName.isEmpty()){
+//            request.setAttribute("lastNameMsg", "lastName not allow null");
+//            check++;
+//        }
+//        if (sfirstName != null && sfirstName.isEmpty()) {
+//            request.setAttribute("firstNameMsg", "firstName not allow null");
+//            check++;
+//        }
+//        if (stitle != null && stitle.isEmpty()) {
+//            request.setAttribute("titleMsg", "title not allow null");
+//            check++;
+//        }
+//        if (stitleOfCourtesy != null && stitleOfCourtesy.isEmpty()) {
+//            request.setAttribute("titleOfCourtesyMsg", "titleOfCourtesy not allow null");
+//            check++;
+//        }
+//        if (saddress != null && saddress.isEmpty()) {
+//            request.setAttribute("addressMsg", "address not allow null");
+//            check++;
+//        }
         employee.setAddress(saddress);
         employee.setFirstName(sfirstName);
         employee.setLastName(slastName);
         employee.setTitle(stitle);
+        employee.setPhoneNumber(sphonenumber);
         employee.setTitleOfCourtesy(stitleOfCourtesy);
         employee.setGender(true);
         employee.setStatus(true);
-//        Date birthDate = Date.valueOf("2022-02-02");
-//        Date hireDate = Date.valueOf("2022-02-02");
-//        employee.setDepartmentID(2);
-//        employee.setBirthDate(birthDate);
-//        employee.setHireDate(hireDate);
+        Date birthDate = Date.valueOf("2022-02-02");
+        Date hireDate = Date.valueOf("2022-02-02");
+        employee.setDepartmentID(Integer.valueOf(sdepartmentID));
+        employee.setBirthDate(birthDate);
+        employee.setHireDate(hireDate);
         try {
             dao.insertEmployee(employee);
         } catch (SQLException ex) {

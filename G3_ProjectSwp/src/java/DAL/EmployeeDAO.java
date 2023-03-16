@@ -71,7 +71,29 @@ public class EmployeeDAO extends DBContext {
         }
         return empList;
     }
-
+ public ArrayList<Employee> getObjectList(ResultSet rs) {
+        ArrayList<Employee> empList = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int EmployeeID = rs.getInt("EmployeeID");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String Title = rs.getString("Title");
+                String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
+                Date BirthDate = rs.getDate("BirthDate");
+                Date HireDate = rs.getDate("HireDate");
+                String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
+                boolean Status = rs.getBoolean("Status");
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, PhoneNumber, Status);
+                empList.add(emp);
+                  }
+        } catch (Exception e) {
+        }
+        return empList;
+    }
     public ArrayList<Employee> getAllEmloyeesByID() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
@@ -97,6 +119,19 @@ public class EmployeeDAO extends DBContext {
         } catch (Exception e) {
 
         }
+        return empList;
+    }
+    public ArrayList<Employee> getListByEmployeeID(int empID) {
+        ArrayList<Employee> empList = new ArrayList<>();
+        try {
+            String sql = "select * from Employees where DepartmentID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, empID);
+            ResultSet rs = ps.executeQuery();
+            empList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
         return empList;
     }
 
@@ -210,6 +245,59 @@ public class EmployeeDAO extends DBContext {
             e.printStackTrace();
         }
     }
+    public ArrayList<Employee> getEmployees(boolean isAdmin) {
+        ArrayList<Employee> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Employees";
+            String sql2 = "select * from Employees where Status = ?";
+            PreparedStatement ps;
+            if (isAdmin == true) {
+                ps = connection.prepareStatement(sql);
+            } else {
+                ps = connection.prepareStatement(sql2);
+                ps.setInt(1, 0);
+            }
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }
+        return orderList;
+    }
+
+
+    public boolean EditInfoEmployees(Employee em) {
+        int result = 0;
+        try {
+            String sql = "UPDATE Employees \n"
+                    + "SET PhoneNumber = ?, Address = ?, BirthDate = ?, \n"
+                    + "TitleOfCourtesy = ?, Title = ?, Gender = ?, \n"
+                    + "FirstName = ?, LastName = ? \n"
+                    + "WHERE EmployeeID = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, em.getPhoneNumber());
+            ps.setString(2, em.getAddress());
+            ps.setDate(3, em.getBirthDate());
+            ps.setString(4, em.getTitleOfCourtesy());
+            ps.setString(5, em.getTitle());
+            ps.setBoolean(6, em.isGender());
+            ps.setString(7, em.getFirstName());
+            ps.setString(8, em.getLastName());
+            ps.setInt(9, em.getEmployeeID());
+            
+            result = ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+        return result > 0;
+    }
+    
+//    public static void main(String[] args) {
+//        Employee em = new Employee(1, "123123", "123", true, "123123", "123",Date.valueOf("2002-12-12"), "123123123", "1231233");
+//        boolean a = new EmployeeDAO().EditInfoEmployees(em);
+//        System.out.println(a);
+//    }
 
     public List<Employee> searchByName(String search) {
         List<Employee> list = new ArrayList<>();

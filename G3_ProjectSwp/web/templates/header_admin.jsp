@@ -33,12 +33,12 @@
             <div id="content">
                 <div id="content-left">
                     <ul>
-                        <h6><a href="home_admin.jsp"><li><i class="fa-solid fa-house"></i> Home managerment</li> </a></h6>
+                        <h6><a href="<%=path%>/StoreManager_admin"><li><i class="fa-solid fa-house"></i> Store managerment</li> </a></h6>
                         <h6><a href="<%=path%>/dashboard_admin"><li><i class="fa-solid fa-chart-line"></i> Dashboard</li></a></h6>
                         <h6><a href="<%=path%>/orderManage_admin"><li><i class="fa-solid fa-cart-shopping"></i> Orders </li></a></h6>
                         <h6><a href="<%=path%>/productManage_admin"><li><i class="fa-solid fa-book"></i> Products</li></a></h6>
                         <h6><a href="<%=path%>/customerManage_admin"><li><i class="fa-solid fa-users"></i> Customers</li></a></h6>
                         <h6><a href="<%=path%>/employeeManager_admin"><li><i class="fa-solid fa-user"></i> Employees</li></a></h6>
-                        <h6><a href="voucher.jsp"><li><i class="fa-solid fa-ticket"></i> Voucher</li></a></h6>
+                        <h6><a href="<%=path%>/voucherManage_admin"><li><i class="fa-solid fa-ticket"></i> Voucher</li></a></h6>
                     </ul>
                 </div>

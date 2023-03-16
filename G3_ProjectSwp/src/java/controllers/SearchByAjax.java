@@ -49,26 +49,38 @@ public class SearchByAjax extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         
-        String txtSearch = request.getParameter("txt");//giay chay bo
-        ArrayList<Product> proList = new ArrayList<Product>();
+        String txtSearch = request.getParameter("txt");
+        ArrayList<Product> proList ;
+        if(request.getSession().getAttribute("proList") !=null){
+            proList = (ArrayList<Product>)request.getSession().getAttribute("proList");
+        }else{
+            proList = new ProductDAO().getProducts(false);
+        }
+        
         
         if(request.getParameter("txtCategory")!=null){
             proList = new ProductDAO().getProductListByCategoryID(Integer.parseInt(request.getParameter("txtCategory")));
+            request.getSession().setAttribute("proList", proList);
         }else if(request.getParameter("txt") != null){
             proList = new ProductDAO().SearchProductByName(txtSearch);
+            request.getSession().setAttribute("proList", proList);
         }else if(request.getParameter("txtGenre") != null){
             proList = new ProductDAO().getProductListByGenreID(Integer.parseInt(request.getParameter("txtGenre")));
+            request.getSession().setAttribute("proList", proList);
         }else if(request.getParameter("txtSupplier") != null){
             proList = new ProductDAO().getProductListBySupplierID(Integer.parseInt(request.getParameter("txtSupplier")));
+            request.getSession().setAttribute("proList", proList);
         }else if(request.getParameter("txtFormat") != null){
             if(Integer.parseInt(request.getParameter("txtFormat"))==1){
                 proList = new ProductDAO().SearchProductByFormat("Bìa mềm");
             }else{
                 proList = new ProductDAO().SearchProductByFormat("Bìa cứng");
             }
+            request.getSession().setAttribute("proList", proList);
             
         }else if(request.getParameter("txtSupplier") != null){
             proList = new ProductDAO().getProductListBySupplierID(Integer.parseInt(request.getParameter("txtSupplier")));
+            request.getSession().setAttribute("proList", proList);
         }else if(request.getParameter("txtPrice") != null){
             switch (Integer.parseInt(request.getParameter("txtPrice"))) {
                 case 1:
@@ -84,9 +96,40 @@ public class SearchByAjax extends HttpServlet {
                     proList = new ProductDAO().searchProductListByPriceDomain(500000, 1500000);
                     break;
             }
-            
+            request.getSession().setAttribute("proList", proList);
         }
         
+        if(request.getParameter("txtsortByName") != null){
+            request.getSession().setAttribute("txtsortByName", 1);
+            request.getSession().removeAttribute("txtsortByIncreasePrice");
+            request.getSession().removeAttribute("txtsortByDecreasePrice");
+            request.getSession().removeAttribute("txtsortByNewest");
+            request.getSession().removeAttribute("txtsortByOldest");
+        }else if(request.getParameter("txtsortByIncreasePrice") != null){
+            request.getSession().setAttribute("txtsortByIncreasePrice", 1);
+            request.getSession().removeAttribute("txtsortByName");
+            request.getSession().removeAttribute("txtsortByDecreasePrice");
+            request.getSession().removeAttribute("txtsortByNewest");
+            request.getSession().removeAttribute("txtsortByOldest");
+        }else if(request.getParameter("txtsortByDecreasePrice") != null){
+            request.getSession().setAttribute("txtsortByDecreasePrice", 1);
+            request.getSession().removeAttribute("txtsortByName");
+            request.getSession().removeAttribute("txtsortByIncreasePrice");
+            request.getSession().removeAttribute("txtsortByNewest");
+            request.getSession().removeAttribute("txtsortByOldest");
+        }else if(request.getParameter("txtsortByNewest") != null){
+            request.getSession().setAttribute("txtsortByNewest", 1);
+            request.getSession().removeAttribute("txtsortByName");
+            request.getSession().removeAttribute("txtsortByIncreasePrice");
+            request.getSession().removeAttribute("txtsortByDecreasePrice");
+            request.getSession().removeAttribute("txtsortByOldest");
+        }else if(request.getParameter("txtsortByOldest") != null){
+            request.getSession().setAttribute("txtsortByOldest", 1);
+            request.getSession().removeAttribute("txtsortByName");
+            request.getSession().removeAttribute("txtsortByIncreasePrice");
+            request.getSession().removeAttribute("txtsortByDecreasePrice");
+            request.getSession().removeAttribute("txtsortByNewest");
+        }
         Comparator sortByName = new Comparator() {
         @Override
             public int compare(Object o1, Object o2) {
@@ -161,7 +204,20 @@ public class SearchByAjax extends HttpServlet {
             }
         };
         
-        Collections.sort(proList,sortByIncreasePrice);
+        if(request.getSession().getAttribute("txtsortByName") != null){
+            proList.sort(sortByName);
+        }else if(request.getSession().getAttribute("txtsortByIncreasePrice") != null){
+            Collections.sort(proList,sortByIncreasePrice);
+        }
+        else if(request.getSession().getAttribute("txtsortByDecreasePrice") != null){
+            Collections.sort(proList,sortByDecreasePrice);
+        }
+        else if(request.getSession().getAttribute("txtsortByNewest") != null){
+            Collections.sort(proList,sortByNewDate);
+        }else{
+            Collections.sort(proList,sortByOldDate);
+        }
+        
         
         
         
@@ -169,10 +225,12 @@ public class SearchByAjax extends HttpServlet {
         Category cate; CategoryDAO cateDAO = new CategoryDAO();
         Genre genre; GenreDAO genreDAO = new GenreDAO();
         Author author; AuthorDAO authorDAO = new AuthorDAO();
+        String pathPrevious;
         for (Product product : proList) {
             cate = cateDAO.getCategoryByID(product.getCategoryID());
             genre = genreDAO.getGenreByID(product.getGenreID());
             author = authorDAO.getAuthorByID(product.getAuthorID());
+            pathPrevious = request.getContextPath()+ "/cart?previousURL=productList&proID="+product.getProductID();
             out.println("<div class=\"col-xs-6 col-sm-6 col-md-4 col-lg-3\" style=\"margin: 20px 0px 0px 0px;\">\n" +
 "                                            <div class=\"tg-postbook\">\n" +
 "                                                <figure class=\"tg-featureimg\">\n" +
@@ -210,7 +268,7 @@ public class SearchByAjax extends HttpServlet {
 "                                                        <c:param name=\"previousURL\" value=\"../productList\" />\n" +
 "                                                        <c:param name=\"proID\" value=\""+product.getProductID()+"\" />\n" +
 "                                                    </c:url>\n" +
-"                                                    <a class=\"tg-btn tg-btnstyletwo\" href=\"${AddToCart}\">\n" +
+"                                                    <a class=\"tg-btn tg-btnstyletwo\" href=\""+pathPrevious+"\">\n" +
 "                                                        <i class=\"fa fa-shopping-basket\"></i>\n" +
 "                                                        <em>Add To Basket</em>\n" +
 "                                                    </a>\n" +

@@ -17,25 +17,29 @@
             <div id="order-table">
                 <table id="orders">
                     <tr>
-                        <th>OrderID</th>
-                        <th>CustomerName</th>
-                        <th>EmployeeName</th>
-                        <th>OrderDate</th>
-                        <th>RequiredDate</th>
-                        <th>ShippedDate</th>
-                        <!--<th>Freight($)</th>-->
-                        <!--<th>ShipName</th>-->
-                        <th>ShipAddress</th>
-                        <th>ShipCity</th>
-                        <!--<th>ShipRegion</th>-->
-                        <!--<th>ShipCountry</th>-->
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Employee Name</th>
+                        <th>Order Date</th>
+                        <th>Required Date</th>
+                        <th>Shipped Date</th>
+                        <th>Ship Address</th>
+                        <th>Ship City</th>
                         <th>Status</th>
                     </tr>
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>
                             <td><a href="<%=path%>/orderManage_admin?idOdDetail=${od.getOrderID()}">${od.getOrderID()}</a></td>
-                            <td>${od.getCustomerID()}</td>
-                            <td>${od.getEmployeeID()}</td>
+                            <td>
+                                <c:forEach var="cus" items="${cusList}"> 
+                                    <c:if test="${od.getCustomerID() == cus.getCustomerID()}">${cus.getFirstName()}</c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <c:forEach var="emp" items="${empList}">
+                                    <c:if test="${od.getEmployeeID() == emp.getEmployeeID()}">${emp.getFirstName()}</c:if>
+                                </c:forEach>
+                            </td>
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
                             <td>${od.getShipAddress()}</td>
@@ -77,7 +81,6 @@
                                     <td style="padding: unset;">
                                         <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: greenyellow;">Delivered</button>
                                         <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
-
                                     </td>
                                 </c:when>
                                 <c:otherwise><td></td></c:otherwise>
@@ -135,7 +138,7 @@
     function cancle(id, curentPage) {
 
         var result = confirm("Do you want to cancel this order?!");
-        if (result == true) {
+        if (result === true) {
             var url = "/G3_ProjectSwp/orderManage_admin?idCancel=" + id + "&currentPage=" + curentPage;
             document.location.href = url;
         }

@@ -5,22 +5,24 @@
 package models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  *
- * @author user
+ * @author ADMIN
  */
 public class Discount {
     private String DiscountID;
     private String Title;
     private String Description;
-    private Date StartDate;
-    private Date EndDate;
+    private LocalDateTime StartDate;
+    private LocalDateTime EndDate;
     private double MinOrderValue;
     private double Percentage;
     private int Type;
+    private int Quantity;
 
-    public Discount(String DiscountID, String Title, String Description, Date StartDate, Date EndDate, double MinOrderValue, double Percentage, int Type) {
+    public Discount(String DiscountID, String Title, String Description, LocalDateTime StartDate, LocalDateTime EndDate, double MinOrderValue, double Percentage, int Type, int Quantity) {
         this.DiscountID = DiscountID;
         this.Title = Title;
         this.Description = Description;
@@ -29,6 +31,22 @@ public class Discount {
         this.MinOrderValue = MinOrderValue;
         this.Percentage = Percentage;
         this.Type = Type;
+        this.Quantity = Quantity;
+    }
+
+    public Discount(String DiscountID, String Title, String Description, LocalDateTime StartDate, LocalDateTime EndDate, double Percentage, int Quantity) {
+        this.DiscountID = DiscountID;
+        this.Title = Title;
+        this.Description = Description;
+        this.StartDate = StartDate;
+        this.EndDate = EndDate;
+        this.Percentage = Percentage;
+        this.Quantity = Quantity;
+    }
+    
+    
+
+    public Discount() {
     }
 
     public String getDiscountID() {
@@ -55,19 +73,19 @@ public class Discount {
         this.Description = Description;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return StartDate;
     }
 
-    public void setStartDate(Date StartDate) {
+    public void setStartDate(LocalDateTime StartDate) {
         this.StartDate = StartDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return EndDate;
     }
 
-    public void setEndDate(Date EndDate) {
+    public void setEndDate(LocalDateTime EndDate) {
         this.EndDate = EndDate;
     }
 
@@ -95,10 +113,17 @@ public class Discount {
         this.Type = Type;
     }
 
-    @Override
-    public String toString() {
-        return "Discount{" + "DiscountID=" + DiscountID + ", Title=" + Title + ", Description=" + Description + ", StartDate=" + StartDate + ", EndDate=" + EndDate + ", MinOrderValue=" + MinOrderValue + ", Percentage=" + Percentage + ", Type=" + Type + '}';
+    public int getQuantity() {
+        return Quantity;
     }
+
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
+    }
+
+        
     
     
 }
+
+

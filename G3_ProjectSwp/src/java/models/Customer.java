@@ -36,14 +36,6 @@ public class Customer {
     
     
 
-    public Customer(int CustomerID, String FirstName, String LastName, String ContactTitle, String Address) {
-        this.CustomerID = CustomerID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.ContactTitle = ContactTitle;
-        this.Address = Address;
-    }
-
     public Customer(int CustomerID, String FirstName, String LastName, boolean Gender, String ContactTitle, String Address, String PhoneNumber, Date CreateDate) {
         this.CustomerID = CustomerID;
         this.FirstName = FirstName;
