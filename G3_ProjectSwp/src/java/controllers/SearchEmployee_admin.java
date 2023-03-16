@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import models.Employee;
 
 
@@ -35,13 +36,7 @@ public class SearchEmployee_admin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search=request.getParameter("txtSearch");
-        EmployeeDAO dao = new EmployeeDAO();
-        List<Employee> list =dao.searchByName(search);
-        request.setAttribute("employeeList",list);
-        request.setAttribute("searchValue", search);
-        request.setAttribute("departmentList", new DepartmentsDAO().getAllDepartments());
-        request.getRequestDispatcher("employees.jsp").forward(request, response);
+        
         }
     
         
@@ -71,7 +66,14 @@ public class SearchEmployee_admin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        String search = request.getParameter("txtSearch").trim().replaceAll(" +", " ");
+        EmployeeDAO dao = new EmployeeDAO();
+        List<Employee> empList = dao.searchByName(search);
+        request.setAttribute("searchValue", search);
+        request.setAttribute("listEmp", empList);
+        request.setAttribute("depart", new DepartmentsDAO().getAllDepartments());
+        request.getRequestDispatcher("/employees.jsp").forward(request, response);
     }
 
     /**

@@ -27,6 +27,7 @@ import DAL.EmployeeDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
 
+
 /**
  *
  * @author user
@@ -42,10 +43,10 @@ public class OrderManage_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        if(req.getSession().getAttribute("AccAdminSession")==null){
-//            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-//            return;
-//        }
+        if (req.getSession().getAttribute("AccAdminSession") == null) {
+            resp.sendRedirect(req.getContextPath() + "/404error.jsp");
+            return;
+        }
         PaginationObject paging = new PaginationObject();
         int currentPage = 1;
 //        if(req.getSession().getAttribute("currentPage")!= null){
@@ -80,6 +81,9 @@ public class OrderManage_admin extends HttpServlet {
             if (parameterName.equals("idCancel")) {
                 req.getSession().setAttribute("mode", 3);
             }
+            if (parameterName.equals("status")) {
+                req.getSession().setAttribute("mode", 4);
+            }
         }
         if (req.getSession().getAttribute("mode") != null) {
             switch ((int) req.getSession().getAttribute("mode")) {
@@ -96,16 +100,16 @@ public class OrderManage_admin extends HttpServlet {
                     req.getSession().setAttribute("txtStartOrderDate", req.getParameter("txtStartOrderDate"));
                     break;
                 case 2:
-                    int idOdDetail = Integer.parseInt(req.getParameter("idOdDetail"));
+                    int idOdDetail=Integer.parseInt(req.getParameter("idOdDetail"));
                     Order order = new OrderDAO().getOrderByID(idOdDetail);
                     ArrayList<OrderDetail> odDetailList = new OrderDAO().getDetailOfOrderByOdID(idOdDetail);
                     ArrayList<Product> proList = new ProductDAO().getProducts(true);
                     req.setAttribute("productList", proList);
                     req.setAttribute("order", order);
                     req.setAttribute("orderDetailList", odDetailList);
-                    req.getRequestDispatcher("order-detail.jsp").forward(req, resp);
-                    return;
-                //break;
+                    req.getRequestDispatcher("order_detail.jsp").forward(req, resp);
+                    break;
+
                 case 3:
                     int idCancel = Integer.parseInt(req.getParameter("idCancel"));
                     try {
@@ -122,6 +126,11 @@ public class OrderManage_admin extends HttpServlet {
                         return;
                     }
                     break;
+                case 4:
+                    int status = Integer.parseInt(req.getParameter("status"));
+                    orderList = new OrderDAO().getOrderByStatus(status);
+                    break;
+
                 default:
                     break;
             }
@@ -138,11 +147,15 @@ public class OrderManage_admin extends HttpServlet {
         req.getSession().setAttribute("currentPage", currentPage);
 
         List<Order> listInCurrentPage = paging.getListInCurrentPage(orderList, currentPage);
+        
         int numberOfPage = paging.getNumberOfPage(orderList);
         req.setAttribute("numberOfPage", numberOfPage);
+        
+        req.getSession().setAttribute("currentPage", currentPage);
+        req.getSession().setAttribute("orderList", orderList);
         req.setAttribute("listInCurrentPage", listInCurrentPage);
+
         req.getRequestDispatcher("order.jsp").forward(req, resp);
-        System.out.println(orderList);
     }
 
 }

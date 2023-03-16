@@ -5,30 +5,31 @@
         <div id="content-main-dashboard">
             <hr>
             <div id="order-title">
-                <b>Filter by Order Date:</b>
+
                 <form style="padding-bottom: 10px;">
-                    <b>From</b>: <input type="date" name="txtStartOrderDate"/>
-                    <b>To</b>: <input type="date" name="txtEndOrderDate"/>
-                    <input type="submit" value="Filter">
-                    <input type="checkbox" name="newOrder"> <label for="newOrder">New Order</label>
-                    <input type="checkbox" name="oldOrder"> <label for="oldOrder">Old Order</label>
+                    <span>From</span>: <input type="date" name="txtStartOrderDate" style="margin-right: 20px"/>
+                    <span>To</span>: <input type="date" name="txtEndOrderDate"/>
+                    <br/>
+                    <input type="radio" name="status" value="1"> <label for="Pending"style="margin-right: 15px">Pending</label>
+                    <input type="radio" name="status" value="2"> <label for="Approved"style="margin-right: 15px">Approved</label>
+                    <input type="radio" name="status" value="3"> <label for="Delivering"style="margin-right: 15px">Delivering</label>
+                    <input type="radio" name="status" value="4"> <label for="Delivered"style="margin-right: 15px">Delivered</label>
+                    <input type="radio" name="status" value="5"> <label for="Refunding"style="margin-right: 15px">Refunding</label>
+                    <input type="radio" name="status" value="6"> <label for="Canceled"style="margin-right: 15px">Cancelled</label>
+                    <input type="submit" value="Apply">
                 </form>
             </div>
             <div id="order-table">
                 <table id="orders">
                     <tr>
-                        <th>OrderID</th>
-                        <th>CustomerName</th>
-                        <th>EmployeeName</th>
-                        <th>OrderDate</th>
-                        <th>RequiredDate</th>
-                        <th>ShippedDate</th>
-                        <!--<th>Freight($)</th>-->
-                        <!--<th>ShipName</th>-->
-                        <th>ShipAddress</th>
-                        <th>ShipCity</th>
-                        <!--<th>ShipRegion</th>-->
-                        <!--<th>ShipCountry</th>-->
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Employee Name</th>
+                        <th>Order Date</th>
+                        <th>Required Date</th>
+                        <th>Shipped Date</th>
+                        <th>Ship Address</th>
+                        <th>Ship City</th>
                         <th>Status</th>
                     </tr>
                     <c:forEach var="od" items="${listInCurrentPage}">
@@ -52,8 +53,8 @@
 
                             <c:choose>
                                 <c:when test="${od.getStatus()==1}"><td style="color: blue;">Pending</td></c:when>
-                                <c:when test="${od.getStatus()==2}"><td style="color: greenyellow;">Approved</td></c:when>
-                                <c:when test="${od.getStatus()==3}"><td style="color: yellow;">Delivering</td></c:when>
+                                <c:when test="${od.getStatus()==2}"><td style="color: #34b233;">Approved</td></c:when>
+                                <c:when test="${od.getStatus()==3}"><td style="color: #f2c205;">Delivering</td></c:when>
                                 <c:when test="${od.getStatus()==4}"><td style="color: green;">Delivered</td></c:when>
                                 <c:when test="${od.getStatus()==5}"><td style="color: orange;">Refunding</td></c:when>
                                 <c:when test="${od.getStatus()==6}"><td style="color: red;">Canceled</td></c:when>
@@ -62,29 +63,29 @@
                             <c:choose>
                                 <c:when test="${od.getStatus()==1}">
                                     <td style="padding: unset;">
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=2'" value="${od.getOrderID()}" style="color: greenyellow;">Approve</button>
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=2'" value="${od.getOrderID()}" style="color: #34b233;">Approve</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: #cf142b;">Cancel</button>
                                     </td>
                                 </c:when>
 
                                 <c:when test="${od.getStatus()==2}">
                                     <td style="padding: unset;">
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=3'" value="${od.getOrderID()}" style="color: greenyellow;">Delivering</button>
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=3'" value="${od.getOrderID()}" style="color: #f2c205;">Delivering</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: #cf142b;">Cancel</button>
                                     </td>
                                 </c:when>
 
                                 <c:when test="${od.getStatus()==3}">
                                     <td style="padding: unset;">
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: greenyellow;">Delivered</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: green;">Delivered</button>
                                     </td>
                                 </c:when>
 
 
                                 <c:when test="${od.getStatus()==5}">
                                     <td style="padding: unset;">
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: greenyellow;">Delivered</button>
-                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: red;">Cancel</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=4'" value="${od.getOrderID()}" style="color: green;">Delivered</button>
+                                        <button onclick="window.location.href = 'ChangorderStatus_admin1?orderId=${od.getOrderID()}&status=6'" value="${od.getOrderID()}" style="color: #cf142b;">Cancel</button>
                                     </td>
                                 </c:when>
                                 <c:otherwise><td></td></c:otherwise>
@@ -142,7 +143,7 @@
     function cancle(id, curentPage) {
 
         var result = confirm("Do you want to cancel this order?!");
-        if (result == true) {
+        if (result === true) {
             var url = "/G3_ProjectSwp/orderManage_admin?idCancel=" + id + "&currentPage=" + curentPage;
             document.location.href = url;
         }

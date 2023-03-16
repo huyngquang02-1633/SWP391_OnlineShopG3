@@ -32,6 +32,8 @@ import models.Supplier;
  */
 @WebServlet(name = "ProductListCustomer", urlPatterns = {"/productList"})
 public class ProductList_Customer extends HttpServlet {
+    
+    CategoryDAO categoryDAO = new CategoryDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,8 +62,8 @@ public class ProductList_Customer extends HttpServlet {
             if ((int) req.getSession().getAttribute("mode") == 1) {
                 int cateID = Integer.parseInt(req.getParameter("categoryID"));
                 productList = new ProductDAO().getProductListByCategoryID(cateID);
+//                req.setAttribute("message", categoryDAO.getCategoryByID(cateID).getCategoryName());
             }
-
             if ((int) req.getSession().getAttribute("mode") == 2) {
                 productList = new ProductDAO().getNewReleaseList(0);
             }

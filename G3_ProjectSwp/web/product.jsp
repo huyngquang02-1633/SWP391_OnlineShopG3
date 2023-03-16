@@ -4,179 +4,196 @@
         <span class="close">&times;</span> <br>
         <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
         <div class="content-main">
-                   <form id="content-main-product" action="createProduct_admin" method="post">
-                        <div class="content-main-1">
-                            <label>Product name (*):</label><br/>
-                            <input type="text" name="txtProductName" id=""><br/>
-                            <label>Category Name(*):</label><br/>
-                            <select name="ddlCategory">
-                                <c:forEach items="${listc}" var="c">
-                                <option value=${c.getCategoryID()}>${c.getCategoryName()}</option>
-                                </c:forEach>
-                            </select>
-                            <label>Genre Name:</label><br/>
-                            <select name="ddlGenre">
-                                <c:forEach items="${listg}" var="g">
-                                <option value=${g.getGenreID()}>${g.getGenreName()}</option>
-                                </c:forEach>
-                            </select>
-                            <label>Cover Price:</label><br/>
-                            <input type="text" name="txtCoverPrice" id=""><br/>
-                            <label>Sale Price:</label><br/>
-                            <input type="text" name="txtSalePrice" id=""><br/>
-                            <label>Author Name:</label><br/>
-                            <select name="ddlAuthor">
-                                <c:forEach items="${lista}" var="a">
-                                <option value=${a.getAuthorID()}>${a.getAuthorName()}</option>
-                                </c:forEach>
-                            </select>
-                            <label>Discontinued (*): </label>
-                            <input style="    width: 15px;
-                            position: relative;
-                            top: 5px;
-                            left: 5px;" type="checkbox" name="chkDiscontinued" value="1" id=""><br/>
-                            
-                        </div>
-                        <div class="content-main-1">
-                            <label>Translator:</label><br/>
-                            <input type="text" name="txtTranslator" id=""><br/>
-                            <label>Publisher Name:</label><br/>
-                            <select name="ddlPublisher">
-                                <c:forEach items="${lists}" var="s">
-                                <option value=${s.getSupplierID()}>${s.getSupplierName()}</option>
-                                </c:forEach>
-                            </select>
-                            <label>Supplier Name:</label><br/>
-                            <select name="ddlSupplier">
-                                <c:forEach items="${lists}" var="s">
-                                <option value=${s.getSupplierID()}>${s.getSupplierName()}</option>
-                                </c:forEach>
-                            </select>
-                            <label>Language:</label><br/>
-                            <input type="text" name="txtLanguage" id=""><br/>
-                            <label>Book Size:</label><br/>
-                            <input type="text" name="txtSize" id=""><br/>
-                            <label>Book Weight:</label><br/>
-                            <input type="text" name="txtWeight" id=""><br/>
-                            
-                        </div>
-                        <div class="content-main-1">
-                            <label>Number Of Page:</label><br/>
-                            <input type="text" name="txtPage" id=""><br/>
-                            <label>Format:</label><br/>
-                            <input type="text" name="txtFormat" id=""><br/>
-                            <label>Image:</label><br/>
-                            <input type="text" name="txtImg" id=""><br/>
-                            <label>Publish Date:</label><br/>
-                            <input type="date" name="txtPublishDate" id=""><br/>
-                            <label>Publish License:</label><br/>
-                            <input type="text" name="txtLicense" id=""><br/>
-                            <label>Description:</label><br/>
-                            <input type="text" name="txtDescription" id=""><br/>
-                            <br/> 
-                        </div>
+            <form id="content-main-product">
+                <div class="content-main-1">
+                    <label>Product name (*):</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Category Name(*):</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Genre Name:</label><br/>
+                    <select name="ddlGenre">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Cover Price:</label><br/>
+                    <input type="text" name="txtUnitPrice" id=""><br/>
+                    <label>Sale Price:</label><br/>
+                    <input type="text" name="txtQuantityPerUnit" id=""><br/>
+                    <label>Author Name:</label><br/>
+                    <select name="ddlAuthor">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Discontinued (*): </label>
+                    <input style="    width: 15px;
+                           position: relative;
+                           top: 5px;
+                           left: 5px;" type="checkbox" name="chkDiscontinued" id=""><br/>
 
-                            <input style="margin: auto;" type="submit" value="Add"/>
-                        
-                    </form>
                 </div>
+                <div class="content-main-1">
+                    <label>Translator:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Publisher Name:</label><br/>
+                    <select name="ddlAuthor">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Author Name:</label><br/>
+                    <select name="ddlAuthor">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Language:</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                    </select>
+                    <label>Book Size:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Book Weight:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+
+                </div>
+                <div class="content-main-1">
+                    <label>Number Of Page:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Format:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Image:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Publish Date:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Publish License:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Description:</label><br/>
+                    <input type="text" name="txtUnitsInStock" id=""><br/>
+                    <br/> 
+                </div>
+
+                <input style="margin: auto;" type="submit" value="Save"/>
+
+            </form>
+        </div>
     </div>
 
-</div>            
-            <div id="content-right">
-                <div class="path-admin">PRODUCTS LIST</b></div>
-                <div class="content-main">
-                    <div id="content-main-dashboard">
-                        <hr>
-                        <div id="product-title-header">
-                            <div id="product-title-1" style="width: 25%;">
-                                <b>Filter by Catetory:</b>
-                                <form action="productManage_admin" method="">
-                                    <select name="categoryFilter">
-                                        <option value="0">No Filter</option>
-                                        <c:forEach items="${categoryList}" var="cate">
-                                            <c:choose>
-                                                <c:when test="${cate.getCategoryID() == categoryIDSession}">
-                                                    <option value="${cate.getCategoryID()}" selected="selected"><c:out value="${cate.getCategoryName()}"/></option>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <option value="${cate.getCategoryID()}"><c:out value="${cate.getCategoryName()}"/></option>
-                                                </c:otherwise>
-                                            </c:choose>                               
-                                        </c:forEach>
-                                    </select>
-                                    <input type="submit" value="Filter">
-                                </form>
-                            </div>
-                            <div id="product-title-2" style="width: 55%;">
-                                <form style="padding-bottom: 40px;" action="search_product" method="post">
+</div>   
+<div id="content-right">
+    <div class="path-admin">PRODUCTS LIST</b></div>
+    <div class="content-main">
+        <div id="content-main-dashboard">
+            <hr>
+            <div id="product-title-header">
+                <div id="product-title-1" style="width: 30%;">
+                    
+                    <form action="productManage_admin" method="">
+                        <b>Filter by Category:</b>
+                        <select name="categoryFilter">
+                            <option value="0">No Filter</option>
+                            <c:forEach items="${categoryList}" var="cate">
+                                <c:choose>
+                                    <c:when test="${cate.getCategoryID() == categoryIDSession}">
+                                        <option value="${cate.getCategoryID()}" selected="selected"><c:out value="${cate.getCategoryName()}"/></option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${cate.getCategoryID()}"><c:out value="${cate.getCategoryName()}"/></option>
+                                    </c:otherwise>
+                                </c:choose>                               
+                            </c:forEach>
+                        </select>
+                        <input type="submit" value="Apply">
+                    </form>
+                    <form style="margin-bottom: 20px" action="productManage_admin" method="">
+                        <strong>Filter by Quantity:</strong>
+                        <input style="margin-left: 2px;" type="radio" name="discontinued" value="1"> <label style="margin-left: -3px; margin-right: 15px" for="discontinued">Discontinued</label>
+                        <input type="radio" name="outofstock"> <label style="margin-left: -3px;" for="">Out of stock</label>
+                        <input type="submit" value="Apply">
+                    </form>
+                </div>
+
+                <div id="product-title-2" style="width: 55%;">
+                    <form style="padding-bottom: 40px;" action="search_product" method="post">
                         <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter product name to search"/>
                         <input type="submit" value="Search">
-                     </form>
-                            </div>
-                            <div id="product-title-3" style="width: 20%;">
-                                <a href="createProduct_admin">Create a new Product</a>
-                            </div>
-                        </div>
-                        <div id="order-table-admin">
-                            <table id="orders">
-                                <tr>
-                                  <th>Product ID</th>
-                                  <th>Product Name</th>
-                                  <th>Category Name</th>
-                                  <th>Genre Name</th>
-                                  <th>Cover Price</th>
-                                  <th>Sale Price</th>
-                                  <th>Author Name</th>
-                                  <!--<th>Translator</th>-->
-                                  <th>Punlisher Name</th>
-                                  <th>Supplier Name</th>
-                                  <th>Language</th>
-                                  <th>Size</th>
-                                  <th>Weight</th>
-                                  <th>NumberOfPage</th>
-                                  <th>Format</th>
-                                  <th>Publish Date</th>
-<!--                                  <th>Publishing License</th>
-                                  <th>Description</th>-->
-                                  <th>Discontinued</th>
-                                  <th></th>
-                                </tr>
-                                <c:forEach items="${productList}" var="product">
-                                    <tr>
-                                    <td><a href="order-detail.html?id=5">${product.getProductID()}</a></td>
-                                    <td>${product.getProductName()}</td>
-                                    <td>${product.getCategoryID()}</td>
-                                    <td>${product.getGenreID()}</td>
-                                    <td>${product.getCoverPrice()}</td>
-                                    <td>${product.getSalePrice()}</td>
-                                    <td>${product.getAuthorID()}</td>
-<!--                                    <td>${product.getTranslator()}</td>-->
-                                    <td>${product.getPublisherID()}</td>
-                                    <td>${product.getSupplierID()}</td>
-                                    <td>${product.getLanguage()}</td>
-                                    <td>${product.getSize()}</td>
-                                    <td>${product.getWeight()}</td>
-                                    <td>${product.getNumberOfPage()}</td>
-                                    <td>${product.getFormat()}</td>
-                                    <td>${product.getPublishDate()}</td>
+                    </form>
+                </div>
+                <div id="product-title-3" style="width: 20%;">
+                    <a href="createProduct_admin">Create a new Product</a>
+                </div>
+            </div>
+            <div id="order-table-admin">
+                <table id="orders">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Category Name</th>
+                        <th>Genre Name</th>
+                        <th>Cover Price</th>
+                        <th>Sale Price</th>
+                        <th>Author Name</th>
+                        <th>Publisher Name</th>
+                        <th>Supplier Name</th>
+                        <th>Language</th>
+                        <th>Size</th>
+                        <th>Weight</th>
+                        <th>Number Of Page</th>
+                        <th>Format</th>
+                        <th>Publish Date</th>
+                        <th>Discontinued</th>
+                        <th></th>
+                    </tr>
+                    <c:forEach items="${productList}" var="product">
+                        <tr>
+                            <td><a href="order-detail.html?id=5">${product.getProductID()}</a></td>
+                            <td>${product.getProductName()}</td>
+                            <td>${product.getCategoryID()}</td>
+                            <td>${product.getGenreID()}</td>
+                            <td>${product.getCoverPrice()}</td>
+                            <td>${product.getSalePrice()}</td>
+                            <td>${product.getAuthorID()}</td>
+                            <td>${product.getPublisherID()}</td>
+                            <td>${product.getSupplierID()}</td>
+                            <td>${product.getLanguage()}</td>
+                            <td>${product.getSize()}</td>
+                            <td>${product.getWeight()}</td>
+                            <td>${product.getNumberOfPage()}</td>
+                            <td>${product.getFormat()}</td>
+                            <td>${product.getPublishDate()}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${product.isDiscontinued() == 'false'}">
+                                        No
+                                    </c:when>
+                                    <c:when test="${product.isDiscontinued() == 'true'}">
+                                        Yes
+                                    </c:when>
+                                </c:choose>
+                            </td>
+                            <td>
+                            <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
+                            <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
 
-                                    <!--<td>${product.getPublishingLicense()}</td>-->
-                                    <!--<td>${product.getDescription()}</td>-->
 
-                                    <td>${product.isDiscontinued()}</td>
-                                    <td>
-                                        <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
-                                        <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
-                                    </td>
-                                </tr>
-                                </c:forEach>
-                                
-                                
-                              </table>
-                        </div>
-                        <div id="paging">
-                    <div class="pagination">
+                </table>
+            </div>
+            <div id="paging">
+                <div class="pagination">
 
                     <c:if test="${currentPage>1}">
                         <c:url value="/productManage_admin" var="paginationPrevous">
@@ -209,38 +226,11 @@
 
                 </div>
             </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
     </div>
+</div>
+</div>
+<div id="footer-admin">2023 All Rights Reserved By &copy; Book Library</div>
+</div>
 </body>
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
-</script>
 </html>

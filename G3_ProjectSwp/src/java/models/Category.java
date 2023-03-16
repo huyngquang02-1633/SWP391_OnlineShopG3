@@ -9,6 +9,7 @@ package models;
  * @author PQT2212
  */
 public class Category {
+
     private int categoryID;
     private String CategoryName;
     private String Description;
@@ -26,6 +27,10 @@ public class Category {
 
     public Category(int categoryID, String categoryName) {
         this.categoryID = categoryID;
+        this.CategoryName = categoryName;
+    }
+
+    public Category(String categoryName) {
         this.CategoryName = categoryName;
     }
 
@@ -65,6 +70,5 @@ public class Category {
     public String toString() {
         return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
-    
+
 }
