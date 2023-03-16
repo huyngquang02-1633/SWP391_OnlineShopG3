@@ -655,7 +655,6 @@
     display: flex;
     border-bottom: 1px solid gainsboro;
     align-items: center;
-    font-style: italic;
     font-weight: 500;
 }
 
@@ -861,7 +860,7 @@
 
 .content-main-1{
     width: 30%;
-    padding: 20px 20px 16px 20px;
+    padding: 15px 20px 15px 20px;
     overflow: hidden;
 }
 
@@ -1000,7 +999,7 @@ input[type="date"]{
 .content-main-1 strong{
     width: 160px;
     display: inline-flex;
-    padding: 6px 3px;
+    padding: 4px 3px;
 }
 
 .info-homeadmin{
@@ -1015,9 +1014,6 @@ input[type="date"]{
 
 .info-homeadmin-right{
     width: 50%;
-    display: flex;
-    flex-wrap: wrap;
-
 }
 
 .msg{
@@ -1027,4 +1023,9 @@ input[type="date"]{
     background: #edf6ff;
     border-radius: 8px;
     margin: 0px 10px;
+}
+
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
 }
