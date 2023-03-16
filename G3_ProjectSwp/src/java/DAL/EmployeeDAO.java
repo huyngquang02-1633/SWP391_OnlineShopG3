@@ -71,7 +71,29 @@ public class EmployeeDAO extends DBContext {
         }
         return empList;
     }
-
+ public ArrayList<Employee> getObjectList(ResultSet rs) {
+        ArrayList<Employee> empList = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int EmployeeID = rs.getInt("EmployeeID");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                boolean Gender = rs.getBoolean("Gender");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String Title = rs.getString("Title");
+                String TitleOfCourtesy = rs.getString("TitleOfCourtesy");
+                Date BirthDate = rs.getDate("BirthDate");
+                Date HireDate = rs.getDate("HireDate");
+                String Address = rs.getString("Address");
+                String PhoneNumber = rs.getString("PhoneNumber");
+                boolean Status = rs.getBoolean("Status");
+                Employee emp = new Employee(EmployeeID, FirstName, LastName, Gender, DepartmentID, Title, TitleOfCourtesy, BirthDate, HireDate, Address, PhoneNumber, Status);
+                empList.add(emp);
+                  }
+        } catch (Exception e) {
+        }
+        return empList;
+    }
     public ArrayList<Employee> getAllEmloyeesByID() {
         ArrayList<Employee> empList = new ArrayList<>();
         try {
@@ -97,6 +119,19 @@ public class EmployeeDAO extends DBContext {
         } catch (Exception e) {
 
         }
+        return empList;
+    }
+    public ArrayList<Employee> getListByEmployeeID(int empID) {
+        ArrayList<Employee> empList = new ArrayList<>();
+        try {
+            String sql = "select * from Employees where DepartmentID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, empID);
+            ResultSet rs = ps.executeQuery();
+            empList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
         return empList;
     }
 
@@ -209,6 +244,25 @@ public class EmployeeDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public ArrayList<Employee> getEmployees(boolean isAdmin) {
+        ArrayList<Employee> orderList = new ArrayList<>();
+        try {
+            String sql = "select * from Employees";
+            String sql2 = "select * from Employees where Status = ?";
+            PreparedStatement ps;
+            if (isAdmin == true) {
+                ps = connection.prepareStatement(sql);
+            } else {
+                ps = connection.prepareStatement(sql2);
+                ps.setInt(1, 0);
+            }
+            ResultSet rs = ps.executeQuery();
+            orderList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }
+        return orderList;
     }
 
     public List<Employee> searchByName(String search) {

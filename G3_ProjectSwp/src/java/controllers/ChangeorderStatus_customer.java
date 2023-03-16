@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Thanh Dao
  */
-@WebServlet(name = "ChangeorderStatus_customer", urlPatterns = {"../changeorderStatus_customer"})
+@WebServlet(name = "ChangeorderStatus_customer", urlPatterns = {"/ChangeorderStatus_customer"})
 public class ChangeorderStatus_customer extends HttpServlet {
 
     /**
