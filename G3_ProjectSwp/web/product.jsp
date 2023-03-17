@@ -138,14 +138,14 @@
                 <table id="orders">
                     <tr>
                         <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Category Name</th>
-                        <th>Genre Name</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Genre</th>
                         <th>Cover Price</th>
                         <th>Sale Price</th>
-                        <th>Author Name</th>
-                        <th>Publisher Name</th>
-                        <th>Supplier Name</th>
+                        <th>Author</th>
+                        <th>Publisher</th>
+                        <th>Supplier</th>
                         <th>Language</th>
                         <th>Size</th>
                         <th>Weight</th>

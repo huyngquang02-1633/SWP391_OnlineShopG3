@@ -141,11 +141,18 @@ public class CartController extends HttpServlet {
             if(req.getSession().getAttribute("mode") != null){
                 if((int) req.getSession().getAttribute("mode") == 1){
                     req.getSession().removeAttribute("mode");
-                    int proID = Integer.parseInt(req.getParameter("proID"));
-                    //int quantity = Integer.parseInt(req.getParameter("quantity"));
+                    
                     try {
+                        int proID = Integer.parseInt(req.getParameter("proID"));
+                        
                         CartDAO cartDAO = new CartDAO();
-                        cartDAO.addToCart(new Cart(accCustomer.getAccountID(), proID, 1));
+                        if(req.getParameter("quantity")!=null){
+                            int quantity = Integer.parseInt(req.getParameter("quantity"));
+                            cartDAO.addToCart(new Cart(accCustomer.getAccountID(), proID, quantity));
+                        }else{
+                            cartDAO.addToCart(new Cart(accCustomer.getAccountID(), proID, 1));
+                        }
+                        
                     } catch (Exception e) {
                         req.setAttribute("addToCartFail", "add this product to cart fail!");
                     }
@@ -155,8 +162,9 @@ public class CartController extends HttpServlet {
 
             }else{
                 ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(accCustomer.getAccountID());
-                ArrayList<Product> productList = new ProductDAO().getProducts(false);double subTotal = 0;
+                ArrayList<Product> productList = new ProductDAO().getProducts(false);
                 
+                double subTotal = 0;
                 double shipping = 30000;
                 ProductDAO prodao = new ProductDAO();
                 Product pro;
@@ -192,14 +200,25 @@ public class CartController extends HttpServlet {
                     req.getSession().removeAttribute("mode");
                     int proID = Integer.parseInt(req.getParameter("proID"));
                     
-                    int quantity = cartCookies.getQuantityByID(Integer.parseInt(req.getParameter("proID")));
+                    int quantity=0;
+                    int quantityAdd = 1;
+                    try {
+                        quantity = cartCookies.getQuantityByID(Integer.parseInt(req.getParameter("proID")));
+                        
+                        if(req.getParameter("quantity")!= null){
+                            quantityAdd = Integer.parseInt(req.getParameter("quantity"));
+                        }
+                    } catch (Exception e) {
+                        
+                    }
+                    
                     int index = -1;
                     if (cartCookies.isProductInCartCookies(proID)) { //sp da co trong cookie
                         if (arr != null) {
                             for (Cookie arrCookie : arr) {
                                 if (arrCookie.getName().equals("item" + proID)) {
                                     index++;
-                                    arrCookie.setValue(proID + "-" + (quantity+1));
+                                    arrCookie.setValue(proID + "-" + (quantity+ quantityAdd));
                                     resp.addCookie(arrCookie);
                                     for (int i = 0; i < cartList.size(); i++) {
                                         if (cartList.get(i).getProductID() == proID) {
@@ -212,7 +231,7 @@ public class CartController extends HttpServlet {
                         }
 
                     } else { //sp chua co trong cookie
-                        Cookie c = new Cookie("item" + proID, proID + "-1");
+                        Cookie c = new Cookie("item" + proID, proID + "-"+quantityAdd);
                         c.setMaxAge(60 * 60 * 24 * 30);
                         //c.setDomain(req.getContextPath());
                         resp.addCookie(c);
@@ -227,6 +246,18 @@ public class CartController extends HttpServlet {
                 ArrayList<Product> productList = new ProductDAO().getProducts(false);
                 req.setAttribute("cartList", cartList);
                 req.setAttribute("productList", productList);
+                
+                //tinh subtotal
+                double subTotal = 0;
+                double shipping = 30000;
+                ProductDAO prodao = new ProductDAO();
+                Product pro;
+                for (Cart cart : cartList) {
+                    pro = prodao.getProductInfor(cart.getProductID());
+                    subTotal += pro.getSalePrice()*cart.getQuantity();
+                }
+                req.setAttribute("subTotal", subTotal);
+                req.setAttribute("shipping", shipping);
                 
                 
                 req.getRequestDispatcher("/viewcart.jsp").forward(req, resp);

@@ -34,7 +34,7 @@
                                     <div class="card-body p-4">
                                         <c:forEach items="${orderList}" var="odList">
 
-                                            <div class="card shadow-0 border mb-4">
+                                            <div class="card shadow-0 border mb-4" style="border: 1px solid green;">
                                                 <div class="col-12 odt-title d-flex">
 
                                                     <span>OrderID: ${odList.getOrderID()}</span>
@@ -82,32 +82,39 @@
                                                 </div>
                                                 <c:forEach items="${orderDetailList}" var="odDetailList">
                                                     <c:if test="${odList.getOrderID() == odDetailList.getOrderID()}">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-2">
+                                                        <c:forEach items="${productList}" var="product">
+                                                            <c:if test="${odDetailList.getProductID() == product.getProductID()}">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
 
-                                                                    <img src="<%=path%>/images/books/img-04.jpg"
-                                                                         class="img-fluid" alt="Phone" style="width:70px;">
+        <!--                                                                    <img src="<%=path%>/images/books/img-04.jpg"
+                                                                                 class="img-fluid" alt="Phone" style="width:70px;">-->
+                                                                            <img src="${product.getImage()}"
+                                                                                 class="img-fluid" alt="Phone" style="width:70px;">
 
-                                                                </div>
-                                                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                    <p class="text-muted mb-0">ID: ${odDetailList.getProductID()}</p>
-                                                                </div>
-                                                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                    <p class="text-muted mb-0 small">Vietnamese</p>
-                                                                </div>
-                                                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                    <p class="text-muted mb-0 small"></p>
+                                                                        </div>
+                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                            <p class="text-muted mb-0">${product.getProductName()}</p>
+                                                                        </div>
+                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                            <p class="text-muted mb-0 small">${product.getSize()}</p>
+                                                                        </div>
+                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                            <p class="text-muted mb-0 small">${product.getFormat()}</p>
 
+                                                                        </div>
+                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                            <p class="text-muted mb-0 small">${odDetailList.getSalePrice()}</p>
+                                                                        </div>
+                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                            <p class="text-muted mb-0 small">x${odDetailList.getQuantity()}</p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                    <p class="text-muted mb-0 small">Qty: ${odDetailList.getQuantity()}</p>
-                                                                </div>
-                                                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                    <p class="text-muted mb-0 small">${odDetailList.getSalePrice()}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        
                                                     </c:if>
                                                 </c:forEach>
                                                 <div class="card-footer" >
@@ -115,9 +122,12 @@
                                                         <c:param name="id" value="${odList.getOrderID()}" />
                                                     </c:url>
                                                     <h5>Total paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
-                                                    <div class="card-footer"><div id="box">
+                                                    <c:if test="${odList.getStatus()==4}">
+                                                        <div class="card-footer"><div id="box">
                                                             <a href="${review}" id="Review">Review</a>
                                                         </div></div>
+                                                    </c:if>
+                                                    
                                                 </div>
                                                 <hr>
                                             </div>    
@@ -130,7 +140,7 @@
                 </div>
             </div>
         </div>
-        </section>
+        <!--</section>-->
     </div>
-
+</div>
     <%@include file="templates/footer.jsp" %>

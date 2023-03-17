@@ -30,7 +30,7 @@
                     <div id="chart1">
                         <span>Statistic Revenue </span>
                         <select id="staticYear" name="staticYear"  onchange="statisticYear()">
-                            <option value="Year">Year</option>
+                            <option value="2023">Year</option>
                             <c:forEach items="${years}" var="i">
                                 <c:choose>
                                     <c:when test="${i==yearSession}">
