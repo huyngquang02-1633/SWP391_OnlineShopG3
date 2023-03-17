@@ -135,6 +135,7 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                                         
+
                                             <div class="tg-share">
                                                 <span>Share:</span>
                                                 <ul class="tg-socialicons">
@@ -199,16 +200,23 @@
                                     </div>
                                     <div class="tg-productdescription">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<!--                                            <div class="tg-sectionhead">
+                                            <div class="tg-sectionhead">
                                                 <h2>Product Description</h2>
-                                            </div>-->
+                                            </div>
                                             <ul class="tg-themetabs" role="tablist">
-                                                <!--<li role="presentation" class="active"><a href="#description" data-toggle="tab">Description</a></li>-->
+                                                <li role="presentation" class="active"><a href="#description" data-toggle="tab">Description</a></li>
                                                 <li role="presentation"><a href="#review" data-toggle="tab">Reviews</a></li>
                                             </ul>
                                             <div class="tg-tab-content tab-content">
-                                                <c:forEach items="${reviewList}" var="review">
-                                                    <div style="">
+
+                                                <div role="tabpanel" class="tg-tab-pane tab-pane active" id="description">
+                                                    <div class="tg-description">
+                                                        <p>${productInfor.getDescription()}</p>                                                      
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tg-tab-pane tab-pane" id="review">
+                                                    <c:forEach items="${reviewList}" var="review">
+                                                       <div style="">
                                                         <span><img src="<%=path%>/images/users/icon-user.png" alt="anh customer"></span>
                                                         <span>
                                                             <c:forEach items="${cusList}" var="cus">
@@ -268,9 +276,10 @@
                                                             <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
                                                         </div>
                                                         <div>${review.getReviewDate()}</div>
-                                                    </div>
-                                                    <hr/>
-                                                </c:forEach>
+                                                        </div>
+                                                        <hr/>
+                                                    </c:forEach>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -281,13 +290,19 @@
                                             </div>
                                             <div class="tg-authorbox">
                                                 <figure class="tg-authorimg">
-                                                    <img src="images/author/imag-24.jpg" alt="image description">
+                                                    <img src="images/users/icon-user.png" alt=""/>
                                                 </figure>
                                                 <div class="tg-authorinfo">
                                                     <div class="tg-authorhead">
                                                         <div class="tg-leftarea">
                                                             <div class="tg-authorname">
-                                                                <h2>Kathrine Culbertson</h2>
+                                                                <h2 style="padding: 10px">
+                                                                    <c:forEach items="${authorList}" var="author"> 
+                                                                        <c:if test="${author.getAuthorID() == productInfor.getAuthorID()}">
+                                                                            <a href="<%=path%>/productList?authorID=${author.getAuthorID()}">${author.getAuthorName()}</a>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </h2>
                                                                 <span>Author Since: June 27, 2017</span>
                                                             </div>
                                                         </div>
@@ -302,7 +317,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="tg-description">
-                                                        <p>Laborum sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis etation.</p>
+                                                        <p></p>
                                                     </div>
                                                     <a class="tg-btn tg-active" href="javascript:void(0);">View All Books</a>
                                                 </div>
@@ -323,7 +338,7 @@
                                                         <div class="tg-postbook">
                                                             <figure class="tg-featureimg">
                                                                 <div class="tg-bookimg">
-<!--                                                                    <div class="tg-frontcover"><img src="images/books/img-01.jpg" alt="image description"></div>-->
+                                                                    <!--                                                                    <div class="tg-frontcover"><img src="images/books/img-01.jpg" alt="image description"></div>-->
                                                                     <div class="tg-frontcover"><img src="${similarProduct.getImage()}" alt="image description"></div>
                                                                     <div class="tg-backcover"><img src="${similarProduct.getImage()}" alt="image description"></div>
                                                                 </div>
@@ -404,10 +419,10 @@
                                                                     <ins>${similarProduct.getSalePrice()}</ins>
                                                                     <del>${similarProduct.getCoverPrice()}</del>
                                                                 </span>
-                                                                    <c:url value="/cart" var="AddToCart">
-                                                                        <c:param name="previousURL" value="../productDetail"/>
-                                                                        <c:param name="proID" value="${similarProduct.getProductID()}" />
-                                                                    </c:url>
+                                                                <c:url value="/cart" var="AddToCart">
+                                                                    <c:param name="previousURL" value="../productDetail"/>
+                                                                    <c:param name="proID" value="${similarProduct.getProductID()}" />
+                                                                </c:url>
                                                                 <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                                                     <i class="fa fa-shopping-basket"></i>
                                                                     <em>Add To Basket</em>
@@ -427,14 +442,6 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
                         <aside id="tg-sidebar" class="tg-sidebar">
-                            <div class="tg-widget tg-widgetsearch">
-                                <form class="tg-formtheme tg-formsearch">
-                                    <div class="form-group">
-                                        <button type="submit"><i class="icon-magnifier"></i></button>
-                                        <input type="search" name="search" class="form-group" placeholder="Search by title, author, key...">
-                                    </div>
-                                </form>
-                            </div>
                             <div class="tg-widget tg-catagories">
                                 <div class="tg-widgettitle">
                                     <h3>Categories</h3>
@@ -442,9 +449,12 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <c:forEach items="${cateList}" var="cate">
-                                            <li><a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}"><span>${cate.getCategoryName()}</span><em>></em></a></li>
-                                                    </c:forEach>
-                                        <li><a href="javascript:void(0);"><span>View All</span></a></li>
+                                            <li>
+                                                <input onclick="searchByCategory(${cate.getCategoryID()})" type="radio" id="checkbox1" name="category">   <span>${cate.getCategoryName()}</span>
+                                            </li>
+                                        </c:forEach>
+                                                                                    <li><a href="<%=path%>/productList"><span>View All</span></a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -455,16 +465,22 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <li>
-                                            <input  type="checkbox" id="checkbox1"> 0đ - 100,000đ
-                                        </li></ul>
-                                    <ul>
-                                        <li>
-                                            <input  type="checkbox" id="checkbox2"> 100,000đ - 300,000đ
+                                            <input onclick="searchByPriceDomain(1)" type="radio" id="checkbox1" name="price"> 0đ - 150,000đ
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            <input  type="checkbox" id="checkbox3""> 300,000đ - Above
+                                            <input onclick="searchByPriceDomain(2)" type="radio" id="checkbox2" name="price"> 150,000đ - 300,000đ
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <input onclick="searchByPriceDomain(3)" type="radio" id="checkbox3" name="price"> 300,000đ - 500,000đ
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <input onclick="searchByPriceDomain(4)" type="radio" id="checkbox3" name="price"> 500,000đ - Above
                                         </li>
                                     </ul>
                                 </div>
@@ -472,13 +488,15 @@
 
                             <div class="tg-widget ">
                                 <div class="tg-widgettitle">
-                                    <h3>supplier</h3>
+                                    <h3>Supplier</h3>
                                 </div>
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <c:forEach items="${SupList}" var="supplier">
-                                            <li><a href="<%=path%>/productList?supplierID=${supplier.getSupplierID()}"><span>${supplier.getSupplierName()}</span><em>></em></a></li>
-                                                    </c:forEach>
+                                            <li>
+                                                <input onclick="searchBySupplier(${supplier.getSupplierID()})" type="radio" id="checkbox1" name="supplier">    <span>${supplier.getSupplierName()}</span>
+                                            </li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>
@@ -490,11 +508,11 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <li>
-                                            <input  type="checkbox" id="checkbox" > Vietnamese
+                                            <input onclick="searchByLanguage(1)" type="radio" id="checkbox" name="laguage"> Vietnamese
                                         </li></ul>
                                     <ul>
                                         <li>
-                                            <input  type="checkbox" id="checkbox"> English
+                                            <input onclick="searchByLanguage(2)" type="radio" id="checkbox" name="laguage"> English
                                         </li>
                                     </ul>
                                 </div>
@@ -507,18 +525,15 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <li>
-                                            <input  type="checkbox" id="checkbox1" > Hardcover
+                                            <input onclick="searchByFormat(1)" name="format" type="radio" id="checkbox1" > Hardcover
                                         </li></ul>
                                     <ul>
                                         <li>
-                                            <input  type="checkbox" id="checkbox1"> Paperback
+                                            <input onclick="searchByFormat(2)" name="format" type="radio" id="checkbox1"> Paperback
                                         </li>
                                     </ul>
                                 </div>
-                                
                             </div>
-                            
-
                         </aside>
                     </div>
                 </div>
@@ -534,3 +549,229 @@
 *************************************-->
 
 <%@include file="templates/footer.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+                        function loadMore() {
+                            var amount = document.getElementsByClassName("product").length;
+                            $.ajax({
+                                url: "/Project_banhang/load",
+                                type: "get", //send it through get method
+                                data: {
+                                    exits: amount
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("content");
+                                    row.innerHTML += data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function searchByName(param){
+                            var txtSearch = param.value;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txt: txtSearch
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function searchByCategory(param){
+                            
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtCategory: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        
+                        function searchByGenre(param){
+                            
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtGenre: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        
+                        function searchBySupplier(param){
+                            
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtSupplier: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function searchByLanguage(param){
+                            
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtLanguage: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function searchByFormat(param){
+                            
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtFormat: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function searchByPriceDomain(param){
+                            
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtPrice: param
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByName(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByName: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByIncreasePrice(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByIncreasePrice: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByDecreasePrice(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByDecreasePrice: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByNewest(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByNewest: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+                        function sortByOldest(){
+                            var value = 1;
+                            $.ajax({
+                                url: "/G3_ProjectSwp/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txtsortByOldest: value
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("ajax");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
+        </script>  

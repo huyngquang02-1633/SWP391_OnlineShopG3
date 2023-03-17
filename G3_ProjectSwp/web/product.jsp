@@ -1,4 +1,96 @@
-<%@include file="templates/header_admin.jsp" %>            
+<%@include file="templates/header_admin.jsp" %>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span> <br>
+        <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
+        <div class="content-main">
+            <form id="content-main-product">
+                <div class="content-main-1">
+                    <label>Product name (*):</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Category Name(*):</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Genre Name:</label><br/>
+                    <select name="ddlGenre">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Cover Price:</label><br/>
+                    <input type="text" name="txtUnitPrice" id=""><br/>
+                    <label>Sale Price:</label><br/>
+                    <input type="text" name="txtQuantityPerUnit" id=""><br/>
+                    <label>Author Name:</label><br/>
+                    <select name="ddlAuthor">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Discontinued (*): </label>
+                    <input style="    width: 15px;
+                           position: relative;
+                           top: 5px;
+                           left: 5px;" type="checkbox" name="chkDiscontinued" id=""><br/>
+
+                </div>
+                <div class="content-main-1">
+                    <label>Translator:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Publisher Name:</label><br/>
+                    <select name="ddlAuthor">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Author Name:</label><br/>
+                    <select name="ddlAuthor">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                        <option value="catid3">Television</option>
+                        <option value="catid4">Electronic</option>
+                    </select>
+                    <label>Language:</label><br/>
+                    <select name="ddlCategory">
+                        <option value="catid1">Smart Phone</option>
+                        <option value="catid2">Computer</option>
+                    </select>
+                    <label>Book Size:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Book Weight:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+
+                </div>
+                <div class="content-main-1">
+                    <label>Number Of Page:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Format:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Image:</label><br/>
+                    <input type="text" name="txtProductName" id=""><br/>
+                    <label>Publish Date:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Publish License:</label><br/>
+                    <input type="date" name="txtUnitsInStock" id=""><br/>
+                    <label>Description:</label><br/>
+                    <input type="text" name="txtUnitsInStock" id=""><br/>
+                    <br/> 
+                </div>
+
+                <input style="margin: auto;" type="submit" value="Save"/>
+
+            </form>
+        </div>
+    </div>
+
+</div>   
 <div id="content-right">
     <div class="path-admin">PRODUCTS LIST</b></div>
     <div class="content-main">
@@ -8,7 +100,7 @@
                 <div id="product-title-1" style="width: 30%;">
                     
                     <form action="productManage_admin" method="">
-                        <b>Filter by Catetory:</b>
+                        <b>Filter by Category:</b>
                         <select name="categoryFilter">
                             <option value="0">No Filter</option>
                             <c:forEach items="${categoryList}" var="cate">
@@ -22,14 +114,16 @@
                                 </c:choose>                               
                             </c:forEach>
                         </select>
-                        <input type="submit" value="Filter">
+                        <input type="submit" value="Apply">
                     </form>
-                    <form style="margin-bottom: 20px" action="" method="">
+                    <form style="margin-bottom: 20px" action="productManage_admin" method="">
                         <strong>Filter by Quantity:</strong>
-                        <input style="margin-left: 2px;"  type="checkbox" name=""> <label style="margin-left: -3px; margin-right: 10px" for="">Stocking</label>
-                        <input type="checkbox" name=""> <label style="margin-left: -3px;" for="">Out of stock</label>
+                        <input style="margin-left: 2px;" type="radio" name="discontinued" value="1"> <label style="margin-left: -3px; margin-right: 15px" for="discontinued">Discontinued</label>
+                        <input type="radio" name="outofstock"> <label style="margin-left: -3px;" for="">Out of stock</label>
+                        <input type="submit" value="Apply">
                     </form>
                 </div>
+
                 <div id="product-title-2" style="width: 55%;">
                     <form style="padding-bottom: 40px;" action="search_product" method="post">
                         <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter product name to search"/>
@@ -50,17 +144,14 @@
                         <th>Cover Price</th>
                         <th>Sale Price</th>
                         <th>Author Name</th>
-                        <!--<th>Translator</th>-->
-                        <th>Punlisher Name</th>
+                        <th>Publisher Name</th>
                         <th>Supplier Name</th>
                         <th>Language</th>
                         <th>Size</th>
                         <th>Weight</th>
-                        <th>NumberOfPage</th>
+                        <th>Number Of Page</th>
                         <th>Format</th>
                         <th>Publish Date</th>
-                        <!--                                  <th>Publishing License</th>
-                                                          <th>Description</th>-->
                         <th>Discontinued</th>
                         <th></th>
                     </tr>
@@ -73,7 +164,6 @@
                             <td>${product.getCoverPrice()}</td>
                             <td>${product.getSalePrice()}</td>
                             <td>${product.getAuthorID()}</td>
-<!--                                    <td>${product.getTranslator()}</td>-->
                             <td>${product.getPublisherID()}</td>
                             <td>${product.getSupplierID()}</td>
                             <td>${product.getLanguage()}</td>
@@ -82,14 +172,19 @@
                             <td>${product.getNumberOfPage()}</td>
                             <td>${product.getFormat()}</td>
                             <td>${product.getPublishDate()}</td>
-
-                                    <!--<td>${product.getPublishingLicense()}</td>-->
-                                    <!--<td>${product.getDescription()}</td>-->
-
-                            <td>${product.isDiscontinued()}</td>
                             <td>
-                                <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
-                                <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
+                                <c:choose>
+                                    <c:when test="${product.isDiscontinued() == 'false'}">
+                                        No
+                                    </c:when>
+                                    <c:when test="${product.isDiscontinued() == 'true'}">
+                                        Yes
+                                    </c:when>
+                                </c:choose>
+                            </td>
+                            <td>
+                            <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
+                            <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -31,7 +31,7 @@
 
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
-            src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=718155789958513&autoLogAppEvents=1"
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=718155789958513&autoLogAppEvents=1"
     nonce="LpjM0yAZ"></script>
     <script src="<%=path%>/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>

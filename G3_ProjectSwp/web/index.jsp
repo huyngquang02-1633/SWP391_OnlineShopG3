@@ -217,11 +217,7 @@
                             <h2><span>Taste The New Spice</span>New Release Books</h2>
                         </div>
                         <div class="tg-description">
-                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoiars nisiuip
-                                commodo consequat aute irure dolor in aprehenderit aveli esseati cillum dolor
-                                fugiat
-                                nulla pariatur cepteur sint occaecat cupidatat.</p>
+                            <p>Subscribe to our newsletter to get more reading recommendations straight to your inbox!</p>
                         </div>
                         <div class="tg-btns">
                             <a class="tg-btn tg-active" href="javascript:void(0);">View All</a>
