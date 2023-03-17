@@ -12,7 +12,7 @@
                     <c:url var="formAction" value="createProduct_admin" />
                 </c:if>
                 <div class="content-main">
-                    <form id="content-main-product" action="${formAction}" method="post">
+                    <form id="content-main-product" action="${formAction}" method="post" enctype="multipart/form-data">
                         <div class="content-main-1">
                             <input type="hidden" name="pid" value="${p.getProductID()}">
                             <label>Product name (*):</label><br/>
@@ -75,7 +75,8 @@
                             <label>Format:</label><br/>
                             <input value="${p.getFormat()}" type="text" name="txtFormat" id=""><br/>
                             <label>Image:</label><br/>
-                            <input value="${p.getImage()}" type="text" name="txtImg" id=""><br/>
+                            <!--<input value="${p.getImage()}" type="text" name="txtImg" id=""><br/>-->
+                            <input type="file" name="file"/>
                             <label>Publish Date:</label><br/>
                             <input value="${p.getPublishDate()}" type="date" name="txtPublishDate" id=""><br/>
                             <label>Publish License:</label><br/>

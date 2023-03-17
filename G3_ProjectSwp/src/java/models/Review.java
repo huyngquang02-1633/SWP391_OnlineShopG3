@@ -28,6 +28,14 @@ public class Review {
         this.Image = Image;
         this.ReviewDate = ReviewDate;
     }
+    public Review(int CustomerID, int OrderID, int ProductID, int Rating, String Comment, String Image) {
+        this.CustomerID = CustomerID;
+        this.OrderID = OrderID;
+        this.ProductID = ProductID;
+        this.Rating = Rating;
+        this.Comment = Comment;
+        this.Image = Image;
+    }
 
     public int getCustomerID() {
         return CustomerID;

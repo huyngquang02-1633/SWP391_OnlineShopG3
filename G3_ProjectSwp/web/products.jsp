@@ -131,7 +131,7 @@
                                                     </c:url>
                                                     <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                                         <i class="fa fa-shopping-basket"></i>
-                                                        <em>Add To Basket</em>
+                                                        <em>Add To Cart</em>
                                                     </a>
                                                     </div>
 
@@ -146,6 +146,14 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
                         <aside id="tg-sidebar" class="tg-sidebar">
+                            <div class="tg-widget tg-widgetsearch">
+                                <form class="tg-formtheme tg-formsearch">
+                                    <div class="form-group">
+                                        <button type="submit"><i class="icon-magnifier"></i></button>
+                                        <input onchange="searchByName(this)" type="text" name="search" class="form-group" placeholder="Search by title...">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="tg-widget tg-catagories">
                                 <div class="tg-widgettitle">
                                     <h3>Categories</h3>
@@ -157,7 +165,7 @@
                                                 <input onclick="searchByCategory(${cate.getCategoryID()})" type="radio" id="checkbox1" name="category">   <span>${cate.getCategoryName()}</span>
                                             </li>
                                         </c:forEach>
-                                                                                    <li><a href="<%=path%>/productList"><span>View All</span></a></li>
+                                        <li><a href="<%=path%>/productList"><span>View All</span></a></li>
 
                                     </ul>
                                 </div>

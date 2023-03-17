@@ -20,10 +20,10 @@ public class AccountSignIn extends HttpServlet{
             req.getSession().removeAttribute("emailSession");
             req.getSession().removeAttribute("passwordSession");
             req.getSession().removeAttribute("AccAdminSession");
-            resp.sendRedirect("../homepage");
+            resp.sendRedirect("../account/login");
         }else if(req.getSession().getAttribute("AccAdminSession")==null && req.getSession().getAttribute("AccCustomerSession")!=null){
             req.getSession().removeAttribute("AccCustomerSession");
-            resp.sendRedirect("../homepage");
+            resp.sendRedirect("../account/login");
         }else{
             req.getRequestDispatcher("../login.jsp").forward(req, resp);
         }
@@ -66,7 +66,7 @@ public class AccountSignIn extends HttpServlet{
                     
                 }
             }else{
-                req.setAttribute("msg", "This account does not exist");
+                req.setAttribute("msg", "This account does not exist or have been suspended!");
                 req.getRequestDispatcher("../login.jsp").forward(req, resp);
             }
         }

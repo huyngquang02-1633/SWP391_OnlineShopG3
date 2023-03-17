@@ -108,6 +108,7 @@ public class ProductDAO extends DBContext {
         }
         return productList;
     }
+    
 
     public ArrayList<Product> getProductsByCatNSearch(String sample, int CatID, boolean isAdmin) {
         ArrayList<Product> productList = new ArrayList<>();
@@ -570,7 +571,8 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO abc = new ProductDAO();
-        System.out.println(abc.getProductListBySupplierID(1).get(0).getSupplierID());
+        ArrayList<Product> productList = new ProductDAO().getProducts(false);
+        System.out.println(productList.get(1).getAuthorID());
     }
 
 }

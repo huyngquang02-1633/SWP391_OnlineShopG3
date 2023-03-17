@@ -68,16 +68,20 @@
                                     </figure>
                                     <div class="tg-postbookcontent">
                                         <ul class="tg-bookscategories">
-                                            <c:forEach items="${cateList}" var="cate">
-                                                <c:if test="${product.getCategoryID() == cate.getCategoryID()}">
-                                                    <li><a href="<%=path%>/productList?categoryID=${product.getCategoryID()}">${cate.getCategoryName()}</a></li>
-                                                </c:if>
-                                            </c:forEach>
-                                            <c:forEach items="${genreList}" var="genre">
-                                                <c:if test="${product.getGenreID() == genre.getGenreID()}">
-                                                    <li><a href="<%=path%>/productList?genreID=${product.getGenreID()}">${genre.getGenreName()}</a></li>
-                                                </c:if>
-                                            </c:forEach>
+                                            <li>
+                                                <c:forEach items="${cateList}" var="cate">
+                                                    <c:if test="${product.getCategoryID() == cate.getCategoryID()}">
+                                                        <a href="<%=path%>/productList?categoryID=${product.getCategoryID()}">${cate.getCategoryName()}</a>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </li>
+                                            <li>
+                                                <c:forEach items="${genreList}" var="genre">
+                                                    <c:if test="${product.getGenreID() == genre.getGenreID()}">
+                                                        <a href="<%=path%>/productList?genreID=${product.getGenreID()}">${genre.getGenreName()}</a>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </li>
                                             
                                         </ul>
                                         <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
@@ -146,7 +150,7 @@
                                             </c:url>
                                         <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Add To Cart</em>
                                         </a>
                                     </div>
                                 </div>
@@ -312,7 +316,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    </c:forEach>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
