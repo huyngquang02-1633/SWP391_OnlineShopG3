@@ -292,7 +292,8 @@ public class ProductDAO extends DBContext {
         }// finally{connection.close();}
         return productList;
     }
-    public ArrayList<Product> searchProductListByPriceDomain(double from,  double to) {
+
+    public ArrayList<Product> searchProductListByPriceDomain(double from, double to) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where SalePrice between ? AND ?";
@@ -333,25 +334,25 @@ public class ProductDAO extends DBContext {
             //connection = DBContext.getInstance().getConnection();
 
             String sql = "update Products SET "
-                    + "ProductName = ?, "  //1
-                    + "CategoryID = ?, "  //2
-                    + "GenreID = ?, "  //3
-                    + "CoverPrice = ?, "  //4
-                    + "SalePrice = ?, "  //5
-                    + "AuthorID = ?, "  //6
-                    + "Translator = ?, "  //7
-                    + "PublisherID = ?, "  //8
-                    + "SupplierID = ?, "  //9
-                    + "Language = ?, "  //10
-                    + "Size = ?, "  //11
-                    + "Weight = ?, "  //12
-                    + "NumberOfPage = ?, "  //13
-                    + "Format = ?, "  //14
-                    + "Image = ?, "  //15
-                    + "PublishDate = ?, "  //16
-                    + "PublishingLicense = ?, "  //17
-                    + "Description = ?, "  //18
-                    + "Discontinued = ? "  //19
+                    + "ProductName = ?, " //1
+                    + "CategoryID = ?, " //2
+                    + "GenreID = ?, " //3
+                    + "CoverPrice = ?, " //4
+                    + "SalePrice = ?, " //5
+                    + "AuthorID = ?, " //6
+                    + "Translator = ?, " //7
+                    + "PublisherID = ?, " //8
+                    + "SupplierID = ?, " //9
+                    + "Language = ?, " //10
+                    + "Size = ?, " //11
+                    + "Weight = ?, " //12
+                    + "NumberOfPage = ?, " //13
+                    + "Format = ?, " //14
+                    + "Image = ?, " //15
+                    + "PublishDate = ?, " //16
+                    + "PublishingLicense = ?, " //17
+                    + "Description = ?, " //18
+                    + "Discontinued = ? " //19
                     + "where ProductID = ?";  //20
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -427,7 +428,7 @@ public class ProductDAO extends DBContext {
             ps.setBoolean(19, p.isDiscontinued());
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         } finally {
             //DBContext.releaseJBDCObject(rs, ps, connection);
         }
@@ -466,41 +467,42 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
-    
+
     public ArrayList<Product> SearchProductByName(String search) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where ProductName like ?";
-             PreparedStatement st=connection.prepareStatement(sql);
-            st.setString(1, "%"+search+"%");
-            ResultSet rs=st.executeQuery();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
 
         }// finally{connection.close();}
         return productList;
     }
+
     public ArrayList<Product> SearchProductByLanguage(String language) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where Language like ?";
-             PreparedStatement st=connection.prepareStatement(sql);
-            st.setString(1, "%"+language+"%");
-            ResultSet rs=st.executeQuery();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + language + "%");
+            ResultSet rs = st.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
 
         }// finally{connection.close();}
         return productList;
     }
+
     public ArrayList<Product> SearchProductByFormat(String format) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "select * from Products where Format like ?";
-             PreparedStatement st=connection.prepareStatement(sql);
-            st.setString(1, "%"+format+"%");
-            ResultSet rs=st.executeQuery();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + format + "%");
+            ResultSet rs = st.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {
 
@@ -508,9 +510,22 @@ public class ProductDAO extends DBContext {
         return productList;
     }
 
-    public static void main(String[] args) {
-        ProductDAO abc = new ProductDAO();
-        System.out.println(abc.getProductListBySupplierID(1).get(0).getSupplierID());
+    public ArrayList<Product> getProductHighRating() {
+        ArrayList<Product> listHighRating = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Products";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            listHighRating = getObjectList(rs);
+        } catch (Exception e) {
+        }
+        return listHighRating;
     }
 
+    public static void main(String[] args) {
+//        ProductDAO abc = new ProductDAO();
+//        System.out.println(abc.getProductListBySupplierID(1).get(0).getSupplierID());
+        ArrayList<Product> listHighRating = new ProductDAO().getProductHighRating();
+        System.out.println(listHighRating);
+    }
 }

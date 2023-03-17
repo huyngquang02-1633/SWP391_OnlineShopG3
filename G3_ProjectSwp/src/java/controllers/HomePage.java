@@ -29,11 +29,14 @@ import DAL.CustomerDAO;
 import DAL.GenreDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import java.util.Comparator;
 import models.Author;
 import models.CartCookies;
 import models.Category;
 import models.Genre;
 import models.Product;
+import java.util.Collections;
+
 @WebServlet(name = "HomePage", urlPatterns = {"/homepage"})
 public class HomePage extends HttpServlet {
 
@@ -44,52 +47,72 @@ public class HomePage extends HttpServlet {
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Product> newReleaseList = new ProductDAO().getNewReleaseList(3);
-        Product comingSoon = new ProductDAO().getComingSoon();
+        ArrayList<Product> listHighRating = new ProductDAO().getProductHighRating();
+
+        Comparator sortByDecreasePrice = new Comparator() {
+        @Override
+            public int compare(Object o1, Object o2) {
+                Product pro1 = (Product) o1;
+                Product pro2 = (Product) o2;
         
-        //Cart icon
-        if(req.getSession().getAttribute("AccCustomerSession")!= null){
-            Account googleAcc = (Account)req.getSession().getAttribute("AccCustomerSession");
-            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(googleAcc.getAccountID());
-            
-            //get subTotal
-            double subTotal = 0;
-            ProductDAO proDao = new ProductDAO();
-            Product pro;
-            for (Cart cart : cartList) {
-                pro = proDao.getProductInfor(cart.getProductID());
-                subTotal+=cart.getQuantity() * pro.getSalePrice();
+                if(pro1.getAverageRating()- pro2.getAverageRating() >0) return -1;
+                if(pro1.getAverageRating() - pro2.getAverageRating() ==0) {
+                    return 0;
+                }
+                return 1;
+
             }
-            req.setAttribute("cartList", cartList);
-            req.setAttribute("cartSize", cartList.size());
-            req.setAttribute("subTotal", subTotal);
-        }else{
+        };
+        listHighRating.sort(sortByDecreasePrice);
+        req.setAttribute("listHighRating", listHighRating.subList(0, 5));
+    
+
+
+    Product comingSoon = new ProductDAO().getComingSoon();
+
+    //Cart icon
+        if (req.getSession().getAttribute("AccCustomerSession") != null) {
+            Account googleAcc = (Account) req.getSession().getAttribute("AccCustomerSession");
+        ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(googleAcc.getAccountID());
+
+        //get subTotal
+        double subTotal = 0;
+        ProductDAO proDao = new ProductDAO();
+        Product pro;
+        for (Cart cart : cartList) {
+            pro = proDao.getProductInfor(cart.getProductID());
+            subTotal += cart.getQuantity() * pro.getSalePrice();
+        }
+        req.setAttribute("cartList", cartList);
+        req.setAttribute("cartSize", cartList.size());
+        req.setAttribute("subTotal", subTotal);
+        } else {
             Cookie arr[] = req.getCookies();
-            ArrayList<String> cookiesText = new ArrayList<>();
-            if (arr != null) {
-                for (Cookie arrCookies : arr) {
-                    if (arrCookies.getName().contains("item")) {
-                        cookiesText.add(arrCookies.getValue());
-                    }
+        ArrayList<String> cookiesText = new ArrayList<>();
+        if (arr != null) {
+            for (Cookie arrCookies : arr) {
+                if (arrCookies.getName().contains("item")) {
+                    cookiesText.add(arrCookies.getValue());
                 }
             }
-            CartCookies cartCookies = new CartCookies();
-            ArrayList<Cart> cartList = cartCookies.decryptionCookiesText(cookiesText);
-            
-            //get subTotal
-            double subTotal = 0;
-            ProductDAO proDao = new ProductDAO();
-            Product pro;
-            for (Cart cart : cartList) {
-                pro = proDao.getProductInfor(cart.getProductID());
-                subTotal+=cart.getQuantity() * pro.getSalePrice();
-            }
-            
-            req.setAttribute("cartList", cartList);
-            req.setAttribute("cartSize", cartList.size());
-            req.setAttribute("subTotal", subTotal);
         }
-        
-        
+        CartCookies cartCookies = new CartCookies();
+        ArrayList<Cart> cartList = cartCookies.decryptionCookiesText(cookiesText);
+
+        //get subTotal
+        double subTotal = 0;
+        ProductDAO proDao = new ProductDAO();
+        Product pro;
+        for (Cart cart : cartList) {
+            pro = proDao.getProductInfor(cart.getProductID());
+            subTotal += cart.getQuantity() * pro.getSalePrice();
+        }
+
+        req.setAttribute("cartList", cartList);
+        req.setAttribute("cartSize", cartList.size());
+        req.setAttribute("subTotal", subTotal);
+    }
+
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);
         req.setAttribute("genreList", genreList);
@@ -97,13 +120,13 @@ public class HomePage extends HttpServlet {
         req.setAttribute("newReleaseList", newReleaseList);
         req.setAttribute("comingSoon", comingSoon);
         
+            
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 
 }
-
