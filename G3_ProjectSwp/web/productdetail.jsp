@@ -166,7 +166,7 @@
                                                 <li><span>Translator: </span><span>${productInfor.getTranslator()}</span></li>
                                                 <li><span>Language: </span><span>${productInfor.getLanguage()}</span></li>
                                                 <li><span>Format: </span><span>${productInfor.getFormat()}</span></li>
-                                                <li><span>Size: </span><span>${productInfor.getSize()}mm | ${productInfor.getWeight()}g</span></li>
+                                                <li><span>Size: </span><span>${productInfor.getSize()}cm | ${productInfor.getWeight()}g</span></li>
                                                 <li><span>Number of page: </span><span>${productInfor.getNumberOfPage()}</span></li>
                                                 <li><span>Category: </span>
                                                     <c:forEach items="${cateList}" var="cate"> 
