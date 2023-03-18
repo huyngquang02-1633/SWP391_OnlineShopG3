@@ -53,7 +53,7 @@
     </div>
 
 </div>
-<div id="content-right">
+<div id="content-right"  style="height: 665px;">
     <div class="path-admin">EMPLOYEES LIST</b></div>
     <div class="content-main">
         <hr/>

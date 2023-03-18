@@ -94,13 +94,13 @@
 <div id="content-right">
     <div class="path-admin">PRODUCTS LIST</b></div>
     <div class="content-main">
-        <div id="content-main-dashboard">
+        <div id="content-main-dashboard" style="height: 590px;">
             <hr>
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 30%;">
                     
                     <form action="productManage_admin" method="">
-                        <b>Filter by Category:</b>
+                        <!--<b>Filter by Category:</b>-->
                         <select name="categoryFilter">
                             <option value="0">No Filter</option>
                             <c:forEach items="${categoryList}" var="cate">
@@ -117,7 +117,7 @@
                         <input type="submit" value="Apply">
                     </form>
                     <form style="margin-bottom: 20px" action="productManage_admin" method="">
-                        <strong>Filter by Quantity:</strong>
+                        <!--<strong>Filter by Quantity:</strong>-->
                         <input style="margin-left: 2px;" type="radio" name="discontinued" value="1"> <label style="margin-left: -3px; margin-right: 15px" for="discontinued">Discontinued</label>
                         <input type="radio" name="outofstock"> <label style="margin-left: -3px;" for="">Out of stock</label>
                         <input type="submit" value="Apply">
@@ -126,7 +126,7 @@
 
                 <div id="product-title-2" style="width: 55%;">
                     <form style="padding-bottom: 40px;" action="search_product" method="post">
-                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter product name to search"/>
+                        <input style="padding: 4px; border: 1px solid blue;" type="text" name="txtSearch" value="${searchValue}" placeholder="Enter product name to search"/>
                         <input type="submit" value="Search">
                     </form>
                 </div>
