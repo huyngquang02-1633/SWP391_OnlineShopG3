@@ -34,6 +34,9 @@
             src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=718155789958513&autoLogAppEvents=1"
     nonce="LpjM0yAZ"></script>
     <script src="<%=path%>/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <style>
+        body{background-color: rgba(232, 244, 248, 0.512);}
+    </style>
 </head>
 <body>
     <header id="tg-header" class="tg-header tg-haslayout">
@@ -94,7 +97,7 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="tg-themebadge">${cartSize}</span>
                                     <i class="icon-cart"></i>
-                                    <span>$123.00</span>
+                                    <span>My Cart</span>
                                 </a>
                                 <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
                                     <c:forEach items="${cartList}" var="cartItem">

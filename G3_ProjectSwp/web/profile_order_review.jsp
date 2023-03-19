@@ -60,7 +60,7 @@
                                                 </c:choose>
                                             </div>
                                             <c:forEach items="${orderDetailList}" var="odDetailList">
-                                                <c:if test="${order.getOrderID() == odDetailList.getOrderID()}">
+                                                <c:if test="${order.getOrderID() == odDetailList.getOrderID() && odDetailList.isReviewed()==false}">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-md-2">
@@ -72,7 +72,8 @@
                                                                 <p style="margin-bottom: 15px;">Qty: ${odDetailList.getQuantity()}</p>
                                                                 <p style="margin-bottom: 0px">${odDetailList.getSalePrice()}</p>
                                                             </div>
-                                                            <form>
+                                                            <form method="POST" action="AccountProfile2_review" enctype="multipart/form-data">
+                                                                    
                                                                 <div class="col-md-6" style="display: flex; flex-wrap: wrap"> 
                                                                     <strong style="    margin-top: 5px;
                                                                             margin-right: 20px;    color: #555555;">Rating:</strong>
@@ -93,7 +94,7 @@
                                                                         <input type="radio" id="star_1" name="rate" value="1" />
                                                                         <label for="star_1" title="One">&#9733;</label>
                                                                     </section>
-
+                                                                    
                                                                     <div class="file-upload">
                                                                         <div class="file-select">
                                                                             <div class="file-select-button" id="fileName">Add image Review</div>
@@ -101,11 +102,14 @@
                                                                             <input type="file" name="chooseFile" accept="image/*,.jpg,.jepg,.png" id="chooseFile">
                                                                         </div>
                                                                     </div>
-
+                                                                    
+                                                                    <input style="display: none;" name="orderID" value="${odDetailList.getOrderID()}">
+                                                                    <input style="display: none;" name="productID" value="${odDetailList.getProductID()}">
+                                                                       
                                                                     <textarea rows="4" cols="50" style="    background: #eeeeee;
                                                                               width: 408px;
                                                                               height: 73px;
-                                                                              position: relative;" type="text" placeholder="Enter your review"/></textarea>
+                                                                              position: relative;" name="txtComment" type="text" placeholder="Enter your review"/></textarea>
                                                                     <input style="position: absolute;
                                                                            padding: 3px;
                                                                            bottom: 4px;
@@ -121,6 +125,7 @@
 
                                                         </div>
                                                     </div>
+                                                            <hr style="margin: 10px; border-top: 1px solid black;">
                                                 </c:if>
                                             </c:forEach>
                                             <div class="card-footer" >

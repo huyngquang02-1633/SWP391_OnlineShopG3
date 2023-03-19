@@ -55,8 +55,16 @@ public class OrderManage_admin extends HttpServlet {
         if (req.getParameter("currentPage") != null) {
             currentPage = Integer.parseInt(req.getParameter("currentPage"));
         }
+        
         ArrayList<Order> orderList = new OrderDAO().getAllOrders();
-        req.getSession().setAttribute("orderList", orderList);
+        if(req.getSession().getAttribute("orderList")!=null){
+            orderList = (ArrayList<Order>)req.getSession().getAttribute("orderList");
+        }
+        
+        //req.getSession().setAttribute("orderList", orderList);
+        
+        
+        
         ArrayList<Customer> cusList = new CustomerDAO().getAllCustomers();
         ArrayList<Employee> empList = null;
         try {
@@ -142,7 +150,7 @@ public class OrderManage_admin extends HttpServlet {
         }
         req.getSession().removeAttribute("mode");
         if (orderList.isEmpty()) {
-            req.setAttribute("emptyListMsg", "There is nothing in Order List, Let's order some thing!");
+            req.setAttribute("emptyListMsg", "There is nothing in Order List!");
         }
         req.getSession().setAttribute("currentPage", currentPage);
 

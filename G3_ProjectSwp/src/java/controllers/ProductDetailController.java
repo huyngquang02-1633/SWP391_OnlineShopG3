@@ -66,7 +66,7 @@ public class ProductDetailController extends HttpServlet{
         req.setAttribute("cateList", cateList);
         req.setAttribute("authorList", authorList);
         req.setAttribute("genreList", genreList);
-        req.setAttribute("supplierList", supplierList);
+        req.setAttribute("SupList", supplierList);
         req.setAttribute("comingSoon", comingSoon);
         req.setAttribute("availableInStock", availableInStock);
         req.setAttribute("similarProductList", similarProductList);

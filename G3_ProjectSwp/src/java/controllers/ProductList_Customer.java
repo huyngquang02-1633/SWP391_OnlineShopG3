@@ -53,6 +53,18 @@ public class ProductList_Customer extends HttpServlet {
             if (parameterName.equals("authorID")) {
                 req.getSession().setAttribute("mode", 3);
             }
+            if (parameterName.equals("genreID")) {
+                req.getSession().setAttribute("mode", 4);
+            }
+            if (parameterName.equals("supplierID")) {
+                req.getSession().setAttribute("mode", 5);
+            }
+            if (parameterName.equals("language")) {
+                req.getSession().setAttribute("mode", 6);
+            }
+            if (parameterName.equals("format")) {
+                req.getSession().setAttribute("mode", 7);
+            }
 
         }
 
@@ -79,6 +91,23 @@ public class ProductList_Customer extends HttpServlet {
                 int supID = Integer.parseInt(req.getParameter("supplierID"));
                 productList = new ProductDAO().getProductListBySupplierID(supID);
             }
+            if ((int) req.getSession().getAttribute("mode") == 6) {
+                int language = Integer.parseInt(req.getParameter("language"));
+                if(language==1){
+                    productList = new ProductDAO().SearchProductByLanguage("Tiếng Việt");
+                }else{
+                    productList = new ProductDAO().SearchProductByLanguage("Tiếng Anh");
+                }
+                
+            }
+            if ((int) req.getSession().getAttribute("mode") == 7) {
+                int format = Integer.parseInt(req.getParameter("format"));
+                if(format==1){
+                    productList = new ProductDAO().SearchProductByFormat("Bìa mềm");
+                }else{
+                    productList = new ProductDAO().SearchProductByFormat("Bìa cứng");
+                }
+            }
 
         } else {
             productList = new ProductDAO().getProducts(false);
@@ -99,6 +128,9 @@ public class ProductList_Customer extends HttpServlet {
         req.setAttribute("authorList", authorList);
         req.setAttribute("comingSoon", comingSoon);
         req.setAttribute("SupList", SupList);
+        
+        
+        
         req.getRequestDispatcher("/products.jsp").forward(req, resp);
     }
 
