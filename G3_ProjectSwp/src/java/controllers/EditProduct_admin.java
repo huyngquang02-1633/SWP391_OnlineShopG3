@@ -61,7 +61,7 @@ public class EditProduct_admin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         int id = Integer.parseInt(req.getParameter("pid"));
-         String name = req.getParameter("txtProductName");
+         String name = req.getParameter("txtProductName").replaceAll("\\s\\s+", " ").trim();
         
         int category = Integer.parseInt(req.getParameter("ddlCategory"));
         int genre = Integer.parseInt(req.getParameter("ddlGenre"));
@@ -70,19 +70,19 @@ public class EditProduct_admin extends HttpServlet {
        String sale_price_raw = req.getParameter("txtSalePrice");
       
         int author = Integer.parseInt(req.getParameter("ddlAuthor"));
-        String translator = req.getParameter("txtTranslator");
+        String translator = req.getParameter("txtTranslator").replaceAll("\\s\\s+", " ").trim();
         int publisher = Integer.parseInt(req.getParameter("ddlPublisher"));
         int supplier = Integer.parseInt(req.getParameter("ddlSupplier"));
-        String language = req.getParameter("txtLanguage");
-        String size = req.getParameter("txtSize");
-        String  weight_raw = req.getParameter("txtWeight");
+        String language = req.getParameter("txtLanguage").replaceAll("\\s\\s+", " ").trim();
+        String size = req.getParameter("txtSize").replaceAll("\\s\\s+", " ").trim();
+        String  weight_raw = req.getParameter("txtWeight").replaceAll("\\s\\s+", " ").trim();
         
-        String page_raw = req.getParameter("txtPage");
+        String page_raw = req.getParameter("txtPage").replaceAll("\\s\\s+", " ").trim();
         
-        String format = req.getParameter("txtFormat");
-        String img = req.getParameter("txtImg");
-        String license = req.getParameter("txtLicense");
-        String description = req.getParameter("txtDescription");
+        String format = req.getParameter("txtFormat").replaceAll("\\s\\s+", " ").trim();
+        String img = req.getParameter("txtImg").replaceAll("\\s\\s+", " ").trim();
+        String license = req.getParameter("txtLicense").replaceAll("\\s\\s+", " ").trim();
+        String description = req.getParameter("txtDescription").replaceAll("\\s\\s+", " ").trim();
 
         boolean discon = false;
         if (req.getParameter("chkDiscontinued") != null) {

@@ -51,12 +51,12 @@ public class StoreManager_admin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("AccAdminSession") != null) {
             Account b = (Account) req.getSession().getAttribute("AccAdminSession");
-            String lastName = req.getParameter("txtLastName");
-            String firstName = req.getParameter("txtFirstName");
-            String title = req.getParameter("txtTitle");
-            String phoneNumber = req.getParameter("txtPhoneNumber");
-            String titleOfCourse = req.getParameter("txtTitleOfCourtesy");
-            String address = req.getParameter("txtAddress");
+            String lastName = req.getParameter("txtLastName").replaceAll("\\s\\s+", " ").trim();
+            String firstName = req.getParameter("txtFirstName").replaceAll("\\s\\s+", " ").trim();
+            String title = req.getParameter("txtTitle").replaceAll("\\s\\s+", " ").trim();
+            String phoneNumber = req.getParameter("txtPhoneNumber").replaceAll("\\s\\s+", " ").trim();
+            String titleOfCourse = req.getParameter("txtTitleOfCourtesy").replaceAll("\\s\\s+", " ").trim();
+            String address = req.getParameter("txtAddress").replaceAll("\\s\\s+", " ").trim();
             Boolean gender = Boolean.valueOf(req.getParameter("txtGender"));
             if (req.getParameter("txtBirthDate") != "") {
                 Date birthday = Date.valueOf(req.getParameter("txtBirthDate"));

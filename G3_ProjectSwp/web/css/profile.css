@@ -135,6 +135,7 @@ body {
 
 .bio-graph-info {
     color: #89817e;
+    width: 105%;
 }
 
 .bio-graph-info h1 {
@@ -155,9 +156,17 @@ body {
 
 }
 
+.bio-row1 {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+    padding:0 10px;
+
+}
+
 .bio-row input{
     width: 60%;
-    height: 28px;
+    height: 30px;
     /* width: 100%; */
     /* background-color: brown; */
     /* color: #fff; */
@@ -166,15 +175,33 @@ body {
     border-radius: 5px;
     /* border: none; */
     box-shadow: 1px 2px #c1c1c1;
-    border-color: #666;
-    border: #77b748;
+    border-radius: 4px;
+}
+.bio-row1 input{
+    margin-top: 8px;
+    width: 90%;
+    height: 30px;
+    /* width: 100%; */
+    /* background-color: brown; */
+    /* color: #fff; */
+    /* margin-bottom: 15px; */
+    line-height: 40px;
+    border-radius: 5px;
+    /* border: none; */
+    box-shadow: 1px 2px #c1c1c1;
     border-radius: 4px;
 }
 
 .bio-row p span {
+
     width: 100px;
     display: inline-block;
-
+    font-weight: 500;
+}
+.bio-row1 p span {
+    width: 110px;
+    padding-bottom: 8px;
+    font-size: 14px;
 }
 
 /*.bio-chart, .bio-desk {

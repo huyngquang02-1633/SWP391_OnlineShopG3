@@ -223,6 +223,50 @@ public class ProductDAO extends DBContext {
         return availableInStock - Pending;
     }
 
+    public ArrayList<Product> getProductListOutOfStock() {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products";
+            PreparedStatement ps;
+            ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int ProductID = rs.getInt("ProductID");
+                String ProductName = rs.getString("ProductName");
+                int CategoryID = rs.getInt("CategoryID");
+                int GenreID = rs.getInt("GenreID");
+                double CoverPrice = rs.getDouble("CoverPrice");
+                double SalePrice = rs.getDouble("SalePrice");
+                int AuthorID = rs.getInt("AuthorID");
+                String Translator = rs.getString("Translator");
+                int PublisherID = rs.getInt("PublisherID");
+                int SupplierID = rs.getInt("SupplierID");
+                String Language = rs.getString("Language");
+                String Size = rs.getString("Size");
+                double Weight = rs.getDouble("Weight");
+                int NumberOfPage = rs.getInt("NumberOfPage");
+                String Format = rs.getString("Format");
+                String Image = rs.getString("Image");
+                Date PublishDate = rs.getDate("PublishDate");
+                String PublishingLicense = rs.getString("PublishingLicense");
+                String Description = rs.getString("Description");
+                boolean Discontinued = rs.getBoolean("Discontinued");
+                double aveRating = getAveRatingOfProduct(ProductID);
+                int availableInStock = getAvailableInStock(ProductID);
+                if (!(availableInStock >= 1)) {
+                    productList.add(new Product(ProductID, ProductName, CategoryID, GenreID, CoverPrice, SalePrice, AuthorID,
+                            Translator, PublisherID, SupplierID, Language, Size, Weight, NumberOfPage, Format,
+                            Image, PublishDate, PublishingLicense, Description, Discontinued, aveRating, availableInStock));
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return productList;
+    }
+
     public ArrayList<Product> getProductbySearch(String sample) {
         ArrayList<Product> productList = new ArrayList<>();
         try {
@@ -285,6 +329,20 @@ public class ProductDAO extends DBContext {
             String sql = "select * from Products where SupplierID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, SupplierID);
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+        } catch (Exception e) {
+
+        }// finally{connection.close();}
+        return productList;
+    }
+
+    public ArrayList<Product> getProductListDiscontinued(int discontinued) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [Products] WHERE [Discontinued] = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, discontinued);
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {

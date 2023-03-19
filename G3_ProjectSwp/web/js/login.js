@@ -1,67 +1,74 @@
-var overlay = document.getElementById("overlay");
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
 
-// Buttons to 'switch' the page
-var openSignUpButton = document.getElementById("slide-left-button");
-var openSignInButton = document.getElementById("slide-right-button");
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
 
-// The sidebars
-var leftText = document.getElementById("sign-in");
-var rightText = document.getElementById("sign-up");
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
 
-// The forms
-var accountForm = document.getElementById("sign-in-info");
-var signinForm = document.getElementById("sign-up-info");
 
-// Open the Sign Up page
-openSignUp = () => {
-    // Remove classes so that animations can restart on the next 'switch'
-    leftText.classList.remove("overlay-text-left-animation-out");
-    overlay.classList.remove("open-sign-in");
-    rightText.classList.remove("overlay-text-right-animation");
-    // Add classes for animations
-    accountForm.className += " form-left-slide-out";
-    rightText.className += " overlay-text-right-animation-out";
-    overlay.className += " open-sign-up";
-    leftText.className += " overlay-text-left-animation";
-    // hide the sign up form once it is out of view
-    setTimeout(function () {
-        accountForm.classList.remove("form-left-slide-in");
-        accountForm.style.display = "none";
-        accountForm.classList.remove("form-left-slide-out");
-    }, 700);
-    // display the sign in form once the overlay begins moving right
-    setTimeout(function () {
-        signinForm.style.display = "flex";
-        signinForm.classList += " form-right-slide-in";
-    }, 200);
+//facebook login
+function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+        testAPI();
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+        document.getElementById('status').innerHTML = 'Please log ' +
+                'into this webpage.';
+    }
+}
+
+
+function checkLoginState() {               // Called when a person is finished with the Login Button.
+    FB.getLoginStatus(function (response) {   // See the onlogin handler
+        statusChangeCallback(response);
+    });
+}
+
+
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '718155789958513',
+        cookie: true, // Enable cookies to allow the server to access the session.
+        xfbml: true, // Parse social plugins on this webpage.
+        version: 'v16.0'           // Use this Graph API version for this call.
+    });
+
+
+    FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+        statusChangeCallback(response);        // Returns the login status.
+    });
+
 };
 
-// Open the Sign In page
-openSignIn = () => {
-    // Remove classes so that animations can restart on the next 'switch'
-    leftText.classList.remove("overlay-text-left-animation");
-    overlay.classList.remove("open-sign-up");
-    rightText.classList.remove("overlay-text-right-animation-out");
-    // Add classes for animations
-    signinForm.classList += " form-right-slide-out";
-    leftText.className += " overlay-text-left-animation-out";
-    overlay.className += " open-sign-in";
-    rightText.className += " overlay-text-right-animation";
-    // hide the sign in form once it is out of view
-    setTimeout(function () {
-        signinForm.classList.remove("form-right-slide-in");
-        signinForm.style.display = "none";
-        signinForm.classList.remove("form-right-slide-out");
-    }, 700);
-    // display the sign up form once the overlay begins moving left
-    setTimeout(function () {
-        accountForm.style.display = "flex";
-        accountForm.classList += " form-left-slide-in";
-    }, 200);
-};
+function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me?fields=email,name,picture', function (response) {
 
-// When a 'switch' button is pressed, switch page
-window.onload = function () {
-    openSignUpButton.addEventListener("click", openSignUp, false);
-    openSignInButton.addEventListener("click", openSignIn, false);
-};
+        let name = response.name;
+        let email = response.email;
+        let id = response.id;
+        let imgFB = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=" + response.id + "&height=50&width=50&ext=1679128895&hash=AeTUdjLLENIW-ySdbEQ";
+        let userData = {
+            name: name,
+            avt: imgFB,
+            email: email,
+            id: id
+        };
+
+        let convertuserData = JSON.stringify(userData);
+
+        sessionStorage.setItem('userlogin', convertuserData);
+    window.location.href = "./homepage";
+
+//        document.getElementById('nameprofile').innerHTML = response.name;
+//
+//        document.getElementById("imgprofile").src = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=" + response.id + "&height=50&width=50&ext=1679128895&hash=AeTUdjLLENIW-ySdbEQ";
+
+    });
+}
