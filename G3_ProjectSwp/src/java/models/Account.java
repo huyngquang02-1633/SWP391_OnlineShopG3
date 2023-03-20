@@ -1,7 +1,7 @@
-
 package models;
 
 public class Account {
+
     private int AccountID;
     private String Email;
     private String Password;
@@ -10,6 +10,14 @@ public class Account {
     private int Role;
     private String Image;
     private boolean Status;
+
+    public Account() {
+    }
+
+    public Account(String Email, String Password) {
+        this.Email = Email;
+        this.Password = Password;
+    }
 
     public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role, boolean Status) {
         this.AccountID = AccountID;
@@ -20,6 +28,7 @@ public class Account {
         this.Role = Role;
         this.Status = Status;
     }
+
     public Account(int AccountID, String Email, String Password, int CustomerID, int EmployeeID, int Role, String Image, boolean Status) {
         this.AccountID = AccountID;
         this.Email = Email;
@@ -38,7 +47,6 @@ public class Account {
     public void setStatus(boolean Status) {
         this.Status = Status;
     }
-    
 
     public String getImage() {
         return Image;
@@ -48,7 +56,6 @@ public class Account {
         this.Image = Image;
     }
 
-    
     public int getAccountID() {
         return AccountID;
     }

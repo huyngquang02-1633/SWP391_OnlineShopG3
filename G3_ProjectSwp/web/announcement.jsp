@@ -49,10 +49,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="tg-404error">
-                            <div class="col-xs-12 col-sm-12 col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
+                            <div class="">
                                 <div class="tg-404errorcontent">
-                                    <h2>Ooops! Could Not Find It</h2>
-                                    <span>404</span>
+                                    <span style="position: relative; font-size: 100px;padding-bottom: 30px">THANK YOU!</span>
+                                    <h2 style="font-size: 30px; margin-top: 30px">You have successfully created an account.</h2>
+                                    <h2 style="font-size: 30px;">Wait for the administrator to activate your account.</h2>
+
                                 </div>
                                 <form class="tg-formtheme tg-formsearch">
                                     <fieldset>

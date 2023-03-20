@@ -6,7 +6,8 @@
         <%
             String path = request.getContextPath();
         %>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Book Library</title>
         <meta name="description" content="">
@@ -82,13 +83,13 @@
                             <div class="dropdown tg-themedropdown tg-wishlistdropdown">
                                 <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="tg-themebadge">3</span>
+                                    <span class="tg-themebadge"></span>
                                     <i class="icon-heart"></i>
-                                    <span>Wishlist</span>
+                                    <span>Wish list</span>
                                 </a>
                                 <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
                                     <div class="tg-description">
-                                        <p>No products were added to the wishlist!</p>
+                                        <p>No products were added to the wish list!</p>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +141,7 @@
                         <div class="tg-searchbox">
                             <form class="tg-formtheme tg-formsearch" style="width: 90%;" method="POST" action="<%=path%>/productList">
                                 <fieldset>
-                                    <input type="text" name="txtSearch" class="typeahead form-control"
+                                    <input type="text" name="txtSearch" value="${txtSearch}" class="typeahead form-control"
                                            placeholder="Search by Title, Author">
                                     <button type="submit"><i class="icon-magnifier"></i></button>
                                 </fieldset>

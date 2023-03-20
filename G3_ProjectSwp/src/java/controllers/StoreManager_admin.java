@@ -7,6 +7,7 @@ package controllers;
 import DAL.AccountDAO;
 import DAL.DepartmentsDAO;
 import DAL.EmployeeDAO;
+import DAL.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -38,6 +39,19 @@ public class StoreManager_admin extends HttpServlet {
             ArrayList<Department> depart = new DepartmentsDAO().getAllDepartments();
             req.setAttribute("depart", depart);
 
+            int quantityID1 = new OrderDAO().CountOrderByStatus(1);
+            req.setAttribute("quantityID1", quantityID1);
+            int quantityID2 = new OrderDAO().CountOrderByStatus(2);
+            req.setAttribute("quantityID2", quantityID2);
+            int quantityID3 = new OrderDAO().CountOrderByStatus(3);
+            req.setAttribute("quantityID3", quantityID3);
+            int quantityID4 = new OrderDAO().CountOrderByStatus(4);
+            req.setAttribute("quantityID4", quantityID4);
+            int quantityID5 = new OrderDAO().CountOrderByStatus(5);
+            req.setAttribute("quantityID5", quantityID5);
+            int quantityID6 = new OrderDAO().CountOrderByStatus(6);
+            req.setAttribute("quantityID6", quantityID6);
+
             req.getRequestDispatcher("store_managerment.jsp").forward(req, resp);
         } else {
 //
@@ -51,12 +65,12 @@ public class StoreManager_admin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("AccAdminSession") != null) {
             Account b = (Account) req.getSession().getAttribute("AccAdminSession");
-            String lastName = req.getParameter("txtLastName");
-            String firstName = req.getParameter("txtFirstName");
-            String title = req.getParameter("txtTitle");
-            String phoneNumber = req.getParameter("txtPhoneNumber");
-            String titleOfCourse = req.getParameter("txtTitleOfCourtesy");
-            String address = req.getParameter("txtAddress");
+            String lastName = req.getParameter("txtLastName").replaceAll("\\s\\s+", " ").trim();
+            String firstName = req.getParameter("txtFirstName").replaceAll("\\s\\s+", " ").trim();
+            String title = req.getParameter("txtTitle").replaceAll("\\s\\s+", " ").trim();
+            String phoneNumber = req.getParameter("txtPhoneNumber").replaceAll("\\s\\s+", " ").trim();
+            String titleOfCourse = req.getParameter("txtTitleOfCourtesy").replaceAll("\\s\\s+", " ").trim();
+            String address = req.getParameter("txtAddress").replaceAll("\\s\\s+", " ").trim();
             Boolean gender = Boolean.valueOf(req.getParameter("txtGender"));
             if (req.getParameter("txtBirthDate") != "") {
                 Date birthday = Date.valueOf(req.getParameter("txtBirthDate"));

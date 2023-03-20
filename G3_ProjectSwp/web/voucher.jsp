@@ -54,7 +54,7 @@
                             <td>${x.getPercentage()}</td>
                             <td>${x.getQuantity()}</td>
                             <td><a href="${Edit}">Edit</a> &nbsp; | &nbsp; 
-                                <a class="s" href="${Delete}">Delete</a></td>
+                                <a class="s" onclick="window.confirm('Confirm delete this voucher?')" href="${Delete}">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </table>
