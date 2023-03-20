@@ -529,7 +529,6 @@ public class OrderDAO extends DBContext {
         return orderDetails;
     }
 
-
     public void updateOrderStatus(String orderId, String status) throws SQLException {
         String sql = "UPDATE Orders SET status = ? WHERE OrderID = ?";
         try {

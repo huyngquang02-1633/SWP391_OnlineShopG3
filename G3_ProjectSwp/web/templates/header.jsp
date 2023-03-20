@@ -6,7 +6,8 @@
         <%
             String path = request.getContextPath();
         %>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Book Library</title>
         <meta name="description" content="">
@@ -140,7 +141,7 @@
                         <div class="tg-searchbox">
                             <form class="tg-formtheme tg-formsearch" style="width: 90%;" method="POST" action="<%=path%>/productList">
                                 <fieldset>
-                                    <input type="text" name="txtSearch" class="typeahead form-control"
+                                    <input type="text" name="txtSearch" value="${txtSearch}" class="typeahead form-control"
                                            placeholder="Search by Title, Author">
                                     <button type="submit"><i class="icon-magnifier"></i></button>
                                 </fieldset>

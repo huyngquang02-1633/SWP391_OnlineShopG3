@@ -48,8 +48,8 @@ public class voucherManage_admin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String DiscountID = req.getParameter("txtDiscountID");
-        String Title = req.getParameter("txtTitle");
-        String Description = req.getParameter("txtDescription");
+        String Title = req.getParameter("txtTitle").replaceAll("\\s\\s+", " ").trim();
+        String Description = req.getParameter("txtDescription").replaceAll("\\s\\s+", " ").trim();
         LocalDateTime StartDate = LocalDateTime.parse(req.getParameter("txtStartDate"));
         LocalDateTime EndDate = LocalDateTime.parse(req.getParameter("txtEndDate"));
         double Percentage = Double.parseDouble(req.getParameter("txtPercentage"));
