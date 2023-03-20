@@ -108,6 +108,7 @@ public class ProductDAO extends DBContext {
         }
         return productList;
     }
+    
 
     public ArrayList<Product> getProductsByCatNSearch(String sample, int CatID, boolean isAdmin) {
         ArrayList<Product> productList = new ArrayList<>();
@@ -568,6 +569,7 @@ public class ProductDAO extends DBContext {
         return productList;
     }
 
+
     public ArrayList<Product> getProductHighRating() {
         ArrayList<Product> listHighRating = new ArrayList<>();
         try {
@@ -578,6 +580,7 @@ public class ProductDAO extends DBContext {
         } catch (Exception e) {
         }
         return listHighRating;
+
     }
 
     public static void main(String[] args) {

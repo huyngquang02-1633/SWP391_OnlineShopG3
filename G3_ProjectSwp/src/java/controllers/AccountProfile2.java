@@ -46,9 +46,11 @@ public class AccountProfile2 extends HttpServlet {
         } else {
             ArrayList<Order> orderList = new OrderDAO().getAllOrdersByCusID(accCustomer.getCustomerID());
             if (orderList.isEmpty()) {
-                req.setAttribute("errorMsg", "Không tìm thấy đơn hàng nào");
+                req.setAttribute("errorMsg", "Order not found");
             } else {
                 ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(accCustomer.getCustomerID());
+                ArrayList<Product> productList = new ProductDAO().getProducts(true);
+                req.setAttribute("productList", productList);
                 req.setAttribute("orderDetailList", orderDetailList);
                 req.setAttribute("orderList", orderList);
             }

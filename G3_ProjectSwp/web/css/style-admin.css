@@ -835,7 +835,7 @@
     overflow: auto;
     white-space: nowrap;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
-
+    text-align: center;
  }
 
  #order-table-admin a{
