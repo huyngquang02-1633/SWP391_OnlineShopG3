@@ -23,12 +23,12 @@
                 <table id="orders">
                     <tr>
                         <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Employee Name</th>
+                        <th>Customer</th>
+                        <th>Employee</th>
                         <th>Order Date</th>
                         <th>Required Date</th>
                         <th>Shipped Date</th>
-                        <th>Ship Address</th>
+                        <th style="width: 200px;">Ship Address</th>
                         <th>Ship City</th>
                         <th>Status</th>
                     </tr>
@@ -47,9 +47,10 @@
                             </td>
                             <td>${od.getOrderDate()}</td>
                             <td>${od.getRequiredDate()}</td>
+                            <td>${od.getShippedDate()}</td>
                             <td>${od.getShipAddress()}</td>
                             <td>${od.getShipCity()}</td> 
-                            <td>${od.getShipCountry()}</td> 
+                            <!--<td>${od.getShipCountry()}</td>--> 
 
                             <c:choose>
                                 <c:when test="${od.getStatus()==1}"><td style="color: blue;">Pending</td></c:when>
@@ -136,7 +137,7 @@
 </div>
 </div>
 <div id="footer-admin">
-    <p>Group 3 SE1639 - Online Shop</p>
+    2023 All Rights Reserved By © Book Library
 </div>
 </div>
 <script>

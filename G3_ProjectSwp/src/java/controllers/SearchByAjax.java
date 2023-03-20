@@ -61,16 +61,20 @@ public class SearchByAjax extends HttpServlet {
         if(request.getParameter("txtCategory")!=null){
             proList = new ProductDAO().getProductListByCategoryID(Integer.parseInt(request.getParameter("txtCategory")));
             request.getSession().setAttribute("proList", proList);
-        }else if(request.getParameter("txt") != null){
+        }
+        if(request.getParameter("txt") != null){
             proList = new ProductDAO().SearchProductByName(txtSearch);
             request.getSession().setAttribute("proList", proList);
-        }else if(request.getParameter("txtGenre") != null){
+        }
+        if(request.getParameter("txtGenre") != null){
             proList = new ProductDAO().getProductListByGenreID(Integer.parseInt(request.getParameter("txtGenre")));
             request.getSession().setAttribute("proList", proList);
-        }else if(request.getParameter("txtSupplier") != null){
+        }
+        if(request.getParameter("txtSupplier") != null){
             proList = new ProductDAO().getProductListBySupplierID(Integer.parseInt(request.getParameter("txtSupplier")));
             request.getSession().setAttribute("proList", proList);
-        }else if(request.getParameter("txtFormat") != null){
+        }
+        if(request.getParameter("txtFormat") != null){
             if(Integer.parseInt(request.getParameter("txtFormat"))==1){
                 proList = new ProductDAO().SearchProductByFormat("Bìa mềm");
             }else{
@@ -78,10 +82,12 @@ public class SearchByAjax extends HttpServlet {
             }
             request.getSession().setAttribute("proList", proList);
             
-        }else if(request.getParameter("txtSupplier") != null){
+        }
+        if(request.getParameter("txtSupplier") != null){
             proList = new ProductDAO().getProductListBySupplierID(Integer.parseInt(request.getParameter("txtSupplier")));
             request.getSession().setAttribute("proList", proList);
-        }else if(request.getParameter("txtPrice") != null){
+        }
+        if(request.getParameter("txtPrice") != null){
             switch (Integer.parseInt(request.getParameter("txtPrice"))) {
                 case 1:
                     proList = new ProductDAO().searchProductListByPriceDomain(0, 150000);
@@ -167,9 +173,9 @@ public class SearchByAjax extends HttpServlet {
                 if (pro1.getPublishDate()== null || pro2.getPublishDate() == null) {
                     return 0;
                 }else if(pro1.getPublishDate().compareTo(pro2.getPublishDate()) > 0){
-                    return 1;
-                }else {
                     return -1;
+                }else {
+                    return 1;
                 }
                 
             }
@@ -207,18 +213,22 @@ public class SearchByAjax extends HttpServlet {
         if(request.getSession().getAttribute("txtsortByName") != null){
             proList.sort(sortByName);
         }else if(request.getSession().getAttribute("txtsortByIncreasePrice") != null){
-            Collections.sort(proList,sortByIncreasePrice);
+             proList.sort(sortByIncreasePrice);
         }
         else if(request.getSession().getAttribute("txtsortByDecreasePrice") != null){
-            Collections.sort(proList,sortByDecreasePrice);
+             proList.sort(sortByDecreasePrice);
         }
         else if(request.getSession().getAttribute("txtsortByNewest") != null){
-            Collections.sort(proList,sortByNewDate);
+              proList.sort(sortByNewDate);
         }else{
-            Collections.sort(proList,sortByOldDate);
+             proList.sort(sortByOldDate);
         }
         
-        
+        if(proList.isEmpty()){
+            request.getSession().setAttribute("emptyListMsg", "There is nothing in Order List, Let's order some thing!");
+        }else{
+            request.getSession().removeAttribute("emptyListMsg");
+        }
         
         
         PrintWriter out = response.getWriter();

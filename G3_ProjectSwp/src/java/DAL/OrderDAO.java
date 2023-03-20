@@ -14,8 +14,13 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import models.Account;
 import models.Cart;
 import models.Discount;
+import models.SendMail;
 
 /**
  *
@@ -85,13 +90,45 @@ public class OrderDAO extends DBContext {
         }//finally{ connection.close();}
         return orderList;
     }
-
+    
+    
     public Order getOrdersByID(int orderID) {
         Order order = null;
         try {
             String sql = "select * from Orders o where o.CustomerID = ? Order by o.OrderDate ASC";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, orderID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int OrderID = rs.getInt("OrderID");
+                int CustomerID = rs.getInt("CustomerID");
+                int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
+                String ShipName = rs.getString("ShipName");
+                String ShipAddress = rs.getString("ShipAddress");
+                String ShipCity = rs.getString("ShipCity");
+                String ShipRegion = rs.getString("ShipRegion");
+                String ShipPostalCode = rs.getString("ShipPostalCode");
+                String ShipCountry = rs.getString("ShipCountry");
+                int Status = rs.getInt("Status");
+
+                order = new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
+            }
+        } catch (Exception e) {
+
+        }//finally{ connection.close();}
+        return order;
+    }
+    
+    public Order getRecentlyOrder(int customerID) {
+        Order order = null;
+        try {
+            String sql = "select Top 1 * from  Orders where CustomerID = ? Order by OrderDate DESC";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, customerID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int OrderID = rs.getInt("OrderID");
@@ -162,8 +199,8 @@ public class OrderDAO extends DBContext {
                 int WarehouseID = rs.getInt("WarehouseID");
                 int Quantity = rs.getInt("Quantity");
                 double SalePrice = rs.getDouble("SalePrice");
-                double Discount = rs.getDouble("Discount");
-                OrderDetail od = new OrderDetail(OrderID, ProductID, Quantity, SalePrice, Discount);
+                String DiscountID = rs.getString("DiscountID");
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID);
                 orderDetails.add(od);
             }
         } catch (Exception e) {
@@ -206,7 +243,18 @@ public class OrderDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cusID);
             ResultSet rs = ps.executeQuery();
-            orderDetails = getObjectOrderDetailList(rs);
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                double SalePrice = rs.getDouble("SalePrice");
+                int WarehouseID = rs.getInt("WarehouseID");
+                int Quantity = rs.getInt("Quantity");
+                String DiscountID = rs.getString("DiscountID");
+                boolean isReviewed = new ReviewDAO().isOrderDetailReviewed(cusID, OrderID, ProductID);
+                OrderDetail od = new OrderDetail(OrderID, ProductID, WarehouseID, SalePrice, Quantity, DiscountID,isReviewed);
+                orderDetails.add(od);
+            }
         } catch (Exception e) {
 
         }//finally{ connection.close();}
@@ -336,9 +384,9 @@ public class OrderDAO extends DBContext {
             ps2.executeUpdate();
 
         } catch (Exception e) {
-            connection.rollback();
+            //connection.rollback();
         } finally {
-            connection.close();
+            //connection.close();
         }
 
     }
@@ -481,7 +529,6 @@ public class OrderDAO extends DBContext {
         return orderDetails;
     }
 
-
     public void updateOrderStatus(String orderId, String status) throws SQLException {
         String sql = "UPDATE Orders SET status = ? WHERE OrderID = ?";
         try {
@@ -492,5 +539,57 @@ public class OrderDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void main(String[] args) {
+        ArrayList<Cart> cartList = new ArrayList<>();
+            cartList.add(new Cart( 1, 2));
+            cartList.add(new Cart( 2, 3));
+            cartList.add(new Cart( 3, 4));
+            AccountDAO accDAO = new AccountDAO();
+            
+            
+            Account AccCustomer = accDAO.getAccountByEmail("vuvu15202gmail.com");
+            //req.getSession().setAttribute("AccCustomerSession", AccCustomer);
+            
+            
+            try {
+                OrderDAO odDAO = new OrderDAO();
+                ProductDAO proDAO = new ProductDAO();
+                Discount discount = odDAO.getVoucher("SIEUSAPSAN40");
+                int newOrderID = odDAO.getNewOrderID();
+                String voucher = discount.getDiscountID();
+                double percent = discount.getPercentage();
+                
+            
+                Order od = new Order(newOrderID, 2, 1, "vu", "vu", "vu", "fe", "ff", "Viet Nam",1);
+                odDAO.createOrder(od);
+                ArrayList<OrderDetail> orderDetailList = new ArrayList<>();
+                for (Cart item : cartList) {
+                    
+                    Product proInfor = proDAO.getProductInfor(item.getProductID());
+                    double discountAmount = proInfor.getSalePrice() - proInfor.getSalePrice()*percent;
+                    orderDetailList.add(new OrderDetail(newOrderID, item.getProductID(),1,discountAmount, item.getQuantity(), voucher ));
+                    
+                }
+                for (OrderDetail orderDetail : orderDetailList) {
+                    odDAO.createDetailOfOrder(orderDetail);
+                }
+                
+                
+                SendMail sendMail = new SendMail();
+                String subjectContent = "Your order " + newOrderID + " has been confirmed!";
+                String emailContent = "Shopee is preparing your order!\nOrder detail: .......";
+                
+                try {
+                    sendMail.sendAnnounce("vuvu15202@gmail.com", subjectContent, emailContent);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } 
     }
 }

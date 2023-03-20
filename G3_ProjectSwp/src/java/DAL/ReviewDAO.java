@@ -40,8 +40,80 @@ public class ReviewDAO extends DBContext{
         return reviewList;
     }
     
+    public boolean createReview(Review review){
+        int result=0;
+        try {
+            String sql = "  insert into Reviews values(?,?,?,?,?, ?,GETDATE())";
+            PreparedStatement ps;
+            ps= connection.prepareStatement(sql);
+            ps.setInt(1,review.getCustomerID());
+            ps.setInt(2,review.getOrderID());
+            ps.setInt(3,review.getProductID());
+            ps.setInt(4,review.getRating());
+            ps.setString(5,review.getComment());
+            ps.setString(6,review.getImage());
+            result = ps.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+        return result>0;
+    }
+    
+    public boolean isReviewed(int customerID, int orderID, int productID){
+        Review review = null;
+        try {
+            String sql = "select * from Reviews where CustomerID=? AND OrderID=? AND ProductID=?";
+            PreparedStatement ps;
+            ps= connection.prepareStatement(sql);
+            ps.setInt(1,customerID);
+            ps.setInt(2,orderID);
+            ps.setInt(3,productID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int CustomerID = rs.getInt("CustomerID");
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                int Rating = rs.getInt("Rating");
+                String Comment = rs.getString("Comment");
+                String Image = rs.getString("Image");
+                Date ReviewDate = rs.getDate("ReviewDate");
+                review = new Review(CustomerID, OrderID, ProductID, Rating, Comment, Image, ReviewDate);
+            }
+        } catch (Exception e) {
+        }
+        return review!=null;
+    }
+    public boolean isOrderDetailReviewed(int customerID, int orderID, int productID){
+        Review review = null;
+        try {
+            String sql = "select * from Reviews where CustomerID=? AND OrderID=? AND ProductID=?";
+            PreparedStatement ps;
+            ps= connection.prepareStatement(sql);
+            ps.setInt(1,customerID);
+            ps.setInt(2,orderID);
+            ps.setInt(3,productID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int CustomerID = rs.getInt("CustomerID");
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                int Rating = rs.getInt("Rating");
+                String Comment = rs.getString("Comment");
+                String Image = rs.getString("Image");
+                Date ReviewDate = rs.getDate("ReviewDate");
+                review = new Review(CustomerID, OrderID, ProductID, Rating, Comment, Image, ReviewDate);
+            }
+        } catch (Exception e) {
+        }
+        return review!=null;
+    }
+    
+    
+    
     public static void main(String[] args) {
         ReviewDAO rvDAO = new ReviewDAO();
-        System.out.println(rvDAO.getReviewListByProductID(1).size());
+        System.out.println(rvDAO.createReview(new Review(11, 10303,2, 5, "comment", "Image")));
     }
 }

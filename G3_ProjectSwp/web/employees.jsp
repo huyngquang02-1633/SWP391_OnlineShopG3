@@ -53,17 +53,17 @@
     </div>
 
 </div>
-<div id="content-right">
+<div id="content-right"  style="height: 665px;">
     <div class="path-admin">EMPLOYEES LIST</b></div>
     <div class="content-main">
         <hr/>
         <div id="content-main-dashboard">
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 25%;">
-                    <b>Filter by Departments:</b>
+                    <!--<b>Filter by Departments:</b>-->
                     <form action="employeeManager_admin" method="">
                         <select name="employeeFilter">
-                            <option value="0">No Filter</option>
+                            <option value="0">Choose Department</option>
                             <c:forEach items="${depart}" var="dep">
 
                                 <c:choose>
@@ -93,15 +93,13 @@
             <div id="order-table-admin">
                 <table id="orders">
                     <tr>
-                        <th>EmployeeID</th>
+                        <th>Emp ID</th>
                         <th>LastName</th>
                         <th>FirstName</th>
                         <th>Gender</th>
-                        <th>Department Name</th>
-
+                        <th>Department</th>
                         <!--<th>Title</th>-->
                         <th>Title</th>
-                        <th>TitleOfCourtesy</th>
                         <th>Birthday</th>
                         <th>HireDate</th>
                         <th>Address</th>
@@ -123,14 +121,13 @@
                                     <c:if test="${x.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if>
                                 </c:forEach>   </td> 
                             <td>${x.getTitle()}</td> 
-                            <td>${x.getTitleOfCourtesy()}</td> 
                             <td>${x.getBirthDate()}</td> 
                             <td>${x.getHireDate()}</td> 
                             <td>${x.getAddress()}</td> 
                             <td>${x.getPhoneNumber()}</td> 
                             <c:choose>
                                 <c:when test="${x.getDepartmentID() == 1}"><td style="color: blue;">Admin</td></c:when>
-                                <c:when test="${x.isStatus() == true}"><td style="color: green;">Active | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Inactivate</a></td></c:when>
+                                <c:when test="${x.isStatus() == true}"><td style="color: green;">Activate | <a herf ="#" onclick="showMess(${x.getEmployeeID()})">Inactivate</a></td></c:when>
                                 <c:when test="${x.isStatus() == false}"><td style="color: red;">Inactivate | <a herf ="#" onclick="showMesss(${x.getEmployeeID()})">Active</a></td></c:when>
                             </c:choose>
                         </tr>

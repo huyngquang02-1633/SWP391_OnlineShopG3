@@ -20,17 +20,28 @@ import DAL.CategoryDAO;
 import DAL.GenreDAO;
 import DAL.ProductDAO;
 import DAL.SupplierDAO;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
 import static java.lang.System.out;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import models.Author;
 import models.Genre;
 import models.Supplier;
 
+@MultipartConfig
 @WebServlet(name = "EditProduct_admin", urlPatterns = {"/editProduct_admin"})
 public class EditProduct_admin extends HttpServlet {
 
+    private static final long serialVersionUID = 1L;
+    
+    private static final String UPLOAD_DIR = "uploads";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CategoryDAO cdao = new CategoryDAO();
@@ -61,7 +72,7 @@ public class EditProduct_admin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         int id = Integer.parseInt(req.getParameter("pid"));
-         String name = req.getParameter("txtProductName");
+         String name = req.getParameter("txtProductName").replaceAll("\\s\\s+", " ").trim();
         
         int category = Integer.parseInt(req.getParameter("ddlCategory"));
         int genre = Integer.parseInt(req.getParameter("ddlGenre"));
@@ -70,25 +81,43 @@ public class EditProduct_admin extends HttpServlet {
        String sale_price_raw = req.getParameter("txtSalePrice");
       
         int author = Integer.parseInt(req.getParameter("ddlAuthor"));
-        String translator = req.getParameter("txtTranslator");
+        String translator = req.getParameter("txtTranslator").replaceAll("\\s\\s+", " ").trim();
         int publisher = Integer.parseInt(req.getParameter("ddlPublisher"));
         int supplier = Integer.parseInt(req.getParameter("ddlSupplier"));
-        String language = req.getParameter("txtLanguage");
-        String size = req.getParameter("txtSize");
-        String  weight_raw = req.getParameter("txtWeight");
+        String language = req.getParameter("txtLanguage").replaceAll("\\s\\s+", " ").trim();
+        String size = req.getParameter("txtSize").replaceAll("\\s\\s+", " ").trim();
+        String  weight_raw = req.getParameter("txtWeight").replaceAll("\\s\\s+", " ").trim();
         
-        String page_raw = req.getParameter("txtPage");
+        String page_raw = req.getParameter("txtPage").replaceAll("\\s\\s+", " ").trim();
         
-        String format = req.getParameter("txtFormat");
-        String img = req.getParameter("txtImg");
-        String license = req.getParameter("txtLicense");
-        String description = req.getParameter("txtDescription");
+        String format = req.getParameter("txtFormat").replaceAll("\\s\\s+", " ").trim();
+        String img ="";
+        String license = req.getParameter("txtLicense").replaceAll("\\s\\s+", " ").trim();
+        String description = req.getParameter("txtDescription").replaceAll("\\s\\s+", " ").trim();
+
 
         boolean discon = false;
         if (req.getParameter("chkDiscontinued") != null) {
             discon = true;
         }
 
+        
+        try {
+            Part filePart  = req.getPart("file");
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            img = fileName;
+            String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            InputStream inputStream = filePart.getInputStream();
+            Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+
+        } catch (Exception e) {
+        }
+        
+        
         String PublishDate = req.getParameter("txtPublishDate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date;

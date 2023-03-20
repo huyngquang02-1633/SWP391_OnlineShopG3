@@ -43,14 +43,16 @@
                                                 </ul>
                                                 <div class="tg-quantityholder">
                                                     <em class="minus">-</em>
-                                                    <input type="text" class="result" value="0" id="quantity1" name="quantity">
+                                                    <input min="1" type="text" class="result" value="1" id="quantity1" name="quantity">
                                                     <em class="plus">+</em>
                                                 </div>
-                                                <c:url value="/account/cart" var="AddToCart">
+                                                <c:url value="cart" var="AddToCart">
                                                     <c:param name="previousURL" value="../productDetail?proID=${productInfor.getProductID()}" />
                                                     <c:param name="proID" value="${productInfor.getProductID()}" />
                                                 </c:url>
-                                                <a class="tg-btn tg-active tg-btn-lg" href="${AddToCart}">Add To Cart</a>
+                                                <c:set var = "previousURL" scope = "page" value="../productDetail?proID=${productInfor.getProductID()}" />
+                                                <!--<a class="tg-btn tg-active tg-btn-lg" href="${AddToCart}">Add To Cart</a>-->
+                                                    <div class="tg-btn tg-active tg-btn-lg" onclick="addToCart(${productInfor.getProductID()})">Add To Cart</div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <span>add to wishlist</span>
                                                 </a>
@@ -164,7 +166,7 @@
                                                 <li><span>Translator: </span><span>${productInfor.getTranslator()}</span></li>
                                                 <li><span>Language: </span><span>${productInfor.getLanguage()}</span></li>
                                                 <li><span>Format: </span><span>${productInfor.getFormat()}</span></li>
-                                                <li><span>Size: </span><span>${productInfor.getSize()}mm | ${productInfor.getWeight()}g</span></li>
+                                                <li><span>Size: </span><span>${productInfor.getSize()}cm | ${productInfor.getWeight()}g</span></li>
                                                 <li><span>Number of page: </span><span>${productInfor.getNumberOfPage()}</span></li>
                                                 <li><span>Category: </span>
                                                     <c:forEach items="${cateList}" var="cate"> 
@@ -271,7 +273,7 @@
                                                         </div>
                                                         <div>${review.getComment()}</div>
                                                         <div>
-                                                            <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
+                                                            <img style="max-width: 20%;" src="<%=path%>/uploads/${review.getImage()}" alt="abc">
                                                             <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
                                                             <img style="max-width: 20%;" src="<%=path%>/images/books/img-06.jpg" alt="abc">
                                                         </div>
@@ -425,7 +427,7 @@
                                                                 </c:url>
                                                                 <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
                                                                     <i class="fa fa-shopping-basket"></i>
-                                                                    <em>Add To Basket</em>
+                                                                    <em>Add To Cart</em>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -450,10 +452,10 @@
                                     <ul>
                                         <c:forEach items="${cateList}" var="cate">
                                             <li>
-                                                <input onclick="searchByCategory(${cate.getCategoryID()})" type="radio" id="checkbox1" name="category">   <span>${cate.getCategoryName()}</span>
+                                                <a href="<%=path%>/productList?categoryID=${cate.getCategoryID()}" > <span>${cate.getCategoryName()}</span></a>
                                             </li>
                                         </c:forEach>
-                                                                                    <li><a href="<%=path%>/productList"><span>View All</span></a></li>
+                                        <!--<li><a href="<%=path%>/productList"><span>View All</span></a></li>-->
 
                                     </ul>
                                 </div>
@@ -494,7 +496,7 @@
                                     <ul>
                                         <c:forEach items="${SupList}" var="supplier">
                                             <li>
-                                                <input onclick="searchBySupplier(${supplier.getSupplierID()})" type="radio" id="checkbox1" name="supplier">    <span>${supplier.getSupplierName()}</span>
+                                                <a href="<%=path%>/productList?supplierID=${supplier.getSupplierID()}"> <span>${supplier.getSupplierName()}</span></a>
                                             </li>
                                         </c:forEach>
                                     </ul>
@@ -508,11 +510,11 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <li>
-                                            <input onclick="searchByLanguage(1)" type="radio" id="checkbox" name="laguage"> Vietnamese
+                                            <a href="<%=path%>/productList?language=1"> <span>Vietnamese</span></a>
                                         </li></ul>
                                     <ul>
                                         <li>
-                                            <input onclick="searchByLanguage(2)" type="radio" id="checkbox" name="laguage"> English
+                                            <a href="<%=path%>/productList?language=2"> <span>Foreign</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -525,11 +527,11 @@
                                 <div class="tg-widgetcontent">
                                     <ul>
                                         <li>
-                                            <input onclick="searchByFormat(1)" name="format" type="radio" id="checkbox1" > Hardcover
+                                            <a href="<%=path%>/productList?format=1"> <span>Softcover</span></a>
                                         </li></ul>
                                     <ul>
                                         <li>
-                                            <input onclick="searchByFormat(2)" name="format" type="radio" id="checkbox1"> Paperback
+                                            <a href="<%=path%>/productList?format=2"> <span>Hardcover</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -549,8 +551,12 @@
 *************************************-->
 
 <%@include file="templates/footer.jsp" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
         <script>
+            function addToCart(param,param1){
+                var quantity = document.getElementById("quantity1").value;
+                window.location.href = '<%=request.getContextPath()%>/cart?proID=' + param + '&quantity=' + quantity +'&previousURL=<%=request.getContextPath()%>/productDetail?proID='+param;
+            }
                         function loadMore() {
                             var amount = document.getElementsByClassName("product").length;
                             $.ajax({
