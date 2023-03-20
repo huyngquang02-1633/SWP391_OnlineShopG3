@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import models.Employee;
 
 public class AccountDAO extends DBContext {
 
@@ -55,6 +56,43 @@ public class AccountDAO extends DBContext {
         return acc;
     }
 
+    public String getAccountEmail(int empID) {
+        String email = null;
+        try {
+            String sql = "select a.email as 'EmailEmp' from Employees e JOIN Accounts a on a.EmployeeID = e.EmployeeID WHERE e.EmployeeID =?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, empID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                email = rs.getString("EmailEmp");
+            }
+        } catch (Exception e) {
+        }
+        return email;
+    }
+
+    public void changeStatusAccount(int EmployeeID) {
+        String sql = "update a set status = 1 from Accounts a JOIN Employees e on a.EmployeeID = e.EmployeeID WHERE e.EmployeeID =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, EmployeeID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteStatusAccount(int EmployeeID) {
+        String sql = "update a set status = 0 from Accounts a JOIN Employees e on a.EmployeeID = e.EmployeeID WHERE e.EmployeeID =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, EmployeeID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean editProfile(Customer cus, Account acc) {
         int result = 0;
         try {
@@ -99,28 +137,46 @@ public class AccountDAO extends DBContext {
         }
         return result > 0;
     }
-    
+
     public boolean createAccount(Customer cus, Account acc) {
-        int result=0;
-            try {
-                String sql = "exec createAccount ?,?,?,?,?,?,?,?,?,?,?,?;";
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setInt(1,createNewCusID() );
-                ps.setString(2, cus.getFirstName());
-                ps.setString(3, cus.getLastName());
-                ps.setString(4, cus.getContactTitle());
-                ps.setDate(5, cus.getDateOfBirth());
-                ps.setString(6, cus.getAddress());
-                ps.setString(7, cus.getPhoneNumber());
-                ps.setInt(8, createNewAccID());
-                ps.setString(9, acc.getEmail());
-                ps.setString(10, acc.getPassword());
-                ps.setString(11, acc.getImage());
-                ps.setBoolean(12, acc.getStatus());
-                result = ps.executeUpdate();
-            } catch (Exception e) {
-            }
-            return result>0;
+        int result = 0;
+        try {
+            String sql = "exec createAccount ?,?,?,?,?,?,?,?,?,?,?,?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, createNewCusID());
+            ps.setString(2, cus.getFirstName());
+            ps.setString(3, cus.getLastName());
+            ps.setString(4, cus.getContactTitle());
+            ps.setDate(5, cus.getDateOfBirth());
+            ps.setString(6, cus.getAddress());
+            ps.setString(7, cus.getPhoneNumber());
+            ps.setInt(8, createNewAccID());
+            ps.setString(9, acc.getEmail());
+            ps.setString(10, acc.getPassword());
+            ps.setString(11, acc.getImage());
+            ps.setBoolean(12, acc.getStatus());
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return result > 0;
+    }
+
+    public boolean createAccountEmployee(Employee emp, Account acc) {
+        int result = 0;
+        try {
+            String sql = "exec createAccountEmp ?, ?, ?, ?,?,?,?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, createNewEmpID());
+            ps.setString(2, emp.getFirstName());
+            ps.setString(3, emp.getLastName());
+            ps.setBoolean(4, true);
+            ps.setInt(5, createNewAccID());
+            ps.setString(6, acc.getEmail());
+            ps.setString(7, acc.getPassword());
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return result > 0;
     }
 
     public int createNewCusID() {
@@ -136,21 +192,35 @@ public class AccountDAO extends DBContext {
         }
         return maxCusID + 1;
     }
-    public int createNewAccID(){
-        int maxAccID=0;
+
+    public int createNewEmpID() {
+        int maxEmpID = 0;
+        try {
+            String sql = "select Max(Employees.EmployeeID) as 'MaxEmpID' from Employees";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                maxEmpID = rs.getInt("MaxEmpID");
+            }
+        } catch (Exception e) {
+        }
+        return maxEmpID + 1;
+    }
+
+    public int createNewAccID() {
+        int maxAccID = 0;
         try {
             String sql = "select Max(Accounts.AccountID) as 'MaxAccID' from Accounts";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 maxAccID = rs.getInt("MaxAccID");
             }
         } catch (Exception e) {
         }
-        return maxAccID+1;
+        return maxAccID + 1;
     }
-    
-    
+
     private String randomString(int n) {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"

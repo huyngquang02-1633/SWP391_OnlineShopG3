@@ -20,10 +20,10 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="images/carousel-1.jpg" alt="Advertising">
+                <img src="images/carousel-1.jpg" alt=""/>
             </div>
             <div class="item">
-                <img src="images/carousel-2.jpg" alt="Advertising">
+                <img src="images/carousel-2.jpg" alt=""/>
             </div>
         </div>
     </div>

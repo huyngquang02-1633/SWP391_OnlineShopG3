@@ -17,12 +17,13 @@
     <p><a href="<%=path%>/homepage">Back to home</a></p>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form method="POST" action="<%=path%>/account/signup">
                 <h1>Create Account</h1>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
+                <input type="text" placeholder="First Name" name="firstName" />
+                <input type="text" placeholder="Last Name" name="lastName"/>
+                <input type="email" placeholder="Email" name="email"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -54,7 +55,6 @@
                     <button class="control-button in">Sign In</button>
                     <c:if test="${msg!=null}"><div style="color: red;">${msg}</div></c:if>
                     </form>
-                </form>
             </div>
             <div class="overlay-container">
                 <div class="overlay">
