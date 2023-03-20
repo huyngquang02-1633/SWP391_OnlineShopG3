@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AccountDAO;
 import DAL.EmployeeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import models.SendMail;
 
 
 /**
@@ -60,7 +65,17 @@ public class ChangeStatusEmployee_admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String EmployeeID = request.getParameter("sEmployeeID");
+        int empID = Integer.parseInt(EmployeeID);
         EmployeeDAO dao = new EmployeeDAO();
+        AccountDAO accountDAO = new AccountDAO();
+        String email = accountDAO.getAccountEmail(empID);
+        SendMail sendEmail = new SendMail(); 
+        try {
+            sendEmail.sendActiveSuccess(email);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ChangeStatusEmployee_admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        accountDAO.changeStatusAccount(empID);
         dao.changeStatusEmployee(EmployeeID);
         response.sendRedirect("employeeManager_admin");
     }
