@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import models.Employee;
 
 public class AccountDAO extends DBContext {
 
@@ -122,6 +123,24 @@ public class AccountDAO extends DBContext {
             }
             return result>0;
     }
+    
+        public boolean createAccountEmployee(Employee emp, Account acc) {
+        int result=0;
+            try {
+                String sql = "exec createAccountEmp ?, ?, ?, ?,?,?,?;";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1,createNewEmpID() );
+                ps.setString(2, emp.getFirstName());
+                ps.setString(3, emp.getLastName());
+                ps.setBoolean(4, true);
+                ps.setInt(5, createNewAccID());
+                ps.setString(6, acc.getEmail());
+                ps.setString(7, acc.getPassword());
+                result = ps.executeUpdate();
+            } catch (Exception e) {
+            }
+            return result>0;
+    }
 
     public int createNewCusID() {
         int maxCusID = 0;
@@ -135,6 +154,20 @@ public class AccountDAO extends DBContext {
         } catch (Exception e) {
         }
         return maxCusID + 1;
+    }
+    
+        public int createNewEmpID() {
+        int maxEmpID = 0;
+        try {
+            String sql = "select Max(Employees.EmployeeID) as 'MaxEmpID' from Employees";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                maxEmpID = rs.getInt("MaxEmpID");
+            }
+        } catch (Exception e) {
+        }
+        return maxEmpID + 1;
     }
     public int createNewAccID(){
         int maxAccID=0;

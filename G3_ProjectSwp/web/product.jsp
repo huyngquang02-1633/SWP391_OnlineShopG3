@@ -1,104 +1,12 @@
 <%@include file="templates/header_admin.jsp" %>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span> <br>
-        <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
-        <div class="content-main">
-            <form id="content-main-product">
-                <div class="content-main-1">
-                    <label>Product name (*):</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-                    <label>Category Name(*):</label><br/>
-                    <select name="ddlCategory">
-                        <option value="catid1">Smart Phone</option>
-                        <option value="catid2">Computer</option>
-                        <option value="catid3">Television</option>
-                        <option value="catid4">Electronic</option>
-                    </select>
-                    <label>Genre Name:</label><br/>
-                    <select name="ddlGenre">
-                        <option value="catid1">Smart Phone</option>
-                        <option value="catid2">Computer</option>
-                        <option value="catid3">Television</option>
-                        <option value="catid4">Electronic</option>
-                    </select>
-                    <label>Cover Price:</label><br/>
-                    <input type="text" name="txtUnitPrice" id=""><br/>
-                    <label>Sale Price:</label><br/>
-                    <input type="text" name="txtQuantityPerUnit" id=""><br/>
-                    <label>Author Name:</label><br/>
-                    <select name="ddlAuthor">
-                        <option value="catid1">Smart Phone</option>
-                        <option value="catid2">Computer</option>
-                        <option value="catid3">Television</option>
-                        <option value="catid4">Electronic</option>
-                    </select>
-                    <label>Discontinued (*): </label>
-                    <input style="    width: 15px;
-                           position: relative;
-                           top: 5px;
-                           left: 5px;" type="checkbox" name="chkDiscontinued" id=""><br/>
-
-                </div>
-                <div class="content-main-1">
-                    <label>Translator:</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-                    <label>Publisher Name:</label><br/>
-                    <select name="ddlAuthor">
-                        <option value="catid1">Smart Phone</option>
-                        <option value="catid2">Computer</option>
-                        <option value="catid3">Television</option>
-                        <option value="catid4">Electronic</option>
-                    </select>
-                    <label>Author Name:</label><br/>
-                    <select name="ddlAuthor">
-                        <option value="catid1">Smart Phone</option>
-                        <option value="catid2">Computer</option>
-                        <option value="catid3">Television</option>
-                        <option value="catid4">Electronic</option>
-                    </select>
-                    <label>Language:</label><br/>
-                    <select name="ddlCategory">
-                        <option value="catid1">Smart Phone</option>
-                        <option value="catid2">Computer</option>
-                    </select>
-                    <label>Book Size:</label><br/>
-                    <input type="date" name="txtUnitsInStock" id=""><br/>
-                    <label>Book Weight:</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-
-                </div>
-                <div class="content-main-1">
-                    <label>Number Of Page:</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-                    <label>Format:</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-                    <label>Image:</label><br/>
-                    <input type="text" name="txtProductName" id=""><br/>
-                    <label>Publish Date:</label><br/>
-                    <input type="date" name="txtUnitsInStock" id=""><br/>
-                    <label>Publish License:</label><br/>
-                    <input type="date" name="txtUnitsInStock" id=""><br/>
-                    <label>Description:</label><br/>
-                    <input type="text" name="txtUnitsInStock" id=""><br/>
-                    <br/> 
-                </div>
-
-                <input style="margin: auto;" type="submit" value="Save"/>
-
-            </form>
-        </div>
-    </div>
-
-</div>   
 <div id="content-right">
-    <div class="path-admin">PRODUCTS LIST</b></div>
+    <div class="path-admin">PRODUCTS LIST</div>
     <div class="content-main">
         <div id="content-main-dashboard" style="height: 590px;">
             <hr>
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 30%;">
-                    
+
                     <form action="productManage_admin" method="">
                         <!--<b>Filter by Category:</b>-->
                         <select name="categoryFilter">
@@ -183,8 +91,8 @@
                                 </c:choose>
                             </td>
                             <td>
-                            <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
-                            <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
+                                <a class="update" href="editProduct_admin?id=${product.getProductID()}">Edit</a> &nbsp; | &nbsp
+                                <a class="delete" href="deleteProduct_admin?id=${product.getProductID()}">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>
