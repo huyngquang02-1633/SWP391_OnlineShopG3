@@ -28,6 +28,11 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Employee(int employeeID, String firstName, String lastName, boolean gender, String title, String titleOfCourtesy, String address, String phoneNumber) {
         this.employeeID = employeeID;
         this.firstName = firstName;
@@ -38,8 +43,6 @@ public class Employee {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
-    
-    
 
     public Employee(int employeeID, String firstName, String lastName, boolean gender, String title, String titleOfCourtesy, Date birthDate, String address, String phoneNumber) {
         this.employeeID = employeeID;
@@ -52,7 +55,6 @@ public class Employee {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
-    
 
     public Employee(int employeeID, String firstName, String lastName, boolean gender, int departmentID, String title, String titleOfCourtesy, Date birthDate, Date hireDate, String address, String phoneNumber, boolean status) {
         this.employeeID = employeeID;
@@ -170,5 +172,4 @@ public class Employee {
         return "Employee{" + "employeeID=" + employeeID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", departmentID=" + departmentID + ", title=" + title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate + ", address=" + address + ", phoneNumber=" + phoneNumber + ", status=" + status + '}';
     }
 
-    
 }

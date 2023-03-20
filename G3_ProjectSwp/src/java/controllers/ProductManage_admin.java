@@ -105,6 +105,7 @@ public class ProductManage_admin extends HttpServlet {
             if ((int) req.getSession().getAttribute("mode") == 3) {
                 int discontinued = Integer.parseInt(req.getParameter("discontinued"));
                 proList = new ProductDAO().getProductListDiscontinued(discontinued);
+
             }
             if ((int) req.getSession().getAttribute("mode") == 4) {
                 proList = new ProductDAO().getProductListOutOfStock();
@@ -129,7 +130,7 @@ public class ProductManage_admin extends HttpServlet {
         if (proList.isEmpty()) {
             req.setAttribute("emptyListMsg", "There is nothing in Product List!");
         }
-        
+
         CategoryDAO cdao = new CategoryDAO();
         AuthorDAO adao = new AuthorDAO();
         SupplierDAO sdao = new SupplierDAO();

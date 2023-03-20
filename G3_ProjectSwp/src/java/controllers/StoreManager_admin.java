@@ -7,6 +7,7 @@ package controllers;
 import DAL.AccountDAO;
 import DAL.DepartmentsDAO;
 import DAL.EmployeeDAO;
+import DAL.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,6 +38,19 @@ public class StoreManager_admin extends HttpServlet {
             req.setAttribute("account", a);
             ArrayList<Department> depart = new DepartmentsDAO().getAllDepartments();
             req.setAttribute("depart", depart);
+
+            int quantityID1 = new OrderDAO().CountOrderByStatus(1);
+            req.setAttribute("quantityID1", quantityID1);
+            int quantityID2 = new OrderDAO().CountOrderByStatus(2);
+            req.setAttribute("quantityID2", quantityID2);
+            int quantityID3 = new OrderDAO().CountOrderByStatus(3);
+            req.setAttribute("quantityID3", quantityID3);
+            int quantityID4 = new OrderDAO().CountOrderByStatus(4);
+            req.setAttribute("quantityID4", quantityID4);
+            int quantityID5 = new OrderDAO().CountOrderByStatus(5);
+            req.setAttribute("quantityID5", quantityID5);
+            int quantityID6 = new OrderDAO().CountOrderByStatus(6);
+            req.setAttribute("quantityID6", quantityID6);
 
             req.getRequestDispatcher("store_managerment.jsp").forward(req, resp);
         } else {

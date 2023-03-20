@@ -16,14 +16,18 @@
         <ol class="carousel-indicators">
             <li data-target="#Advertising" data-slide-to="0" class="active"></li>
             <li data-target="#Advertising" data-slide-to="1"></li>
+            <li data-target="#Advertising" data-slide-to="2"></li>
         </ol>
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="images/carousel-1.jpg" alt="Advertising">
+                <img src="images/Banner40.png" alt="Advertising"style="width: auto;height: 100%;display: block; margin-left: auto;margin-right: auto;"/>
             </div>
             <div class="item">
-                <img src="images/carousel-2.jpg" alt="Advertising">
+                <img src="images/Banner30.png" alt="Advertising"style="width: auto;height: 100%;display: block; margin-left: auto;margin-right: auto;"/>
+            </div>
+            <div class="item">
+                <img src="images/Banner20 .png" alt="Advertising"style="width: auto;height: 100%;display: block; margin-left: auto;margin-right: auto;"/>
             </div>
         </div>
     </div>

@@ -106,41 +106,46 @@
             <div class="info-homeadmin-right">
                 <div class="wrapper">
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=1">
+                            <h4>${quantityID1}</h4>
+                            <p>Pending orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
-                    </div>
-
-
-                    <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=2">
+                            <h4>${quantityID2}</h4>
+                            <p>Approved orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=3">
+                            <h4>${quantityID3}</h4>
+                            <p>Delivering orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
-                    </div>
-                    <div class="div-square">
-                        <a href=""><h4>20</h4></a>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=4">
+                            <h4>${quantityID4}</h4>
+                            <p>Delivered orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <a href=""><h4>20</h4></a>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=5">
+                            <h4>${quantityID5}</h4>
+                            <p>Refunding orders</p>
+                        </a>
+                    </div>
+                    <div class="div-square">
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=6">
+                            <h4>${quantityID6}</h4>
+                            <p>Cancelled orders</p>
+                        </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
