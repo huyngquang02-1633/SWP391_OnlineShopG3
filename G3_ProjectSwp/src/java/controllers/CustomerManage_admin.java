@@ -35,7 +35,7 @@ public class CustomerManage_admin extends HttpServlet {
 //            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
 //            return;
 //        }
-        PaginationObject paging = new PaginationObject();
+        PaginationObject paging = new PaginationObject(); paging.setNumberOfRowEachPage(10);
 
         int currentPage = 1;
         if (req.getParameter("currentPage") != null) {

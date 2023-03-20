@@ -107,7 +107,7 @@
                                                     <div class="tg-minicarproduct">
 
                                                         <figure>
-                                                            <img src="${product.getImage()}" style="height: 70px;" alt="image description">
+                                                            <img src="<%=path%>/products/${product.getImage()}" style="height: 70px;" alt="image description">
                                                         </figure>
                                                         <div class="tg-minicarproductdata">
                                                             <h5><a href="javascript:void(0);">${product.getProductName()}</a></h5>

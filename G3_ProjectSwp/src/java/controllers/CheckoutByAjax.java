@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import models.Account;
@@ -47,7 +48,21 @@ public class CheckoutByAjax extends HttpServlet{
             discount = request.getParameter("txtDiscountID");
         }
         Discount discountObject = new OrderDAO().getVoucher(discount);
-        request.getSession().setAttribute("discount", discount);
+        if(discountObject==null){
+            discountObject = new Discount();
+            discountObject.setDiscountID("Voucher does not exist!");
+            discountObject.setQuantity(0);
+            discountObject.setPercentage(0);
+        }else{
+            if(discountObject.getQuantity()>=1)
+            {
+                request.getSession().setAttribute("discount", discount);
+            }else{
+                discountObject.setPercentage(0);
+                discountObject.setDiscountID("Voucher is overdue or run out!");
+            }
+        }
+        
         
         ArrayList<Cart> cartList ;
         ArrayList<Product> proList ;
@@ -100,9 +115,9 @@ public class CheckoutByAjax extends HttpServlet{
         result+="<li class=\"list-group-item d-flex justify-content-between bg-light\">\n" +
 "                                    <div class=\"text-success\">\n" +
 "                                        <h6 class=\"my-0\">Voucher code</h6>\n" +
-"                                        <small>"+discount+"</small>\n" +
+"                                        <small style=\"color:red;\">"+ discountObject.getDiscountID()+"</small>\n" +
 "                                    </div>\n" +
-"                                    <span class=\"text-success\">-"+Math.round(saleOff)+"</span>\n" +
+"                                    <span class=\"text-success\" style=\"color:red;\">-"+Math.round(saleOff)+"</span>\n" +
 "                                </li>\n" +
 "                                <li class=\"list-group-item d-flex justify-content-between\">\n" +
 "                                    <span>Shipping: </span>\n" +

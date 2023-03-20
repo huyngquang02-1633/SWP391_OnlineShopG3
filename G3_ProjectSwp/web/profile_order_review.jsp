@@ -63,15 +63,20 @@
                                                 <c:if test="${order.getOrderID() == odDetailList.getOrderID() && odDetailList.isReviewed()==false}">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-md-2">
-                                                                <img style="width: 90%;" src="<%=path%>/images/books/img-04.jpg"
-                                                                     class="img-fluid" alt="Phone">
-                                                            </div>
-                                                            <div style="padding: 8px;" class="col-md-4"><p style="margin-bottom: 15px;">ID: ${odDetailList.getProductID()}</p>
-                                                                <p style="margin-bottom: 15px;">Vietnamese</p>
-                                                                <p style="margin-bottom: 15px;">Qty: ${odDetailList.getQuantity()}</p>
-                                                                <p style="margin-bottom: 0px">${odDetailList.getSalePrice()}</p>
-                                                            </div>
+                                                            <c:forEach items="${productList}" var="product">
+                                                                <c:if test="${product.getProductID() == odDetailList.getProductID()}">
+                                                                    <div class="col-md-2">
+                                                                        <img style="width: 90%;" src="<%=path%>/products/${product.getImage()}"
+                                                                             class="img-fluid" alt="Phone">
+                                                                    </div>
+                                                                    <div style="padding: 8px;" class="col-md-4">
+                                                                        <p style="margin-bottom: 15px;">${product.getProductName()}</p>
+                                                                        <p style="margin-bottom: 15px;">${product.getNumberOfPage()} pages</p>
+                                                                        <p style="margin-bottom: 15px;">${odDetailList.getSalePrice()} </p>
+                                                                        <p style="margin-bottom: 0px">x${odDetailList.getQuantity()}</p>
+                                                                    </div>
+                                                                </c:if>
+                                                            </c:forEach>
                                                             <form method="POST" action="AccountProfile2_review" enctype="multipart/form-data">
                                                                     
                                                                 <div class="col-md-6" style="display: flex; flex-wrap: wrap"> 
@@ -98,7 +103,7 @@
                                                                     <div class="file-upload">
                                                                         <div class="file-select">
                                                                             <div class="file-select-button" id="fileName">Add image Review</div>
-                                                                            <div class="file-select-name" id="noFile">No image chosen...</div> 
+                                                                            <div class="file-select-name" id="noFile" style="width: 403px;">No image chosen...</div> 
                                                                             <input type="file" name="chooseFile" accept="image/*,.jpg,.jepg,.png" id="chooseFile">
                                                                         </div>
                                                                     </div>
@@ -128,10 +133,10 @@
                                                             <hr style="margin: 10px; border-top: 1px solid black;">
                                                 </c:if>
                                             </c:forEach>
-                                            <div class="card-footer" >
+<!--                                            <div class="card-footer" >
                                                 <h5>Total paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
                                                 <div class="card-footer"></div>
-                                            </div>
+                                            </div>-->
                                             <hr>
                                         </div>    
 
@@ -140,12 +145,13 @@
                             </div>
 
                         </div>
+                    </section>                            
                 </div>
             </div>
         </div>
-        </section>
+<!--        </section>-->
     </div>
-
+</div>
     <script>
         $('#chooseFile').bind('change', function () {
             var filename = $("#chooseFile").val();

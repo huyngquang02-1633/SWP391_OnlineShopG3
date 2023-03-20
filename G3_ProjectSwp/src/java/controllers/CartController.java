@@ -2,6 +2,7 @@ package controllers;
 
 import DAL.AccountDAO;
 import DAL.CartDAO;
+import DAL.CategoryDAO;
 import DAL.OrderDAO;
 import models.Cart;
 import models.Product;
@@ -23,6 +24,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import models.Account;
 import models.CartCookies;
+import models.Category;
 import models.Customer;
 import models.Discount;
 import models.Order;
@@ -172,7 +174,8 @@ public class CartController extends HttpServlet {
                     pro = prodao.getProductInfor(cart.getProductID());
                     subTotal += pro.getSalePrice()*cart.getQuantity();
                 }
-                
+                ArrayList<Category> cateList = new CategoryDAO().getCategory();
+                req.setAttribute("cateList", cateList);
                 req.setAttribute("subTotal", subTotal);
                 req.setAttribute("shipping", shipping);
                 
@@ -243,7 +246,9 @@ public class CartController extends HttpServlet {
             //Chua dang nhap, view cart
             }else{ 
                 
-                ArrayList<Product> productList = new ProductDAO().getProducts(false);
+                ArrayList<Product> productList = new ProductDAO().getProducts(true);
+                ArrayList<Category> cateList = new CategoryDAO().getCategory();
+                req.setAttribute("cateList", cateList);
                 req.setAttribute("cartList", cartList);
                 req.setAttribute("productList", productList);
                 

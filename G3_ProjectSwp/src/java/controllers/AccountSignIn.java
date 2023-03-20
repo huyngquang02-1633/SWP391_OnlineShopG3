@@ -59,10 +59,10 @@ public class AccountSignIn extends HttpServlet{
                 if(acc.getRole()==1){
                     req.getSession().setAttribute("AccAdminSession", acc);
                     resp.sendRedirect(req.getContextPath()+"/dashboard_admin");
-                }else if(acc.getRole()==2){
+                }else if(acc.getRole()==2 && acc.getStatus()==true){
                     req.getSession().setAttribute("AccAdminSession", acc);
                     resp.sendRedirect(req.getContextPath()+"/StoreManager_admin");
-                }else if(acc.getRole()==3){
+                }else if(acc.getRole()==3 && acc.getStatus()==true){
                     
                 }
             }else{

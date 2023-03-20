@@ -133,6 +133,50 @@ public class ProductDAO extends DBContext {
         }
         return productList;
     }
+    public ArrayList<Product> getProductListByFilterAdmin(String sample, int CatID, boolean discontinued, boolean ouOfStock) {
+        ArrayList<Product> productList = new ArrayList<>();
+        try {
+            String sql = "select * from Products ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            productList = getObjectList(rs);
+            
+            if(CatID!=0){
+                for (int i = 0; i < productList.size(); i++) {
+                    if(!(productList.get(i).getCategoryID()==CatID)){
+                        productList.remove(i);
+                    }
+                }
+            }
+            
+            if(sample.length()!=0){
+                for (int i = 0; i < productList.size(); i++) {
+                    if(!productList.get(i).getProductName().contains(sample)){
+                        productList.remove(i);
+                    }
+                }
+            }
+            
+            if(sample.length()!=0){
+                for (int i = 0; i < productList.size(); i++) {
+                    if(!productList.get(i).isDiscontinued()==false){
+                        productList.remove(i);
+                    }
+                }
+            }
+            if(sample.length()!=0){
+                for (int i = 0; i < productList.size(); i++) {
+                    if(productList.get(i).getAvailableInStock()>=0){
+                        productList.remove(i);
+                    }
+                }
+            }
+            
+        } catch (Exception e) {
+
+        }
+        return productList;
+    }
 
     public ArrayList<Product> getHotProduct() {
         ArrayList<Product> productList = new ArrayList<>();
@@ -338,12 +382,12 @@ public class ProductDAO extends DBContext {
         return productList;
     }
 
-    public ArrayList<Product> getProductListDiscontinued(int discontinued) {
+    public ArrayList<Product> getProductListDiscontinued() {
         ArrayList<Product> productList = new ArrayList<>();
         try {
             String sql = "SELECT * FROM [Products] WHERE [Discontinued] = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, discontinued);
+            ps.setInt(1, 1);
             ResultSet rs = ps.executeQuery();
             productList = getObjectList(rs);
         } catch (Exception e) {

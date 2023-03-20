@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import DAL.CartDAO;
+import DAL.CategoryDAO;
 import models.Account;
 import models.Order;
 import models.OrderDetail;
@@ -21,6 +23,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import jakarta.servlet.http.Cookie;
+import models.Cart;
+import models.CartCookies;
+import models.Category;
 
 /**
  *
@@ -40,6 +46,50 @@ public class AccountProfile2 extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/404error.jsp");
             return;
         }
+        //Cart icon**********
+        if(req.getSession().getAttribute("AccCustomerSession")!= null){
+            Account accCustomerSession = (Account)req.getSession().getAttribute("AccCustomerSession");
+            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(accCustomerSession.getAccountID());
+            
+            //get subTotal
+            double subTotal = 0;
+            ProductDAO proDao = new ProductDAO();
+            Product pro;
+            for (Cart cart : cartList) {
+                pro = proDao.getProductInfor(cart.getProductID());
+                subTotal+=cart.getQuantity() * pro.getSalePrice();
+            }
+            req.setAttribute("cartList", cartList);
+            req.setAttribute("cartSize", cartList.size());
+            req.setAttribute("subTotal", subTotal);
+        }else{
+            Cookie arr[] = req.getCookies();
+            ArrayList<String> cookiesText = new ArrayList<>();
+            if (arr != null) {
+                for (Cookie arrCookies : arr) {
+                    if (arrCookies.getName().contains("item")) {
+                        cookiesText.add(arrCookies.getValue());
+                    }
+                }
+            }
+            CartCookies cartCookies = new CartCookies();
+            ArrayList<Cart> cartList = cartCookies.decryptionCookiesText(cookiesText);
+            
+            //get subTotal
+            double subTotal = 0;
+            ProductDAO proDao = new ProductDAO();
+            Product pro;
+            for (Cart cart : cartList) {
+                pro = proDao.getProductInfor(cart.getProductID());
+                subTotal+=cart.getQuantity() * pro.getSalePrice();
+            }
+            
+            req.setAttribute("cartList", cartList);
+            req.setAttribute("cartSize", cartList.size());
+            req.setAttribute("subTotal", subTotal);
+        }
+        //*****************
+        
         Account accCustomer = (Account) req.getSession().getAttribute("AccCustomerSession");
         if (accCustomer == null) {
             resp.sendRedirect("profile_order.jsp");
@@ -50,6 +100,8 @@ public class AccountProfile2 extends HttpServlet {
             } else {
                 ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(accCustomer.getCustomerID());
                 ArrayList<Product> productList = new ProductDAO().getProducts(true);
+                ArrayList<Category> cateList = new CategoryDAO().getCategory();
+                req.setAttribute("cateList", cateList);
                 req.setAttribute("productList", productList);
                 req.setAttribute("orderDetailList", orderDetailList);
                 req.setAttribute("orderList", orderList);

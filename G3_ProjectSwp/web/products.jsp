@@ -45,8 +45,8 @@
                                                 <div class="tg-postbook">
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
-                                                            <div class="tg-frontcover"><img src="${product.getImage()}" alt="image description"></div>
-                                                            <div class="tg-backcover"><img src="${product.getImage()}" alt="image description"></div>
+                                                            <div class="tg-frontcover"><img src="<%=path%>/products/${product.getImage()}" alt="image description"></div>
+                                                            <div class="tg-backcover"><img src="<%=path%>/products/${product.getImage()}" alt="image description"></div>
                                                         </div>
                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                             <i class="icon-heart"></i>
@@ -146,14 +146,14 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
                         <aside id="tg-sidebar" class="tg-sidebar">
-                            <div class="tg-widget tg-widgetsearch">
+<!--                            <div class="tg-widget tg-widgetsearch">
                                 <form class="tg-formtheme tg-formsearch">
                                     <div class="form-group">
                                         <button type="submit"><i class="icon-magnifier"></i></button>
                                         <input onchange="searchByName(this)" type="text" name="search" class="form-group" placeholder="Search by title...">
                                     </div>
                                 </form>
-                            </div>
+                            </div>-->
                             <div class="tg-widget tg-catagories">
                                 <div class="tg-widgettitle">
                                     <h3>Categories</h3>

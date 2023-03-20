@@ -48,8 +48,8 @@ public class HomePage extends HttpServlet {
         
         //Cart icon
         if(req.getSession().getAttribute("AccCustomerSession")!= null){
-            Account googleAcc = (Account)req.getSession().getAttribute("AccCustomerSession");
-            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(googleAcc.getAccountID());
+            Account accCustomerSession = (Account)req.getSession().getAttribute("AccCustomerSession");
+            ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(accCustomerSession.getAccountID());
             
             //get subTotal
             double subTotal = 0;

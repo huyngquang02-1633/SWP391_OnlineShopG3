@@ -46,8 +46,8 @@
                     </div> 
                     <div id="chart2"> <br> 
                         <canvas id="myChart2" style="width: 80%;"></canvas>
-                        <input name="radioDiagram" id="radioDiagram" type="radio" value="" >6 months earlier
-                        <input name="radioDiagram" id="radioDiagram" type="radio" value="" >This month
+<!--                        <input name="radioDiagram" id="radioDiagram" type="radio" value="" >6 months earlier
+                        <input name="radioDiagram" id="radioDiagram" type="radio" value="" >This month-->
 
 <!--                        <b>Filter:</b>
                          <br>

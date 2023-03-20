@@ -141,7 +141,12 @@ public class ProductList_Customer extends HttpServlet {
         ArrayList<Category> cateList = new CategoryDAO().getCategory();
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
-
+        
+        if(!productList.isEmpty()){
+            req.getSession().setAttribute("proList", productList);
+        }
+        
+        
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);
         req.setAttribute("genreList", genreList);

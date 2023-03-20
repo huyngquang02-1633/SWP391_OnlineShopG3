@@ -47,7 +47,7 @@ public class OrderManage_admin extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/404error.jsp");
             return;
         }
-        PaginationObject paging = new PaginationObject();
+        PaginationObject paging = new PaginationObject(); paging.setNumberOfRowEachPage(10);
         int currentPage = 1;
 //        if(req.getSession().getAttribute("currentPage")!= null){
 //            currentPage = Integer.parseInt((String) req.getSession().getAttribute("currentPage"));

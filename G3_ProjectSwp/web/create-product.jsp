@@ -2,7 +2,6 @@
 
 <%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             <div id="content-right">
-                <div class="path-admin">CREATE A NEW PRODUCT</b></div>
                 <c:if test="${create1_edit2 == 2}">
                     <div class="path-admin">UPDATE PRODUCT INFOMATION</b></div>
                     <c:url var="formAction" value="editProduct_admin" />
@@ -76,7 +75,7 @@
                             <input value="${p.getFormat()}" type="text" name="txtFormat" id=""><br/>
                             <label>Image:</label><br/>
                             <!--<input value="${p.getImage()}" type="text" name="txtImg" id=""><br/>-->
-                            <input type="file" name="file"/>
+                            <input type="file" name="chooseFile" accept="image/*,.jpg,.jepg,.png" id="chooseFile"/>
                             <label>Publish Date:</label><br/>
                             <input value="${p.getPublishDate()}" type="date" name="txtPublishDate" id=""><br/>
                             <label>Publish License:</label><br/>

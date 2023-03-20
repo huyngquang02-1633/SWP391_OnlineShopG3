@@ -42,7 +42,7 @@ import models.Supplier;
 public class CreateProduct_admin extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private static final String UPLOAD_DIR = "uploads";
+    private static final String UPLOAD_DIR = "products";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //       if(req.getSession().getAttribute("AccAdminSession")==null){
@@ -63,12 +63,15 @@ public class CreateProduct_admin extends HttpServlet {
         req.setAttribute("lista", lista);
         req.setAttribute("listc", listc);
         req.setAttribute("lists", lists);
+        req.setAttribute("create1_edit2", 1);
+        req.setAttribute("formAction", "createProduct_admin");
         req.setAttribute("formAction", "createProduct_admin");
         req.getRequestDispatcher("create-product.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
         String name = req.getParameter("txtProductName");
         
         int category = Integer.parseInt(req.getParameter("ddlCategory"));
@@ -88,7 +91,7 @@ public class CreateProduct_admin extends HttpServlet {
         String page_raw = req.getParameter("txtPage");
         
         String format = req.getParameter("txtFormat");
-        String img ="";
+        //String img ="";
         String license = req.getParameter("txtLicense");
         String description = req.getParameter("txtDescription");
 
@@ -99,25 +102,29 @@ public class CreateProduct_admin extends HttpServlet {
 
         
         //upload image
-        try {
-            Part filePart  = req.getPart("file");
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            img = fileName;
-            String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+        String img ="";
+        Part filePart  = req.getPart("chooseFile");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            if(fileName.length()!=0){
+                //Part filePart  = req.getPart("chooseFile");
+                
+                img = fileName;
+                // Set the destination directory for the uploaded file
+                String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+                // Copy the file to the destination directory
+                InputStream inputStream = filePart.getInputStream();
+                Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+            
             }
-            InputStream inputStream = filePart.getInputStream();
-            Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
-
-        } catch (Exception e) {
-        }
         
         String PublishDate = req.getParameter("txtPublishDate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date;
-        try {
+        
            
             if(name.isEmpty() || cover_price_raw.isEmpty() ||sale_price_raw.isEmpty()){
                resp.sendRedirect("productManage_admin"); 

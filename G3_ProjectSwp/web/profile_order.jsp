@@ -90,7 +90,7 @@
 
         <!--                                                                    <img src="<%=path%>/images/books/img-04.jpg"
                                                                                  class="img-fluid" alt="Phone" style="width:70px;">-->
-                                                                            <img src="${product.getImage()}"
+                                                                            <img src="<%=path%>/products/${product.getImage()}"
                                                                                  class="img-fluid" alt="Phone" style="width:70px;">
 
                                                                         </div>
@@ -112,6 +112,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                        <hr>
                                                             </c:if>
                                                         </c:forEach>
                                                         
@@ -121,7 +122,7 @@
                                                     <c:url value="/AccountProfile2_review" var="review">
                                                         <c:param name="id" value="${odList.getOrderID()}" />
                                                     </c:url>
-                                                    <h5>Total paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
+                                                    <h5>Total paid: <span class="h2 mb-0 ms-2">${odList.getTotalAmount()}</span></h5>
                                                     <c:if test="${odList.getStatus()==4}">
                                                         <div class="card-footer"><div id="box">
                                                             <a href="${review}" id="Review">Review</a>
@@ -129,7 +130,7 @@
                                                     </c:if>
                                                     
                                                 </div>
-                                                <hr>
+                                                
                                             </div>    
                                         </c:forEach>
                                     </div>

@@ -14,7 +14,7 @@
                     <div class="tg-404error">
                         <div class="col-xs-12 col-sm-12 col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
                             <div class="tg-404errorcontent">
-                                <h2>Ooops! Could Not Find It</h2>
+                                <h2>Ooops!  <br> <br> Something went wrong!</h2>  <br>
                                 <span>404</span>
                             </div>
                             <form class="tg-formtheme tg-formsearch">
@@ -24,7 +24,7 @@
                                 </fieldset>
                                 <div class="tg-gobackhome">
                                     <span>Or Goto</span>
-                                    <a href="javascript:void(0);">Homepage</a>
+                                    <a href="<%=path%>/homepage">Homepage</a>
                                 </div>
                             </form>
                         </div>
