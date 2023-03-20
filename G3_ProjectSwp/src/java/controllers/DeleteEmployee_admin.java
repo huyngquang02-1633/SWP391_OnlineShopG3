@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AccountDAO;
 import DAL.EmployeeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -64,7 +65,10 @@ public class DeleteEmployee_admin extends HttpServlet {
             return;
         }
         String EmployeeID = request.getParameter("sEmployeeID");
+        int empID = Integer.parseInt(EmployeeID);
         EmployeeDAO dao = new EmployeeDAO();
+        AccountDAO accountDAO = new AccountDAO();
+        accountDAO.deleteStatusAccount(empID);
         dao.deleteEmployee(EmployeeID);       
         response.sendRedirect("employeeManager_admin");
     }

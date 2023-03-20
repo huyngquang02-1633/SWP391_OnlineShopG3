@@ -11,7 +11,7 @@ import DAL.AccountDAO;
 import DAL.CustomerDAO;
 import jakarta.servlet.annotation.WebServlet;
 import javax.mail.Session;
-@WebServlet(name = "AccountSignUp", urlPatterns = {"/account/login"})
+@WebServlet(name = "AccountSignIn", urlPatterns = {"/account/login"})
 public class AccountSignIn extends HttpServlet{
 
     @Override

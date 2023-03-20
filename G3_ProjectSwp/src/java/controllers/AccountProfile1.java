@@ -44,10 +44,10 @@ public class AccountProfile1 extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("AccCustomerSession") != null) {
             Account a = (Account) req.getSession().getAttribute("AccCustomerSession");
-            String firstName = req.getParameter("txtFirstName");
-            String lastName = req.getParameter("txtLastName");
-            String address = req.getParameter("txtAddress");
-            String contactTitle = req.getParameter("txtContactTitle");
+            String firstName = req.getParameter("txtFirstName").replaceAll("\\s\\s+", " ").trim();
+            String lastName = req.getParameter("txtLastName").replaceAll("\\s\\s+", " ").trim();
+            String address = req.getParameter("txtAddress").replaceAll("\\s\\s+", " ").trim();
+            String contactTitle = req.getParameter("txtContactTitle").replaceAll("\\s\\s+", " ").trim();
             String Phone = req.getParameter("txtPhone");
             Date creatDate = Date.valueOf(req.getParameter("txtCreatDate"));
             Boolean gender = Boolean.valueOf(req.getParameter("txtGender"));

@@ -24,64 +24,64 @@
 
                         <div class="col-md-8 order-md-1">
                             <h4 class="mb-3" style="font-weight: 600;">Billing address</h4>
-                            
-                            
-                            
+
+
+
                             <form action="checkout" class="needs-validation" novalidate method="POST">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="fullName">Full Name</label>
+                                        <label for="fullName">Full Name <span style="color: red;font-size: 12px;font-weight: 600;" id="errorName"></span></label>
                                         <input type="text" class="form-control" name="txtReceiver" id="fullName" placeholder="" value="${cus.getFirstName()} ${cus.getLastName()}" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="phone">Phone Number</label>
+                                        <label for="phone">Phone Number <span style="color: red;font-size: 12px;font-weight: 600;" id="errorPhone"></span></label>
                                         <input type="tel" name="txtPhoneNumber" class="form-control" id="phone" placeholder="" value="${cus.getPhoneNumber()}" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email">Email </label>
+                                    <label for="email">Email <span style="color: red;font-size: 12px;font-weight: 600;" id="errorEmail"></span></label>
                                     <input type="email" name="txtEmail" class="form-control" id="email" placeholder="you@example.com" value="${AccCustomerSession.getEmail()}">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="address">Address</label>
+                                    <label for="address">Address <span style="color: red;font-size: 12px;font-weight: 600;" id="errorAddress"></span></label>
                                     <input type="text" name="txtAddress" class="form-control" id="address" placeholder="1234 Main St" required>
                                 </div>
 
                                 <div class="row">
-<!--                                    <div class="col-md-5 mb-3">
-                                        <label for="country">Country</label>
-                                        <select name="country" class="countries form-control" id="countryId">
-                                            <option value="">Select Country</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="state" name="txtShipCity">City</label>
-                                        <select name="state" class="states form-control" id="stateId">
-                                            <option value="">Select City</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="zip">District</label>
-                                        <input type="text" class="form-control" id="district" placeholder="" required>
-
-                                    </div>-->
+                                    <!--                                    <div class="col-md-5 mb-3">
+                                                                            <label for="country">Country</label>
+                                                                            <select name="country" class="countries form-control" id="countryId">
+                                                                                <option value="">Select Country</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-4 mb-3">
+                                                                            <label for="state" name="txtShipCity">City</label>
+                                                                            <select name="state" class="states form-control" id="stateId">
+                                                                                <option value="">Select City</option>
+                                                                            </select>
+                                    
+                                                                        </div>
+                                                                        <div class="col-md-3 mb-3">
+                                                                            <label for="zip">District</label>
+                                                                            <input type="text" class="form-control" id="district" placeholder="" required>
+                                    
+                                                                        </div>-->
                                     <br>
                                     <div class="col-md-4 mb-3">
                                         <label for="country">Country</label>
-                                        <input class="" name="" type="text" value="Viet Nam">
+                                        <input class="" name="" readonly type="text" value="Viet Nam">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="City">City</label>
-                                        <select name="calc_shipping_provinces" required="">
+                                        <label for="City">City <span style="color: red;font-size: 12px;font-weight: 600;" id="errorSelecttp"></span></label>
+                                        <select id="selectTp" name="calc_shipping_provinces" required="">
                                             <option value="">Tỉnh / Thành phố</option>
                                         </select>
                                         <input class="billing_address_1" name="txtCity" type="hidden" value="">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="District">District</label>
-                                        <select name="calc_shipping_district" required="">
+                                        <label for="District">District <span style="color: red;font-size: 12px;font-weight: 600;" id="errorSelecth"></span></label>
+                                        <select id="selectH" name="calc_shipping_district" required="">
                                             <option value="">Quận / Huyện</option>
                                         </select>
 
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <button class="tg-btn tg-btns tg-active" type="submit">Confirm to order</button>
+                                <button onclick="return validate()" class="tg-btn tg-btns tg-active" type="submit">Confirm to order</button>
                             </form>
                         </div>
                         <div class="col-md-4 order-md-2 mb-4" id="ajax">
@@ -120,20 +120,20 @@
                                                 <c:if test="${product.getProductID() == cart.getProductID()}">
                                                     <h6 class="my-0">${product.getProductName()}</h6>
                                                 </c:if>
-                                                
+
                                             </c:forEach>
                                             <c:forEach items="${proList}" var="product">
                                                 <c:if test="${product.getProductID() == cart.getProductID()}">
                                                     <small class="text-muted">${product.getSalePrice()}</small>
                                                 </c:if>
-                                                
+
                                             </c:forEach>
                                         </div>
                                         <span class="text-muted">${cart.getQuantity()}</span>
                                     </li>
                                 </c:forEach>
-                                
-                                
+
+
                                 <li class="list-group-item d-flex justify-content-between bg-light">
                                     <div class="text-success">
                                         <h6 class="my-0">Voucher code</h6>
@@ -151,14 +151,14 @@
                                 </li>
                             </ul>
 
-<!--                            <form class="card p-2">-->
-                                <div class="input-group">
-                                    <input id="vuvu" type="text" class="form-control" name="txtDiscountID" placeholder="Voucher code">
-                                    <div class="input-group-append">
-                                        <button onclick="redeem()" type="submit" class="tg-btn tg-btns " style="background-color: lightgray">Redeem</button>
-                                    </div>
+                            <!--                            <form class="card p-2">-->
+                            <div class="input-group">
+                                <input id="vuvu" type="text" class="form-control" name="txtDiscountID" placeholder="Voucher code">
+                                <div class="input-group-append">
+                                    <button onclick="redeem()" type="submit" class="tg-btn tg-btns " style="background-color: lightgray">Redeem</button>
                                 </div>
-<!--                            </form>-->
+                            </div>
+                            <!--                            </form>-->
                         </div>
                     </div>
                 </div>
@@ -166,169 +166,256 @@
         </section>
     </div>
 </main>
-              
+
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
 
 <%@include file="templates/footer.jsp" %>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function redeem() {
-        var discount = document.getElementById("vuvu").value;
-        $.ajax({
-            url: "/G3_ProjectSwp/checkoutAjax",
-            type: "get", //send it through get method
-            data: {
-                txtDiscountID: discount
-            },
-            success: function (data) {
-                var row = document.getElementById("ajax");
-                row.innerHTML = data;
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
-    }
+                                        function redeem() {
+                                            var discount = document.getElementById("vuvu").value;
+                                            $.ajax({
+                                                url: "/G3_ProjectSwp/checkoutAjax",
+                                                type: "get", //send it through get method
+                                                data: {
+                                                    txtDiscountID: discount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("ajax");
+                                                    row.innerHTML = data;
+                                                },
+                                                error: function (xhr) {
+                                                    //Do Something to handle error
+                                                }
+                                            });
+                                        }
+
+                                        function validate() {
+                                            let i = 1;
+                                            var mySelecttp = document.getElementById('selectTp').value;
+                                            var mySelecth = document.getElementById('selectH').value;
+                                            let txtReceiver = document.getElementById('fullName').value.trim();
+                                            let txtPhoneNumber = document.getElementById('phone').value.trim();
+                                            let txtEmail = document.getElementById('email').value.trim();
+                                            let txtAddress = document.getElementById('address').value.trim();
+                                            const regexName = /^[\p{L} ]+$/u;
+                                            const regexPhone = /^(0|84)\d{9}$/;
+                                            const regexAdresss = /['"\\?!^*%$@]/;
+                                            var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                                            if (mySelecttp == "") {
+                                                errorSelecttp.innerHTML = "Not null!";
+                                                i++;
+                                            }
+                                            if (mySelecth == "") {
+                                                errorSelecth.innerHTML = "Not null!";
+                                                i++;
+                                            }
+
+                                            if (txtReceiver === '') {
+                                                errorName.innerHTML = "Name cannot be empty!";
+                                                i++;
+                                            } else if (txtReceiver.length < 2) {
+                                                errorName.innerHTML = "Name cannot be less than 2 characters!";
+                                                i++;
+                                            } else if (txtReceiver.length > 30) {
+                                                errorName.innerHTML = "Name cannot be more than 30 characters!";
+                                                i++;
+                                            } else if (txtReceiver.match(regexName)) {
+                                                errorName.innerHTML = "";
+                                            } else {
+                                                errorName.innerHTML = "Name cannot contain numbers or special characters!";
+                                                i++;
+                                            }
+
+                                            if (txtPhoneNumber == '') {
+                                                errorPhone.innerHTML = "Phone number cannot be empty!";
+                                                i++;
+                                            } else if (regexPhone.test(txtPhoneNumber)) {
+                                                errorPhone.innerHTML = "";
+                                            } else {
+                                                errorPhone.innerHTML = "invalid phone number";
+                                                i++;
+                                            }
+//        
+//        
+                                            if (txtAddress == '') {
+                                                errorAddress.innerHTML = "Address cannot be empty!";
+                                                i++;
+                                            } else if (txtAddress.length < 10) {
+                                                errorAddress.innerHTML = "address cannot be less than 10 characters";
+                                                i++;
+                                            } else if (txtAddress.length > 100) {
+                                                errorAddress.innerHTML = "address cannot be more than 100 characters";
+                                                i++;
+                                            } else if (!regexAdresss.test(txtAddress)) {
+                                                errorAddress.innerHTML = "";
+                                            } else {
+                                                errorAddress.innerHTML = "address cannot contain special characters: '\"\?^*%!@$";
+                                                i++;
+                                            }
+//        
+                                            if (txtEmail === '') {
+                                                errorEmail.innerHTML = "Email cannot be empty!";
+                                                i++;
+                                            } else if (txtEmail.match(regexEmail)) {
+                                                errorEmail.innerHTML = "";
+                                            } else {
+                                                errorEmail.innerHTML = "Wrong email format!";
+                                                i++;
+                                            }
+
+                                            if (i > 1) {
+                                                return false;
+                                            } else {
+                                                if (confirm("Confirm to order") == true) {
+                                                    return true
+                                                } else {
+                                                    return false;
+                                                }
+                                            }
+
+                                        }
+
+
 </script>                 
 
 <script src="https://web8802.com/wp-content/themes/hienads/assets/js/quanhuyen.js"></script>
 <script>
-if (address_2 = localStorage.getItem('address_2_saved')) {
+                                        if (address_2 = localStorage.getItem('address_2_saved')) {
 
-  $('select[name="calc_shipping_district"] option').each(function() {
+                                            $('select[name="calc_shipping_district"] option').each(function () {
 
-    if ($(this).text() == address_2) {
+                                                if ($(this).text() == address_2) {
 
-      $(this).attr('selected', '')
+                                                    $(this).attr('selected', '')
 
-    }
+                                                }
 
-  })
+                                            })
 
-  $('input.billing_address_2').attr('value', address_2)
+                                            $('input.billing_address_2').attr('value', address_2)
 
-}
+                                        }
 
-if (district = localStorage.getItem('district')) {
+                                        if (district = localStorage.getItem('district')) {
 
-  $('select[name="calc_shipping_district"]').html(district)
+                                            $('select[name="calc_shipping_district"]').html(district)
 
-  $('select[name="calc_shipping_district"]').on('change', function() {
+                                            $('select[name="calc_shipping_district"]').on('change', function () {
 
-    var target = $(this).children('option:selected')
+                                                var target = $(this).children('option:selected')
 
-    target.attr('selected', '')
+                                                target.attr('selected', '')
 
-    $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                                                $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
 
-    address_2 = target.text()
+                                                address_2 = target.text()
 
-    $('input.billing_address_2').attr('value', address_2)
+                                                $('input.billing_address_2').attr('value', address_2)
 
-    district = $('select[name="calc_shipping_district"]').html()
+                                                district = $('select[name="calc_shipping_district"]').html()
 
-    localStorage.setItem('district', district)
+                                                localStorage.setItem('district', district)
 
-    localStorage.setItem('address_2_saved', address_2)
+                                                localStorage.setItem('address_2_saved', address_2)
 
-  })
+                                            })
 
-}
+                                        }
 
-$('select[name="calc_shipping_provinces"]').each(function() {
+                                        $('select[name="calc_shipping_provinces"]').each(function () {
 
-  var $this = $(this),
+                                            var $this = $(this),
+                                                    stc = ''
 
-    stc = ''
+                                            c.forEach(function (i, e) {
 
-  c.forEach(function(i, e) {
+                                                e += +1
 
-    e += +1
+                                                stc += '<option value=' + e + '>' + i + '</option>'
 
-    stc += '<option value=' + e + '>' + i + '</option>'
+                                                $this.html('<option value="">T?nh / Thành ph?</option>' + stc)
 
-    $this.html('<option value="">T?nh / Thành ph?</option>' + stc)
+                                                if (address_1 = localStorage.getItem('address_1_saved')) {
 
-    if (address_1 = localStorage.getItem('address_1_saved')) {
+                                                    $('select[name="calc_shipping_provinces"] option').each(function () {
 
-      $('select[name="calc_shipping_provinces"] option').each(function() {
+                                                        if ($(this).text() == address_1) {
 
-        if ($(this).text() == address_1) {
+                                                            $(this).attr('selected', '')
 
-          $(this).attr('selected', '')
+                                                        }
 
-        }
+                                                    })
 
-      })
+                                                    $('input.billing_address_1').attr('value', address_1)
 
-      $('input.billing_address_1').attr('value', address_1)
+                                                }
 
-    }
+                                                $this.on('change', function (i) {
 
-    $this.on('change', function(i) {
+                                                    i = $this.children('option:selected').index() - 1
 
-      i = $this.children('option:selected').index() - 1
+                                                    var str = '',
+                                                            r = $this.val()
 
-      var str = '',
+                                                    if (r != '') {
 
-        r = $this.val()
+                                                        arr[i].forEach(function (el) {
 
-      if (r != '') {
+                                                            str += '<option value="' + el + '">' + el + '</option>'
 
-        arr[i].forEach(function(el) {
+                                                            $('select[name="calc_shipping_district"]').html('<option value="">Qu?n / Huy?n</option>' + str)
 
-          str += '<option value="' + el + '">' + el + '</option>'
+                                                        })
 
-          $('select[name="calc_shipping_district"]').html('<option value="">Qu?n / Huy?n</option>' + str)
+                                                        var address_1 = $this.children('option:selected').text()
 
-        })
+                                                        var district = $('select[name="calc_shipping_district"]').html()
 
-        var address_1 = $this.children('option:selected').text()
+                                                        localStorage.setItem('address_1_saved', address_1)
 
-        var district = $('select[name="calc_shipping_district"]').html()
+                                                        localStorage.setItem('district', district)
 
-        localStorage.setItem('address_1_saved', address_1)
+                                                        $('select[name="calc_shipping_district"]').on('change', function () {
 
-        localStorage.setItem('district', district)
+                                                            var target = $(this).children('option:selected')
 
-        $('select[name="calc_shipping_district"]').on('change', function() {
+                                                            target.attr('selected', '')
 
-          var target = $(this).children('option:selected')
+                                                            $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
 
-          target.attr('selected', '')
+                                                            var address_2 = target.text()
 
-          $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                                                            $('input.billing_address_2').attr('value', address_2)
 
-          var address_2 = target.text()
+                                                            district = $('select[name="calc_shipping_district"]').html()
 
-          $('input.billing_address_2').attr('value', address_2)
+                                                            localStorage.setItem('district', district)
 
-          district = $('select[name="calc_shipping_district"]').html()
+                                                            localStorage.setItem('address_2_saved', address_2)
 
-          localStorage.setItem('district', district)
+                                                        })
 
-          localStorage.setItem('address_2_saved', address_2)
+                                                    } else {
 
-        })
+                                                        $('select[name="calc_shipping_district"]').html('<option value="">Qu?n / Huy?n</option>')
 
-      } else {
+                                                        district = $('select[name="calc_shipping_district"]').html()
 
-        $('select[name="calc_shipping_district"]').html('<option value="">Qu?n / Huy?n</option>')
+                                                        localStorage.setItem('district', district)
 
-        district = $('select[name="calc_shipping_district"]').html()
+                                                        localStorage.removeItem('address_1_saved', address_1)
 
-        localStorage.setItem('district', district)
+                                                    }
 
-        localStorage.removeItem('address_1_saved', address_1)
+                                                })
 
-      }
+                                            })
 
-    })
-
-  })
-
-})
+                                        })
 
 </script>
 <!--

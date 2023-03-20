@@ -134,7 +134,7 @@ public class ProductManage_admin extends HttpServlet {
         if (proList.isEmpty()) {
             req.setAttribute("emptyListMsg", "There is nothing in Product List!");
         }
-        
+
         CategoryDAO cdao = new CategoryDAO();
         AuthorDAO adao = new AuthorDAO();
         SupplierDAO sdao = new SupplierDAO();

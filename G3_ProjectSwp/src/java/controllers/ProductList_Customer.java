@@ -136,7 +136,7 @@ public class ProductList_Customer extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String txtSearch = req.getParameter("txtSearch");
+        String txtSearch = req.getParameter("txtSearch").replaceAll("\\s\\s+", " ").trim();
         ArrayList<Product> productList = new ProductDAO().getProductbySearch(txtSearch);
         ArrayList<Category> cateList = new CategoryDAO().getCategory();
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();
@@ -147,6 +147,8 @@ public class ProductList_Customer extends HttpServlet {
         }
         
         
+
+        req.setAttribute("txtSearch", txtSearch);
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);
         req.setAttribute("genreList", genreList);

@@ -138,7 +138,6 @@ public class OrderManage_admin extends HttpServlet {
                     int status = Integer.parseInt(req.getParameter("status"));
                     orderList = new OrderDAO().getOrderByStatus(status);
                     break;
-
                 default:
                     break;
             }

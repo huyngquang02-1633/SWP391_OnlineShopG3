@@ -7,32 +7,31 @@
         <div class="content-main">
             <form action="<%=path%>/StoreManager_admin" method="post" id="content-main-product">
                 <div class="content-main-1">
-                    <input style="display: none" type="text" name="txtEmployeeID" id="" value="${em.getEmployeeID()}"><br/>
-                    <label>Last Name:</label><br/>
-                    <input type="text" name="txtLastName" id="" value="${em.getLastName()}"><br/>
-                    <label>First Name:</label><br/>
-                    <input type="text" name="txtFirstName" id="" value="${em.getFirstName()}"><br/>
-                    <label>Title:</label><br/>
-                    <input type="text" name="txtTitle" id="" value="${em.getTitle()}"><br/>
+                    <input style="display: none" type="text" name="txtEmployeeID" id="txtEmployeeID" value="${em.getEmployeeID()}">
+                    <label>Last Name: <span style="color: red" id="errorLName"></span></label><br/>
+                    <input type="text" name="txtLastName" id="txtLastName" value="${em.getLastName()}"><br/>
+                    <label>First Name: <span style="color: red" id="errorFName"></span></label><br/>
+                    <input type="text" name="txtFirstName" id="txtFirstName" value="${em.getFirstName()}"><br/>
+                    <label>Title: <span style="color: red" id="errorCTitle"></span></label><br/>
+                    <input type="text" name="txtTitle" id="txtTitle" value="${em.getTitle()}"><br/>
                     <label>Status:</label><br/>
                     <input readonly type="text" value="<c:choose><c:when test="${em.isStatus() == true}">Active</c:when><c:when test="${em.isStatus() == false}">Suspended</c:when></c:choose>"/>
                         </div>
                         <div class="content-main-1">
-                            <label>Phone Number:</label><br/>
-                                <input type="text" name="txtPhoneNumber" id="" value="${em.getPhoneNumber()}"><br/>
-                    <label>Title Of Courtesy:</label><br/>
-                    <input type="text" name="txtTitleOfCourtesy" id="" value="${em.getTitleOfCourtesy()}"><br/>
-                    <label>Address:</label><br/>
-                    <input type="text" name="txtAddress" id="" value="${em.getAddress()}"><br/>
+                            <label>Phone Number: <span style="color: red" id="errorPhone"></span></label><br/>
+                                <input type="text" name="txtPhoneNumber" id="txtPhoneNumber" value="${em.getPhoneNumber()}"><br/>
+                    <label>Title Of Courtesy: <span style="color: red" id="errorTitleC"></span></label><br/>
+                    <input type="text" name="txtTitleOfCourtesy" id="txtTitleOfCourtesy" value="${em.getTitleOfCourtesy()}"><br/>
+                    <label>Address: <span style="color: red" id="errorAddress"></span></label><br/>
+                    <input type="text" name="txtAddress" id="txtAddress" value="${em.getAddress()}"><br/>
                     <label>Department:</label><br/>
-                    <input readonly type="text" name="txtAddress" id="" value="<c:forEach var="dep" items="${depart}"> <c:if test="${em.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if></c:forEach>"><br/>
-                            <br/>
+                    <input readonly type="text" name="txtDepartment" id="txtDepartment" value="<c:forEach var="dep" items="${depart}"> <c:if test="${em.getDepartmentID() == dep.getDepartmentID()}">${dep.getDepartmentName()}</c:if></c:forEach>"><br/>
                         </div>
                         <div class="content-main-1">
-                            <label>Birth Date:</label><br/>
-                            <input type="date" name="txtBirthDate" id="" value="${em.getBirthDate()}"><br/>
+                            <label>Birth Date: <span style="color: red" id="errorDiscountID"></span></label><br/>
+                            <input min="1900-01-01" max="2012-12-31" type="date" name="txtBirthDate" id="txtBirthDate" value="${em.getBirthDate()}"><br/>
                     <label>Hire Date:</label><br/>
-                    <input readonly type="date" name="txtHireDate" id="" value="${em.getHireDate()}"><br/>
+                    <input readonly type="date" name="txtHireDate" id="txtHireDate" value="${em.getHireDate()}"><br/>
                     <label>Gender:</label><br/>
                     <select name="txtGender" >
                         <c:if test="${em.isGender()==true}">
@@ -43,10 +42,10 @@
                             <option value="true">Male</option>
                             <option selected="false">Female</option>
                         </c:if>
-                    </select><br/> 
+                    </select>
                 </div>
 
-                <input style="margin: auto;" type="submit" value="Save"/>
+                <input onclick="return validate()" style="margin: auto;" type="submit" value="Save"/>
 
             </form>
         </div>
@@ -56,11 +55,11 @@
 <div id="content-right">
     <div class="path-admin">STORE MANAGERMENT
         <c:if test="${msg!=null}">
-        <strong style="margin-left: 102px; color: #09b83e">${msg}</strong>
-    </c:if>
-    <c:if test="${msg1!=null}">
-        <strong style="margin-left: 188px; color: red">${msg1}</strong>
-    </c:if>
+            <strong style="margin-left: 102px; color: #09b83e">${msg}</strong>
+        </c:if>
+        <c:if test="${msg1!=null}">
+            <strong style="margin-left: 188px; color: red">${msg1}</strong>
+        </c:if>
     </div>
     <div style="background-color: white;" class="content-main">
         <hr/>
@@ -107,41 +106,46 @@
             <div class="info-homeadmin-right">
                 <div class="wrapper">
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=1">
+                            <h4>${quantityID1}</h4>
+                            <p>Pending orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
-                    </div>
-
-
-                    <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=2">
+                            <h4>${quantityID2}</h4>
+                            <p>Approved orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=3">
+                            <h4>${quantityID3}</h4>
+                            <p>Delivering orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <h4>20</h4>
-                        <p>ch? x? lý</p>
-                    </div>
-                    <div class="div-square">
-                        <a href=""><h4>20</h4></a>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=4">
+                            <h4>${quantityID4}</h4>
+                            <p>Delivered orders</p>
+                        </a>
                     </div>
 
                     <div class="div-square">
-                        <a href=""><h4>20</h4></a>
-                        <p>ch? x? lý</p>
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=5">
+                            <h4>${quantityID5}</h4>
+                            <p>Refunding orders</p>
+                        </a>
+                    </div>
+                    <div class="div-square">
+                        <a style="text-decoration: none" href="<%=path%>/orderManage_admin?txtStartOrderDate=&txtEndOrderDate=&status=6">
+                            <h4>${quantityID6}</h4>
+                            <p>Cancelled orders</p>
+                        </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -179,6 +183,118 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+    function validate() {
+        let i = 1;
+        let txtBirthDate = document.getElementById('txtBirthDate').value;
+        let txtAddress = document.getElementById('txtAddress').value.trim();
+        let txtPhoneNumber = document.getElementById('txtPhoneNumber').value.trim();
+        let txtTitleOfCourtesy = document.getElementById('txtTitleOfCourtesy').value.trim();
+        let txtTitle = document.getElementById('txtTitle').value.trim();
+        let txtFirstName = document.getElementById('txtFirstName').value.trim();
+        let txtLastName = document.getElementById('txtLastName').value.trim();
+
+        const regexName = /^[\p{L} ]+$/u;
+        const regexPhone = /^(0|84)\d{9}$/;
+        const regexAdresss = /['"\\?!^*%$@]/;
+
+        if (txtLastName === '') {
+            errorLName.innerHTML = "Name cannot be empty!";
+            i++;
+        } else if (txtLastName.length < 2) {
+            errorLName.innerHTML = "Name cannot be less than 2 characters!";
+            i++;
+        } else if (txtLastName.length > 30) {
+            errorLName.innerHTML = "Name cannot be more than 30 characters!";
+            i++;
+        } else if (txtLastName.match(regexName)) {
+            errorLName.innerHTML = "";
+        } else {
+            errorLName.innerHTML = "Name cannot contain numbers or special characters!";
+            i++;
+        }
+
+        if (txtFirstName === '') {
+            errorFName.innerHTML = "Name cannot be empty!";
+            i++;
+        } else if (txtFirstName.length < 2) {
+            errorFName.innerHTML = "Name cannot be less than 2 characters!";
+            i++;
+        } else if (txtFirstName.length > 30) {
+            errorFName.innerHTML = "Name cannot be more than 30 characters!";
+            i++;
+        } else if (txtFirstName.match(regexName)) {
+            errorFName.innerHTML = "";
+        } else {
+            errorFName.innerHTML = "Name cannot contain numbers or special characters!";
+            i++;
+        }
+
+        if (txtAddress !== '') {
+            if (txtAddress.length < 20) {
+                errorAddress.innerHTML = "Address cannot be less than 20 characters";
+                i++;
+            } else if (txtAddress.length > 100) {
+                errorAddress.innerHTML = "Address cannot be more than 100 characters";
+                i++;
+            } else if (!regexAdresss.test(txtAddress)) {
+                errorAddress.innerHTML = "";
+            } else {
+                errorAddress.innerHTML = "Address cannot contain special characters: '\"\?^*%!@$";
+                i++;
+            }
+        }
+
+        if (txtTitle !== '') {
+            if (txtTitle.length < 5) {
+                errorCTitle.innerHTML = "contactTitle cannot be less than 5 characters";
+                i++;
+            } else if (txtTitle.length > 40) {
+                errorCTitle.innerHTML = "contactTitle cannot be more than 40 characters";
+                i++;
+            } else if (!regexAdresss.test(txtTitle)) {
+                errorCTitle.innerHTML = "";
+            } else {
+                errorCTitle.innerHTML = "contactTitle cannot contain special characters: '\"\?^*%!@$";
+                i++;
+            }
+        }
+
+        if (txtTitleOfCourtesy !== '') {
+            if (txtTitleOfCourtesy.length < 5) {
+                errorTitleC.innerHTML = "Title of course cannot be less than 5 characters";
+                i++;
+            } else if (txtTitleOfCourtesy.length > 40) {
+                errorTitleC.innerHTML = "Title of course cannot be more than 40 characters";
+                i++;
+            } else if (!regexAdresss.test(txtTitleOfCourtesy)) {
+                errorTitleC.innerHTML = "";
+            } else {
+                errorTitleC.innerHTML = "Title of course cannot contain special characters: '\"\?^*%!@$";
+                i++;
+            }
+        }
+
+        if (txtPhoneNumber == '') {
+            errorPhone.innerHTML = "Phone number cannot be empty!";
+            i++;
+        } else if (regexPhone.test(txtPhoneNumber)) {
+            errorPhone.innerHTML = "";
+        } else {
+            errorPhone.innerHTML = "invalid phone number";
+            i++;
+        }
+
+        if (i > 1) {
+            return false
+        } else {
+            if (confirm("Confirm update your profile?") == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 </script>
 </html>

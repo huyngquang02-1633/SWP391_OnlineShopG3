@@ -437,25 +437,25 @@ public class ProductDAO extends DBContext {
             //connection = DBContext.getInstance().getConnection();
 
             String sql = "update Products SET "
-                    + "ProductName = ?, "  //1
-                    + "CategoryID = ?, "  //2
-                    + "GenreID = ?, "  //3
-                    + "CoverPrice = ?, "  //4
-                    + "SalePrice = ?, "  //5
-                    + "AuthorID = ?, "  //6
-                    + "Translator = ?, "  //7
-                    + "PublisherID = ?, "  //8
-                    + "SupplierID = ?, "  //9
-                    + "Language = ?, "  //10
-                    + "Size = ?, "  //11
-                    + "Weight = ?, "  //12
-                    + "NumberOfPage = ?, "  //13
-                    + "Format = ?, "  //14
-                    + "Image = ?, "  //15
-                    + "PublishDate = ?, "  //16
-                    + "PublishingLicense = ?, "  //17
-                    + "Description = ?, "  //18
-                    + "Discontinued = ? "  //19
+                    + "ProductName = ?, " //1
+                    + "CategoryID = ?, " //2
+                    + "GenreID = ?, " //3
+                    + "CoverPrice = ?, " //4
+                    + "SalePrice = ?, " //5
+                    + "AuthorID = ?, " //6
+                    + "Translator = ?, " //7
+                    + "PublisherID = ?, " //8
+                    + "SupplierID = ?, " //9
+                    + "Language = ?, " //10
+                    + "Size = ?, " //11
+                    + "Weight = ?, " //12
+                    + "NumberOfPage = ?, " //13
+                    + "Format = ?, " //14
+                    + "Image = ?, " //15
+                    + "PublishDate = ?, " //16
+                    + "PublishingLicense = ?, " //17
+                    + "Description = ?, " //18
+                    + "Discontinued = ? " //19
                     + "where ProductID = ?";  //20
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -531,7 +531,7 @@ public class ProductDAO extends DBContext {
             ps.setBoolean(19, p.isDiscontinued());
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         } finally {
             //DBContext.releaseJBDCObject(rs, ps, connection);
         }
@@ -613,10 +613,24 @@ public class ProductDAO extends DBContext {
         return productList;
     }
 
-    public static void main(String[] args) {
-        ProductDAO abc = new ProductDAO();
-        ArrayList<Product> productList = new ProductDAO().getProducts(false);
-        System.out.println(productList.get(1).getAuthorID());
+
+    public ArrayList<Product> getProductHighRating() {
+        ArrayList<Product> listHighRating = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Products";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            listHighRating = getObjectList(rs);
+        } catch (Exception e) {
+        }
+        return listHighRating;
+
     }
 
+    public static void main(String[] args) {
+//        ProductDAO abc = new ProductDAO();
+//        System.out.println(abc.getProductListBySupplierID(1).get(0).getSupplierID());
+        ArrayList<Product> listHighRating = new ProductDAO().getProductHighRating();
+        System.out.println(listHighRating);
+    }
 }

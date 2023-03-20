@@ -138,7 +138,7 @@
 </div>
 </div>
 <div id="footer-admin">
-    <p>Group 3 SE1639 - Online Shop</p>
+    2023 All Rights Reserved By © Book Library
 </div>
 </div>
 <script>

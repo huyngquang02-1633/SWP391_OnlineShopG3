@@ -13,8 +13,8 @@
                 </div>
                 <c:if test="${msgOutOfStock!=null}"><div style="color: red; font-size: 20px;margin: 10px 0px; text-align: center;">${msgOutOfStock}</div></c:if>
                 <c:if test="${msgWrongDiscountID!=null}">${msgWrongDiscountID}</c:if>
-                <div class="content" id="content">
-                        <div class="row">
+                    <div class="content" id="content" style="padding-bottom: 25px;">
+                        <div class="row" >
                             <div class="col-md-12 col-lg-8">
                                 <div class="items">
                                 <c:forEach items="${cartList}" var="cartItem">
@@ -70,7 +70,7 @@
                             <div class="summary">
                                 <h3>Summary</h3>
                                 <div class="summary-item"><span class="text">Subtotal</span><span class="price">${subTotal}đ</span></div>
-                                <div class="summary-item"><span class="text">Discount</span><span class="price">$0đ</span></div>
+                                <div class="summary-item"><span class="text">Discount</span><span class="price">0đ</span></div>
                                 <div class="summary-item"><span class="text">Shipping</span><span class="price">${shipping}đ</span></div>
                                 <div class="summary-item"><span class="text">Total</span><span class="price">${subTotal + shipping}đ</span></div>
                                 <a class="tg-btn tg-btns tg-active" href="<%=path%>/checkout">
@@ -88,41 +88,41 @@
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function changeQuantity(param, param1){
+                                                                        function changeQuantity(param, param1) {
 
-        $.ajax({
-            url: "/G3_ProjectSwp/cartAjax",
-            type: "get", //send it through get method
-            data: {
-                txtProductID: param1,
-                txtQuantity: param.value
-            },
-            success: function (data) {
-                var row = document.getElementById("content");
-                row.innerHTML = data;
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
-        }
-        function deleteCartItem(param, param1){
+                                                                            $.ajax({
+                                                                                url: "/G3_ProjectSwp/cartAjax",
+                                                                                type: "get", //send it through get method
+                                                                                data: {
+                                                                                    txtProductID: param1,
+                                                                                    txtQuantity: param.value
+                                                                                },
+                                                                                success: function (data) {
+                                                                                    var row = document.getElementById("content");
+                                                                                    row.innerHTML = data;
+                                                                                },
+                                                                                error: function (xhr) {
+                                                                                    //Do Something to handle error
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        function deleteCartItem(param, param1) {
 
-        $.ajax({
-            url: "/G3_ProjectSwp/cartAjax",
-            type: "get", //send it through get method
-            data: {
-                txtProductIDToDelete: param1
-            },
-            success: function (data) {
-                var row = document.getElementById("content");
-                row.innerHTML = data;
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
-        }
+                                                                            $.ajax({
+                                                                                url: "/G3_ProjectSwp/cartAjax",
+                                                                                type: "get", //send it through get method
+                                                                                data: {
+                                                                                    txtProductIDToDelete: param1
+                                                                                },
+                                                                                success: function (data) {
+                                                                                    var row = document.getElementById("content");
+                                                                                    row.innerHTML = data;
+                                                                                },
+                                                                                error: function (xhr) {
+                                                                                    //Do Something to handle error
+                                                                                }
+                                                                            });
+                                                                        }
 </script>
 <%@include file="templates/footer.jsp" %>
 
