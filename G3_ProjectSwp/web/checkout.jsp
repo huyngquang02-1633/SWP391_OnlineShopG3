@@ -129,7 +129,7 @@
 
                                             </c:forEach>
                                         </div>
-                                        <span class="text-muted">${cart.getQuantity()}</span>
+                                        <span class="text-muted">x${cart.getQuantity()}</span>
                                     </li>
                                 </c:forEach>
 

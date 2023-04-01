@@ -39,14 +39,18 @@ public class ProductManage_admin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.getSession().removeAttribute("orderList");
+        if (req.getSession().getAttribute("AccAdminSession") == null) {
+            resp.sendRedirect(req.getContextPath() + "/404error.jsp");
+            return;
+        }
         PaginationObject paging = new PaginationObject(); paging.setNumberOfRowEachPage(5);
 
         int currentPage = 1;
         if (req.getParameter("currentPage") != null) {
             currentPage = Integer.parseInt(req.getParameter("currentPage"));
         }
-
+        
         ArrayList<Product> proList = new ArrayList<>();
         List<Product> listInCurrentPage = null;
 

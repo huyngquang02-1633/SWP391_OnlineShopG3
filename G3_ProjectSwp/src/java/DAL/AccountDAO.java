@@ -221,7 +221,7 @@ public class AccountDAO extends DBContext {
         return maxAccID + 1;
     }
 
-    private String randomString(int n) {
+    public String randomString(int n) {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";

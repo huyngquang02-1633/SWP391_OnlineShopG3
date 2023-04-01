@@ -21,13 +21,10 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="images/Banner40.png" alt="Advertising"style="width: auto;height: 100%;display: block; margin-left: auto;margin-right: auto;"/>
+                <img src="images/carousel-1.jpg" alt=""/>
             </div>
             <div class="item">
-                <img src="images/Banner30.png" alt="Advertising"style="width: auto;height: 100%;display: block; margin-left: auto;margin-right: auto;"/>
-            </div>
-            <div class="item">
-                <img src="images/Banner20 .png" alt="Advertising"style="width: auto;height: 100%;display: block; margin-left: auto;margin-right: auto;"/>
+                <img src="images/carousel-2.jpg" alt=""/>
             </div>
         </div>
     </div>
@@ -65,10 +62,10 @@
                                             <div class="tg-frontcover"><img src="<%=path%>/products/${product.getImage()}" alt="image description"></div>
                                             <div class="tg-backcover"><img src="<%=path%>/products/${product.getImage()}" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+<!--                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                             <i class="icon-heart"></i>
                                             <span>add to wishlist</span>
-                                        </a>
+                                        </a>-->
                                     </figure>
                                     <div class="tg-postbookcontent">
                                         <ul class="tg-bookscategories">
@@ -252,11 +249,11 @@
                             <h2><span>Taste The New Spice</span>New Release Books</h2>
                         </div>
                         <div class="tg-description">
-                            <p>Subscribe to our newsletter to get more reading recommendations straight to your inbox!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                         <div class="tg-btns">
-                            <a class="tg-btn tg-active" href="javascript:void(0);">View All</a>
-                            <a class="tg-btn" href="javascript:void(0);">Read More</a>
+<!--                            <a class="tg-btn tg-active" href="javascript:void(0);">View All</a>
+                            <a class="tg-btn" href="javascript:void(0);">Read More</a>-->
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -270,10 +267,10 @@
                                                     <div class="tg-frontcover"><img src="<%=path%>/products/${newRelease.getImage()}"></div>
                                                     <div class="tg-backcover"><img src="<%=path%>/products/${newRelease.getImage()}"alt="image description"></div>
                                                 </div>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+<!--                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
                                                     <span>add to wishlist</span>
-                                                </a>
+                                                </a>-->
                                             </figure>
                                             <div class="tg-postbookcontent">
                                                 <ul class="tg-bookscategories">
@@ -289,7 +286,7 @@
                                                         </c:forEach>
                                                 </ul>
                                                 <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">${newRelease.getProductName()}</a>
+                                                    <h3><a href="<%=path%>/productDetail?proID=${newRelease.getProductID()}">${newRelease.getProductName()}</a>
                                                     </h3>
                                                 </div>
                                                 <span class="tg-bookwriter">By: 
@@ -368,7 +365,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="tg-sectionhead">
                         <h2><span>Some Great Books</span>Highest Rating</h2>
-                        <a class="tg-btn" href="javascript:void(0);">View All</a>
+                        <!--<a class="tg-btn" href="javascript:void(0);">View All</a>-->
                     </div>
                 </div>
                 <div id="tg-pickedbyauthorslider"
@@ -378,7 +375,7 @@
                             <div class="tg-postbook">
                                 <figure class="tg-featureimg">
                                     <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="${product.getImage()}"
+                                        <div class="tg-frontcover"><img src="<%=path%>/products/${product.getImage()}"
                                                                         alt="image description"></div>
                                     </div>
                                     <div class="tg-hovercontent">
@@ -449,15 +446,20 @@
                                     <div class="tg-booktitle">
                                         <h3><a href="javascript:void(0);">${product.getProductName()}</a></h3>
                                     </div>
+                                    <c:url value="/cart" var="AddToCart">
+                                            <c:param name="previousURL" value="homepage" />
+                                            <c:param name="proID" value="${product.getProductID()}" />
+                                        </c:url>
                                     <c:forEach items="${authorList}" var="author">
                                         <c:if test="${product.getAuthorID() == author.getAuthorID()}">
                                             <span class="tg-bookwriter">By: <a href="<%=path%>/productList?authorID=${author.getAuthorID()}">${author.getAuthorName()}</a></span>
-                                            </c:if>
+                                            <a class="tg-btn tg-btnstyletwo" href="${AddToCart}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Add To Cart</em>
+                                            </a>
+                                        </c:if>
                                         </c:forEach>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>

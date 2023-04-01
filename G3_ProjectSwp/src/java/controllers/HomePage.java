@@ -29,6 +29,7 @@ import DAL.CustomerDAO;
 import DAL.GenreDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import java.util.Comparator;
 import models.Author;
 import models.CartCookies;
 import models.Category;
@@ -89,6 +90,23 @@ public class HomePage extends HttpServlet {
             req.setAttribute("subTotal", subTotal);
         }
         
+        Comparator sortByDecreasePrice = new Comparator() {
+        @Override
+            public int compare(Object o1, Object o2) {
+                Product pro1 = (Product) o1;
+                Product pro2 = (Product) o2;
+        
+                if(pro1.getAverageRating()- pro2.getAverageRating() >0) return -1;
+                if(pro1.getAverageRating() - pro2.getAverageRating() ==0) {
+                    return 0;
+                }
+                return 1;
+
+            }
+        };
+        ArrayList<Product> listHighRating = new ProductDAO().getProductHighRating();
+        listHighRating.sort(sortByDecreasePrice);
+        req.setAttribute("listHighRating", listHighRating.subList(0, 5));
         
         req.setAttribute("productList", productList);
         req.setAttribute("cateList", cateList);

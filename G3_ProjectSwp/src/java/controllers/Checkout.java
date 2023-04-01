@@ -162,6 +162,8 @@ public class Checkout extends HttpServlet {
                 for (Cookie arrCookies : arr) {
                     if (arrCookies.getName().contains("item")) {
                         cookiesText.add(arrCookies.getValue());
+                        arrCookies.setMaxAge(0);
+                        resp.addCookie(arrCookies);
                     }
                 }
             }
@@ -172,6 +174,7 @@ public class Checkout extends HttpServlet {
 //                resp.getWriter().print(cookiesText.get(i) + "\n");
 //                return;
 //            }
+
             ProductDAO proDAO = new ProductDAO();
             for (Cart cart1 : cartList) {
                 if(cart1.getQuantity() > proDAO.getAvailableInStock(cart1.getProductID())){

@@ -361,7 +361,7 @@ public class OrderDAO extends DBContext {
             ps1.setInt(1, od.getOrderID());
             ps1.setInt(2, od.getCustomerID());
             ps1.setInt(3, od.getEmployeeID());
-            ps1.setDouble(4, 0);
+            ps1.setDouble(4, 30000);
             ps1.setString(5, od.getShipName());
             ps1.setString(6, od.getShipAddress());
             ps1.setString(7, od.getShipCity());
@@ -574,6 +574,18 @@ public class OrderDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, status);
             ps.setString(2, orderId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateQuantityInWarehouse(OrderDetail odDetail) throws SQLException {
+        String sql = "update Inventories set UnitsInStock = UnitsInStock - ? where ProductID = ? AND WarehouseID = ? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, odDetail.getQuantity());
+            ps.setInt(2, odDetail.getProductID());
+            ps.setInt(3, odDetail.getWarehouseID());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

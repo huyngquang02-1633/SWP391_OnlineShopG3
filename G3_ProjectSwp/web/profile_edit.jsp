@@ -89,19 +89,19 @@
         const regexPhone = /^(0|84)\d{9}$/;
         const regexAdresss = /['"\\?!^*%$@]/;
 
-        if (lName === '') {
-            errorLName.innerHTML = "Name cannot be empty!";
+        if (fName === '') {
+            errorFName.innerHTML = "Name cannot be empty!";
             i++;
-        } else if (lName.length < 2) {
-            errorLName.innerHTML = "Name cannot be less than 2 characters!";
+        } else if (fName.length < 2) {
+            errorFName.innerHTML = "Name cannot be less than 2 characters!";
             i++;
-        } else if (lName.length > 30) {
-            errorLName.innerHTML = "Name cannot be more than 30 characters!";
+        } else if (fName.length > 30) {
+            errorFName.innerHTML = "Name cannot be more than 30 characters!";
             i++;
-        } else if (lName.match(regexName)) {
-            errorLName.innerHTML = "";
+        } else if (fName.match(regexName)) {
+            errorFName.innerHTML = "";
         } else {
-            errorLName.innerHTML = "Name cannot contain numbers or special characters!";
+            errorFName.innerHTML = "Name cannot contain numbers or special characters!";
             i++;
         }
 

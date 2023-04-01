@@ -32,6 +32,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Locale;
 import models.Author;
 import models.Genre;
@@ -53,12 +54,14 @@ public class CreateProduct_admin extends HttpServlet {
         AuthorDAO adao = new AuthorDAO();
         SupplierDAO sdao = new SupplierDAO();
         GenreDAO gdao = new GenreDAO();
-
+        
         List<Genre> listg = gdao.getGenreList();
         List<Author> lista = adao.getAuthorList();
         List<Category> listc = cdao.getCategory();
         List<Supplier> lists = sdao.getSupplierList();
 
+//        LocalDate today = LocalDate.now();
+//        req.setAttribute("today", today);
         req.setAttribute("listg", listg);
         req.setAttribute("lista", lista);
         req.setAttribute("listc", listc);
@@ -109,7 +112,6 @@ public class CreateProduct_admin extends HttpServlet {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
             if(fileName.length()!=0){
                 //Part filePart  = req.getPart("chooseFile");
-                
                 img = fileName;
                 // Set the destination directory for the uploaded file
                 String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;

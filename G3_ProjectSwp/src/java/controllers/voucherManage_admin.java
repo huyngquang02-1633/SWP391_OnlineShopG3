@@ -47,6 +47,10 @@ public class voucherManage_admin extends HttpServlet {
     //edit
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("AccAdminSession") == null) {
+            resp.sendRedirect(req.getContextPath() + "/404error.jsp");
+            return;
+        }
         String DiscountID = req.getParameter("txtDiscountID");
         String Title = req.getParameter("txtTitle").replaceAll("\\s\\s+", " ").trim();
         String Description = req.getParameter("txtDescription").replaceAll("\\s\\s+", " ").trim();

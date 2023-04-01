@@ -67,7 +67,7 @@
         <div class="info-homeadmin">
             <div class="info-homeadmin-left">
                 <div style=" width: 100%; border-right: solid 1px black; display: flex;" class="content-main-1">
-                    <div style="width: 30%;"><img style="width: 80%;border-radius: 50%;" src="https://i.pinimg.com/736x/4a/4c/29/4a4c29807499a1a8085e9bde536a570a.jpg" alt=""><br>
+                    <div style="width: 30%;"><img style="width: 80%;border-radius: 50%;" src="https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png" alt=""><br>
                     </div>
                     <div class="textInfo">
                         <div><strong>Email</strong>: ${account.getEmail()}</div>

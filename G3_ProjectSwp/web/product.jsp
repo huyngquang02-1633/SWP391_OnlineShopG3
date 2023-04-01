@@ -66,7 +66,7 @@
                     </tr>
                     <c:forEach items="${productList}" var="product">
                                     <tr>
-                                    <td><img style="width: 50px;" src="<%=path%>/products/${product.getImage()}"></td>
+                                        <td style="padding: 0px;"><img style="width: 50px;" src="<%=path%>/products/${product.getImage()}"></td>
                                     <td><a href="order-detail.html?id=5">${product.getProductID()}</a></td>
                                     <td>${product.getProductName()}</td>
                                     <td>

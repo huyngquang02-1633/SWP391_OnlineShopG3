@@ -26,6 +26,7 @@ import DAL.CustomerDAO;
 import DAL.EmployeeDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import java.util.Comparator;
 
 
 /**
@@ -72,6 +73,24 @@ public class OrderManage_admin extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(OrderManage_admin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Comparator sortByOldDate = new Comparator() {
+        @Override
+            public int compare(Object o1, Object o2) {
+                Order pro1 = (Order) o1;
+                Order pro2 = (Order) o2;
+                
+                if (pro1.getOrderDate()== null || pro2.getOrderDate() == null) {
+                    return 0;
+                }else if(pro1.getOrderDate().compareTo(pro2.getOrderDate()) > 0){
+                    return 1;
+                }else {
+                    return -1;
+                }
+            }
+        };
+        
+        
         req.setAttribute("cusList", cusList);
         req.setAttribute("empList", empList);
         Enumeration<String> enumeration = req.getParameterNames();
@@ -108,15 +127,16 @@ public class OrderManage_admin extends HttpServlet {
                     req.getSession().setAttribute("txtStartOrderDate", req.getParameter("txtStartOrderDate"));
                     break;
                 case 2:
-                    int idOdDetail=Integer.parseInt(req.getParameter("idOdDetail"));
+                    int idOdDetail = Integer.parseInt(req.getParameter("idOdDetail"));
                     Order order = new OrderDAO().getOrderByID(idOdDetail);
                     ArrayList<OrderDetail> odDetailList = new OrderDAO().getDetailOfOrderByOdID(idOdDetail);
                     ArrayList<Product> proList = new ProductDAO().getProducts(true);
                     req.setAttribute("productList", proList);
                     req.setAttribute("order", order);
                     req.setAttribute("orderDetailList", odDetailList);
-                    req.getRequestDispatcher("order_detail.jsp").forward(req, resp);
-                    break;
+                    
+                    req.getRequestDispatcher("order-detail.jsp").forward(req, resp);
+                    return;
 
                 case 3:
                     int idCancel = Integer.parseInt(req.getParameter("idCancel"));
@@ -137,6 +157,7 @@ public class OrderManage_admin extends HttpServlet {
                 case 4:
                     int status = Integer.parseInt(req.getParameter("status"));
                     orderList = new OrderDAO().getOrderByStatus(status);
+                    orderList.sort(sortByOldDate);
                     break;
                 default:
                     break;
@@ -148,9 +169,13 @@ public class OrderManage_admin extends HttpServlet {
 //            }
         }
         req.getSession().removeAttribute("mode");
+        
+        
         if (orderList.isEmpty()) {
             req.setAttribute("emptyListMsg", "There is nothing in Order List!");
         }
+        
+        
         req.getSession().setAttribute("currentPage", currentPage);
 
         List<Order> listInCurrentPage = paging.getListInCurrentPage(orderList, currentPage);

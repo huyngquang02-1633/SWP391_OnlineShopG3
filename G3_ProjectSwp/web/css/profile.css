@@ -135,7 +135,7 @@ body {
 
 .bio-graph-info {
     color: #89817e;
-    width: 105%;
+    width: 100%;
 }
 
 .bio-graph-info h1 {
@@ -145,7 +145,7 @@ body {
 }
 
 .panel{
-
+    background-color: #fff0;
 }
 
 .bio-row {

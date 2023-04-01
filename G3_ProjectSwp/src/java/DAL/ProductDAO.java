@@ -133,6 +133,8 @@ public class ProductDAO extends DBContext {
         }
         return productList;
     }
+    
+    
     public ArrayList<Product> getProductListByFilterAdmin(String sample, int CatID, boolean discontinued, boolean ouOfStock) {
         ArrayList<Product> productList = new ArrayList<>();
         try {

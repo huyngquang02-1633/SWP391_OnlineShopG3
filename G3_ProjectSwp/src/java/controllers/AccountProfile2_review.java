@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.AccountDAO;
 import DAL.CartDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
@@ -65,9 +66,12 @@ public class AccountProfile2_review extends HttpServlet {
                 orderID = Integer.parseInt(req.getParameter("id"));
             }
 
+            
             Order order = new OrderDAO().getOrderByID(orderID);
             ArrayList<OrderDetail> orderDetailList = new OrderDAO().getDetailOfOrderByCusID(accCustomer.getCustomerID());
+            ArrayList<Review> reviewList = new ReviewDAO().getReviewListByOrderID(orderID);
 
+            req.setAttribute("reviewList", reviewList);
             req.setAttribute("order", order);
             req.setAttribute("orderDetailList", orderDetailList);
             
@@ -145,10 +149,13 @@ public class AccountProfile2_review extends HttpServlet {
             int orderID = Integer.parseInt(req.getParameter("orderID"));
             int productID = Integer.parseInt(req.getParameter("productID"));
             
-            String fileNameToStore = "";
-            if(req.getParameter("chooseFile")!=null){
-                Part filePart  = req.getPart("chooseFile");
-                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            String fileNameToStore = "img-10.jpg";
+            String random = new AccountDAO().randomString(5);
+            
+            Part filePart  = req.getPart("chooseFile");
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString().replace(".",random+".");
+            if(fileName.length()!=0){
+                //Part filePart  = req.getPart("chooseFile");
                 fileNameToStore = fileName;
                 // Set the destination directory for the uploaded file
                 String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;

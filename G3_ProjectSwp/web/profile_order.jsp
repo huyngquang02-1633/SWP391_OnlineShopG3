@@ -34,60 +34,33 @@
                                     <div class="card-body p-4">
                                         <c:forEach items="${orderList}" var="odList">
 
-                                            <div class="card shadow-0 border mb-4" style="border: 1px solid green;">
+                                            <div class="card shadow-0 border mb-4" style="background-color: #f6f6f6;    border: solid 1px grey;
+                                                 border-radius: 8px;margin-bottom: 40px;">
                                                 <div class="col-12 odt-title d-flex">
 
                                                     <span>OrderID: ${odList.getOrderID()}</span>
                                                     <span>Order date: ${odList.getOrderDate()}</span>
-                                                    <c:choose>
-                                                        <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()!=null}"><span style="color: red;">Canceled</span></c:when>
-                                                        <c:when test="${odList.getRequiredDate()!=null && odList.getShippedDate()==null}"><select id="selectS" name="ddlCategory">
-                                                                <option value="catid1" style="color: blue;">Pending</option>
-                                                                <option value="catid1" style="color: red;">Canceled</option>
-                                                            </select></c:when>
-                                                        <c:when test="${odList.getRequiredDate()==null && odList.getShippedDate()==null}"><span style="color: green;">Completed</span></c:when>
-                                                        <c:when test=""><select id="selectS" name="ddlCategory">
-                                                                <option value="catid1" style="color: blue;">Delivering</option>
-                                                                <option value="catid1" style="color: rgb(22, 22, 22);">Refunding</option>
-                                                                <option value="catid1" style="color: rgb(204, 201, 0);">Delivered</option>
-                                                            </select></c:when>
-                                                        <c:when test=""><select id="selectS" name="ddlCategory">
-                                                                <option value="catid1" style="color: green">Approved</option>
-                                                                <option value="catid1" style="color: red;">Canceled</option>
-                                                            </select></c:when>
 
-                                                    </c:choose>
                                                     <span>Status:</span>
                                                     <c:choose>
-                                                        <c:when test="${odList.getStatus()==1}">
-                                                            <span style="padding: unset;">
-                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
-                                                            </span></c:when>
-                                                        <c:when test="${odList.getStatus()==2}">
-                                                            <span style="padding: unset;">
-                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: red;">Cancel</button>
-                                                            </span>
-                                                        </c:when>
-                                                        <c:when test="${odList.getStatus()==3}">
-                                                            <span style="padding: unset;">
-                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: green;">Delivered</button>
-                                                                <button onclick="window.location.href = '../ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: orange;">Refunding</button>
-                                                            </span>
-                                                        </c:when>
-                                                        <c:when test="${odList.getStatus()==4}"><span style="color: green;">Delivered</span></c:when>
-                                                        <c:when test="${odList.getStatus()==5}"><span style="color: green;">Refunding</span></c:when>
-                                                        <c:when test="${odList.getStatus()==6}"><span style="color: red;">Canceled</span></c:when>
+                                                        <c:when test="${odList.getStatus()==1}"><span style="color: blue; margin-right: 35px; background-color: white;  padding: 5px;">Pending</span></c:when>
+                                                        <c:when test="${odList.getStatus()==2}"><span style="color: cornflowerblue; margin-right: 35px; background-color: white;  padding: 5px;">Approved</span></c:when>
+                                                        <c:when test="${odList.getStatus()==3}"><span style="color: #46b8da; margin-right: 35px; background-color: white;  padding: 5px;">Delivering</span></c:when>
+                                                        <c:when test="${odList.getStatus()==4}"><span style="color: green; margin-right: 35px; background-color: white;  padding: 5px;">Delivered</span></c:when>
+                                                        <c:when test="${odList.getStatus()==5}"><span style="color: orange; margin-right: 35px; background-color: white;  padding: 5px;">Refunding</span></c:when>
+                                                        <c:when test="${odList.getStatus()==6}"><span style="color: red; margin-right: 35px; background-color: white; padding: 5px;">Canceled</span></c:when>
                                                         <c:otherwise><td></td></c:otherwise>
                                                     </c:choose>
                                                 </div>
+                                                    <br>
                                                 <c:forEach items="${orderDetailList}" var="odDetailList">
                                                     <c:if test="${odList.getOrderID() == odDetailList.getOrderID()}">
                                                         <c:forEach items="${productList}" var="product">
                                                             <c:if test="${odDetailList.getProductID() == product.getProductID()}">
+                                                                
                                                                 <div class="card-body">
                                                                     <div class="row">
-                                                                        <div class="col-md-2">
-
+                                                                        <div class="col-md-2" style=" margin: 8px;">
         <!--                                                                    <img src="<%=path%>/images/books/img-04.jpg"
                                                                                  class="img-fluid" alt="Phone" style="width:70px;">-->
                                                                             <img src="<%=path%>/products/${product.getImage()}"
@@ -98,12 +71,12 @@
                                                                             <p class="text-muted mb-0">${product.getProductName()}</p>
                                                                         </div>
                                                                         <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                            <p class="text-muted mb-0 small">${product.getSize()}</p>
+                                                                            <p class="text-muted mb-0 small">${product.getNumberOfPage()} page</p>
                                                                         </div>
-                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+<!--                                                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                             <p class="text-muted mb-0 small">${product.getFormat()}</p>
 
-                                                                        </div>
+                                                                        </div>-->
                                                                         <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                             <p class="text-muted mb-0 small">${odDetailList.getSalePrice()}</p>
                                                                         </div>
@@ -112,25 +85,42 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                        <hr>
+                                                                <hr style="border-top: 1px solid cornflowerblue; margin: 1px;">
                                                             </c:if>
                                                         </c:forEach>
-                                                        
+
                                                     </c:if>
                                                 </c:forEach>
-                                                <div class="card-footer" >
+                                                <div class="card-footer" style="margin: 10px;">
                                                     <c:url value="/AccountProfile2_review" var="review">
                                                         <c:param name="id" value="${odList.getOrderID()}" />
                                                     </c:url>
-                                                    <h5>Total paid: <span class="h2 mb-0 ms-2">${odList.getTotalAmount()}</span></h5>
-                                                    <c:if test="${odList.getStatus()==4}">
+                                                    <h4>Total paid: <span class="h2 mb-0 ms-2">${odList.getTotalAmount()}</span></h4>
+                                                        <c:if test="${odList.getStatus()==4}">
+                                                            <div class="card-footer"><div id="box">
+                                                                <a href="${review}" id="Review">Review</a>
+                                                            </div></div>
+                                                        </c:if>
+                                                        <c:if test="${odList.getStatus()==1}">
                                                         <div class="card-footer"><div id="box">
-                                                            <a href="${review}" id="Review">Review</a>
-                                                        </div></div>
-                                                    </c:if>
+                                                                <button onclick="window.location.href = '<%=request.getContextPath()%>/ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: #cf142b; margin-right: 25px; background-color: bisque;  padding: 5px; border-radius: 10px; border: 1px solid green;">Cancel</button>
+                                                            </div></div>
+                                                        </c:if>
+                                                        <c:if test="${odList.getStatus()==2}">
+                                                        <div class="card-footer"><div id="box">
+                                                                <button onclick="window.location.href = '<%=request.getContextPath()%>/ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=6'" value="${odList.getOrderID()}" style="color: #cf142b; margin-right: 25px; background-color: bisque;  padding: 5px; border-radius: 10px; border: 1px solid green;">Cancel</button>
+                                                            </div></div>
+                                                        </c:if>
+                                                        <c:if test="${odList.getStatus()==3}">
+                                                        <div class="card-footer"><div id="box">
+                                                                <button onclick="window.location.href = '<%=request.getContextPath()%>/ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=4'" value="${odList.getOrderID()}" style="color: green; margin-right: 25px; background-color: bisque;  padding: 5px; border-radius: 10px; border: 1px solid green;">Delivered</button>
+                                                                <button onclick="window.location.href = '<%=request.getContextPath()%>/ChangeorderStatus_customer?orderId=${odList.getOrderID()}&status=5'" value="${odList.getOrderID()}" style="color: #cf142b; margin-right: 25px; background-color: bisque;  padding: 5px; border-radius: 10px; border: 1px solid green;">Refund</button>
+                                                            </div></div>
+                                                        </c:if>
                                                     
+
                                                 </div>
-                                                
+
                                             </div>    
                                         </c:forEach>
                                     </div>
@@ -144,4 +134,4 @@
         <!--</section>-->
     </div>
 </div>
-    <%@include file="templates/footer.jsp" %>
+<%@include file="templates/footer.jsp" %>

@@ -53,9 +53,9 @@
                                                 <c:set var = "previousURL" scope = "page" value="../productDetail?proID=${productInfor.getProductID()}" />
                                                 <!--<a class="tg-btn tg-active tg-btn-lg" href="${AddToCart}">Add To Cart</a>-->
                                                     <div class="tg-btn tg-active tg-btn-lg" onclick="addToCart(${productInfor.getProductID()})">Add To Cart</div>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+<!--                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <span>add to wishlist</span>
-                                                </a>
+                                                </a>-->
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +227,21 @@
                                                                 </c:forEach>
                                                             </span>
                                                         </div>
-                                                        <div style="margin-left: 70px;">
+                                                        <div style="margin-left: 70px; display: flex; flex-wrap: wrap ">
+                                                            <div style="width: 30%">
+                                                                <c:choose>
+                                                                    <c:when test="${review.getImage()!=null}">
+                                                                        <img style="max-width: 40%;" src="<%=path%>/uploads/${review.getImage()}" alt="abc">
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <img style="max-width: 40%;" src="<%=path%>/uploads/img-10.jpg" alt="abc">
+                                                                    </c:otherwise>
+                                                                        
+                                                                </c:choose>
+                                                                
+                                                            </div>
+                                                            <div style="width: 70%;padding-top: 1%;">
+                                                            
                                                             <c:choose>
                                                                 <c:when test="${review.getRating() ==0}">
                                                                     <i class="fa-solid fa-star" style="color: #bcbcb5;"></i>
@@ -274,10 +288,9 @@
                                                             </c:choose>
                                                                     <br>
                                                             <div>${review.getComment()}</div><br>
-                                                            <div>
-                                                                <img style="max-width: 15%;" src="<%=path%>/uploads/${review.getImage()}" alt="abc">
-                                                            </div>
+                                                            
                                                             <div>${review.getReviewDate()}</div>
+                                                        </div>
                                                         </div>
                                                             <hr/>
                                                         <!--</div>-->
@@ -345,10 +358,10 @@
                                                                     <div class="tg-frontcover"><img src="<%=path%>/products/${similarProduct.getImage()}" alt="image description"></div>
                                                                     <div class="tg-backcover"><img src="<%=path%>/products/${similarProduct.getImage()}" alt="image description"></div>
                                                                 </div>
-                                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+<!--                                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                     <i class="icon-heart"></i>
                                                                     <span>add to wishlist</span>
-                                                                </a>
+                                                                </a>-->
                                                             </figure>
                                                             <div class="tg-postbookcontent">
                                                                 <ul class="tg-bookscategories">
@@ -449,7 +462,8 @@
                                 <div class="tg-widgettitle">
                                     <h3>Categories</h3>
                                 </div>
-                                <div class="tg-widgetcontent">
+                                <div class="tg-widgetcontent" style="overflow: auto;
+                                                                             height: 265px;">
                                     <ul>
                                         <c:forEach items="${cateList}" var="cate">
                                             <li>
@@ -493,7 +507,8 @@
                                 <div class="tg-widgettitle">
                                     <h3>Supplier</h3>
                                 </div>
-                                <div class="tg-widgetcontent">
+                                <div class="tg-widgetcontent" style="overflow: auto;
+                                                                             height: 265px;">
                                     <ul>
                                         <c:forEach items="${SupList}" var="supplier">
                                             <li>

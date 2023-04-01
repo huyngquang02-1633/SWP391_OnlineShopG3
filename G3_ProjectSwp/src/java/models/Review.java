@@ -5,6 +5,7 @@
 package models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -17,9 +18,9 @@ public class Review {
     private int Rating;
     private String Comment;
     private String Image;
-    private Date ReviewDate;
+    private LocalDateTime ReviewDate;
 
-    public Review(int CustomerID, int OrderID, int ProductID, int Rating, String Comment, String Image, Date ReviewDate) {
+    public Review(int CustomerID, int OrderID, int ProductID, int Rating, String Comment, String Image, LocalDateTime ReviewDate) {
         this.CustomerID = CustomerID;
         this.OrderID = OrderID;
         this.ProductID = ProductID;
@@ -85,11 +86,11 @@ public class Review {
         this.Image = Image;
     }
 
-    public Date getReviewDate() {
+    public LocalDateTime getReviewDate() {
         return ReviewDate;
     }
 
-    public void setReviewDate(Date ReviewDate) {
+    public void setReviewDate(LocalDateTime ReviewDate) {
         this.ReviewDate = ReviewDate;
     }
 
