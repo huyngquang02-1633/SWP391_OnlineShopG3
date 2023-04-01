@@ -16,7 +16,6 @@
         <ol class="carousel-indicators">
             <li data-target="#Advertising" data-slide-to="0" class="active"></li>
             <li data-target="#Advertising" data-slide-to="1"></li>
-            <li data-target="#Advertising" data-slide-to="2"></li>
         </ol>
         <!-- The slideshow -->
         <div class="carousel-inner">
