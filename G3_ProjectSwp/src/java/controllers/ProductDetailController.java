@@ -51,7 +51,11 @@ public class ProductDetailController extends HttpServlet{
         ProductDAO proDAO = new ProductDAO();
         int proID = Integer.parseInt(req.getParameter("proID"));
         Product product = proDAO.getProductInfor(proID);
-
+        if(product==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+        }
+        
+        
         ArrayList<Category> cateList = new CategoryDAO().getCategory();
         ArrayList<Author> authorList = new AuthorDAO().getAuthorList();
         ArrayList<Genre> genreList = new GenreDAO().getGenreList();

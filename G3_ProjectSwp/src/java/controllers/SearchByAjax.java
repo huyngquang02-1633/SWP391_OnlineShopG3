@@ -235,18 +235,19 @@ public class SearchByAjax extends HttpServlet {
         Category cate; CategoryDAO cateDAO = new CategoryDAO();
         Genre genre; GenreDAO genreDAO = new GenreDAO();
         Author author; AuthorDAO authorDAO = new AuthorDAO();
-        String pathPrevious;
+        String pathPrevious; String image;
         for (Product product : proList) {
             cate = cateDAO.getCategoryByID(product.getCategoryID());
             genre = genreDAO.getGenreByID(product.getGenreID());
             author = authorDAO.getAuthorByID(product.getAuthorID());
             pathPrevious = request.getContextPath()+ "/cart?previousURL=productList&proID="+product.getProductID();
+            image = request.getContextPath()+ "/products/"+product.getImage();
             out.println("<div class=\"col-xs-6 col-sm-6 col-md-4 col-lg-3\" style=\"margin: 20px 0px 0px 0px;\">\n" +
 "                                            <div class=\"tg-postbook\">\n" +
 "                                                <figure class=\"tg-featureimg\">\n" +
 "                                                    <div class=\"tg-bookimg\">\n" +
-"                                                        <div class=\"tg-frontcover\"><img src=\""+product.getImage()+"\" alt=\"image description\"></div>\n" +
-"                                                        <div class=\"tg-backcover\"><img src=\""+product.getImage()+"\" alt=\"image description\"></div>\n" +
+"                                                        <div class=\"tg-frontcover\"><img src=\""+image+"\" alt=\"image description\"></div>\n" +
+"                                                        <div class=\"tg-backcover\"><img src=\""+image+"\" alt=\"image description\"></div>\n" +
 "                                                    </div>\n" +
 "                                                    <a class=\"tg-btnaddtowishlist\" href=\"javascript:void(0);\">\n" +
 "                                                        <i class=\"icon-heart\"></i>\n" +

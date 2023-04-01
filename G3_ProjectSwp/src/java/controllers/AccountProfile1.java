@@ -5,6 +5,8 @@
 package controllers;
 
 import DAL.AccountDAO;
+import DAL.CartDAO;
+import DAL.CategoryDAO;
 import DAL.CustomerDAO;
 import models.Account;
 import models.Order;
@@ -23,8 +25,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
+import jakarta.servlet.http.Cookie;
 import java.sql.Date;
 import java.time.LocalDate;
+import models.Cart;
+import models.CartCookies;
+import models.Category;
 import models.Customer;
 
 /**
@@ -67,11 +73,56 @@ public class AccountProfile1 extends HttpServlet {
         if (req.getSession().getAttribute("AccCustomerSession") != null) {
             Account a = (Account) req.getSession().getAttribute("AccCustomerSession");
             Customer customer = new CustomerDAO().getCustomerByID(a.getCustomerID());
+            ArrayList<Category> cateList = new CategoryDAO().getCategory();
+                req.setAttribute("cateList", cateList);
             req.setAttribute("customer", customer);
+            
+            //Cart icon
+            if(req.getSession().getAttribute("AccCustomerSession")!= null){
+                Account accCustomerSession = (Account)req.getSession().getAttribute("AccCustomerSession");
+                ArrayList<Cart> cartList = new CartDAO().getCartListByAccID(accCustomerSession.getAccountID());
+
+                //get subTotal
+                double subTotal = 0;
+                ProductDAO proDao = new ProductDAO();
+                Product pro;
+                for (Cart cart : cartList) {
+                    pro = proDao.getProductInfor(cart.getProductID());
+                    subTotal+=cart.getQuantity() * pro.getSalePrice();
+                }
+                req.setAttribute("cartList", cartList);
+                req.setAttribute("cartSize", cartList.size());
+                req.setAttribute("subTotal", subTotal);
+            }else{
+                Cookie arr[] = req.getCookies();
+                ArrayList<String> cookiesText = new ArrayList<>();
+                if (arr != null) {
+                    for (Cookie arrCookies : arr) {
+                        if (arrCookies.getName().contains("item")) {
+                            cookiesText.add(arrCookies.getValue());
+                        }
+                    }
+                }
+                CartCookies cartCookies = new CartCookies();
+                ArrayList<Cart> cartList = cartCookies.decryptionCookiesText(cookiesText);
+
+                //get subTotal
+                double subTotal = 0;
+                ProductDAO proDao = new ProductDAO();
+                Product pro;
+                for (Cart cart : cartList) {
+                    pro = proDao.getProductInfor(cart.getProductID());
+                    subTotal+=cart.getQuantity() * pro.getSalePrice();
+                }
+
+                req.setAttribute("cartList", cartList);
+                req.setAttribute("cartSize", cartList.size());
+                req.setAttribute("subTotal", subTotal);
+            }
+            
             req.getRequestDispatcher("/profile_edit.jsp").forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/404error.jsp");
-            return;
         }
 
     }

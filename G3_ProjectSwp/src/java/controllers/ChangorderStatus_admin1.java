@@ -13,8 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.OrderDetail;
 
 /**
  *
@@ -69,6 +71,13 @@ public class ChangorderStatus_admin1 extends HttpServlet {
         OrderDAO dao = new OrderDAO();
         try {
             dao.updateOrderStatus(orderId, status);
+            if(status.equals("4")){
+                ArrayList<OrderDetail> odDetail = dao.getDetailOfOrderByOdID(Integer.parseInt(orderId));
+                for (OrderDetail orderDetail : odDetail) {
+                    dao.updateQuantityInWarehouse(orderDetail);
+                }
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ChangorderStatus_admin1.class.getName()).log(Level.SEVERE, null, ex);
         }

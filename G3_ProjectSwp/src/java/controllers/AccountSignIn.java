@@ -20,6 +20,7 @@ public class AccountSignIn extends HttpServlet{
             req.getSession().removeAttribute("emailSession");
             req.getSession().removeAttribute("passwordSession");
             req.getSession().removeAttribute("AccAdminSession");
+            req.getSession().removeAttribute("AdminSession");
             resp.sendRedirect("../account/login");
         }else if(req.getSession().getAttribute("AccAdminSession")==null && req.getSession().getAttribute("AccCustomerSession")!=null){
             req.getSession().removeAttribute("AccCustomerSession");
@@ -58,12 +59,13 @@ public class AccountSignIn extends HttpServlet{
             if (acc!=null && acc.getStatus()==true) {
                 if(acc.getRole()==1){
                     req.getSession().setAttribute("AccAdminSession", acc);
+                    req.getSession().setAttribute("AdminSession", acc);
                     resp.sendRedirect(req.getContextPath()+"/dashboard_admin");
-                }else if(acc.getRole()==2){
+                }else if(acc.getRole()==2 && acc.getStatus()==true){
                     req.getSession().setAttribute("AccAdminSession", acc);
                     resp.sendRedirect(req.getContextPath()+"/StoreManager_admin");
                 }else if(acc.getRole()==3){
-                    
+                    req.getRequestDispatcher("../login.jsp").forward(req, resp);
                 }
             }else{
                 req.setAttribute("msg", "This account does not exist or have been suspended!");

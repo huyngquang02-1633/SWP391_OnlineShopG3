@@ -7,6 +7,7 @@ package DAL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import models.Product;
 import models.Review;
@@ -32,7 +33,31 @@ public class ReviewDAO extends DBContext{
                 int Rating = rs.getInt("Rating");
                 String Comment = rs.getString("Comment");
                 String Image = rs.getString("Image");
-                Date ReviewDate = rs.getDate("ReviewDate");
+                LocalDateTime ReviewDate= rs.getTimestamp("ReviewDate").toLocalDateTime();
+                reviewList.add(new Review(CustomerID, OrderID, ProductID, Rating, Comment, Image, ReviewDate));
+            }
+        } catch (Exception e) {
+        }
+        return reviewList;
+    }
+    
+    public ArrayList<Review> getReviewListByOrderID(int orderID){
+        ArrayList<Review> reviewList = new ArrayList<>();
+        try {
+            String sql = "select * from Reviews where OrderID=?";
+            PreparedStatement ps;
+            ps= connection.prepareStatement(sql);
+            ps.setInt(1,orderID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //doc du lieu tu 'rs' gan cho cac bien cuc bo
+                int CustomerID = rs.getInt("CustomerID");
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = rs.getInt("ProductID");
+                int Rating = rs.getInt("Rating");
+                String Comment = rs.getString("Comment");
+                String Image = rs.getString("Image");
+                LocalDateTime ReviewDate= rs.getTimestamp("ReviewDate").toLocalDateTime();
                 reviewList.add(new Review(CustomerID, OrderID, ProductID, Rating, Comment, Image, ReviewDate));
             }
         } catch (Exception e) {
@@ -77,7 +102,7 @@ public class ReviewDAO extends DBContext{
                 int Rating = rs.getInt("Rating");
                 String Comment = rs.getString("Comment");
                 String Image = rs.getString("Image");
-                Date ReviewDate = rs.getDate("ReviewDate");
+                LocalDateTime ReviewDate= rs.getTimestamp("ReviewDate").toLocalDateTime();
                 review = new Review(CustomerID, OrderID, ProductID, Rating, Comment, Image, ReviewDate);
             }
         } catch (Exception e) {
@@ -102,7 +127,7 @@ public class ReviewDAO extends DBContext{
                 int Rating = rs.getInt("Rating");
                 String Comment = rs.getString("Comment");
                 String Image = rs.getString("Image");
-                Date ReviewDate = rs.getDate("ReviewDate");
+                LocalDateTime ReviewDate= rs.getTimestamp("ReviewDate").toLocalDateTime();
                 review = new Review(CustomerID, OrderID, ProductID, Rating, Comment, Image, ReviewDate);
             }
         } catch (Exception e) {

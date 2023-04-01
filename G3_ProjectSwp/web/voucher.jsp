@@ -18,7 +18,7 @@
                 </div>
                 <div id="product-title-2" style="width: 55%;">
                     <form action="<%=path%>/SearchVoucher"  method="post" style="padding-bottom: 40px;">
-                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter employee name to search"/>
+                        <input type="text" name="txtSearch" value="${searchValue}" placeholder="Enter Voucher ID to search"/>
                         <input type="submit" value="Search"/>
                     </form>                 
                 </div>
@@ -59,7 +59,7 @@
                     </c:forEach>
                 </table>
             </div>
-            <div id="paging">
+<!--            <div id="paging">
                 <div class="pagination">
                     <a href="#">&laquo;</a>
                     <a href="#">1</a>
@@ -70,7 +70,7 @@
                     <a href="#">6</a>
                     <a href="#">&raquo;</a>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

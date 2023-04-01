@@ -6,6 +6,7 @@ package controllers;
 
 import DAL.AccountDAO;
 import DAL.CartDAO;
+import DAL.CategoryDAO;
 import DAL.CustomerDAO;
 import DAL.OrderDAO;
 import DAL.ProductDAO;
@@ -24,6 +25,7 @@ import javax.mail.MessagingException;
 import models.Account;
 import models.Cart;
 import models.CartCookies;
+import models.Category;
 import models.Customer;
 import models.Discount;
 import models.Order;
@@ -56,7 +58,8 @@ public class Checkout extends HttpServlet {
                 total+= pro.getSalePrice()*cart.getQuantity();
             }
             
-            
+            ArrayList<Category> cateList = new CategoryDAO().getCategory();
+            request.setAttribute("cateList", cateList);
             request.setAttribute("recentlyOrder", recentlyOrder);
             request.setAttribute("cartList", cartList);
             request.setAttribute("proList", proList);
@@ -85,6 +88,8 @@ public class Checkout extends HttpServlet {
                 subTotal+=cart.getQuantity() * pro.getSalePrice();
             }
             
+            ArrayList<Category> cateList = new CategoryDAO().getCategory();
+            request.setAttribute("cateList", cateList);
             request.setAttribute("cartList", cartList);
             request.setAttribute("proList", proList);
             request.setAttribute("total", subTotal+30000);
@@ -140,6 +145,7 @@ public class Checkout extends HttpServlet {
                 String subjectContent = "Your order " + newOrderID + " has been confirmed!";
                 String emailContent = "Shopee is preparing your order!\nOrder detail: .......";
                 try {
+                    odDAO.changeQuantityVoucher(txtDiscountID);
                     sendMail.sendAnnounce("vuvu15202@gmail.com", subjectContent, emailContent);
                 } catch (MessagingException ex) {
                     Logger.getLogger(OrderAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,6 +162,8 @@ public class Checkout extends HttpServlet {
                 for (Cookie arrCookies : arr) {
                     if (arrCookies.getName().contains("item")) {
                         cookiesText.add(arrCookies.getValue());
+                        arrCookies.setMaxAge(0);
+                        resp.addCookie(arrCookies);
                     }
                 }
             }
@@ -166,6 +174,7 @@ public class Checkout extends HttpServlet {
 //                resp.getWriter().print(cookiesText.get(i) + "\n");
 //                return;
 //            }
+
             ProductDAO proDAO = new ProductDAO();
             for (Cart cart1 : cartList) {
                 if(cart1.getQuantity() > proDAO.getAvailableInStock(cart1.getProductID())){
@@ -217,7 +226,7 @@ public class Checkout extends HttpServlet {
                     odDAO.createDetailOfOrder(orderDetail);
                 }
                 
-                
+                odDAO.changeQuantityVoucher(txtDiscountID);
                 SendMail sendMail = new SendMail();
                 String subjectContent = "Your order " + newOrderID + " has been confirmed!";
                 String emailContent = "Shopee is preparing your order!\nOrder detail: .......";

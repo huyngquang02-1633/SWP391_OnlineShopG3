@@ -128,13 +128,14 @@ public class CartAjax extends HttpServlet {
             }
             
         }
-        result = returnResult(cartList);
+        String contextPath = req.getContextPath();
+        result = returnResult(cartList,contextPath);
         PrintWriter out = resp.getWriter();
         out.print(result);
 
     }
     
-    public String returnResult(ArrayList<Cart> cartList){
+    public String returnResult(ArrayList<Cart> cartList, String contextPath){
         String result = "<div class=\"row\">\n" +
 "                            <div class=\"col-md-12 col-lg-8\">\n" +
 "                                <div class=\"items\">";
@@ -143,14 +144,16 @@ public class CartAjax extends HttpServlet {
         Product pro ;
         double subTotal=0;
         double Shipping=30000;
+        String image;
             for (Cart object : cartList) {
                 pro = proDao.getProductInfor(object.getProductID());
                 subTotal += object.getQuantity() * pro.getSalePrice();
+                image = contextPath+ "/products/"+pro.getImage();
                 result +=("<div class=\"product\">\n" +
 "                                        <div class=\"row\">\n" +
 "                                            \n" +
 "                                                    <div class=\"col-md-3\">\n" +
-"                                                        <img class=\"img-fluid mx-auto d-block image\" src=\""+pro.getImage()+"\">\n" +
+"                                                        <img class=\"img-fluid mx-auto d-block image\" src=\""+image+"\">\n" +
 "                                                    </div>\n" +
 "                                                \n" +
 "                                            <div class=\"col-md-8\">\n" +

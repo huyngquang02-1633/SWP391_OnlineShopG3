@@ -36,7 +36,7 @@
     nonce="LpjM0yAZ"></script>
     <script src="<%=path%>/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <style>
-        body{background-color: rgba(232, 244, 248, 0.512);}
+        body{background-color: rgba(215, 241, 250, 0.512);}
     </style>
 </head>
 <body>
@@ -48,51 +48,6 @@
                         <strong class="tg-logo"><a href="<%=path%>/homepage"><img src="<%=path%>/images/logo.png"
                                                                                   alt="company name herez"></a></strong> 
                         <div class="tg-wishlistandcart">
-                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-
-                                <c:choose>
-                                    <c:when test="${AccCustomerSession == null}">
-                                        <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="25" height="25" style=" border-radius: 50%" alt="" >
-                                        <a class="login tg-btnthemedropdown" style="display: inline-block;" href="<%=path%>/account/login"style="text-decoration:none; color: #454545"><span>Login</span></a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img id="imgprofile" src="${AccCustomerSession.getImage()}" width="25   " height="25" style=" border-radius: 50%" alt="" >
-                                        <a  class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545" id="tg-wishlisst" class="tg-btnthemedropdown"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span>${userGoogle.getName()}</span>
-                                        </a>
-                                    </c:otherwise>
-                                </c:choose>
-
-
-                                <a id="nameprofile" style="display: inline-block;" class="account tg-btnthemedropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>User</span></a>
-
-                                <div class="dropdown-menu tg-themedropdownmenu" style="width: 50px" aria-labelledby="tg-wishlisst">
-                                    <div class="tg-description">
-                                        <a href="<%=path%>/account/profile">Profile</a>
-                                    </div>
-                                    <div class="tg-description">
-                                        <a href="<%=path%>/account/profile_myOrder">My Orders</a>
-                                    </div>
-                                    <div class="tg-description">
-                                        <a href="<%=path%>/account/login">Log out</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-                                <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="tg-themebadge"></span>
-                                    <i class="icon-heart"></i>
-                                    <span>Wish list</span>
-                                </a>
-                                <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-                                    <div class="tg-description">
-                                        <p>No products were added to the wish list!</p>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="dropdown tg-themedropdown tg-minicartdropdown">
                                 <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -108,7 +63,7 @@
                                                     <div class="tg-minicarproduct">
 
                                                         <figure>
-                                                            <img src="${product.getImage()}" style="height: 70px;" alt="image description">
+                                                            <img src="<%=path%>/products/${product.getImage()}" style="height: 70px;" alt="image description">
                                                         </figure>
                                                         <div class="tg-minicarproductdata">
                                                             <h5><a href="javascript:void(0);">${product.getProductName()}</a></h5>
@@ -135,7 +90,53 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> <span>  </span>
+                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
+
+                                <c:choose>
+                                    <c:when test="${AccCustomerSession == null}">
+                                        <img id="imgprofile" src="<%=path%>/images/users/icon-user.png" width="25" height="25" style=" border-radius: 50%; margin-bottom: 4px;" alt="" >
+                                        <a class="login tg-btnthemedropdown" style="display: inline-block;" href="<%=path%>/account/login"style="text-decoration:none; color: #454545"><span style="font-size: 15px;">Login</span></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img id="imgprofile" src="${AccCustomerSession.getImage()}" width="25   " height="25" style=" border-radius: 50%" alt="" >
+                                        <a  class="login" href="<%=path%>/account/profile" style="text-decoration:none; color: #454545" id="tg-wishlisst" class="tg-btnthemedropdown"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>${userGoogle.getName()}</span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+
+
+                                <a id="nameprofile" style="display: inline-block;" class="account tg-btnthemedropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>User</span></a>
+
+                                <div class="dropdown-menu tg-themedropdownmenu" style="width: 50px" aria-labelledby="tg-wishlisst">
+                                    <div class="tg-description">
+                                        <a href="<%=path%>/account/profile">Profile</a>
+                                    </div>
+                                    <div class="tg-description">
+                                        <a href="<%=path%>/account/profile_myOrder">My Orders</a>
+                                    </div>
+                                    <div class="tg-description">
+                                        <a href="<%=path%>/account/login">Log out</a>
+                                    </div>
+                                </div>
                             </div>
+
+<!--                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
+                                <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="tg-themebadge"></span>
+                                    <i class="icon-heart"></i>
+                                    <span>Wish list</span>
+                                </a>
+                                <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
+                                    <div class="tg-description">
+                                        <p>No products were added to the wish list!</p>
+                                    </div>
+                                </div>
+                            </div>-->
+                            
                         </div>
 
                         <div class="tg-searchbox">

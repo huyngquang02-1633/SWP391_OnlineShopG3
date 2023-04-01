@@ -46,8 +46,9 @@ public class OrderDAO extends DBContext {
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
+                double TotalAmount = getTotalAmountOfAOrder(OrderID);
                 orderList.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName,
-                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status));
+                        ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status, TotalAmount));
             }
         } catch (Exception e) {
         }
@@ -113,15 +114,24 @@ public class OrderDAO extends DBContext {
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
-
-                order = new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
+                double TotalAmount = getTotalAmountOfAOrder(OrderID);
+                order = new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status, TotalAmount);
             }
         } catch (Exception e) {
 
         }//finally{ connection.close();}
         return order;
     }
-
+    
+    public double getTotalAmountOfAOrder(int orderID) {
+        ArrayList<OrderDetail> odDetail = new OrderDAO().getDetailsListOfOrderByOdID(orderID);
+        double totalAmount =0;
+        for (OrderDetail orderDetail : odDetail) {
+            totalAmount+= orderDetail.getSalePrice()*orderDetail.getQuantity();
+        }
+        return totalAmount;
+    }
+    
     public Order getRecentlyOrder(int customerID) {
         Order order = null;
         try {
@@ -144,8 +154,10 @@ public class OrderDAO extends DBContext {
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
-
-                order = new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
+                double TotalAmount = getTotalAmountOfAOrder(OrderID);
+                order = new Order(OrderID, CustomerID, EmployeeID, OrderDate, 
+                        RequiredDate, ShippedDate, Freight, ShipName, ShipAddress,
+                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status, TotalAmount);
             }
         } catch (Exception e) {
 
@@ -297,9 +309,10 @@ public class OrderDAO extends DBContext {
                 String ShipPostalCode = rs.getString("ShipPostalCode");
                 String ShipCountry = rs.getString("ShipCountry");
                 int Status = rs.getInt("Status");
+                double TotalAmount = getTotalAmountOfAOrder(OrderID);
                 return new Order(OrderID, CustomerID, EmployeeID, OrderDate,
                         RequiredDate, ShippedDate, Freight, ShipName, ShipAddress,
-                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status);
+                        ShipCity, ShipRegion, ShipPostalCode, ShipCountry, Status, TotalAmount);
             }
         } catch (Exception e) {
 
@@ -348,7 +361,7 @@ public class OrderDAO extends DBContext {
             ps1.setInt(1, od.getOrderID());
             ps1.setInt(2, od.getCustomerID());
             ps1.setInt(3, od.getEmployeeID());
-            ps1.setDouble(4, 0);
+            ps1.setDouble(4, 30000);
             ps1.setString(5, od.getShipName());
             ps1.setString(6, od.getShipAddress());
             ps1.setString(7, od.getShipCity());
@@ -441,6 +454,18 @@ public class OrderDAO extends DBContext {
         } catch (Exception e) {
         }//finally{ connection.close();}
         return discount;
+    }
+    public void changeQuantityVoucher(String discountID) throws SQLException {
+        int result = 0;
+        try {
+            String sql = "update Discount set Quantity = Quantity-1 Where DiscountID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, discountID);
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+            connection.rollback();
+        }//finally{ connection.close();}
+        
     }
 
     public boolean cancelOrder(int orderID) throws SQLException {
@@ -549,6 +574,18 @@ public class OrderDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, status);
             ps.setString(2, orderId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateQuantityInWarehouse(OrderDetail odDetail) throws SQLException {
+        String sql = "update Inventories set UnitsInStock = UnitsInStock - ? where ProductID = ? AND WarehouseID = ? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, odDetail.getQuantity());
+            ps.setInt(2, odDetail.getProductID());
+            ps.setInt(3, odDetail.getWarehouseID());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

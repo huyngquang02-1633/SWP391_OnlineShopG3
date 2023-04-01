@@ -31,6 +31,7 @@
                         <th style="width: 200px;">Ship Address</th>
                         <th>Ship City</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                     <c:forEach var="od" items="${listInCurrentPage}">
                         <tr>

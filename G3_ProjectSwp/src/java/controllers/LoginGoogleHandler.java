@@ -53,12 +53,18 @@ public class LoginGoogleHandler extends HttpServlet {
                         accDAO.createAccount(cus, acc);
                         AccCustomer = accDAO.getAccountByEmail(userGoogle.getEmail());
                     }
-                    request.getSession().setAttribute("AccCustomerSession", AccCustomer);
+                    if(AccCustomer.getStatus()==true){
+                        request.getSession().setAttribute("AccCustomerSession", AccCustomer);
+                        request.getRequestDispatcher("/homepage").forward(request, response);
+                    }else{
+                        response.sendRedirect(request.getContextPath()+"/404error.jsp");
+                    }
+                    
                 } catch (Exception e) {
                     
                 }
                 
-                request.getRequestDispatcher("/homepage").forward(request, response);
+                
                 //response.getWriter().print(user);
 	}
 

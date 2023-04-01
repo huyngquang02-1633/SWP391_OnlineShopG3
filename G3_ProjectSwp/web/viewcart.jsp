@@ -23,7 +23,7 @@
                                             <c:forEach items="${productList}" var="product">
                                                 <c:if test="${product.getProductID() == cartItem.getProductID()  }">
                                                     <div class="col-md-3">
-                                                        <img class="img-fluid mx-auto d-block image" src="${product.getImage()}">
+                                                        <img class="img-fluid mx-auto d-block image" src="<%=path%>/products/${product.getImage()}">
                                                     </div>
                                                 </c:if>
                                             </c:forEach>
@@ -51,7 +51,7 @@
                                                             <c:if test="${product.getProductID() == cartItem.getProductID()}">
 
                                                                 <div class="col-md-3 price">
-                                                                    <span>${product.getSalePrice()}</span>
+                                                                    <span>${product.getSalePrice()}</span> <span>   </span>
                                                                     <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteCartItem(this, ${cartItem.getProductID()})"></i>
                                                                 </div>
                                                             </c:if>

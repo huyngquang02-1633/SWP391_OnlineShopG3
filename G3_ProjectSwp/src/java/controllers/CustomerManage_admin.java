@@ -31,11 +31,12 @@ public class CustomerManage_admin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        if(req.getSession().getAttribute("AccAdminSession")==null){
-//            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
-//            return;
-//        }
-        PaginationObject paging = new PaginationObject();
+        req.getSession().removeAttribute("orderList");
+        if(req.getSession().getAttribute("AccAdminSession")==null){
+            resp.sendRedirect(req.getContextPath()+"/404error.jsp");
+            return;
+        }
+        PaginationObject paging = new PaginationObject(); paging.setNumberOfRowEachPage(10);
 
         int currentPage = 1;
         if (req.getParameter("currentPage") != null) {

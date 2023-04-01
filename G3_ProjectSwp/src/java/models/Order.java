@@ -25,8 +25,9 @@ public class Order {
     private String ShipPostalCode;
     private String ShipCountry;
     private int Status;
+    private double TotalAmount;
 
-    public Order(int OrderID, int CustomerID, int EmployeeID, Date OrderDate, Date RequiredDate, Date ShippedDate, double Freight, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry, int Status) {
+    public Order(int OrderID, int CustomerID, int EmployeeID, Date OrderDate, Date RequiredDate, Date ShippedDate, double Freight, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry, int Status, double TotalAmount) {
         this.OrderID = OrderID;
         this.CustomerID = CustomerID;
         this.EmployeeID = EmployeeID;
@@ -41,6 +42,7 @@ public class Order {
         this.ShipPostalCode = ShipPostalCode;
         this.ShipCountry = ShipCountry;
         this.Status = Status;
+        this.TotalAmount = TotalAmount;
     }
     public Order(int OrderID, int CustomerID, int EmployeeID, String ShipName, String ShipAddress, String ShipCity, String ShipRegion, String ShipPostalCode, String ShipCountry, int Status) {
         this.OrderID = OrderID;
@@ -61,6 +63,14 @@ public class Order {
 
     public void setStatus(int Status) {
         this.Status = Status;
+    }
+
+    public double getTotalAmount() {
+        return TotalAmount;
+    }
+
+    public void setTotalAmount(double TotalAmount) {
+        this.TotalAmount = TotalAmount;
     }
     
     

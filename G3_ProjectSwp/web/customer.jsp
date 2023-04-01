@@ -91,7 +91,7 @@
 
                             <td>
                                 <div style="display: flex">
-                                    <a id="myBtn">Edit</a> &nbsp; | &nbsp; 
+                                    <!--<a id="myBtn">Edit</a> &nbsp; | &nbsp;--> 
                                     <a class="delete" href="delete_cus?id=${c.getCustomerID()}">Delete</a>
                                 </div>
                             </td>

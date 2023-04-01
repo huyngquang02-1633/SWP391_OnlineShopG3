@@ -19,15 +19,15 @@
         <div class="form-container sign-up-container">
             <form method="POST" action="<%=path%>/account/signup">
                 <h1>Create Account</h1>
-                <input type="text" placeholder="First Name" name="firstName" />
-                <input type="text" placeholder="Last Name" name="lastName"/>
+                <input type="text" placeholder="First Name" id="firstName" name="firstName" />
+                <input type="text" placeholder="Last Name" id="lastName" name="lastName"/>
                 <input type="email" placeholder="Email" name="email"/>
-                <input type="password" placeholder="Password" name="password"/>
-                <button type="submit">Sign Up</button>
+                <input type="password" placeholder="Password" minlength="8" required id="passWord" name="password"/>
+                <button onclick="return validate()" type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-                <form id="sign-in-form" method="POST" action="<%=path%>/account/login">  
+            <form id="sign-in-form" method="POST" action="<%=path%>/account/login">  
                 <h1>Sign In</h1>
                 <div class="social-container">
                     <div class="fb-login-button" data-width="204" data-size="medium" data-button-type="continue_with"
@@ -47,14 +47,14 @@
 
                 </div>
                 <span>or use your account</span>  
-                    <c:if test="${msgEmail!=null}"><div style="color: red;">${msgEmail}</div></c:if>
-                    <input type="email" placeholder="Email" name="txtEmail" value="${emailSession}"/>
-                    <c:if test="${msgPass!=null}"><div style="color: red;">${msgPass}</div></c:if>
-                    <input type="password" placeholder="Password" name="txtPassword" value="${passwordSession}"/>
-                    <p class="forgot-password"><a href="<%=path%>/account/forgotpass">Forgot your password?</a></p>
-                    <button class="control-button in">Sign In</button>
-                    <c:if test="${msg!=null}"><div style="color: red;">${msg}</div></c:if>
-                    </form>
+                <c:if test="${msgEmail!=null}"><div style="color: red;">${msgEmail}</div></c:if>
+                <input type="email" placeholder="Email" name="txtEmail" value="${emailSession}"/>
+                <c:if test="${msgPass!=null}"><div style="color: red;">${msgPass}</div></c:if>
+                <input type="password" placeholder="Password" name="txtPassword" value="${passwordSession}"/>
+                <p class="forgot-password"><a href="<%=path%>/account/forgotpass">Forgot your password?</a></p>
+                <button class="control-button in">Sign In</button>
+                <c:if test="${msg!=null}"><div style="color: red;">${msg}</div></c:if>
+                </form>
             </div>
             <div class="overlay-container">
                 <div class="overlay">
@@ -75,5 +75,55 @@
 
         <script src="<%=path%>/js/login.js"></script>
 </body>
+<script>
+                    function validate() {
+                        let i = 1;
+                        let firstName = document.getElementById('firstName').value.trim();
+                        let lastName = document.getElementById('lastName').value.trim();
+                        let passWord = document.getElementById('passWord').value.trim();
 
+                        const regexName = /^[\p{L} ]+$/u;
+
+                        if (firstName === '') {
+                            alert('First Name cannot be empty!')
+                            i++;
+                        } else if (firstName.length < 2) {
+                            alert('First Name cannot be less than 2 characters!')
+                            i++;
+                        } else if (firstName.length > 30) {
+                            alert('First Name cannot be more than 30 characters!')
+                            i++;
+                        } else if (firstName.match(regexName)) {
+
+                        } else {
+                            alert('First Name cannot contain numbers or special characters!')
+                            i++;
+                        }
+
+                        if (lastName === '') {
+                            alert('Last Name cannot be empty!')
+                            i++;
+                        } else if (lastName.length < 2) {
+                            alert('Last Name cannot be less than 2 characters!')
+                            i++;
+                        } else if (lastName.length > 30) {
+                            alert('Last Name cannot be more than 30 characters!')
+                            i++;
+                        } else if (lastName.match(regexName)) {
+                        } else {
+                            alert('Last Name cannot contain numbers or special characters!')
+                            i++;
+                        }
+
+                        if (i > 1) {
+                            return false;
+                        } else {
+
+                            return true;
+                        }
+                    }
+
+                    
+
+</script>
 </html>

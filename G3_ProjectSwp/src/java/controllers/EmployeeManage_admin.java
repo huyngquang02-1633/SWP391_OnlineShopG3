@@ -33,7 +33,7 @@ public class EmployeeManage_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        if (req.getSession().getAttribute("AccAdminSession") == null) {
+        if ( req.getSession().getAttribute("AdminSession")==null) {
             resp.sendRedirect(req.getContextPath() + "/404error.jsp");
             return;
         }
